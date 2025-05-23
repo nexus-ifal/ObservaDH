@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { RespostaApi } from "@/domain/models/resposta-api";
 import { UpdateProfissaoDTO } from "@/domain/dtos/profissao.dto";
+import { RespostaApi } from "@/domain/models/resposta-api";
 import { AtualizarProfissaoController } from "@/lib/api/controllers/profissao/atualizar-profissao-controller";
 import { BuscarProfissaoController } from "@/lib/api/controllers/profissao/buscar-profissao-controller";
 import { DeletarProfissaoController } from "@/lib/api/controllers/profissao/deletar-profissao-controller";
@@ -31,10 +31,11 @@ function handleError(error: any, message: string) {
 // ! Handler - Atualização de Profissão
 export async function PATCH(
 	request: NextRequest,
-	{ params }: { params: { id?: string } }
+	context: { params: Promise<{ id: string }> }
 ) {
 	try {
-		const idError = validateId(params.id);
+		const params = await context.params;
+const idError = validateId(params.id);
 		if (idError) return idError;
 
 		const body = await request.json().catch(() => ({}));
@@ -66,10 +67,11 @@ export async function PATCH(
 // ! Handler - Deletar Profissão
 export async function DELETE(
 	request: NextRequest,
-	{ params }: { params: { id?: string } }
+	context: { params: Promise<{ id: string }> }
 ) {
 	try {
-		const idError = validateId(params.id);
+		const params = await context.params;
+const idError = validateId(params.id);
 		if (idError) return idError;
 
 		const controller = new DeletarProfissaoController();
@@ -97,10 +99,11 @@ export async function DELETE(
 // ! Handler - Buscar Profissão por ID
 export async function GET(
 	request: Request,
-	{ params }: { params: { id: string } }
+	context: { params: Promise<{ id: string }> }
 ) {
 	try {
-		const idError = validateId(params.id);
+		const params = await context.params;
+const idError = validateId(params.id);
 		if (idError) return idError;
 
 		const { id } = params;

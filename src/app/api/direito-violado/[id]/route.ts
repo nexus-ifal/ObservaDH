@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { RespostaApi } from "@/domain/models/resposta-api";
 import { UpdateDireitoVioladoDTO } from "@/domain/dtos/direito-violado.dto";
+import { RespostaApi } from "@/domain/models/resposta-api";
 import { AtualizarDireitoVioladoController } from "@/lib/api/controllers/direito-violado/atualizar-direito_violado-controller";
 import { BuscarDireitoVioladoController } from "@/lib/api/controllers/direito-violado/buscar-direito_violado-controller";
 import { DeletarDireitoVioladoController } from "@/lib/api/controllers/direito-violado/deletar-direito_violado-controller";
@@ -31,15 +31,16 @@ function handleError(error: any, message: string) {
 // ! Handler - Atualização de Direito Violado
 export async function PATCH(
 	request: NextRequest,
-	{ params }: { params: { id?: string } }
+	context: { params: Promise<{ id: string }> }
 ) {
 	try {
-		const idError = validateId(params.id);
+		const params = await context.params;
+const idError = validateId(params.id);
 		if (idError) return idError;
 
 		const body = await request.json().catch(() => ({}));
 		const updateData = {
-			id: params.id as string,
+			id: params.id,
 			...body,
 		} as UpdateDireitoVioladoDTO;
 
@@ -66,15 +67,16 @@ export async function PATCH(
 // ! Handler - Deletar Direito Violado
 export async function DELETE(
 	request: NextRequest,
-	{ params }: { params: { id?: string } }
+	context: { params: Promise<{ id: string }> }
 ) {
 	try {
-		const idError = validateId(params.id);
+		const params = await context.params;
+const idError = validateId(params.id);
 		if (idError) return idError;
 
 		const controller = new DeletarDireitoVioladoController();
 		const resposta = (await controller.executar({
-			id: params.id as string,
+			id: params.id,
 		})) as RespostaApi;
 
 		let status = 200;
@@ -96,16 +98,16 @@ export async function DELETE(
 
 // ! Handler - Buscar Direito Violado por ID
 export async function GET(
-	request: Request,
-	{ params }: { params: { id: string } }
-) {
+	request: NextRequest,
+	context: { params: Promise<{ id: string }> }
+): Promise<NextResponse> {
 	try {
-		const idError = validateId(params.id);
+		const params = await context.params;
+const idError = validateId(params.id);
 		if (idError) return idError;
 
-		const { id } = params;
 		const controller = new BuscarDireitoVioladoController();
-		const resposta = await controller.executar(id);
+		const resposta = await controller.executar(params.id);
 
 		return NextResponse.json(resposta, {
 			status: resposta.sucesso ? 200 : 404,
@@ -114,3 +116,26 @@ export async function GET(
 		return handleError(error, "Erro ao buscar Direito Violado por ID");
 	}
 }
+
+
+
+// ! Handler - Buscar Direito Violado por ID
+// export async function GET(
+//     request: NextRequest,
+//     context: { params: { id: string } }
+// ): Promise<NextResponse> {
+//     try {
+//         const idError = validateId(context.params.id);
+//         if (idError) return idError;
+
+//         const { id } = context.params;
+//         const controller = new BuscarDireitoVioladoController();
+//         const resposta = await controller.executar(id);
+
+//         return NextResponse.json(resposta, {
+//             status: resposta.sucesso ? 200 : 404,
+//         });
+//     } catch (error) {
+//         return handleError(error, "Erro ao buscar Direito Violado por ID");
+//     }
+// }

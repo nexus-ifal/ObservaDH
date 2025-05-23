@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 
 import { useParams } from "next/navigation";
@@ -16,7 +15,7 @@ const page = () => {
 	const { id } = useParams();
 
 	const projeto = buscarProjetoPorId(
-		Array.isArray(id) ? id[0] : id
+		Array.isArray(id) ? (id[0] ?? "") : (id ?? "")
 	) as ProjetoLei;
 
 	const parlamentarNomes = projeto.parlamentares.map((p) => p.nome).join(", ");

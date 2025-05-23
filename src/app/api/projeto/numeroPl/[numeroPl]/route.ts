@@ -16,9 +16,10 @@ function handleError(error: any, message: string) {
 
 export async function GET(
 	request: Request,
-	{ params }: { params: { numeroPl: string } }
+	context: { params: Promise<{ numeroPl: string }> }
 ) {
 	try {
+		const params = await context.params;
 		const { numeroPl } = params;
 		if (!numeroPl || numeroPl.trim() === "") {
 			const respostaNumPlInvalido = new RespostaApi({

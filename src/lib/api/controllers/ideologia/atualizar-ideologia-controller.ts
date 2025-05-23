@@ -1,8 +1,11 @@
 import { AtualizarIdeologiaService } from "../../service/ideologia/atualizar-ideologia-service";
 import { BuscarIdeologiaService } from "../../service/ideologia/buscar-ideologia-service";
 
+import {
+	ResponseIdeologiaDTO,
+	UpdateIdeologiaDTO,
+} from "@/domain/dtos/ideologia.dto";
 import { RespostaApi } from "@/domain/models/resposta-api";
-import { ResponseIdeologiaDTO, UpdateIdeologiaDTO } from "@/domain/dtos/ideologia.dto";
 
 interface IBuscarIdeologiaService {
 	buscarPorId(params: { id: string }): Promise<ResponseIdeologiaDTO | null>;

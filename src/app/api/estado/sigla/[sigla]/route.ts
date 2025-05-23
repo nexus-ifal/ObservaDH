@@ -5,9 +5,10 @@ import { BuscarEstadoController } from "@/lib/api/controllers/estado/buscar-esta
 
 export async function GET(
 	request: Request,
-	{ params }: { params: { sigla: string } }
+	context: { params: Promise<{ sigla: string }> }
 ) {
 	try {
+		const params = await context.params;
 		const { sigla } = params;
 		const controller = new BuscarEstadoController();
 		const resposta = await controller.buscarPorSigla(sigla);

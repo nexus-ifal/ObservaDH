@@ -1,8 +1,11 @@
 import { BuscarPoliticoService } from "../../service/politico/buscar-politico-service";
 import { DeletarPoliticoService } from "../../service/politico/deletar-politico-service";
 
+import {
+	DeletePoliticoDTO,
+	ResponsePoliticoDTO,
+} from "@/domain/dtos/politico.dto";
 import { RespostaApi } from "@/domain/models/resposta-api";
-import { DeletePoliticoDTO, ResponsePoliticoDTO } from "@/domain/dtos/politico.dto";
 
 interface IBuscarPoliticoService {
 	buscarPorId(params: { id: string }): Promise<ResponsePoliticoDTO | null>;

@@ -1,8 +1,11 @@
 import { BuscarPartidoService } from "../../service/partido/buscar-partido-service";
 import { DeletarPartidoService } from "../../service/partido/deletar-partido-service";
 
+import {
+	DeletePartidoDTO,
+	ResponsePartidoDTO,
+} from "@/domain/dtos/partido.dto";
 import { RespostaApi } from "@/domain/models/resposta-api";
-import { DeletePartidoDTO, ResponsePartidoDTO } from "@/domain/dtos/partido.dto";
 
 interface IBuscarPartidoService {
 	buscarPorId(params: { id: string }): Promise<ResponsePartidoDTO | null>;

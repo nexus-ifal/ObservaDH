@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { RespostaApi } from "@/domain/models/resposta-api";
 import { UpdatePautaDTO } from "@/domain/dtos/pauta.dto";
+import { RespostaApi } from "@/domain/models/resposta-api";
 import { AtualizarPautaController } from "@/lib/api/controllers/pauta/atualizar-pauta-controller";
 import { BuscarPautaController } from "@/lib/api/controllers/pauta/buscar-pauta-controller";
 import { DeletarPautaController } from "@/lib/api/controllers/pauta/deletar-pauta-controller";
@@ -31,10 +31,11 @@ function handleError(error: any, message: string) {
 // ! Handler - Atualização de Pauta
 export async function PATCH(
 	request: NextRequest,
-	{ params }: { params: { id?: string } }
+	context: { params: Promise<{ id: string }> }
 ) {
 	try {
-		const idError = validateId(params.id);
+		const params = await context.params;
+const idError = validateId(params.id);
 		if (idError) return idError;
 
 		const body = await request.json().catch(() => ({}));
@@ -63,10 +64,11 @@ export async function PATCH(
 // ! Handler - Deletar Pauta
 export async function DELETE(
 	request: NextRequest,
-	{ params }: { params: { id?: string } }
+	context: { params: Promise<{ id: string }> }
 ) {
 	try {
-		const idError = validateId(params.id);
+		const params = await context.params;
+const idError = validateId(params.id);
 		if (idError) return idError;
 
 		const controller = new DeletarPautaController();
@@ -94,10 +96,11 @@ export async function DELETE(
 // ! Handler - Buscar Pauta por ID
 export async function GET(
 	request: Request,
-	{ params }: { params: { id: string } }
+	context: { params: Promise<{ id: string }> }
 ) {
 	try {
-		const idError = validateId(params.id);
+		const params = await context.params;
+const idError = validateId(params.id);
 		if (idError) return idError;
 
 		const { id } = params;

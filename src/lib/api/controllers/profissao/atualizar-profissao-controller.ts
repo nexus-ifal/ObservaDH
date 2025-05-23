@@ -1,8 +1,11 @@
 import { AtualizarProfissaoService } from "../../service/profissao/atualizar-profissao-service";
 import { BuscarProfissaoService } from "../../service/profissao/buscar-profissao-service";
 
+import {
+	ResponseProfissaoDTO,
+	UpdateProfissaoDTO,
+} from "@/domain/dtos/profissao.dto";
 import { RespostaApi } from "@/domain/models/resposta-api";
-import { ResponseProfissaoDTO, UpdateProfissaoDTO } from "@/domain/dtos/profissao.dto";
 
 interface IBuscarProfissaoService {
 	buscarPorId(params: { id: string }): Promise<ResponseProfissaoDTO | null>;

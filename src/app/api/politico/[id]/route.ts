@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { RespostaApi } from "@/domain/models/resposta-api";
 import { UpdatePoliticoDTO } from "@/domain/dtos/politico.dto";
+import { RespostaApi } from "@/domain/models/resposta-api";
 import { AtualizarPoliticoController } from "@/lib/api/controllers/politico/atualizar-politico-controller";
 import { BuscarPoliticoController } from "@/lib/api/controllers/politico/buscar-politico-controller";
 import { DeletarPoliticoController } from "@/lib/api/controllers/politico/deletar-politico-controller";
@@ -30,10 +30,11 @@ function handleError(error: any, message: string) {
 
 export async function PATCH(
 	request: NextRequest,
-	{ params }: { params: { id?: string } }
+	context: { params: Promise<{ id: string }> }
 ) {
 	try {
-		const idError = validateId(params.id);
+		const params = await context.params;
+const idError = validateId(params.id);
 		if (idError) return idError;
 
 		const body = await request.json().catch(() => ({}));
@@ -64,10 +65,11 @@ export async function PATCH(
 
 export async function DELETE(
 	request: NextRequest,
-	{ params }: { params: { id?: string } }
+	context: { params: Promise<{ id: string }> }
 ) {
 	try {
-		const idError = validateId(params.id);
+		const params = await context.params;
+const idError = validateId(params.id);
 		if (idError) return idError;
 
 		const controller = new DeletarPoliticoController();
@@ -94,10 +96,11 @@ export async function DELETE(
 
 export async function GET(
 	request: Request,
-	{ params }: { params: { id: string } }
+	context: { params: Promise<{ id: string }> }
 ) {
 	try {
-		const idError = validateId(params.id);
+		const params = await context.params;
+const idError = validateId(params.id);
 		if (idError) return idError;
 
 		const { id } = params;

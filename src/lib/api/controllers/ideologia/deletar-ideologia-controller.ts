@@ -1,8 +1,11 @@
 import { BuscarIdeologiaService } from "../../service/ideologia/buscar-ideologia-service";
 import { DeletarIdeologiaService } from "../../service/ideologia/deletar-ideologia-service";
 
+import {
+	DeleteIdeologiaDTO,
+	ResponseIdeologiaDTO,
+} from "@/domain/dtos/ideologia.dto";
 import { RespostaApi } from "@/domain/models/resposta-api";
-import { DeleteIdeologiaDTO, ResponseIdeologiaDTO } from "@/domain/dtos/ideologia.dto";
 
 interface IBuscarIdeologiaService {
 	buscarPorId(params: { id: string }): Promise<ResponseIdeologiaDTO | null>;

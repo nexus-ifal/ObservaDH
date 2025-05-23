@@ -1,8 +1,11 @@
 import { AtualizarProjetoService } from "../../service/projeto/atualizar-projeto-service";
 import { BuscarProjetoService } from "../../service/projeto/buscar-projeto-service";
 
+import {
+	ResponseProjetoDTO,
+	UpdateProjetoDTO,
+} from "@/domain/dtos/projeto.dto";
 import { RespostaApi } from "@/domain/models/resposta-api";
-import { ResponseProjetoDTO, UpdateProjetoDTO } from "@/domain/dtos/projeto.dto";
 
 interface IBuscarProjetoService {
 	buscarPorId(params: { id: string }): Promise<ResponseProjetoDTO | null>;

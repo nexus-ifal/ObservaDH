@@ -1,11 +1,11 @@
 import { AtualizarDireitoVioladoService } from "../../service/direito-violado/atualizar-direito_violado-service";
 import { BuscarDireitoVioladoService } from "../../service/direito-violado/buscar-direito_violado-service";
 
-import { RespostaApi } from "@/domain/models/resposta-api";
 import {
 	ResponseDireitoVioladoDTO,
 	UpdateDireitoVioladoDTO,
 } from "@/domain/dtos/direito-violado.dto";
+import { RespostaApi } from "@/domain/models/resposta-api";
 
 interface IBuscarDireitoVioladoService {
 	buscarPorId(params: {

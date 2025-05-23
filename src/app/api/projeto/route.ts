@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { RespostaApi } from "@/domain/models/resposta-api";
 import { CreateProjetoDTO } from "@/domain/dtos/projeto.dto";
+import { RespostaApi } from "@/domain/models/resposta-api";
 import { CriarProjetoController } from "@/lib/api/controllers/projeto/criar-projeto-controller";
 import { ListarProjetoController } from "@/lib/api/controllers/projeto/listar-projeto-controller";
 

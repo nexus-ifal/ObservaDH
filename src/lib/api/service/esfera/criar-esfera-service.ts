@@ -30,6 +30,8 @@ export class CriarEsferaService implements ICriarEsferaService {
 			};
 		} catch (error) {
 			if (error instanceof Prisma.PrismaClientKnownRequestError) {
+				console.error("Erro ao criar esfera:", error);
+				throw error;
 			}
 
 			throw error;

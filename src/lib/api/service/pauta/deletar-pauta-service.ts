@@ -1,4 +1,7 @@
-import { DeletePautaDTO, ResponseDeletePautaDTO } from "@/domain/dtos/pauta.dto";
+import {
+	DeletePautaDTO,
+	ResponseDeletePautaDTO,
+} from "@/domain/dtos/pauta.dto";
 import { prismaClient } from "@/services/prisma/prisma";
 
 interface IDeletarPautaService {

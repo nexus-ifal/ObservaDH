@@ -1,6 +1,9 @@
 import { Prisma } from "@prisma/client";
 
-import { CreateIdeologiaDTO, ResponseIdeologiaDTO } from "@/domain/dtos/ideologia.dto";
+import {
+	CreateIdeologiaDTO,
+	ResponseIdeologiaDTO,
+} from "@/domain/dtos/ideologia.dto";
 import { prismaClient } from "@/services/prisma/prisma";
 
 interface ICriarIdeologiaService {
@@ -39,6 +42,8 @@ export class CriarIdeologiaService implements ICriarIdeologiaService {
 			};
 		} catch (error) {
 			if (error instanceof Prisma.PrismaClientKnownRequestError) {
+				console.error("Erro ao criar ideologia:", error);
+				throw error;
 			}
 
 			throw error;

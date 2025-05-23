@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { RespostaApi } from "@/domain/models/resposta-api";
 import { UpdateEstadoDTO } from "@/domain/dtos/estado.dto";
+import { RespostaApi } from "@/domain/models/resposta-api";
 import { AtualizarEstadoController } from "@/lib/api/controllers/estado/atualizar-estado-controller";
 import { BuscarEstadoController } from "@/lib/api/controllers/estado/buscar-estado-controller";
 import { DeletarEstadoController } from "@/lib/api/controllers/estado/deletar-estado-controller";
@@ -20,9 +20,10 @@ function validateId(id?: string): NextResponse | undefined {
 //! Handler - Atualização de estado
 export async function PATCH(
 	request: NextRequest,
-	{ params }: { params: { id?: string } }
+	context: { params: Promise<{ id: string }> }
 ) {
 	try {
+		const params = await context.params;
 		const idError = validateId(params.id);
 		if (idError) return idError;
 
@@ -58,9 +59,10 @@ export async function PATCH(
 //! Handler - Deletar estado
 export async function DELETE(
 	request: NextRequest,
-	{ params }: { params: { id?: string } }
+	context: { params: Promise<{ id: string }> }
 ) {
 	try {
+		const params = await context.params;
 		const idError = validateId(params.id);
 		if (idError) return idError;
 
@@ -91,9 +93,10 @@ export async function DELETE(
 //! Handler - Buscar estado
 export async function GET(
 	request: Request,
-	{ params }: { params: { id: string } }
+	context: { params: Promise<{ id: string }> }
 ) {
 	try {
+		const params = await context.params;
 		const { id } = params;
 		const controller = new BuscarEstadoController();
 		const resposta = await controller.executar(id);

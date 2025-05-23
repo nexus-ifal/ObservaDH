@@ -1,8 +1,11 @@
 import { BuscarProfissaoService } from "../../service/profissao/buscar-profissao-service";
 import { DeletarProfissaoService } from "../../service/profissao/deletar-profissao-service";
 
+import {
+	DeleteProfissaoDTO,
+	ResponseProfissaoDTO,
+} from "@/domain/dtos/profissao.dto";
 import { RespostaApi } from "@/domain/models/resposta-api";
-import { DeleteProfissaoDTO, ResponseProfissaoDTO } from "@/domain/dtos/profissao.dto";
 
 interface IBuscarProfissaoService {
 	buscarPorId(params: { id: string }): Promise<ResponseProfissaoDTO | null>;

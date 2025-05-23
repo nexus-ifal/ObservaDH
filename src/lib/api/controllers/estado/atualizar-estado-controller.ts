@@ -1,12 +1,12 @@
 import { AtualizarEstadoService } from "../../service/estado/atualizar-estado-service";
 import { BuscarEstadoService } from "../../service/estado/buscar-estado-service";
 
-import { RespostaApi } from "@/domain/models/resposta-api";
 import {
 	ResponseEstadoDTO,
 	UpdateEstadoDTO,
 	UpdateEstadoSchema,
 } from "@/domain/dtos/estado.dto";
+import { RespostaApi } from "@/domain/models/resposta-api";
 
 interface IBuscarEstadoService {
 	buscarPorId(params: { id: string }): Promise<ResponseEstadoDTO | null>;

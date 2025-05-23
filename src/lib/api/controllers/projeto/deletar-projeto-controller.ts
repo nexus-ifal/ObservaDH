@@ -1,8 +1,11 @@
 import { BuscarProjetoService } from "../../service/projeto/buscar-projeto-service";
 import { DeletarProjetoService } from "../../service/projeto/deletar-projeto-service";
 
+import {
+	DeleteProjetoDTO,
+	ResponseProjetoDTO,
+} from "@/domain/dtos/projeto.dto";
 import { RespostaApi } from "@/domain/models/resposta-api";
-import { DeleteProjetoDTO, ResponseProjetoDTO } from "@/domain/dtos/projeto.dto";
 
 interface IBuscarProjetoService {
 	buscarPorId(params: { id: string }): Promise<ResponseProjetoDTO | null>;

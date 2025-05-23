@@ -1,4 +1,7 @@
-import { DeleteEstadoDTO, ResponseDeleteEstadoDTO } from "@/domain/dtos/estado.dto";
+import {
+	DeleteEstadoDTO,
+	ResponseDeleteEstadoDTO,
+} from "@/domain/dtos/estado.dto";
 import { prismaClient } from "@/services/prisma/prisma";
 
 export class DeletarEstadoService {

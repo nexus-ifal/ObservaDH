@@ -37,12 +37,13 @@ import {
 	buscarPautasPorAno,
 	buscarProjetosPorAno,
 } from "@/infra/api/projeto";
-import EsferaDTO from "@/infra/domain/esfera-dto";
+
 import obterEstadosUnicos from "@/lib/web/mock-utils/projeto-utils/obter-estados-unico";
 import obterPautasUnicas from "@/lib/web/mock-utils/projeto-utils/obter-pautas-unicas";
+import { ResponseEsferaDTO } from "@/domain/dtos/esfera.dto";
 
 const Page: React.FC = () => {
-	const [esferas, setEsferas] = useState<EsferaDTO[]>([]);
+	const [esferas, setEsferas] = useState<ResponseEsferaDTO[]>([]);
 	const [anos, setAnos] = useState<string[]>([]);
 	const [dadosPlAno, setDadosPlAno] = useState<DadosGraficoLinhaPontos[]>();
 	const [dadosPautas, setDadosPautas] =

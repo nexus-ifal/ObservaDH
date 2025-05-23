@@ -1,8 +1,11 @@
 import { BuscarPartidoService } from "../../service/partido/buscar-partido-service";
 import { CriarPartidoService } from "../../service/partido/criar-partido-service";
 
+import {
+	CreatePartidoDTO,
+	ResponsePartidoDTO,
+} from "@/domain/dtos/partido.dto";
 import { RespostaApi } from "@/domain/models/resposta-api";
-import { CreatePartidoDTO, ResponsePartidoDTO } from "@/domain/dtos/partido.dto";
 
 interface IBuscarPartidoService {
 	buscarPorNome(params: { nome: string }): Promise<ResponsePartidoDTO | null>;

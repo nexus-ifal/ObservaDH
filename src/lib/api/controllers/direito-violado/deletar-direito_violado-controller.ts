@@ -1,8 +1,8 @@
-import { RespostaApi } from "@/domain/models/resposta-api";
 import {
 	DeleteDireitoVioladoDTO,
 	ResponseDireitoVioladoDTO,
 } from "@/domain/dtos/direito-violado.dto";
+import { RespostaApi } from "@/domain/models/resposta-api";
 
 interface IBuscarDireitoVioladoService {
 	buscarPorId(params: {

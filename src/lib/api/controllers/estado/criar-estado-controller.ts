@@ -3,12 +3,12 @@ import { ZodError } from "zod";
 import { BuscarEstadoService } from "../../service/estado/buscar-estado-service";
 import { CriarEstadoService } from "../../service/estado/criar-estado-service";
 
-import { RespostaApi } from "@/domain/models/resposta-api";
 import {
 	CreateEstadoDTO,
 	CreateEstadoSchema,
 	ResponseEstadoDTO,
 } from "@/domain/dtos/estado.dto";
+import { RespostaApi } from "@/domain/models/resposta-api";
 
 interface IBuscarEstadoService {
 	buscarPorNome(params: { nome: string }): Promise<ResponseEstadoDTO | null>;

@@ -1,8 +1,11 @@
 import { AtualizarPartidoService } from "../../service/partido/atualizar-partido-service";
 import { BuscarPartidoService } from "../../service/partido/buscar-partido-service";
 
+import {
+	ResponsePartidoDTO,
+	UpdatePartidoDTO,
+} from "@/domain/dtos/partido.dto";
 import { RespostaApi } from "@/domain/models/resposta-api";
-import { ResponsePartidoDTO, UpdatePartidoDTO } from "@/domain/dtos/partido.dto";
 
 interface IBuscarPartidoService {
 	buscarPorId(params: { id: string }): Promise<ResponsePartidoDTO | null>;
