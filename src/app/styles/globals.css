@@ -4,6 +4,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 .logo::before {
 	content: "Observa";
 	font-family: "Oswald", sans-serif;

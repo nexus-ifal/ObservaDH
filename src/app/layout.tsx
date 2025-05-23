@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import "./globals.css";
+import "./styles/globals.css";
 
 import { titilliumWeb } from "@/lib/fonts/fonts";
 
@@ -14,7 +14,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
 	return (
 		<html lang="pt-br" className={titilliumWeb.className}>
-			<body className="bg-layout-principal antialiased no-scrollbar flex flex-col">
+			<body className="bg-layout-principal antialiased no-scrollbar flex flex-col bg-red">
 				{children}
 			</body>
 		</html>
