@@ -3,9 +3,9 @@
 import * as React from "react";
 import * as RechartsPrimitive from "recharts";
 
-import { cn } from "@/lib/utils/utils";
+import { cn } from "@/core/lib/utils/utils";
 
-import { oswald } from "@/lib/fonts/fonts";
+import { oswald } from "@/core/lib/fonts/fonts";
 
 // Format: { THEME_NAME: CSS_SELECTOR }
 const THEMES = { light: "sas", dark: "" } as const;

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
-import { RespostaApi } from "@/domain/models/resposta-api";
-import { BuscarProfissaoController } from "@/lib/api/controllers/profissao/buscar-profissao-controller";
+import { RespostaApi } from "@/core/domain/models/resposta-api";
+import { BuscarProfissaoController } from "@/core/lib/api/controllers/profissao/buscar-profissao-controller";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function handleError(error: any, message: string) {

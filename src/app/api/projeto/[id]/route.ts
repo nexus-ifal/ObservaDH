@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { UpdateProjetoDTO } from "@/domain/dtos/projeto.dto";
-import { RespostaApi } from "@/domain/models/resposta-api";
-import { AtualizarProjetoController } from "@/lib/api/controllers/projeto/atualizar-projeto-controller";
-import { BuscarProjetoController } from "@/lib/api/controllers/projeto/buscar-projeto-controller";
-import { DeletarProjetoController } from "@/lib/api/controllers/projeto/deletar-projeto-controller";
+import { UpdateProjetoDTO } from "@/core/domain/dtos/projeto.dto";
+import { RespostaApi } from "@/core/domain/models/resposta-api";
+import { AtualizarProjetoController } from "@/core/lib/api/controllers/projeto/atualizar-projeto-controller";
+import { BuscarProjetoController } from "@/core/lib/api/controllers/projeto/buscar-projeto-controller";
+import { DeletarProjetoController } from "@/core/lib/api/controllers/projeto/deletar-projeto-controller";
 
 function validateId(id?: string): NextResponse | undefined {
 	if (!id || id.trim() === "") {
@@ -34,7 +34,7 @@ export async function PATCH(
 ) {
 	try {
 		const params = await context.params;
-const idError = validateId(params.id);
+		const idError = validateId(params.id);
 		if (idError) return idError;
 
 		const body = await request.json().catch(() => ({}));
@@ -70,7 +70,7 @@ export async function DELETE(
 ) {
 	try {
 		const params = await context.params;
-const idError = validateId(params.id);
+		const idError = validateId(params.id);
 		if (idError) return idError;
 
 		const controller = new DeletarProjetoController();
@@ -98,11 +98,10 @@ const idError = validateId(params.id);
 export async function GET(
 	request: Request,
 	context: { params: Promise<{ id: string }> }
-
 ) {
 	try {
 		const params = await context.params;
-const idError = validateId(params.id);
+		const idError = validateId(params.id);
 		if (idError) return idError;
 
 		const { id } = params;

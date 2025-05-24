@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import FooterBar from "@/components/ui/layouts/footer-bar";
 import Header from "@/components/ui/layouts/header";
 
-import { oswald } from "@/lib/fonts/fonts";
+import { oswald } from "@/core/lib/fonts/fonts";
 
 const page: React.FC = () => {
 	const router = useRouter();

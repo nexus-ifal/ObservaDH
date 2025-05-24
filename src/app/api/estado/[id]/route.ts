@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { UpdateEstadoDTO } from "@/domain/dtos/estado.dto";
-import { RespostaApi } from "@/domain/models/resposta-api";
-import { AtualizarEstadoController } from "@/lib/api/controllers/estado/atualizar-estado-controller";
-import { BuscarEstadoController } from "@/lib/api/controllers/estado/buscar-estado-controller";
-import { DeletarEstadoController } from "@/lib/api/controllers/estado/deletar-estado-controller";
+import { AtualizarEstadoController } from "@/core/lib/api/controllers/estado/atualizar-estado-controller";
+import { BuscarEstadoController } from "@/core/lib/api/controllers/estado/buscar-estado-controller";
+import { DeletarEstadoController } from "@/core/lib/api/controllers/estado/deletar-estado-controller";
+import { UpdateEstadoDTO } from "@/core/domain/dtos/estado.dto";
+import { RespostaApi } from "@/core/domain/models/resposta-api";
 
 function validateId(id?: string): NextResponse | undefined {
 	if (!id) {

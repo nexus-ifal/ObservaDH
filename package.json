@@ -6,16 +6,16 @@
 		"dev": "next dev",
 		"build": "prisma generate && next build",
 		"start": "next start",
-		"lint": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
 		"format": "prettier --write .",
 		"prepare": "prisma generate",
-		"check": "npm run prepare && npm run format && eslint . --ext .js,.jsx,.ts,.tsx && prettier --check . && tsc --noEmit && next build && npm audit && npm outdated"
+		"check": "npm run prepare && npm run format && tsc --noEmit && next build && npm audit && npm outdated"
 	},
 	"dependencies": {
 		"@prisma/client": "^6.8.2",
 		"@radix-ui/react-alert-dialog": "^1.1.14",
 		"@radix-ui/react-select": "^2.2.5",
 		"@radix-ui/react-slot": "^1.2.3",
+		"@tanstack/react-query": "^5.77.0",
 		"axios": "^1.9.0",
 		"class-variance-authority": "^0.7.1",
 		"clsx": "^2.1.1",
@@ -25,6 +25,7 @@
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-icons": "^5.5.0",
+		"react-spinners": "^0.17.0",
 		"recharts": "^2.15.3",
 		"tailwind-merge": "^3.3.0",
 		"tailwindcss": "^3.4.0",

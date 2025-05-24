@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { UpdateIdeologiaDTO } from "@/domain/dtos/ideologia.dto";
-import { RespostaApi } from "@/domain/models/resposta-api";
-import { AtualizarIdeologiaController } from "@/lib/api/controllers/ideologia/atualizar-ideologia-controller";
-import { BuscarIdeologiaController } from "@/lib/api/controllers/ideologia/buscar-ideologia-controller";
-import { DeletarIdeologiaController } from "@/lib/api/controllers/ideologia/deletar-ideologia-controller";
+import { AtualizarIdeologiaController } from "@/core/lib/api/controllers/ideologia/atualizar-ideologia-controller";
+import { BuscarIdeologiaController } from "@/core/lib/api/controllers/ideologia/buscar-ideologia-controller";
+import { DeletarIdeologiaController } from "@/core/lib/api/controllers/ideologia/deletar-ideologia-controller";
+import { UpdateIdeologiaDTO } from "@/core/domain/dtos/ideologia.dto";
+import { RespostaApi } from "@/core/domain/models/resposta-api";
 
 function validateId(id?: string): NextResponse | undefined {
 	if (!id || id.trim() === "") {
@@ -34,7 +34,7 @@ export async function PATCH(
 ) {
 	try {
 		const params = await context.params;
-const idError = validateId(params.id);
+		const idError = validateId(params.id);
 		if (idError) return idError;
 
 		const body = await request.json().catch(() => ({}));
@@ -67,7 +67,7 @@ export async function DELETE(
 ) {
 	try {
 		const params = await context.params;
-const idError = validateId(params.id);
+		const idError = validateId(params.id);
 		if (idError) return idError;
 
 		const controller = new DeletarIdeologiaController();
@@ -98,7 +98,7 @@ export async function GET(
 ) {
 	try {
 		const params = await context.params;
-const idError = validateId(params.id);
+		const idError = validateId(params.id);
 		if (idError) return idError;
 
 		const { id } = params;

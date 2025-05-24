@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { UpdatePartidoDTO } from "@/domain/dtos/partido.dto";
-import { RespostaApi } from "@/domain/models/resposta-api";
-import { AtualizarPartidoController } from "@/lib/api/controllers/partido/atualizar-partido-controller";
-import { BuscarPartidoController } from "@/lib/api/controllers/partido/buscar-partido-controller";
-import { DeletarPartidoController } from "@/lib/api/controllers/partido/deletar-partido-controller";
+import { UpdatePartidoDTO } from "@/core/domain/dtos/partido.dto";
+import { RespostaApi } from "@/core/domain/models/resposta-api";
+import { AtualizarPartidoController } from "@/core/lib/api/controllers/partido/atualizar-partido-controller";
+import { BuscarPartidoController } from "@/core/lib/api/controllers/partido/buscar-partido-controller";
+import { DeletarPartidoController } from "@/core/lib/api/controllers/partido/deletar-partido-controller";
 
 function validateId(id?: string): NextResponse | undefined {
 	if (!id || id.trim() === "") {
@@ -34,7 +34,7 @@ export async function PATCH(
 ) {
 	try {
 		const params = await context.params;
-const idError = validateId(params.id);
+		const idError = validateId(params.id);
 		if (idError) return idError;
 
 		const body = await request.json().catch(() => ({}));
@@ -66,7 +66,7 @@ export async function DELETE(
 ) {
 	try {
 		const params = await context.params;
-const idError = validateId(params.id);
+		const idError = validateId(params.id);
 		if (idError) return idError;
 
 		const controller = new DeletarPartidoController();
@@ -94,7 +94,7 @@ export async function GET(
 ) {
 	try {
 		const params = await context.params;
-const idError = validateId(params.id);
+		const idError = validateId(params.id);
 		if (idError) return idError;
 
 		const { id } = params;

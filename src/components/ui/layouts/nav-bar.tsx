@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 
 import Header from "./header";
 
-import useDescobertaCabecalho from "@/lib/web/mock-utils/cabecalho-utils";
+import useDescobertaCabecalho from "@/core/lib/web/mock-utils/cabecalho-utils";
 
 interface Cabecalho {
 	titulo: string;
@@ -34,7 +34,7 @@ const navBar: React.FC = () => {
 				text: "",
 			});
 		}
-	}, [router, buscarCabecalho]);
+	}, []);
 
 	return (
 		<div className="w-full h-full flex flex-col items-center bg-senado bg-cover bg-center border-b-2 border-[#001745]">

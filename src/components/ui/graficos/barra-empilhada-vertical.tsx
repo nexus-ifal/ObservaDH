@@ -13,7 +13,7 @@ import {
 	ChartTooltipContent,
 } from "@/components/ui-shacnui/chart";
 
-import { DadosGraficoBarraEmpilhadaVertical } from "@/domain/graficos/barra-empilhada-vertical";
+import { DadosGraficoBarraEmpilhadaVertical } from "@/core/domain/graficos/types/barra-empilhada-vertical";
 
 const chartConfig = {
 	branco: {

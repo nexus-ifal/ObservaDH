@@ -1,10 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { UpdateEsferaDTO } from "@/domain/dtos/esfera.dto";
-import { RespostaApi } from "@/domain/models/resposta-api";
-import { AtualizarEsferaController } from "@/lib/api/controllers/esfera/atualizar-esfera-controller";
-import { BuscarEsferaController } from "@/lib/api/controllers/esfera/buscar-esfera-controller";
-import { DeletarEsferaController } from "@/lib/api/controllers/esfera/deletar-esfera-controller";
+
+import { AtualizarEsferaController } from "@/core/lib/api/controllers/esfera/atualizar-esfera-controller";
+import { BuscarEsferaController } from "@/core/lib/api/controllers/esfera/buscar-esfera-controller";
+import { DeletarEsferaController } from "@/core/lib/api/controllers/esfera/deletar-esfera-controller";
+import { UpdateEsferaDTO } from "@/core/domain/dtos/esfera.dto";
+import { RespostaApi } from "@/core/domain/models/resposta-api";
 
 function validateId(id?: string): NextResponse | undefined {
 	if (!id || id.trim() === "") {
@@ -35,7 +36,7 @@ export async function PATCH(
 ) {
 	try {
 		const params = await context.params;
-const idError = validateId(params.id);
+		const idError = validateId(params.id);
 		if (idError) return idError;
 
 		const body = await request.json().catch(() => ({}));
@@ -66,7 +67,7 @@ export async function DELETE(
 ) {
 	try {
 		const params = await context.params;
-const idError = validateId(params.id);
+		const idError = validateId(params.id);
 		if (idError) return idError;
 
 		const controller = new DeletarEsferaController();
@@ -100,7 +101,7 @@ export async function GET(
 ) {
 	try {
 		const params = await context.params;
-const idError = validateId(params.id);
+		const idError = validateId(params.id);
 		if (idError) return idError;
 
 		const { id } = params;
