@@ -1,8 +1,8 @@
 import {
 	DeleteDireitoVioladoDTO,
 	ResponseDireitoVioladoDTO,
-} from "@/domain/dtos/direito-violado.dto";
-import { RespostaApi } from "@/domain/models/resposta-api";
+} from "@/core/domain/dtos/direito-violado.dto";
+import { RespostaApi } from "@/core/domain/models/resposta-api";
 
 interface IBuscarDireitoVioladoService {
 	buscarPorId(params: {
@@ -13,7 +13,7 @@ interface IBuscarDireitoVioladoService {
 import { BuscarDireitoVioladoService } from "../../service/direito-violado/buscar-direito_violado-service";
 import { DeletarDireitoVioladoService } from "../../service/direito-violado/deletar-direito_violado-service";
 
-import { ResponseDeleteDireitoVioladoDTO } from "@/domain/dtos/direito-violado.dto";
+import { ResponseDeleteDireitoVioladoDTO } from "@/core/domain/dtos/direito-violado.dto";
 
 interface IDeletarDireitoVioladoService {
 	executar(params: { id: string }): Promise<ResponseDeleteDireitoVioladoDTO>;

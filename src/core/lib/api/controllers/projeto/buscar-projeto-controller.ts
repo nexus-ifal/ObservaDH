@@ -3,7 +3,7 @@ import {
 	IBuscarProjetoService,
 } from "../../service/projeto/buscar-projeto-service";
 
-import { RespostaApi } from "@/domain/models/resposta-api";
+import { RespostaApi } from "@/core/domain/models/resposta-api";
 
 export interface IBuscarProjetoController {
 	executar(id: string): Promise<RespostaApi>;

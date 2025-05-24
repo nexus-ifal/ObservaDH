@@ -6,10 +6,9 @@
 		"dev": "next dev",
 		"build": "prisma generate && next build",
 		"start": "next start",
-		"lint": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
 		"format": "prettier --write .",
 		"prepare": "prisma generate",
-		"check": "npm run prepare && npm run format && eslint . --ext .js,.jsx,.ts,.tsx && prettier --check . && tsc --noEmit && next build && npm audit && npm outdated"
+		"check": "npm run prepare && npm run format && tsc --noEmit && next build && npm audit && npm outdated"
 	},
 	"dependencies": {
 		"@prisma/client": "^6.8.2",

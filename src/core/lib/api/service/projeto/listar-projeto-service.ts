@@ -1,4 +1,4 @@
-import { ResponseProjetoDTO } from "@/domain/dtos/projeto.dto";
+import { ResponseProjetoDTO } from "@/core/domain/dtos/projeto.dto";
 import { prismaClient } from "@/services/prisma/prisma";
 
 export interface IListarProjetoService {

@@ -3,7 +3,7 @@ import { Prisma } from "@prisma/client";
 import {
 	CreatePartidoDTO,
 	ResponsePartidoDTO,
-} from "@/domain/dtos/partido.dto";
+} from "@/core/domain/dtos/partido.dto";
 import { prismaClient } from "@/services/prisma/prisma";
 
 interface ICriarPartidoService {

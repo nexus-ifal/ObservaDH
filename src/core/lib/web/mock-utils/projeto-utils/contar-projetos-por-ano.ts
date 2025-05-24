@@ -1,4 +1,4 @@
-import { ProjetoLei } from "@/domain/graficos/types/projeto-lei";
+import { ProjetoLei } from "@/core/domain/graficos/types/projeto-lei";
 
 function contarProjetosPorAno({ data }: { data: ProjetoLei[] }) {
 	const anosContagem: Record<string, number> = {};

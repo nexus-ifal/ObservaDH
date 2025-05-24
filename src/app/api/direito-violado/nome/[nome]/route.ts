@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { RespostaApi } from "@/domain/models/resposta-api";
+import { RespostaApi } from "@/core/domain/models/resposta-api";
 import { BuscarDireitoVioladoController } from "@/core/lib/api/controllers/direito-violado/buscar-direito_violado-controller";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

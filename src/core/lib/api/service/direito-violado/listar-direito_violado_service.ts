@@ -1,4 +1,4 @@
-import { ResponseDireitoVioladoDTO } from "@/domain/dtos/direito-violado.dto";
+import { ResponseDireitoVioladoDTO } from "@/core/domain/dtos/direito-violado.dto";
 import { prismaClient } from "@/services/prisma/prisma";
 
 export interface IListarDireitoVioladoService {

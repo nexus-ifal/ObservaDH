@@ -1,14 +1,14 @@
 import { BuscarEstadoService } from "../../service/estado/buscar-estado-service";
 import { DeletarEstadoService } from "../../service/estado/deletar-estado-service";
 
-import { DeleteEstadoDTO, ResponseEstadoDTO } from "@/domain/dtos/estado.dto";
-import { RespostaApi } from "@/domain/models/resposta-api";
+import { DeleteEstadoDTO, ResponseEstadoDTO } from "@/core/domain/dtos/estado.dto";
+import { RespostaApi } from "@/core/domain/models/resposta-api";
 
 interface IBuscarEstadoService {
 	buscarPorId(params: { id: string }): Promise<ResponseEstadoDTO | null>;
 }
 
-import { ResponseDeleteEstadoDTO } from "@/domain/dtos/estado.dto";
+import { ResponseDeleteEstadoDTO } from "@/core/domain/dtos/estado.dto";
 
 interface IDeletarEstadoService {
 	executar(params: { id: string }): Promise<ResponseDeleteEstadoDTO | null>;

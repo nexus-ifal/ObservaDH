@@ -3,7 +3,7 @@ import {
 	IBuscarEsferaService,
 } from "../../service/esfera/buscar-esfera-service";
 
-import { RespostaApi } from "@/domain/models/resposta-api";
+import { RespostaApi } from "@/core/domain/models/resposta-api";
 
 export interface IBuscarEsferaController {
 	executar(id: string): Promise<RespostaApi>;

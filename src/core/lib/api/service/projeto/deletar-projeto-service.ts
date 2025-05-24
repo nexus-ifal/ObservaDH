@@ -1,7 +1,7 @@
 import {
 	DeleteProjetoDTO,
 	ResponseDeleteProjetoDTO,
-} from "@/domain/dtos/projeto.dto";
+} from "@/core/domain/dtos/projeto.dto";
 import { prismaClient } from "@/services/prisma/prisma";
 
 interface IDeletarProjetoService {

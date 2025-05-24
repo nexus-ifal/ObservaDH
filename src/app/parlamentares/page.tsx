@@ -1,8 +1,8 @@
 import { MdOutlineFilterAlt } from "react-icons/md";
 
-import { elemento } from "@/domain/graficos/types/elemento-dropdown";
-import { PartidoModel } from "@/domain/graficos/types/partido";
-import { ProjetoLei } from "@/domain/graficos/types/projeto-lei";
+import { elemento } from "@/core/domain/graficos/types/elemento-dropdown";
+import { PartidoModel } from "@/core/domain/graficos/types/partido";
+import { ProjetoLei } from "@/core/domain/graficos/types/projeto-lei";
 
 import Card from "@/components/ui/cards";
 import CardLegenda from "@/components/ui/cards/card-legenda";

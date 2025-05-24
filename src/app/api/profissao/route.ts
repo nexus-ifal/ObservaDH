@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { CreateProfissaoDTO } from "@/domain/dtos/profissao.dto";
-import { RespostaApi } from "@/domain/models/resposta-api";
+import { CreateProfissaoDTO } from "@/core/domain/dtos/profissao.dto";
+import { RespostaApi } from "@/core/domain/models/resposta-api";
 import { CriarProfissaoController } from "@/core/lib/api/controllers/profissao/criar-profissao-controller";
 import { ListarProfissaoController } from "@/core/lib/api/controllers/profissao/listar-profissao-controller";
 

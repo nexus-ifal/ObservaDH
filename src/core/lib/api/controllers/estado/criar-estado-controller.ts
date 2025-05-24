@@ -7,8 +7,8 @@ import {
 	CreateEstadoDTO,
 	CreateEstadoSchema,
 	ResponseEstadoDTO,
-} from "@/domain/dtos/estado.dto";
-import { RespostaApi } from "@/domain/models/resposta-api";
+} from "@/core/domain/dtos/estado.dto";
+import { RespostaApi } from "@/core/domain/models/resposta-api";
 
 interface IBuscarEstadoService {
 	buscarPorNome(params: { nome: string }): Promise<ResponseEstadoDTO | null>;

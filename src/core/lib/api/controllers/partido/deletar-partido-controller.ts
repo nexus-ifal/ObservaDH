@@ -4,14 +4,14 @@ import { DeletarPartidoService } from "../../service/partido/deletar-partido-ser
 import {
 	DeletePartidoDTO,
 	ResponsePartidoDTO,
-} from "@/domain/dtos/partido.dto";
-import { RespostaApi } from "@/domain/models/resposta-api";
+} from "@/core/domain/dtos/partido.dto";
+import { RespostaApi } from "@/core/domain/models/resposta-api";
 
 interface IBuscarPartidoService {
 	buscarPorId(params: { id: string }): Promise<ResponsePartidoDTO | null>;
 }
 
-import { ResponseDeletePartidoDTO } from "@/domain/dtos/partido.dto";
+import { ResponseDeletePartidoDTO } from "@/core/domain/dtos/partido.dto";
 
 interface IDeletarPartidoService {
 	executar(params: { id: string }): Promise<ResponseDeletePartidoDTO>;

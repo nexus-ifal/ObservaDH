@@ -1,7 +1,7 @@
 import {
 	ResponsePoliticoDTO,
 	SearchPoliticoDTO,
-} from "@/domain/dtos/politico.dto";
+} from "@/core/domain/dtos/politico.dto";
 import { prismaClient } from "@/services/prisma/prisma";
 
 export interface IBuscarPoliticoService {

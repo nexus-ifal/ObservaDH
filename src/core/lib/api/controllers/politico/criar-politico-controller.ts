@@ -3,8 +3,8 @@ import { CriarPoliticoService } from "../../service/politico/criar-politico-serv
 import {
 	CreatePoliticoDTO,
 	ResponsePoliticoDTO,
-} from "@/domain/dtos/politico.dto";
-import { RespostaApi } from "@/domain/models/resposta-api";
+} from "@/core/domain/dtos/politico.dto";
+import { RespostaApi } from "@/core/domain/models/resposta-api";
 
 interface ICriarPoliticoService {
 	executar(params: CreatePoliticoDTO): Promise<ResponsePoliticoDTO>;

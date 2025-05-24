@@ -4,8 +4,8 @@ import { CriarProjetoService } from "../../service/projeto/criar-projeto-service
 import {
 	CreateProjetoDTO,
 	ResponseProjetoDTO,
-} from "@/domain/dtos/projeto.dto";
-import { RespostaApi } from "@/domain/models/resposta-api";
+} from "@/core/domain/dtos/projeto.dto";
+import { RespostaApi } from "@/core/domain/models/resposta-api";
 
 interface IBuscarProjetoService {
 	buscarPorNumeroPl(params: {

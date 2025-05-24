@@ -4,8 +4,8 @@ import { BuscarProfissaoService } from "../../service/profissao/buscar-profissao
 import {
 	ResponseProfissaoDTO,
 	UpdateProfissaoDTO,
-} from "@/domain/dtos/profissao.dto";
-import { RespostaApi } from "@/domain/models/resposta-api";
+} from "@/core/domain/dtos/profissao.dto";
+import { RespostaApi } from "@/core/domain/models/resposta-api";
 
 interface IBuscarProfissaoService {
 	buscarPorId(params: { id: string }): Promise<ResponseProfissaoDTO | null>;

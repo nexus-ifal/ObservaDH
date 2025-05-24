@@ -1,7 +1,7 @@
 "use client";
 
-import { ResponseEstadoDTO } from "@/domain/dtos/estado.dto";
-import { getEstados } from "@/infra/api/services/estado/estado.service";
+
+import { ResponseEstadoDTO } from "@/core/domain/dtos/estado.dto";
 import { useEffect, useState } from "react";
 import { ScaleLoader } from "react-spinners";
 
@@ -9,8 +9,6 @@ const Page: React.FC = () => {
 	const [data, setData] = useState<ResponseEstadoDTO[]>([]);
 	useEffect(() => {
 		async function fetchData() {
-			const initialEstados = await getEstados();
-			setData(initialEstados);
 		}
 		fetchData();
 	}, []);

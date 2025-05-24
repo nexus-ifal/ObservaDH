@@ -1,7 +1,7 @@
 import {
 	ResponseIdeologiaDTO,
 	SearchIdeologiaDTO,
-} from "@/domain/dtos/ideologia.dto";
+} from "@/core/domain/dtos/ideologia.dto";
 import { prismaClient } from "@/services/prisma/prisma";
 
 export interface IBuscarIdeologiaService {

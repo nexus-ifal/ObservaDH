@@ -4,14 +4,14 @@ import { DeletarPoliticoService } from "../../service/politico/deletar-politico-
 import {
 	DeletePoliticoDTO,
 	ResponsePoliticoDTO,
-} from "@/domain/dtos/politico.dto";
-import { RespostaApi } from "@/domain/models/resposta-api";
+} from "@/core/domain/dtos/politico.dto";
+import { RespostaApi } from "@/core/domain/models/resposta-api";
 
 interface IBuscarPoliticoService {
 	buscarPorId(params: { id: string }): Promise<ResponsePoliticoDTO | null>;
 }
 
-import { ResponseDeletePoliticoDTO } from "@/domain/dtos/politico.dto";
+import { ResponseDeletePoliticoDTO } from "@/core/domain/dtos/politico.dto";
 
 interface IDeletarPoliticoService {
 	executar(params: { id: string }): Promise<ResponseDeletePoliticoDTO>;

@@ -4,14 +4,14 @@ import { DeletarProjetoService } from "../../service/projeto/deletar-projeto-ser
 import {
 	DeleteProjetoDTO,
 	ResponseProjetoDTO,
-} from "@/domain/dtos/projeto.dto";
-import { RespostaApi } from "@/domain/models/resposta-api";
+} from "@/core/domain/dtos/projeto.dto";
+import { RespostaApi } from "@/core/domain/models/resposta-api";
 
 interface IBuscarProjetoService {
 	buscarPorId(params: { id: string }): Promise<ResponseProjetoDTO | null>;
 }
 
-import { ResponseDeleteProjetoDTO } from "@/domain/dtos/projeto.dto";
+import { ResponseDeleteProjetoDTO } from "@/core/domain/dtos/projeto.dto";
 
 interface IDeletarProjetoService {
 	executar(params: { id: string }): Promise<ResponseDeleteProjetoDTO>;

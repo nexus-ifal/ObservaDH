@@ -3,7 +3,7 @@ import { Prisma } from "@prisma/client";
 import {
 	CreatePoliticoDTO,
 	ResponsePoliticoDTO,
-} from "@/domain/dtos/politico.dto";
+} from "@/core/domain/dtos/politico.dto";
 import { prismaClient } from "@/services/prisma/prisma";
 
 interface ICriarPoliticoService {

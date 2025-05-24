@@ -5,7 +5,7 @@ import {
 	IBuscarEstadoService,
 } from "../../service/estado/buscar-estado-service";
 
-import { RespostaApi } from "@/domain/models/resposta-api";
+import { RespostaApi } from "@/core/domain/models/resposta-api";
 
 export interface IBuscarEstadoController {
 	executar(id: string): Promise<RespostaApi>;

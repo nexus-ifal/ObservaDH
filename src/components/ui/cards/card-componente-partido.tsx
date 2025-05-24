@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { PartidoModel } from "@/domain/graficos/types/partido";
+import { PartidoModel } from "@/core/domain/graficos/types/partido";
 
 import { oswald } from "../../../core/lib/fonts/fonts";
 

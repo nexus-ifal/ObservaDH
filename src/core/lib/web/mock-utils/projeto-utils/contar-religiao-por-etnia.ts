@@ -1,6 +1,6 @@
-import { ProjetoLei } from "@/domain/graficos/types/projeto-lei";
+import { ProjetoLei } from "@/core/domain/graficos/types/projeto-lei";
 
-import { DadosGraficoBarraEmpilhadaVertical } from "@/domain/graficos/types/barra-empilhada-vertical";
+import { DadosGraficoBarraEmpilhadaVertical } from "@/core/domain/graficos/types/barra-empilhada-vertical";
 
 function contarReligiaoPorEtnia(data: ProjetoLei[]) {
 	const resultado: DadosGraficoBarraEmpilhadaVertical[] = [];

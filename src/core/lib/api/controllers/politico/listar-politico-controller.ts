@@ -3,7 +3,7 @@ import {
 	ListarPoliticoService,
 } from "../../service/politico/listar-politico-service";
 
-import { RespostaApi } from "@/domain/models/resposta-api";
+import { RespostaApi } from "@/core/domain/models/resposta-api";
 
 export interface IListarPoliticoController {
 	executar(): Promise<RespostaApi>;

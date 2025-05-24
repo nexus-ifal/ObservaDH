@@ -3,7 +3,7 @@ import {
 	ListarEsferaService,
 } from "../../service/esfera/listar-esfera-service";
 
-import { RespostaApi } from "@/domain/models/resposta-api";
+import { RespostaApi } from "@/core/domain/models/resposta-api";
 
 export interface IListarEsferaController {
 	executar(): Promise<RespostaApi>;

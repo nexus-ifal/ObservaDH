@@ -4,8 +4,8 @@ import { CriarDireitoVioladoService } from "../../service/direito-violado/criar-
 import {
 	CreateDireitoVioladoDTO,
 	ResponseDireitoVioladoDTO,
-} from "@/domain/dtos/direito-violado.dto";
-import { RespostaApi } from "@/domain/models/resposta-api";
+} from "@/core/domain/dtos/direito-violado.dto";
+import { RespostaApi } from "@/core/domain/models/resposta-api";
 
 interface IBuscarDireitoVioladoService {
 	buscarPorNome(params: {

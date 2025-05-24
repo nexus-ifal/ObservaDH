@@ -1,7 +1,7 @@
 import { CriarEsferaService } from "../../service/esfera/criar-esfera-service";
 
-import { CreateEsferaDTO, ResponseEsferaDTO } from "@/domain/dtos/esfera.dto";
-import { RespostaApi } from "@/domain/models/resposta-api";
+import { CreateEsferaDTO, ResponseEsferaDTO } from "@/core/domain/dtos/esfera.dto";
+import { RespostaApi } from "@/core/domain/models/resposta-api";
 
 interface ICriarEsferaService {
 	executar(params: CreateEsferaDTO): Promise<ResponseEsferaDTO>;

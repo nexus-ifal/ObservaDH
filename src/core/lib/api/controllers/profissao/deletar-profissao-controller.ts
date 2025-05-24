@@ -4,14 +4,14 @@ import { DeletarProfissaoService } from "../../service/profissao/deletar-profiss
 import {
 	DeleteProfissaoDTO,
 	ResponseProfissaoDTO,
-} from "@/domain/dtos/profissao.dto";
-import { RespostaApi } from "@/domain/models/resposta-api";
+} from "@/core/domain/dtos/profissao.dto";
+import { RespostaApi } from "@/core/domain/models/resposta-api";
 
 interface IBuscarProfissaoService {
 	buscarPorId(params: { id: string }): Promise<ResponseProfissaoDTO | null>;
 }
 
-import { ResponseDeleteProfissaoDTO } from "@/domain/dtos/profissao.dto";
+import { ResponseDeleteProfissaoDTO } from "@/core/domain/dtos/profissao.dto";
 
 interface IDeletarProfissaoService {
 	executar(params: { id: string }): Promise<ResponseDeleteProfissaoDTO>;

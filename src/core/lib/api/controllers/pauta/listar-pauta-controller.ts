@@ -3,7 +3,7 @@ import {
 	ListarPautaService,
 } from "../../service/pauta/listar-pauta-service";
 
-import { RespostaApi } from "@/domain/models/resposta-api";
+import { RespostaApi } from "@/core/domain/models/resposta-api";
 
 export interface IListarPautaController {
 	executar(): Promise<RespostaApi>;

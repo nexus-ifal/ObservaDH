@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { UpdateDireitoVioladoDTO } from "@/domain/dtos/direito-violado.dto";
-import { RespostaApi } from "@/domain/models/resposta-api";
+import { UpdateDireitoVioladoDTO } from "@/core/domain/dtos/direito-violado.dto";
+import { RespostaApi } from "@/core/domain/models/resposta-api";
 import { AtualizarDireitoVioladoController } from "@/core/lib/api/controllers/direito-violado/atualizar-direito_violado-controller";
 import { BuscarDireitoVioladoController } from "@/core/lib/api/controllers/direito-violado/buscar-direito_violado-controller";
 import { DeletarDireitoVioladoController } from "@/core/lib/api/controllers/direito-violado/deletar-direito_violado-controller";
@@ -35,7 +35,7 @@ export async function PATCH(
 ) {
 	try {
 		const params = await context.params;
-const idError = validateId(params.id);
+		const idError = validateId(params.id);
 		if (idError) return idError;
 
 		const body = await request.json().catch(() => ({}));
@@ -71,7 +71,7 @@ export async function DELETE(
 ) {
 	try {
 		const params = await context.params;
-const idError = validateId(params.id);
+		const idError = validateId(params.id);
 		if (idError) return idError;
 
 		const controller = new DeletarDireitoVioladoController();
@@ -103,7 +103,7 @@ export async function GET(
 ): Promise<NextResponse> {
 	try {
 		const params = await context.params;
-const idError = validateId(params.id);
+		const idError = validateId(params.id);
 		if (idError) return idError;
 
 		const controller = new BuscarDireitoVioladoController();
@@ -116,8 +116,6 @@ const idError = validateId(params.id);
 		return handleError(error, "Erro ao buscar Direito Violado por ID");
 	}
 }
-
-
 
 // ! Handler - Buscar Direito Violado por ID
 // export async function GET(

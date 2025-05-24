@@ -3,7 +3,7 @@ import { Prisma } from "@prisma/client";
 import {
 	CreateIdeologiaDTO,
 	ResponseIdeologiaDTO,
-} from "@/domain/dtos/ideologia.dto";
+} from "@/core/domain/dtos/ideologia.dto";
 import { prismaClient } from "@/services/prisma/prisma";
 
 interface ICriarIdeologiaService {

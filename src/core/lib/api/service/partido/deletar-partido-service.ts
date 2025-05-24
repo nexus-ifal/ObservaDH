@@ -1,7 +1,7 @@
 import {
 	DeletePartidoDTO,
 	ResponseDeletePartidoDTO,
-} from "@/domain/dtos/partido.dto";
+} from "@/core/domain/dtos/partido.dto";
 import { prismaClient } from "@/services/prisma/prisma";
 
 interface IDeletarPartidoService {

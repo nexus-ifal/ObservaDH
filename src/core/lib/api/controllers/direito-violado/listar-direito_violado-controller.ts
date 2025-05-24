@@ -3,7 +3,7 @@ import {
 	ListarDireitoVioladoService,
 } from "../../service/direito-violado/listar-direito_violado_service";
 
-import { RespostaApi } from "@/domain/models/resposta-api";
+import { RespostaApi } from "@/core/domain/models/resposta-api";
 
 export interface IListarDireitoVioladoController {
 	executar(): Promise<RespostaApi>;

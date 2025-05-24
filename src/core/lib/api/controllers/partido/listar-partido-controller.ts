@@ -3,7 +3,7 @@ import {
 	ListarPartidoService,
 } from "../../service/partido/listar-partido-service";
 
-import { RespostaApi } from "@/domain/models/resposta-api";
+import { RespostaApi } from "@/core/domain/models/resposta-api";
 
 export interface IListarPartidoController {
 	executar(): Promise<RespostaApi>;

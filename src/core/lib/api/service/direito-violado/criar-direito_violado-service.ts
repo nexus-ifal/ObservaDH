@@ -3,7 +3,7 @@ import { Prisma } from "@prisma/client";
 import {
 	CreateDireitoVioladoDTO,
 	ResponseDireitoVioladoDTO,
-} from "@/domain/dtos/direito-violado.dto";
+} from "@/core/domain/dtos/direito-violado.dto";
 import { prismaClient } from "@/services/prisma/prisma";
 
 interface ICriarDireitoVioladoService {

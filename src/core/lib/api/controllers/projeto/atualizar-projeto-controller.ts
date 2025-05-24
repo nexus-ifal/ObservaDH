@@ -4,8 +4,8 @@ import { BuscarProjetoService } from "../../service/projeto/buscar-projeto-servi
 import {
 	ResponseProjetoDTO,
 	UpdateProjetoDTO,
-} from "@/domain/dtos/projeto.dto";
-import { RespostaApi } from "@/domain/models/resposta-api";
+} from "@/core/domain/dtos/projeto.dto";
+import { RespostaApi } from "@/core/domain/models/resposta-api";
 
 interface IBuscarProjetoService {
 	buscarPorId(params: { id: string }): Promise<ResponseProjetoDTO | null>;

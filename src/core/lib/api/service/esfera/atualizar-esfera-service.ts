@@ -1,4 +1,4 @@
-import { ResponseEsferaDTO, UpdateEsferaDTO } from "@/domain/dtos/esfera.dto";
+import { ResponseEsferaDTO, UpdateEsferaDTO } from "@/core/domain/dtos/esfera.dto";
 import { prismaClient } from "@/services/prisma/prisma";
 
 interface IAtualizarEsferaService {

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { StatusType } from "@/domain/graficos/types/status";
+import { StatusType } from "@/core/domain/graficos/types/status";
 
 import { titilliumWeb } from "../../../core/lib/fonts/fonts";
 

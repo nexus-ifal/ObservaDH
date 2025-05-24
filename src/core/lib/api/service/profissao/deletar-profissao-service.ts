@@ -1,7 +1,7 @@
 import {
 	DeleteProfissaoDTO,
 	ResponseDeleteProfissaoDTO,
-} from "@/domain/dtos/profissao.dto";
+} from "@/core/domain/dtos/profissao.dto";
 import { prismaClient } from "@/services/prisma/prisma";
 
 interface IDeletarProfissaoService {

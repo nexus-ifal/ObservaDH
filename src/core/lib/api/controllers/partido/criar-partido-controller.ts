@@ -4,8 +4,8 @@ import { CriarPartidoService } from "../../service/partido/criar-partido-service
 import {
 	CreatePartidoDTO,
 	ResponsePartidoDTO,
-} from "@/domain/dtos/partido.dto";
-import { RespostaApi } from "@/domain/models/resposta-api";
+} from "@/core/domain/dtos/partido.dto";
+import { RespostaApi } from "@/core/domain/models/resposta-api";
 
 interface IBuscarPartidoService {
 	buscarPorNome(params: { nome: string }): Promise<ResponsePartidoDTO | null>;

@@ -4,14 +4,14 @@ import { DeletarIdeologiaService } from "../../service/ideologia/deletar-ideolog
 import {
 	DeleteIdeologiaDTO,
 	ResponseIdeologiaDTO,
-} from "@/domain/dtos/ideologia.dto";
-import { RespostaApi } from "@/domain/models/resposta-api";
+} from "@/core/domain/dtos/ideologia.dto";
+import { RespostaApi } from "@/core/domain/models/resposta-api";
 
 interface IBuscarIdeologiaService {
 	buscarPorId(params: { id: string }): Promise<ResponseIdeologiaDTO | null>;
 }
 
-import { ResponseDeleteIdeologiaDTO } from "@/domain/dtos/ideologia.dto";
+import { ResponseDeleteIdeologiaDTO } from "@/core/domain/dtos/ideologia.dto";
 
 interface IDeletarIdeologiaService {
 	executar(params: { id: string }): Promise<ResponseDeleteIdeologiaDTO>;

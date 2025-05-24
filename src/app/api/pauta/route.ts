@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextRequest, NextResponse } from "next/server";
 
-import { CreatePautaDTO } from "@/domain/dtos/pauta.dto";
-import { RespostaApi } from "@/domain/models/resposta-api";
+import { CreatePautaDTO } from "@/core/domain/dtos/pauta.dto";
+import { RespostaApi } from "@/core/domain/models/resposta-api";
 import { CriarPautaController } from "@/core/lib/api/controllers/pauta/criar-pauta-controller";
 import { ListarPautaController } from "@/core/lib/api/controllers/pauta/listar-pauta-controller";
 

@@ -2,8 +2,6 @@
 
 import { useParams } from "next/navigation";
 
-
-
 import Card from "@/components/ui/cards";
 import MainLayout from "@/components/ui/layouts/main-layout";
 import Titulo from "@/components/ui/titulo-pages";

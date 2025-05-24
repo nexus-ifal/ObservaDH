@@ -3,7 +3,7 @@ import { Prisma } from "@prisma/client";
 import {
 	CreateProjetoDTO,
 	ResponseProjetoDTO,
-} from "@/domain/dtos/projeto.dto";
+} from "@/core/domain/dtos/projeto.dto";
 import { prismaClient } from "@/services/prisma/prisma";
 
 interface ICriarProjetoService {

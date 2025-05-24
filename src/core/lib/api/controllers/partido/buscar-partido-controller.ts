@@ -3,7 +3,7 @@ import {
 	IBuscarPartidoService,
 } from "../../service/partido/buscar-partido-service";
 
-import { RespostaApi } from "@/domain/models/resposta-api";
+import { RespostaApi } from "@/core/domain/models/resposta-api";
 
 export interface IBuscarPartidoController {
 	executar(id: string): Promise<RespostaApi>;

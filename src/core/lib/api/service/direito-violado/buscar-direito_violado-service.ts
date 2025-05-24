@@ -1,7 +1,7 @@
 import {
 	ResponseDireitoVioladoDTO,
 	SearchDireitoVioladoDTO,
-} from "@/domain/dtos/direito-violado.dto";
+} from "@/core/domain/dtos/direito-violado.dto";
 import { prismaClient } from "@/services/prisma/prisma";
 
 export interface IBuscarDireitoVioladoService {

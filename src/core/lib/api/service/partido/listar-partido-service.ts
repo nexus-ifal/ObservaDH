@@ -1,4 +1,4 @@
-import { ResponsePartidoDTO } from "@/domain/dtos/partido.dto";
+import { ResponsePartidoDTO } from "@/core/domain/dtos/partido.dto";
 import { prismaClient } from "@/services/prisma/prisma";
 
 export interface IListarPartidoService {

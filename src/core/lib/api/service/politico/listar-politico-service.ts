@@ -1,4 +1,4 @@
-import { ResponsePoliticoDTO } from "@/domain/dtos/politico.dto";
+import { ResponsePoliticoDTO } from "@/core/domain/dtos/politico.dto";
 import { prismaClient } from "@/services/prisma/prisma";
 
 export interface IListarPoliticoService {

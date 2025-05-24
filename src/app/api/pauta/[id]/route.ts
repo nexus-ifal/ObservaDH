@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { UpdatePautaDTO } from "@/domain/dtos/pauta.dto";
-import { RespostaApi } from "@/domain/models/resposta-api";
 import { AtualizarPautaController } from "@/core/lib/api/controllers/pauta/atualizar-pauta-controller";
 import { BuscarPautaController } from "@/core/lib/api/controllers/pauta/buscar-pauta-controller";
 import { DeletarPautaController } from "@/core/lib/api/controllers/pauta/deletar-pauta-controller";
+import { UpdatePautaDTO } from "@/core/domain/dtos/pauta.dto";
+import { RespostaApi } from "@/core/domain/models/resposta-api";
 
 function validateId(id?: string): NextResponse | undefined {
 	if (!id || id.trim() === "") {
@@ -35,7 +35,7 @@ export async function PATCH(
 ) {
 	try {
 		const params = await context.params;
-const idError = validateId(params.id);
+		const idError = validateId(params.id);
 		if (idError) return idError;
 
 		const body = await request.json().catch(() => ({}));
@@ -68,7 +68,7 @@ export async function DELETE(
 ) {
 	try {
 		const params = await context.params;
-const idError = validateId(params.id);
+		const idError = validateId(params.id);
 		if (idError) return idError;
 
 		const controller = new DeletarPautaController();
@@ -100,7 +100,7 @@ export async function GET(
 ) {
 	try {
 		const params = await context.params;
-const idError = validateId(params.id);
+		const idError = validateId(params.id);
 		if (idError) return idError;
 
 		const { id } = params;

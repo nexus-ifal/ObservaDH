@@ -1,4 +1,4 @@
-import { ResponsePautaDTO, UpdatePautaDTO } from "@/domain/dtos/pauta.dto";
+import { ResponsePautaDTO, UpdatePautaDTO } from "@/core/domain/dtos/pauta.dto";
 import { prismaClient } from "@/services/prisma/prisma";
 
 interface IAtualizarPautaService {

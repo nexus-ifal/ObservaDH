@@ -3,7 +3,7 @@ import {
 	ListarProfissaoService,
 } from "../../service/profissao/listar-profissao-service";
 
-import { RespostaApi } from "@/domain/models/resposta-api";
+import { RespostaApi } from "@/core/domain/models/resposta-api";
 
 export interface IListarProfissaoController {
 	executar(): Promise<RespostaApi>;

@@ -3,8 +3,8 @@ import { CriarIdeologiaService } from "../../service/ideologia/criar-ideologia-s
 import {
 	CreateIdeologiaDTO,
 	ResponseIdeologiaDTO,
-} from "@/domain/dtos/ideologia.dto";
-import { RespostaApi } from "@/domain/models/resposta-api";
+} from "@/core/domain/dtos/ideologia.dto";
+import { RespostaApi } from "@/core/domain/models/resposta-api";
 
 interface ICriarIdeologiaService {
 	executar(params: CreateIdeologiaDTO): Promise<ResponseIdeologiaDTO>;

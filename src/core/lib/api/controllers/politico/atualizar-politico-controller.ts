@@ -4,8 +4,8 @@ import { BuscarPoliticoService } from "../../service/politico/buscar-politico-se
 import {
 	ResponsePoliticoDTO,
 	UpdatePoliticoDTO,
-} from "@/domain/dtos/politico.dto";
-import { RespostaApi } from "@/domain/models/resposta-api";
+} from "@/core/domain/dtos/politico.dto";
+import { RespostaApi } from "@/core/domain/models/resposta-api";
 
 interface IBuscarPoliticoService {
 	buscarPorId(params: { id: string }): Promise<ResponsePoliticoDTO | null>;

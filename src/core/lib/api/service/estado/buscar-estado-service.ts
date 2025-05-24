@@ -1,4 +1,4 @@
-import { ResponseEstadoDTO, SearchEstadoDTO } from "@/domain/dtos/estado.dto";
+import { ResponseEstadoDTO, SearchEstadoDTO } from "@/core/domain/dtos/estado.dto";
 import { prismaClient } from "@/services/prisma/prisma";
 
 export interface IBuscarEstadoService {
