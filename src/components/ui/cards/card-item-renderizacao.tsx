@@ -1,4 +1,4 @@
-import { oswald } from "../../../lib/fonts/fonts";
+import { oswald } from "../../../core/lib/fonts/fonts";
 
 interface itemRenderProps {
 	titulo: string;

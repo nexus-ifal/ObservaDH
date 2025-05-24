@@ -1,8 +1,8 @@
 import { MdOutlineFilterAlt } from "react-icons/md";
 
-import { elemento } from "@/domain/interfaces/elemento-dropdown";
-import { PartidoModel } from "@/domain/interfaces/partido";
-import { ProjetoLei } from "@/domain/interfaces/projeto-lei";
+import { elemento } from "@/domain/graficos/types/elemento-dropdown";
+import { PartidoModel } from "@/domain/graficos/types/partido";
+import { ProjetoLei } from "@/domain/graficos/types/projeto-lei";
 
 import Card from "@/components/ui/cards";
 import CardLegenda from "@/components/ui/cards/card-legenda";
@@ -14,15 +14,15 @@ import MainLayout from "@/components/ui/layouts/main-layout";
 import Titulo from "@/components/ui/titulo-pages";
 import { Button } from "@/components/ui-shacnui/button";
 
-import contarGeneroPorIdeologia from "@/lib/web/mock-utils/projeto-utils/contar-genero-por-ideologia";
-import contarPropostasPorParlamentar from "@/lib/web/mock-utils/projeto-utils/contar-proposta-por-parlamentar";
-import contarReligiaoPorEtnia from "@/lib/web/mock-utils/projeto-utils/contar-religiao-por-etnia";
-import obterEsferasUnicas from "@/lib/web/mock-utils/projeto-utils/obter-esferas-unicas";
-import obterEstadosUnicos from "@/lib/web/mock-utils/projeto-utils/obter-estados-unico";
-import obterGeneroUnico from "@/lib/web/mock-utils/projeto-utils/obter-genero-unico";
-import obterIdeologiasUnica from "@/lib/web/mock-utils/projeto-utils/obter-ideologias-unica";
-import obterPartidosUnicos from "@/lib/web/mock-utils/projeto-utils/obter-partidos-unicos";
-import obterProfissoesUnicas from "@/lib/web/mock-utils/projeto-utils/obter-profissoes-unicas";
+import contarGeneroPorIdeologia from "@/core/lib/web/mock-utils/projeto-utils/contar-genero-por-ideologia";
+import contarPropostasPorParlamentar from "@/core/lib/web/mock-utils/projeto-utils/contar-proposta-por-parlamentar";
+import contarReligiaoPorEtnia from "@/core/lib/web/mock-utils/projeto-utils/contar-religiao-por-etnia";
+import obterEsferasUnicas from "@/core/lib/web/mock-utils/projeto-utils/obter-esferas-unicas";
+import obterEstadosUnicos from "@/core/lib/web/mock-utils/projeto-utils/obter-estados-unico";
+import obterGeneroUnico from "@/core/lib/web/mock-utils/projeto-utils/obter-genero-unico";
+import obterIdeologiasUnica from "@/core/lib/web/mock-utils/projeto-utils/obter-ideologias-unica";
+import obterPartidosUnicos from "@/core/lib/web/mock-utils/projeto-utils/obter-partidos-unicos";
+import obterProfissoesUnicas from "@/core/lib/web/mock-utils/projeto-utils/obter-profissoes-unicas";
 import { legendas } from "@/mocks/mock-parlamentares";
 import { partidosMock, projetosMock } from "@/mocks/mock-projetos";
 

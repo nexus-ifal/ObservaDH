@@ -11,7 +11,7 @@ import {
 	ChartTooltipContent,
 } from "@/components/ui-shacnui/chart";
 
-import { DadosGraficoRosquinha } from "@/domain/graficos/rosquinha";
+import { DadosGraficoRosquinha } from "@/domain/graficos/types/rosquinha";
 
 const chartConfig = {
 	pl: {

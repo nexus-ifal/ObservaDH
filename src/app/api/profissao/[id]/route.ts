@@ -2,9 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { UpdateProfissaoDTO } from "@/domain/dtos/profissao.dto";
 import { RespostaApi } from "@/domain/models/resposta-api";
-import { AtualizarProfissaoController } from "@/lib/api/controllers/profissao/atualizar-profissao-controller";
-import { BuscarProfissaoController } from "@/lib/api/controllers/profissao/buscar-profissao-controller";
-import { DeletarProfissaoController } from "@/lib/api/controllers/profissao/deletar-profissao-controller";
+import { AtualizarProfissaoController } from "@/core/lib/api/controllers/profissao/atualizar-profissao-controller";
+import { BuscarProfissaoController } from "@/core/lib/api/controllers/profissao/buscar-profissao-controller";
+import { DeletarProfissaoController } from "@/core/lib/api/controllers/profissao/deletar-profissao-controller";
 
 function validateId(id?: string): NextResponse | undefined {
 	if (!id || id.trim() === "") {

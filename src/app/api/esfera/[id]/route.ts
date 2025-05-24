@@ -2,9 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { UpdateEsferaDTO } from "@/domain/dtos/esfera.dto";
 import { RespostaApi } from "@/domain/models/resposta-api";
-import { AtualizarEsferaController } from "@/lib/api/controllers/esfera/atualizar-esfera-controller";
-import { BuscarEsferaController } from "@/lib/api/controllers/esfera/buscar-esfera-controller";
-import { DeletarEsferaController } from "@/lib/api/controllers/esfera/deletar-esfera-controller";
+import { AtualizarEsferaController } from "@/core/lib/api/controllers/esfera/atualizar-esfera-controller";
+import { BuscarEsferaController } from "@/core/lib/api/controllers/esfera/buscar-esfera-controller";
+import { DeletarEsferaController } from "@/core/lib/api/controllers/esfera/deletar-esfera-controller";
 
 function validateId(id?: string): NextResponse | undefined {
 	if (!id || id.trim() === "") {

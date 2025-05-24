@@ -3,8 +3,8 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { CreatePautaDTO } from "@/domain/dtos/pauta.dto";
 import { RespostaApi } from "@/domain/models/resposta-api";
-import { CriarPautaController } from "@/lib/api/controllers/pauta/criar-pauta-controller";
-import { ListarPautaController } from "@/lib/api/controllers/pauta/listar-pauta-controller";
+import { CriarPautaController } from "@/core/lib/api/controllers/pauta/criar-pauta-controller";
+import { ListarPautaController } from "@/core/lib/api/controllers/pauta/listar-pauta-controller";
 
 function handleError(error: any, message: string) {
 	console.error(message, error);

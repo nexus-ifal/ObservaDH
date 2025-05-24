@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { CreateEsferaDTO } from "@/domain/dtos/esfera.dto";
 import { RespostaApi } from "@/domain/models/resposta-api";
-import { CriarEsferaController } from "@/lib/api/controllers/esfera/criar-esfera-controller";
-import { ListarEsferaController } from "@/lib/api/controllers/esfera/listar-esfera-controller";
+import { CriarEsferaController } from "@/core/lib/api/controllers/esfera/criar-esfera-controller";
+import { ListarEsferaController } from "@/core/lib/api/controllers/esfera/listar-esfera-controller";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function handleError(error: any, message: string) {

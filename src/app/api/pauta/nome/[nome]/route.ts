@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 import { RespostaApi } from "@/domain/models/resposta-api";
-import { BuscarPautaController } from "@/lib/api/controllers/pauta/buscar-pauta-controller";
+import { BuscarPautaController } from "@/core/lib/api/controllers/pauta/buscar-pauta-controller";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function handleError(error: any, message: string) {

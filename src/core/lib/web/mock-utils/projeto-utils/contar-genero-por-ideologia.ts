@@ -1,6 +1,6 @@
-import { ProjetoLei } from "@/domain/interfaces/projeto-lei";
+import { ProjetoLei } from "@/domain/graficos/types/projeto-lei";
 
-import { DadosGraficoBarrasMultiplas } from "@/domain/graficos/barras-multiplas";
+import { DadosGraficoBarrasMultiplas } from "@/domain/graficos/types/barras-multiplas";
 
 function contarGeneroPorIdeologia(data: ProjetoLei[]) {
 	const resultado: DadosGraficoBarrasMultiplas[] = [];

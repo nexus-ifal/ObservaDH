@@ -2,9 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { UpdatePautaDTO } from "@/domain/dtos/pauta.dto";
 import { RespostaApi } from "@/domain/models/resposta-api";
-import { AtualizarPautaController } from "@/lib/api/controllers/pauta/atualizar-pauta-controller";
-import { BuscarPautaController } from "@/lib/api/controllers/pauta/buscar-pauta-controller";
-import { DeletarPautaController } from "@/lib/api/controllers/pauta/deletar-pauta-controller";
+import { AtualizarPautaController } from "@/core/lib/api/controllers/pauta/atualizar-pauta-controller";
+import { BuscarPautaController } from "@/core/lib/api/controllers/pauta/buscar-pauta-controller";
+import { DeletarPautaController } from "@/core/lib/api/controllers/pauta/deletar-pauta-controller";
 
 function validateId(id?: string): NextResponse | undefined {
 	if (!id || id.trim() === "") {

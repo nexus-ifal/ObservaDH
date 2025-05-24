@@ -1,8 +1,8 @@
 import Image from "next/image";
 
-import { PartidoModel } from "@/domain/interfaces/partido";
+import { PartidoModel } from "@/domain/graficos/types/partido";
 
-import { oswald } from "../../../lib/fonts/fonts";
+import { oswald } from "../../../core/lib/fonts/fonts";
 
 import CardDivider from "./card-divider";
 

@@ -2,9 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { UpdateDireitoVioladoDTO } from "@/domain/dtos/direito-violado.dto";
 import { RespostaApi } from "@/domain/models/resposta-api";
-import { AtualizarDireitoVioladoController } from "@/lib/api/controllers/direito-violado/atualizar-direito_violado-controller";
-import { BuscarDireitoVioladoController } from "@/lib/api/controllers/direito-violado/buscar-direito_violado-controller";
-import { DeletarDireitoVioladoController } from "@/lib/api/controllers/direito-violado/deletar-direito_violado-controller";
+import { AtualizarDireitoVioladoController } from "@/core/lib/api/controllers/direito-violado/atualizar-direito_violado-controller";
+import { BuscarDireitoVioladoController } from "@/core/lib/api/controllers/direito-violado/buscar-direito_violado-controller";
+import { DeletarDireitoVioladoController } from "@/core/lib/api/controllers/direito-violado/deletar-direito_violado-controller";
 
 function validateId(id?: string): NextResponse | undefined {
 	if (!id || id.trim() === "") {

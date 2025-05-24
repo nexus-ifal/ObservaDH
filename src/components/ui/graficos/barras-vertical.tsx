@@ -10,7 +10,7 @@ import {
 	ChartTooltipContent,
 } from "@/components/ui-shacnui/chart";
 
-import { DadosGraficoBarrasVertical } from "@/domain/graficos/barras-vertical";
+import { DadosGraficoBarrasVertical } from "@/domain/graficos/types/barras-vertical";
 
 const chartConfig = {
 	pauta: {

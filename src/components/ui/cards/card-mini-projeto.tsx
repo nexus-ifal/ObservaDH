@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 
-import { miniProjeto } from "@/domain/interfaces/mini-projeto";
+import { miniProjeto } from "@/domain/graficos/types/mini-projeto";
 
 import CardItemRenderizacao from "./card-item-renderizacao";
 

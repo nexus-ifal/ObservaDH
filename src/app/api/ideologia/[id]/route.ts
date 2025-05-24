@@ -2,9 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { UpdateIdeologiaDTO } from "@/domain/dtos/ideologia.dto";
 import { RespostaApi } from "@/domain/models/resposta-api";
-import { AtualizarIdeologiaController } from "@/lib/api/controllers/ideologia/atualizar-ideologia-controller";
-import { BuscarIdeologiaController } from "@/lib/api/controllers/ideologia/buscar-ideologia-controller";
-import { DeletarIdeologiaController } from "@/lib/api/controllers/ideologia/deletar-ideologia-controller";
+import { AtualizarIdeologiaController } from "@/core/lib/api/controllers/ideologia/atualizar-ideologia-controller";
+import { BuscarIdeologiaController } from "@/core/lib/api/controllers/ideologia/buscar-ideologia-controller";
+import { DeletarIdeologiaController } from "@/core/lib/api/controllers/ideologia/deletar-ideologia-controller";
 
 function validateId(id?: string): NextResponse | undefined {
 	if (!id || id.trim() === "") {

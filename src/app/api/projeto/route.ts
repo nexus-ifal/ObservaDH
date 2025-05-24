@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { CreateProjetoDTO } from "@/domain/dtos/projeto.dto";
 import { RespostaApi } from "@/domain/models/resposta-api";
-import { CriarProjetoController } from "@/lib/api/controllers/projeto/criar-projeto-controller";
-import { ListarProjetoController } from "@/lib/api/controllers/projeto/listar-projeto-controller";
+import { CriarProjetoController } from "@/core/lib/api/controllers/projeto/criar-projeto-controller";
+import { ListarProjetoController } from "@/core/lib/api/controllers/projeto/listar-projeto-controller";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function handleError(error: any, message: string) {

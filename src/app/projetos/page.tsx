@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { MdOutlineFilterAlt } from "react-icons/md";
 
 import { CarrosselPlsProps } from "@/domain/interfaces/carrossel-interface";
-import { elemento } from "@/domain/interfaces/elemento-dropdown";
-import { ProjetoLei } from "@/domain/interfaces/projeto-lei";
+import { elemento } from "@/domain/graficos/types/elemento-dropdown";
+import { ProjetoLei } from "@/domain/graficos/types/projeto-lei";
 
 import Card from "@/components/ui/cards";
 import Texto from "@/components/ui/componente-texto";
@@ -29,17 +29,17 @@ import {
 	projetosMock,
 } from "../../mocks/mock-projetos";
 
-import { DadosGraficoBarraEmpilhadaHorizontal } from "@/domain/graficos/barra-empilhada-horizontal";
-import { DadosGraficoLinhaPontos } from "@/domain/graficos/linha-pontos";
+import { DadosGraficoBarraEmpilhadaHorizontal } from "@/domain/graficos/types/barra-empilhada-horizontal";
+import { DadosGraficoLinhaPontos } from "@/domain/graficos/types/linha-pontos";
 import { buscarEsferas } from "@/infra/api/esfera";
 import {
 	buscarAnoProjeto,
 	buscarPautasPorAno,
 	buscarProjetosPorAno,
-} from "@/infra/api/projeto";
+} from "@/infra/api/services/projeto";
 
-import obterEstadosUnicos from "@/lib/web/mock-utils/projeto-utils/obter-estados-unico";
-import obterPautasUnicas from "@/lib/web/mock-utils/projeto-utils/obter-pautas-unicas";
+import obterEstadosUnicos from "@/core/lib/web/mock-utils/projeto-utils/obter-estados-unico";
+import obterPautasUnicas from "@/core/lib/web/mock-utils/projeto-utils/obter-pautas-unicas";
 import { ResponseEsferaDTO } from "@/domain/dtos/esfera.dto";
 
 const Page: React.FC = () => {

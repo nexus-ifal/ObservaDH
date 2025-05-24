@@ -12,7 +12,7 @@ import {
 	ChartTooltipContent,
 } from "@/components/ui-shacnui/chart";
 
-import { DadosGraficoBarraEmpilhadaHorizontal } from "@/domain/graficos/barra-empilhada-horizontal";
+import { DadosGraficoBarraEmpilhadaHorizontal } from "@/domain/graficos/types/barra-empilhada-horizontal";
 
 const chartConfig = {
 	linguagensNeutra: {

@@ -1,4 +1,4 @@
-import { elemento } from "@/domain/interfaces/elemento-dropdown";
+import { elemento } from "@/domain/graficos/types/elemento-dropdown";
 
 import {
 	Select,

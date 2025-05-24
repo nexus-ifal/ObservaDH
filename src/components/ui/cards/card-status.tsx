@@ -1,8 +1,8 @@
 import React from "react";
 
-import { StatusType } from "@/domain/interfaces/status";
+import { StatusType } from "@/domain/graficos/types/status";
 
-import { titilliumWeb } from "../../../lib/fonts/fonts";
+import { titilliumWeb } from "../../../core/lib/fonts/fonts";
 
 import CardDivider from "./card-divider";
 import CardStatusItem from "./card-status-item";

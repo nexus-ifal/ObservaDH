@@ -2,14 +2,15 @@
 
 import { useParams } from "next/navigation";
 
-import { ProjetoLei } from "@/domain/interfaces/projeto-lei";
+
 
 import Card from "@/components/ui/cards";
 import MainLayout from "@/components/ui/layouts/main-layout";
 import Titulo from "@/components/ui/titulo-pages";
 
-import { oswald } from "@/lib/fonts/fonts";
-import { buscarProjetoPorId } from "@/lib/web/mock-utils/busca";
+import { oswald } from "@/core/lib/fonts/fonts";
+import { buscarProjetoPorId } from "@/core/lib/web/mock-utils/busca";
+import { ProjetoLei } from "@/core/domain/graficos/types/projeto-lei";
 
 const page = () => {
 	const { id } = useParams();

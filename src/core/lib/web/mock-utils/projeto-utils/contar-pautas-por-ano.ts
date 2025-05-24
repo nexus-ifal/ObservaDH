@@ -1,4 +1,4 @@
-import { ProjetoLei } from "@/domain/interfaces/projeto-lei";
+import { ProjetoLei } from "@/domain/graficos/types/projeto-lei";
 
 function contarPautasPorAno(data: ProjetoLei[]) {
 	const pautasPorAno: Record<string, Record<string, number>> = {};

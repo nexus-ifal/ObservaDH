@@ -13,7 +13,7 @@ import {
 	ChartTooltipContent,
 } from "@/components/ui-shacnui/chart";
 
-import { DadosGraficoLinhaPontos } from "@/domain/graficos/linha-pontos";
+import { DadosGraficoLinhaPontos } from "@/domain/graficos/types/linha-pontos";
 
 const chartConfig = {
 	projetos: {

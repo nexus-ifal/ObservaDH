@@ -12,7 +12,7 @@ import {
 	ChartTooltipContent,
 } from "@/components/ui-shacnui/chart";
 
-import { DadosGraficoBarrasMultiplas } from "@/domain/graficos/barras-multiplas";
+import { DadosGraficoBarrasMultiplas } from "@/domain/graficos/types/barras-multiplas";
 
 interface GraficoBarraMultiplasProps {
 	dados: DadosGraficoBarrasMultiplas[];
