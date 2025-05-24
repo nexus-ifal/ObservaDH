@@ -34,7 +34,7 @@ const navBar: React.FC = () => {
 				text: "",
 			});
 		}
-	}, [router, buscarCabecalho]);
+	}, []);
 
 	return (
 		<div className="w-full h-full flex flex-col items-center bg-senado bg-cover bg-center border-b-2 border-[#001745]">
