@@ -1,6 +1,3 @@
-
-import { elemento } from "@/core/domain/graficos/types/elemento-dropdown";
-
 import Card from "@/components/ui/cards";
 import Texto from "@/components/ui/componente-texto";
 import DropdownButton from "@/components/ui/dropdown/dropdown-button";
@@ -16,7 +13,9 @@ import {
 	CarouselPrevious,
 } from "@/components/ui-shacnui/carousel";
 
+import { CarrosselPlsProps } from "@/core/domain/graficos/interfaces/carrossel-interface";
 import { DadosGraficoBarrasVertical } from "@/core/domain/graficos/types/barras-vertical";
+import { elemento } from "@/core/domain/graficos/types/elemento-dropdown";
 import { DadosGraficoRosquinha } from "@/core/domain/graficos/types/rosquinha";
 import obterPautasUnicas from "@/core/lib/web/mock-utils/projeto-utils/obter-pautas-unicas";
 import {
@@ -25,7 +24,6 @@ import {
 } from "@/mocks/mock-direitos";
 import { legendas } from "@/mocks/mock-parlamentares";
 import { projetosMock } from "@/mocks/mock-projetos";
-import { CarrosselPlsProps } from "@/core/domain/graficos/interfaces/carrossel-interface";
 
 const direitos: React.FC = () => {
 	const elementosDropdown = obterPautasUnicas({ projetos: projetosMock });

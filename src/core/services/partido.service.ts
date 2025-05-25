@@ -10,8 +10,8 @@ class PartidoService implements PartidoUseCase {
 	}
 
 	listar(): Promise<ResponsePartidoDTO[]> {
-		return this.adapter.listar()
+		return this.adapter.listar();
 	}
 }
 
-export default PartidoService
+export default PartidoService;

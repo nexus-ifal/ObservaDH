@@ -7,7 +7,7 @@ import Header from "@/components/ui/layouts/header";
 
 import { oswald } from "@/core/lib/fonts/fonts";
 
-const page: React.FC = () => {
+const NotFoundPage: React.FC = () => {
 	const router = useRouter();
 	const retornar = () => {
 		router.push("/");
@@ -33,4 +33,4 @@ const page: React.FC = () => {
 		</div>
 	);
 };
-export default page;
+export default NotFoundPage;

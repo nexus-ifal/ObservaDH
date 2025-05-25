@@ -1,9 +1,5 @@
 import { MdOutlineFilterAlt } from "react-icons/md";
 
-import { elemento } from "@/core/domain/graficos/types/elemento-dropdown";
-import { PartidoModel } from "@/core/domain/graficos/types/partido";
-import { ProjetoLei } from "@/core/domain/graficos/types/projeto-lei";
-
 import Card from "@/components/ui/cards";
 import CardLegenda from "@/components/ui/cards/card-legenda";
 import Texto from "@/components/ui/componente-texto";
@@ -14,6 +10,9 @@ import MainLayout from "@/components/ui/layouts/main-layout";
 import Titulo from "@/components/ui/titulo-pages";
 import { Button } from "@/components/ui-shacnui/button";
 
+import { elemento } from "@/core/domain/graficos/types/elemento-dropdown";
+import { PartidoModel } from "@/core/domain/graficos/types/partido";
+import { ProjetoLei } from "@/core/domain/graficos/types/projeto-lei";
 import contarGeneroPorIdeologia from "@/core/lib/web/mock-utils/projeto-utils/contar-genero-por-ideologia";
 import contarPropostasPorParlamentar from "@/core/lib/web/mock-utils/projeto-utils/contar-proposta-por-parlamentar";
 import contarReligiaoPorEtnia from "@/core/lib/web/mock-utils/projeto-utils/contar-religiao-por-etnia";

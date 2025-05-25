@@ -1,7 +1,10 @@
 import { BuscarEsferaService } from "../../service/esfera/buscar-esfera-service";
 import { DeletarEsferaService } from "../../service/esfera/deletar-esfera-service";
 
-import { DeleteEsferaDTO, ResponseEsferaDTO } from "@/core/domain/dtos/esfera.dto";
+import {
+	DeleteEsferaDTO,
+	ResponseEsferaDTO,
+} from "@/core/domain/dtos/esfera.dto";
 import { RespostaApi } from "@/core/domain/models/resposta-api";
 
 interface IBuscarEsferaService {

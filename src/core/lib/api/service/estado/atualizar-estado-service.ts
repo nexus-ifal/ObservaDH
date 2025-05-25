@@ -1,4 +1,7 @@
-import { ResponseEstadoDTO, UpdateEstadoDTO } from "@/core/domain/dtos/estado.dto";
+import {
+	ResponseEstadoDTO,
+	UpdateEstadoDTO,
+} from "@/core/domain/dtos/estado.dto";
 import { prismaClient } from "@/services/prisma/prisma";
 
 export class AtualizarEstadoService {

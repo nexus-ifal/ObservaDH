@@ -1,9 +1,8 @@
+import { NextResponse } from "next/server";
+
 import { RespostaApi } from "@/core/domain/models/resposta-api";
 import { CriarUserController } from "@/core/lib/api/controllers/user/criar-user-controller";
 import { ListarUsersController } from "@/core/lib/api/controllers/user/listar-user-controller";
-import { NextResponse } from "next/server";
-
-
 
 export async function POST(request: Request) {
 	try {

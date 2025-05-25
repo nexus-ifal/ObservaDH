@@ -1,4 +1,7 @@
-import { ResponseEsferaDTO, SearchEsferaDTO } from "@/core/domain/dtos/esfera.dto";
+import {
+	ResponseEsferaDTO,
+	SearchEsferaDTO,
+} from "@/core/domain/dtos/esfera.dto";
 import { prismaClient } from "@/services/prisma/prisma";
 
 export interface IBuscarEsferaService {
