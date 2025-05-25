@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 
-import { auth } from "@/auth";
+import { auth } from "../../../auth";
 
 const page: React.FC = async () => {
 	const session = await auth();

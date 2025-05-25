@@ -1,4 +1,4 @@
-import { oswald, titilliumWeb } from "../../../lib/fonts/fonts";
+import { oswald, titilliumWeb } from "../../../core/lib/fonts/fonts";
 
 interface RenderizarTextoProps {
 	titulo: string;

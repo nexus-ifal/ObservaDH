@@ -6,18 +6,25 @@
 		"dev": "next dev",
 		"build": "prisma generate && next build",
 		"start": "next start",
-		"lint": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
-		"format": "prettier --write .",
 		"prepare": "prisma generate",
-		"check": "npm run prepare && npm run format && eslint . --ext .js,.jsx,.ts,.tsx && prettier --check . && tsc --noEmit && next build && npm audit && npm outdated"
+		"check": "npm run prepare && npm run format && tsc --noEmit && next build && npm audit && npm outdated",
+		"prettier:check": "prettier --check .",
+		"prettier:fix": "prettier --write .",
+		"lint": "next lint",
+		"lint:fix": "next lint --fix",
+		"format": "npm run prettier:fix && npm run lint:fix && prettier --write ."
 	},
 	"dependencies": {
 		"@auth/prisma-adapter": "^2.9.1",
+		"@auth/prisma-adapter": "^2.9.1",
 		"@prisma/client": "^6.8.2",
-		"@radix-ui/react-alert-dialog": "^1.1.4",
-		"@radix-ui/react-select": "^2.1.4",
-		"@radix-ui/react-slot": "^1.1.1",
+		"@radix-ui/react-alert-dialog": "^1.1.14",
+		"@radix-ui/react-select": "^2.2.5",
+		"@radix-ui/react-slot": "^1.2.3",
+		"@tanstack/react-query": "^5.77.0",
 		"axios": "^1.9.0",
+		"bcrypt": "^6.0.0",
+		"bcryptjs": "^3.0.2",
 		"bcrypt": "^6.0.0",
 		"bcryptjs": "^3.0.2",
 		"class-variance-authority": "^0.7.1",
@@ -41,6 +48,7 @@
 		"prismjs": ">=1.30.0",
 		"@braintree/sanitize-url": "6.0.0",
 		"cookie": "1.0.2",
+		"cookie": "1.0.2",
 		"dompurify": "3.2.4",
 		"fast-json-patch": "3.1.1"
 	},
@@ -56,10 +64,11 @@
 		"eslint-config-prettier": "^10.1.5",
 		"eslint-plugin-prettier": "^5.4.0",
 		"eslint-plugin-simple-import-sort": "^12.1.1",
-		"postcss": "^8",
+		"globals": "^16.1.0",
+		"postcss": "^8.5.3",
 		"prettier": "^3.5.3",
 		"prisma": "^6.8.2",
-		"tailwindcss": "^3.4.1",
-		"typescript": "^5"
+		"typescript": "^5",
+		"typescript-eslint": "^8.32.1"
 	}
 }

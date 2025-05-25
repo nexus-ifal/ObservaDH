@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 
-import "./globals.css";
+import QueryProvider from "@/components/ui/layouts/query-provider";
 
-import { titilliumWeb } from "@/lib/fonts/fonts";
+import "./styles/globals.css";
+
+import { titilliumWeb } from "@/core/lib/fonts/fonts";
 
 export const metadata: Metadata = {
 	title: "ObservaDH",
@@ -15,7 +17,7 @@ export default function RootLayout({
 	return (
 		<html lang="pt-br" className={titilliumWeb.className}>
 			<body className="bg-layout-principal antialiased no-scrollbar flex flex-col">
-				{children}
+				<QueryProvider>{children}</QueryProvider>
 			</body>
 		</html>
 	);

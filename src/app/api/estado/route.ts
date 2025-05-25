@@ -1,59 +1,60 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-import { RespostaApi } from "@/domain/models/resposta-api";
-import { CriarEstadoController } from "@/lib/api/controllers/estado/criar-estado-controller";
-import { ListarEstadoController } from "@/lib/api/controllers/estado/listar-estado-controller";
+import { CreateEstadoDTO } from "@/core/domain/dtos/estado.dto";
+import { RespostaApi } from "@/core/domain/models/resposta-api";
+import { CriarEstadoController } from "@/core/lib/api/controllers/estado/criar-estado-controller";
+import { ListarEstadoController } from "@/core/lib/api/controllers/estado/listar-estado-controller";
 
-export async function POST(request: Request) {
+//! Handler - Criação de estados
+export async function POST(request: NextRequest) {
 	try {
-		const { nome, sigla } = await request.json();
+		const body = await request.json().catch(() => null);
 
-		if (!nome) {
-			const respostaApi = new RespostaApi({
+		if (!body) {
+			const respostaNoBody = new RespostaApi({
 				sucesso: false,
-				mensagem: "Estão faltando infomações para a criação do estado",
+				mensagem: "Estão faltando informações para a criação do estado",
 			});
-
-			return NextResponse.json({ respostaApi }, { status: 400 });
-		} else {
-			const controller = new CriarEstadoController();
-
-			const resposta = await controller.executar({ nome, sigla });
-
-			return NextResponse.json(
-				{ resposta },
-				{ status: resposta.sucesso ? 200 : 400 }
-			);
+			return NextResponse.json({ respostaNoBody }, { status: 400 });
 		}
-	} catch (error) {
-		const respostaApi = new RespostaApi({
-			sucesso: false,
-			mensagem: "Ocorreu um erro inesperado",
-			dados: error,
-		});
 
-		return NextResponse.json({ respostaApi }, { status: 500 });
+		const controller = new CriarEstadoController();
+		const resposta = await controller.executar(body as CreateEstadoDTO);
+
+		return NextResponse.json(
+			{ resposta },
+			{ status: resposta.sucesso ? 201 : 400 }
+		);
+	} catch (error) {
+		console.error("Erro ao criar estado:", error);
+
+		const respostaException = new RespostaApi({
+			sucesso: false,
+			mensagem: "Ocorreu um erro inesperado no servidor",
+			dados: process.env.NODE_ENV === "development" ? error : undefined,
+		});
+		return NextResponse.json({ respostaException }, { status: 500 });
 	}
 }
 
+//! Handler - Listar estados
 export async function GET() {
 	try {
 		const controller = new ListarEstadoController();
 		const resposta = await controller.executar();
 
-		if (!resposta.sucesso) {
-			return NextResponse.json({
-				resposta,
-				status: 400,
-			});
-		}
-		return NextResponse.json({ resposta }, { status: 200 });
+		return NextResponse.json(
+			{ resposta },
+			{ status: resposta.sucesso ? 200 : 404 }
+		);
 	} catch (error) {
-		const respostaApi = new RespostaApi({
+		console.error("Erro ao listar estados:", error);
+
+		const respostaException = new RespostaApi({
 			sucesso: false,
-			mensagem: "Ocorreu um erro inesperado",
-			dados: error,
+			mensagem: "Ocorreu um erro inesperado no servidor",
+			dados: process.env.NODE_ENV === "development" ? error : undefined,
 		});
-		return NextResponse.json({ respostaApi }, { status: 500 });
+		return NextResponse.json({ respostaException }, { status: 500 });
 	}
 }

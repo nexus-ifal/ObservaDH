@@ -1,0 +1,125 @@
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.logo::before {
+	content: "Observa";
+	font-family: "Oswald", sans-serif;
+	font-optical-sizing: auto;
+	font-weight: 400;
+	font-style: normal;
+}
+
+.logo::after {
+	content: "DH";
+	font-family: "Titillium Web", sans-serif;
+	font-weight: 300;
+	font-style: normal;
+}
+
+.bg-senado {
+	position: relative;
+}
+
+.bg-senado::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-image: url("/assets/images/senado_federal.jpg");
+	background-size: cover;
+	background-position: center;
+	opacity: 0.15;
+	z-index: 0;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+	display: none;
+}
+
+@layer utilities {
+	.text-shadow {
+		text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+	}
+	.text-shadow-sm {
+		text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+	}
+	.text-shadow-lg {
+		text-shadow: 3px 3px 6px rgba(69, 104, 190, 1);
+	}
+	.text-shadow-xl {
+		text-shadow: 4px 4px 8px rgba(69, 104, 190, 1);
+	}
+}
+
+.imagem-hover {
+	opacity: 1;
+	transition: opacity 0.3s ease;
+}
+
+.imagem-hover:hover {
+	opacity: 0.7;
+}
+
+.fundo-404 {
+	background-image: url("/assets/images/fundo_404.jpg");
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-size: cover;
+	background-position: center;
+	position: relative;
+}
+
+.border-gradient {
+	border-image: linear-gradient(to right, #87d9ff 0%, #f693f9 100%) 1;
+	border-width: 2px;
+	border-style: solid;
+}
+
+.bg-grid {
+	background-image:
+		url("/assets/images/grids/normal_grid.png"),
+		url("/assets/images/grids/turn_grid.png");
+	background-size: auto, auto;
+	background-position:
+		left top,
+		right bottom;
+	background-repeat: no-repeat, no-repeat;
+}
+
+.bg-brasil {
+	background-image: url("/assets/images/background_brasil.png");
+	background-size: auto;
+	background-position: center;
+	background-repeat: no-repeat;
+	position: relative;
+	overflow: hidden; /* Garante que o pseudo-elemento não extrapole */
+}
+
+.bg-brasil::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(to right, black, #001745);
+	opacity: 0.65;
+	z-index: 1;
+	pointer-events: none;
+}
+
+.content {
+	position: relative;
+	z-index: 2;
+	color: white;
+}
+
+.login {
+	background-color: #050b17;
+	background-size: cover;
+}

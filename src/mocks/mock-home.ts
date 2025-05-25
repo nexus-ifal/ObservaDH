@@ -96,8 +96,8 @@ const cardsInformativos = [
 		isSubtitleHTML: true,
 	},
 	{
-		titulo: "Conheça",
-		subtitulo: "o projeto",
+		titulo: "Conheça o",
+		subtitulo: "projeto",
 		texto:
 			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed feugiat nisi nec orci maximus, eu tempus metus vivrra. Pellentesque non ante turpis. Mauris venenatis",
 		rota: "/sobre",

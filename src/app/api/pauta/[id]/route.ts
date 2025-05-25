@@ -1,109 +1,116 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { RespostaApi } from "@/domain/models/resposta-api";
-import { AtualizarPautaController } from "@/lib/api/controllers/pauta/atualizar-pauta-controller";
-import { BuscarPautaController } from "@/lib/api/controllers/pauta/buscar-pauta-controller";
-import { DeletarPautaController } from "@/lib/api/controllers/pauta/deletar-pauta-controller";
+import { UpdatePautaDTO } from "@/core/domain/dtos/pauta.dto";
+import { RespostaApi } from "@/core/domain/models/resposta-api";
+import { AtualizarPautaController } from "@/core/lib/api/controllers/pauta/atualizar-pauta-controller";
+import { BuscarPautaController } from "@/core/lib/api/controllers/pauta/buscar-pauta-controller";
+import { DeletarPautaController } from "@/core/lib/api/controllers/pauta/deletar-pauta-controller";
 
-export async function DELETE(
-	request: NextRequest,
-	{ params }: { params: { id: string } }
-) {
-	try {
-		const { id } = params;
-		if (!id) {
-			const respostaApi = new RespostaApi({
-				sucesso: false,
-				mensagem: "id não informado",
-			});
-
-			return NextResponse.json({ respostaApi }, { status: 400 });
-		}
-
-		const controller = new DeletarPautaController();
-
-		const resposta = await controller.executar(id);
-
-		return NextResponse.json(
-			{ resposta },
-			{ status: resposta.sucesso ? 200 : 400 }
-		);
-	} catch (error) {
-		const respostaApi = new RespostaApi({
+function validateId(id?: string): NextResponse | undefined {
+	if (!id || id.trim() === "") {
+		const respostaIdInvalido = new RespostaApi({
 			sucesso: false,
-			mensagem: "Ocorreu um erro inesperado",
-			dados: error,
+			mensagem: "ID da pauta não fornecido ou inválido",
 		});
-		return NextResponse.json({ respostaApi, status: 500 });
+		return NextResponse.json(respostaIdInvalido, { status: 400 });
 	}
+	return undefined;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function handleError(error: any, message: string) {
+	console.error(message, error);
+	const respostaException = new RespostaApi({
+		sucesso: false,
+		mensagem: `Ocorreu um erro inesperado no servidor: ${message}`,
+		dados: process.env.NODE_ENV === "development" ? error : undefined,
+	});
+	return NextResponse.json(respostaException, { status: 500 });
+}
+
+// ! Handler - Atualização de Pauta
 export async function PATCH(
 	request: NextRequest,
-	{ params }: { params: { id: string } }
+	context: { params: Promise<{ id: string }> }
 ) {
 	try {
-		const { id } = params;
+		const params = await context.params;
+		const idError = validateId(params.id);
+		if (idError) return idError;
 
-		if (!id) {
-			const respostaApi = new RespostaApi({
-				sucesso: false,
-				mensagem: "id não informado",
-			});
-
-			return NextResponse.json({ respostaApi }, { status: 400 });
-		}
-
-		const { nome } = await request.json();
+		const body = await request.json().catch(() => ({}));
+		const updateData = { id: params.id as string, ...body } as UpdatePautaDTO;
 
 		const controller = new AtualizarPautaController();
+		const resposta = (await controller.executar(updateData)) as RespostaApi;
 
-		const resposta = await controller.executar(id, nome);
+		let status = 200;
+		if (!resposta.sucesso) {
+			if (resposta.mensagem?.includes("não foi encontrada")) {
+				status = 404;
+			} else if (resposta.mensagem?.includes("já existe outra")) {
+				status = 409;
+			} else {
+				status = 400;
+			}
+		}
 
-		return NextResponse.json(
-			{ resposta },
-			{ status: resposta.sucesso ? 200 : 400 }
-		);
+		return NextResponse.json(resposta, { status });
 	} catch (error) {
-		const respostaApi = new RespostaApi({
-			sucesso: false,
-			mensagem: "Ocorreu um erro inesperado",
-			dados: error,
-		});
-		return NextResponse.json({ respostaApi }, { status: 500 });
+		return handleError(error, "Erro ao atualizar pauta");
 	}
 }
 
-export async function GET(
+// ! Handler - Deletar Pauta
+export async function DELETE(
 	request: NextRequest,
-	{ params }: { params: { id: string } }
+	context: { params: Promise<{ id: string }> }
 ) {
 	try {
-		const { id } = params;
+		const params = await context.params;
+		const idError = validateId(params.id);
+		if (idError) return idError;
 
-		if (!id) {
-			const respostaApi = new RespostaApi({
-				sucesso: false,
-				mensagem: "id não informado",
-			});
+		const controller = new DeletarPautaController();
+		const resposta = (await controller.executar({
+			id: params.id as string,
+		})) as RespostaApi;
 
-			return NextResponse.json({ respostaApi }, { status: 400 });
+		let status = 200;
+		if (!resposta.sucesso) {
+			if (resposta.mensagem?.includes("não foi encontrada")) {
+				status = 404;
+			} else if (resposta.mensagem?.includes("projetos relacionados")) {
+				status = 409;
+			} else {
+				status = 400;
+			}
 		}
 
-		const controller = new BuscarPautaController();
+		return NextResponse.json(resposta, { status });
+	} catch (error) {
+		return handleError(error, "Erro ao deletar pauta");
+	}
+}
 
+// ! Handler - Buscar Pauta por ID
+export async function GET(
+	request: Request,
+	context: { params: Promise<{ id: string }> }
+) {
+	try {
+		const params = await context.params;
+		const idError = validateId(params.id);
+		if (idError) return idError;
+
+		const { id } = params;
+		const controller = new BuscarPautaController();
 		const resposta = await controller.executar(id);
 
-		return NextResponse.json(
-			{ resposta },
-			{ status: resposta.sucesso ? 200 : 400 }
-		);
-	} catch (error) {
-		const respostaApi = new RespostaApi({
-			sucesso: false,
-			mensagem: "Ocorreu um erro inesperado",
-			dados: error,
+		return NextResponse.json(resposta, {
+			status: resposta.sucesso ? 200 : 404,
 		});
-		return NextResponse.json({ respostaApi }, { status: 500 });
+	} catch (error) {
+		return handleError(error, "Erro ao buscar pauta por ID");
 	}
 }

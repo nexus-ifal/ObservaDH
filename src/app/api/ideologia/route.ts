@@ -1,42 +1,50 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-import { RespostaApi } from "@/domain/models/resposta-api";
-import { CriarIdeologiaController } from "@/lib/api/controllers/ideologia/criar-ideologia-controller";
-import { ListarIdeologiaController } from "@/lib/api/controllers/ideologia/listar-ideologia-controller";
+import { CreateIdeologiaDTO } from "@/core/domain/dtos/ideologia.dto";
+import { RespostaApi } from "@/core/domain/models/resposta-api";
+import { CriarIdeologiaController } from "@/core/lib/api/controllers/ideologia/criar-ideologia-controller";
+import { ListarIdeologiaController } from "@/core/lib/api/controllers/ideologia/listar-ideologia-controller";
 
-export async function POST(request: Request) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function handleError(error: any, message: string) {
+	console.error(message, error);
+	const respostaException = new RespostaApi({
+		sucesso: false,
+		mensagem: `Ocorreu um erro inesperado no servidor: ${
+			message.toLowerCase().includes("criar") ? "ao criar" : "ao listar"
+		} ideologia(s)`,
+		dados: process.env.NODE_ENV === "development" ? error : undefined,
+	});
+	return NextResponse.json(respostaException, { status: 500 });
+}
+
+export async function POST(request: NextRequest) {
 	try {
-		const { nome, sigla, descricao } = await request.json();
+		const body = await request.json().catch(() => null);
 
-		if (!nome) {
-			const respostaApi = new RespostaApi({
+		if (!body) {
+			const respostaNoBody = new RespostaApi({
 				sucesso: false,
-				mensagem: "Estão faltando infomações para a criação da ideologia",
+				mensagem: "Corpo da requisição inválido ou vazio",
 			});
-
-			return NextResponse.json({ respostaApi }, { status: 400 });
-		} else {
-			const controller = new CriarIdeologiaController();
-
-			const resposta = await controller.executar({
-				nome: nome,
-				descricao: descricao,
-				sigla: sigla,
-			});
-
-			return NextResponse.json(
-				{ resposta },
-				{ status: resposta.sucesso ? 200 : 400 }
-			);
+			return NextResponse.json(respostaNoBody, { status: 400 });
 		}
-	} catch (error) {
-		const respostaApi = new RespostaApi({
-			sucesso: false,
-			mensagem: "Ocorreu um erro inesperado",
-			dados: error,
-		});
 
-		return NextResponse.json({ respostaApi }, { status: 500 });
+		const controller = new CriarIdeologiaController();
+		const resposta = await controller.executar(body as CreateIdeologiaDTO);
+
+		let status = 201;
+		if (!resposta.sucesso) {
+			if (resposta.mensagem?.includes("obrigatórios")) {
+				status = 400;
+			} else {
+				status = 400;
+			}
+		}
+
+		return NextResponse.json(resposta, { status });
+	} catch (error) {
+		return handleError(error, "Erro ao criar ideologia");
 	}
 }
 
@@ -45,19 +53,10 @@ export async function GET() {
 		const controller = new ListarIdeologiaController();
 		const resposta = await controller.executar();
 
-		if (!resposta.sucesso) {
-			return NextResponse.json({
-				resposta,
-				status: 400,
-			});
-		}
-		return NextResponse.json({ resposta }, { status: 200 });
-	} catch (error) {
-		const respostaApi = new RespostaApi({
-			sucesso: false,
-			mensagem: "Ocorreu um erro inesperado",
-			dados: error,
+		return NextResponse.json(resposta, {
+			status: resposta.sucesso ? 200 : 404,
 		});
-		return NextResponse.json({ respostaApi }, { status: 500 });
+	} catch (error) {
+		return handleError(error, "Erro ao listar ideologias");
 	}
 }

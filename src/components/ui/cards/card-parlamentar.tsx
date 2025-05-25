@@ -2,8 +2,6 @@ import React from "react";
 import { IoMdClose } from "react-icons/io";
 import Image from "next/image";
 
-import { parlamentar } from "@/domain/interfaces/parlamentar";
-
 import {
 	AlertDialog,
 	AlertDialogCancel,
@@ -24,6 +22,7 @@ import Texto from "../componente-texto";
 import CardItemRenderizacao from "./card-item-renderizacao";
 import CardMiniProjetos from "./card-mini-projeto";
 
+import { parlamentar } from "@/core/domain/graficos/types/parlamentar";
 import { projetosMock } from "@/mocks/mock-projetos";
 
 interface saibaMaisProps {

@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 
 import { useRouter } from "next/navigation";
@@ -6,9 +5,9 @@ import { useRouter } from "next/navigation";
 import FooterBar from "@/components/ui/layouts/footer-bar";
 import Header from "@/components/ui/layouts/header";
 
-import { oswald } from "@/lib/fonts/fonts";
+import { oswald } from "@/core/lib/fonts/fonts";
 
-const page: React.FC = () => {
+const NotFoundPage: React.FC = () => {
 	const router = useRouter();
 	const retornar = () => {
 		router.push("/");
@@ -34,4 +33,4 @@ const page: React.FC = () => {
 		</div>
 	);
 };
-export default page;
+export default NotFoundPage;

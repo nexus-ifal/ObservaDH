@@ -1,23 +1,20 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 "use client";
 
-import { useParams } from "next/navigation";
-
-import { ProjetoLei } from "@/domain/interfaces/projeto-lei";
-
-import { buscarProjetoPorId } from "@/lib/utils/busca";
+import { use } from "react";
 
 import Card from "@/components/ui/cards";
 import MainLayout from "@/components/ui/layouts/main-layout";
 import Titulo from "@/components/ui/titulo-pages";
 
-import { oswald } from "@/lib/fonts/fonts";
+import { ProjetoLei } from "@/core/domain/graficos/types/projeto-lei";
+import { oswald } from "@/core/lib/fonts/fonts";
+import { buscarProjetoPorId } from "@/core/lib/web/mock-utils/busca";
 
-const page = () => {
-	const { id } = useParams();
+const Page: React.FC<{ params: Promise<{ id: string }> }> = ({ params }) => {
+	const { id } = use(params);
 
 	const projeto = buscarProjetoPorId(
-		Array.isArray(id) ? id[0] : id
+		Array.isArray(id) ? (id[0] ?? "") : (id ?? "")
 	) as ProjetoLei;
 
 	const parlamentarNomes = projeto.parlamentares.map((p) => p.nome).join(", ");
@@ -108,4 +105,4 @@ const Topico: React.FC<TopicoProps> = ({ titulo, children }) => (
 	</section>
 );
 
-export default page;
+export default Page;

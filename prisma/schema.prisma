@@ -8,15 +8,20 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
+enum Role {
+    ADMIN
+    EDITOR
+}
+
 model User {
-    id              String      @id @default(cuid())
-    email           String      @unique
-    passwordHash    String
-    role            String
-    name            String?
-    emailVerified   DateTime?
-    createdAt       DateTime    @default(now())
-    updatedAt       DateTime    @updatedAt
+    id            String    @id @default(cuid())
+    email         String    @unique
+    passwordHash  String
+    role          Role      @default(EDITOR)
+    name          String?   @unique
+    emailVerified DateTime?
+    createdAt     DateTime  @default(now())
+    updatedAt     DateTime  @updatedAt
 }
 
 model Projeto {

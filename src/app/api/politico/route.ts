@@ -1,197 +1,64 @@
-/**
- * @openapi
- * /api/politico:
- *   post:
- *     summary: Cria um novo político
- *     tags:
- *       - Politico
- *     requestBody:
- *       required: true
- *       description: Dados necessários para criação de um político
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - nome
- *               - genero
- *               - raca
- *               - religiao
- *               - estado_id
- *               - partido_id
- *               - ideologia
- *               - data_nascimento
- *               - profissoes
- *               - projetos
- *             properties:
- *               nome:
- *                 type: string
- *                 example: João da Silva
- *               genero:
- *                 type: string
- *                 enum: [Masculino, Feminino, Outro]
- *                 example: Masculino
- *               raca:
- *                 type: string
- *                 example: Branca
- *               religiao:
- *                 type: string
- *                 example: Católica
- *               estado_id:
- *                 type: string
- *                 format: uuid
- *                 example: "a3f1c2d4-5b6e-7f8a-9b0c-d1e2f3a4b5c6"
- *               partido_id:
- *                 type: string
- *                 format: uuid
- *                 example: "b4e2d3c1-6f5a-4e7b-8c9d-0a1b2c3d4e5f"
- *               ideologia:
- *                 type: string
- *                 example: Liberal
- *               data_nascimento:
- *                 type: string
- *                 format: date
- *                 example: 1970-01-01
- *               foto:
- *                 type: string
- *                 format: uri
- *                 example: https://example.com/foto.jpg
- *               profissoes:
- *                 type: array
- *                 items:
- *                   type: string
- *                 example:
- *                   - Engenheiro
- *                   - Advogado
- *               projetos:
- *                 type: array
- *                 items:
- *                   type: string
- *                 example:
- *                   - "proj-uuid-1234"
- *                   - "proj-uuid-5678"
- *     responses:
- *       201:
- *         description: Político criado com sucesso
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/RespostaApi'
- *             example:
- *               sucesso: true
- *               mensagem: Político criado com sucesso
- *               dados:
- *                 id: "c1d2e3f4-5678-90ab-cdef-1234567890ab"
- *                 nome: "João da Silva"
- *                 genero: "Masculino"
- *                 raca: "Branca"
- *                 religiao: "Católica"
- *                 estado_id: "a3f1c2d4-5b6e-7f8a-9b0c-d1e2f3a4b5c6"
- *                 partido_id: "b4e2d3c1-6f5a-4e7b-8c9d-0a1b2c3d4e5f"
- *                 ideologia: "Liberal"
- *                 data_nascimento: "1970-01-01"
- *                 foto: "https://example.com/foto.jpg"
- *                 profissoes:
- *                   - "Engenheiro"
- *                   - "Advogado"
- *                 projetos:
- *                   - "proj-uuid-1234"
- *                   - "proj-uuid-5678"
- *       400:
- *         description: Erro de validação de entrada
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/RespostaApi'
- *             examples:
- *               campo_ausente:
- *                 summary: Campo obrigatório ausente
- *                 value:
- *                   sucesso: false
- *                   mensagem: "Campo 'nome' é obrigatório"
- *               formato_invalido:
- *                 summary: Formato de data inválido
- *                 value:
- *                   sucesso: false
- *                   mensagem: "Formato de 'data_nascimento' inválido"
- *       500:
- *         description: Erro interno do servidor
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/RespostaApi'
- *             example:
- *               sucesso: false
- *               mensagem: "Erro interno ao criar o político"
- */
+import { NextRequest, NextResponse } from "next/server";
 
-import { NextResponse } from "next/server";
+import { CreatePoliticoDTO } from "@/core/domain/dtos/politico.dto";
+import { RespostaApi } from "@/core/domain/models/resposta-api";
+import { CriarPoliticoController } from "@/core/lib/api/controllers/politico/criar-politico-controller";
+import { ListarPoliticoController } from "@/core/lib/api/controllers/politico/listar-politico-controller";
 
-import { RespostaApi } from "@/domain/models/resposta-api";
-import { CriarPoliticoController } from "@/lib/api/controllers/politico/criar-politico-controller";
-import { ListarPoliticoContoller } from "@/lib/api/controllers/politico/listar-politico-controller";
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function handleError(error: any, message: string) {
+	console.error(message, error);
+	const respostaException = new RespostaApi({
+		sucesso: false,
+		mensagem: `Ocorreu um erro inesperado no servidor: ${
+			message.toLowerCase().includes("criar") ? "ao criar" : "ao listar"
+		} político(s)`,
+		dados: process.env.NODE_ENV === "development" ? error : undefined,
+	});
+	return NextResponse.json(respostaException, { status: 500 });
+}
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
 	try {
-		const {
-			nome,
-			genero,
-			raca,
-			religiao,
-			estado_id,
-			partido_id,
-			ideologia,
-			foto,
-			profissao_id,
-			projetos,
-			esfera_id,
-		} = await request.json();
+		const body = await request.json().catch(() => null);
+
+		if (!body) {
+			const respostaNoBody = new RespostaApi({
+				sucesso: false,
+				mensagem: "Corpo da requisição inválido ou vazio",
+			});
+			return NextResponse.json(respostaNoBody, { status: 400 });
+		}
 
 		const controller = new CriarPoliticoController();
+		const resposta = await controller.executar(body as CreatePoliticoDTO);
 
-		const resposta = await controller.executar({
-			nome: nome,
-			genero: genero,
-			raca: raca,
-			religiao: religiao,
-			estadoId: estado_id,
-			partidoId: partido_id,
-			ideologia: ideologia,
-			foto: foto,
-			profissaoId: profissao_id,
-			projetos: projetos,
-			esferaId: esfera_id,
-		});
+		let status = 201;
+		if (!resposta.sucesso) {
+			if (resposta.mensagem?.includes("Faltam informações obrigatórias")) {
+				status = 400;
+			} else if (resposta.mensagem?.includes("ID relacionado inválido")) {
+				status = 400;
+			} else {
+				status = 400;
+			}
+		}
 
-		return NextResponse.json(
-			{ resposta },
-			{ status: resposta.sucesso ? 201 : 400 }
-		);
+		return NextResponse.json(resposta, { status });
 	} catch (error) {
-		const resposta = new RespostaApi({
-			sucesso: false,
-			mensagem: "erro interno",
-			dados: error,
-		});
-		return NextResponse.json({ resposta }, { status: 500 });
+		return handleError(error, "Erro ao criar político");
 	}
 }
+
 export async function GET() {
 	try {
-		const controller = new ListarPoliticoContoller();
-
+		const controller = new ListarPoliticoController();
 		const resposta = await controller.executar();
 
-		return NextResponse.json(
-			{ resposta },
-			{ status: resposta.sucesso ? 200 : 400 }
-		);
-	} catch (error) {
-		const resposta = new RespostaApi({
-			sucesso: false,
-			mensagem: "erro interno",
-			dados: error,
+		return NextResponse.json(resposta, {
+			status: resposta.sucesso ? 200 : 404,
 		});
-		return NextResponse.json({ resposta }, { status: 500 });
+	} catch (error) {
+		return handleError(error, "Erro ao listar políticos");
 	}
 }
