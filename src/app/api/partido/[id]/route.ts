@@ -111,13 +111,12 @@ export async function GET(
 
 		const controller = new AtualizarPartidoController();
 
-		const resposta = await controller.executar(
+		const resposta = await controller.executar({
 			id,
 			nome,
 			sigla,
 			imagem,
-			politicos,
-			projetos
+		}
 		);
 
 		return NextResponse.json(resposta, {
