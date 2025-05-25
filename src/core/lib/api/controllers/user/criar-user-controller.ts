@@ -8,31 +8,21 @@ export class CriarUserController {
 		name,
 		email,
 		passwordHash,
-		role,
 	}: {
 		name: string;
 		email: string;
 		passwordHash: string;
-		role: string;
 	}) {
-		if (!name || !email || !passwordHash || !role) {
+		if (!name || !email || !passwordHash) {
 			return new RespostaApi({
 				sucesso: false,
 				mensagem: "Falta informação para a criação do usuário",
-			});
-		}
-		const lowRole = role.toLowerCase();
-		if (lowRole !== "admin" && lowRole !== "editor") {
-			return new RespostaApi({
-				sucesso: false,
-				mensagem: "O papel do usuário não existe",
 			});
 		}
 		const user = new User({
 			name: name,
 			email: email,
 			passwordHash: passwordHash,
-			role: role,
 		});
 
 		const service = new CriarUserService();
