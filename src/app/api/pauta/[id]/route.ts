@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 
+import { UpdatePautaDTO } from "@/core/domain/dtos/pauta.dto";
+import { RespostaApi } from "@/core/domain/models/resposta-api";
 import { AtualizarPautaController } from "@/core/lib/api/controllers/pauta/atualizar-pauta-controller";
 import { BuscarPautaController } from "@/core/lib/api/controllers/pauta/buscar-pauta-controller";
 import { DeletarPautaController } from "@/core/lib/api/controllers/pauta/deletar-pauta-controller";
-import { UpdatePautaDTO } from "@/core/domain/dtos/pauta.dto";
-import { RespostaApi } from "@/core/domain/models/resposta-api";
 
 function validateId(id?: string): NextResponse | undefined {
 	if (!id || id.trim() === "") {

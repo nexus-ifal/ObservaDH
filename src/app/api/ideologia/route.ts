@@ -1,10 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 
-
-import { CriarIdeologiaController } from "@/core/lib/api/controllers/ideologia/criar-ideologia-controller";
-import { ListarIdeologiaController } from "@/core/lib/api/controllers/ideologia/listar-ideologia-controller";
 import { CreateIdeologiaDTO } from "@/core/domain/dtos/ideologia.dto";
 import { RespostaApi } from "@/core/domain/models/resposta-api";
+import { CriarIdeologiaController } from "@/core/lib/api/controllers/ideologia/criar-ideologia-controller";
+import { ListarIdeologiaController } from "@/core/lib/api/controllers/ideologia/listar-ideologia-controller";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function handleError(error: any, message: string) {

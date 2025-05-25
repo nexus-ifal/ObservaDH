@@ -6,9 +6,9 @@ import useEmblaCarousel, {
 } from "embla-carousel-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-import { cn } from "@/core/lib/utils/utils";
-
 import { Button } from "@/components/ui-shacnui/button";
+
+import { cn } from "@/core/lib/utils/utils";
 
 type CarouselApi = UseEmblaCarouselType[1];
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;

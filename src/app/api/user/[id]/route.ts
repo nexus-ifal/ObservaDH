@@ -1,9 +1,9 @@
+import { NextRequest, NextResponse } from "next/server";
+
 import { RespostaApi } from "@/core/domain/models/resposta-api";
 import { AtualizarUserController } from "@/core/lib/api/controllers/user/atualizar-user-controller";
 import { BuscarUserController } from "@/core/lib/api/controllers/user/buscar-user-controller";
 import { DeletarUserController } from "@/core/lib/api/controllers/user/deletar-user-contoller";
-import { NextRequest, NextResponse } from "next/server";
-
 
 export async function DELETE(
 	request: NextRequest,

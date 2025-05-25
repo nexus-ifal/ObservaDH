@@ -1,11 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 
-
+import { UpdateEsferaDTO } from "@/core/domain/dtos/esfera.dto";
+import { RespostaApi } from "@/core/domain/models/resposta-api";
 import { AtualizarEsferaController } from "@/core/lib/api/controllers/esfera/atualizar-esfera-controller";
 import { BuscarEsferaController } from "@/core/lib/api/controllers/esfera/buscar-esfera-controller";
 import { DeletarEsferaController } from "@/core/lib/api/controllers/esfera/deletar-esfera-controller";
-import { UpdateEsferaDTO } from "@/core/domain/dtos/esfera.dto";
-import { RespostaApi } from "@/core/domain/models/resposta-api";
 
 function validateId(id?: string): NextResponse | undefined {
 	if (!id || id.trim() === "") {

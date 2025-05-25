@@ -1,7 +1,10 @@
 import { BuscarEstadoService } from "../../service/estado/buscar-estado-service";
 import { DeletarEstadoService } from "../../service/estado/deletar-estado-service";
 
-import { DeleteEstadoDTO, ResponseEstadoDTO } from "@/core/domain/dtos/estado.dto";
+import {
+	DeleteEstadoDTO,
+	ResponseEstadoDTO,
+} from "@/core/domain/dtos/estado.dto";
 import { RespostaApi } from "@/core/domain/models/resposta-api";
 
 interface IBuscarEstadoService {
