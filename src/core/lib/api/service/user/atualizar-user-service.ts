@@ -8,7 +8,7 @@ export class AtualizarUserService {
 	async executar({ user }: { user: User }) {
 		const prisma = prismaClient;
 		const passwordHash = await bcrypt.hash(user.passwordHash, 10);
-		const Upperrole = user.role.toUpperCase();
+		const Upperrole = user.role ? user.role.toUpperCase() : "EDITOR";
 		const resposta = prisma.user.update({
 			data: {
 				name: user.name,

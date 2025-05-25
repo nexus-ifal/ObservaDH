@@ -6,15 +6,15 @@ import { ListarUsersController } from "@/core/lib/api/controllers/user/listar-us
 
 export async function POST(request: Request) {
 	try {
-		const { name, email, passwordHash, role } = await request.json();
+		const { name, email, passwordHash } = await request.json();
 
-		if (!name || !email || !passwordHash || !role) {
+		if (!name || !email || !passwordHash) {
 			const respostaApi = new RespostaApi({
 				sucesso: false,
 				mensagem: "Estão faltando infomações para a criação do usuário",
 			});
 
-			return NextResponse.json({ respostaApi }, { status: 400 });
+			return NextResponse.json(respostaApi, { status: 400 });
 		} else {
 			const controller = new CriarUserController();
 
@@ -22,13 +22,11 @@ export async function POST(request: Request) {
 				name: name,
 				email: email,
 				passwordHash: passwordHash,
-				role: role,
 			});
 
-			return NextResponse.json(
-				{ resposta },
-				{ status: resposta.sucesso ? 200 : 400 }
-			);
+			return NextResponse.json(resposta, {
+				status: resposta.sucesso ? 200 : 400,
+			});
 		}
 	} catch (error) {
 		const respostaApi = new RespostaApi({
@@ -37,7 +35,7 @@ export async function POST(request: Request) {
 			dados: error,
 		});
 
-		return NextResponse.json({ respostaApi }, { status: 500 });
+		return NextResponse.json(respostaApi, { status: 500 });
 	}
 }
 
@@ -52,13 +50,13 @@ export async function GET() {
 				status: 400,
 			});
 		}
-		return NextResponse.json({ resposta }, { status: 200 });
+		return NextResponse.json(resposta, { status: 200 });
 	} catch (error) {
 		const respostaApi = new RespostaApi({
 			sucesso: false,
 			mensagem: "Ocorreu um erro inesperado",
 			dados: error,
 		});
-		return NextResponse.json({ respostaApi }, { status: 500 });
+		return NextResponse.json(respostaApi, { status: 500 });
 	}
 }
