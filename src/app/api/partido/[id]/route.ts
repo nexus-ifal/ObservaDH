@@ -98,9 +98,8 @@ export async function GET(
 		if (idError) return idError;
 
 		const { id } = params;
-		const { nome, sigla, imagem, politicos, projetos } = await request.json();
 
-		if (!id || !nome || !sigla || !politicos || !projetos || !imagem) {
+		if (!id) {
 			const respostaApi = new RespostaApi({
 				sucesso: false,
 				mensagem: "falta informação para atualizar o partido",
@@ -109,15 +108,9 @@ export async function GET(
 			return NextResponse.json({ respostaApi }, { status: 400 });
 		}
 
-		const controller = new AtualizarPartidoController();
+		const controller = new BuscarPartidoController();
 
-		const resposta = await controller.executar({
-			id,
-			nome,
-			sigla,
-			imagem,
-		}
-		);
+		const resposta = await controller.executar(id);
 
 		return NextResponse.json(resposta, {
 			status: resposta.sucesso ? 200 : 404,
