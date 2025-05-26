@@ -6,8 +6,8 @@ class IdeologiaAPI implements IdeologiaRepository {
 	async listar(): Promise<ResponseIdeologiaDTO[]> {
 		const response = await conexaoBackend.get("/ideologia");
 		const dados = response.data.dados;
-		console.log(dados)
-		return dados
+		console.log(dados);
+		return dados;
 	}
 }
 

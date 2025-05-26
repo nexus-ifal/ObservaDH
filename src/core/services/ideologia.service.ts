@@ -6,12 +6,11 @@ class IdeologiaService implements IdeologiaUseCase {
 	protected readonly adapter: IdeologiaRepository;
 
 	constructor(adapter: IdeologiaRepository) {
-		this.adapter = adapter
+		this.adapter = adapter;
 	}
 	listar(): Promise<ResponseIdeologiaDTO[]> {
 		return this.adapter.listar();
 	}
 }
-
 
 export default IdeologiaService;
