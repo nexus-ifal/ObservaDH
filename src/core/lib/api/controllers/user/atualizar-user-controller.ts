@@ -9,29 +9,19 @@ export class AtualizarUserController {
 		name,
 		email,
 		passwordHash,
-		role,
 	}: {
 		id: string;
 		name: string;
 		email: string;
 		passwordHash: string;
-		role: string;
 	}) {
-		if (!id || !name || !email || !passwordHash || !role) {
+		if (!id || !name || !email || !passwordHash) {
 			const respostaApi = new RespostaApi({
 				sucesso: false,
 				mensagem: "Estão faltando informações para a atualização do usuário",
 			});
 
 			return respostaApi;
-		}
-
-		const lowRole = role.toLowerCase();
-		if (lowRole !== "admin" && lowRole !== "editor") {
-			return new RespostaApi({
-				sucesso: false,
-				mensagem: "O papel do usuário não existe",
-			});
 		}
 
 		const service = new AtualizarUserService();
@@ -41,7 +31,6 @@ export class AtualizarUserController {
 			name: name,
 			email: email,
 			passwordHash: passwordHash,
-			role: role,
 		});
 
 		const resposta = await service.executar({ user: user });

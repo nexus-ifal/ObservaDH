@@ -4,8 +4,8 @@ class User {
 	id?: string;
 	email: string;
 	passwordHash: string;
-	role: string;
-	name?: string;
+	role?: string;
+	name: string;
 	emailVerified?: Date;
 	createdAt?: Date;
 	updatedAt?: Date;
@@ -22,10 +22,10 @@ class User {
 	}: {
 		email: string;
 		passwordHash: string;
-		role: string;
+		role?: string | "";
+		name: string;
 		createdAt?: Date;
 		updatedAt?: Date;
-		name?: string | "";
 		emailVerified?: Date;
 		id?: string;
 	}) {

@@ -3,10 +3,13 @@ import { NextResponse } from "next/server";
 import { RespostaApi } from "@/core/domain/models/resposta-api";
 import { CriarUserController } from "@/core/lib/api/controllers/user/criar-user-controller";
 import { ListarUsersController } from "@/core/lib/api/controllers/user/listar-user-controller";
+import { criarUserSchema } from "@/schemas/user-zod-schema";
 
 export async function POST(request: Request) {
 	try {
-		const { name, email, passwordHash } = await request.json();
+		const dadosEntrada = await request.json();
+		const dadosValidados = criarUserSchema.parse(dadosEntrada);
+		const { name, email, passwordHash } = dadosValidados;
 
 		if (!name || !email || !passwordHash) {
 			const respostaApi = new RespostaApi({

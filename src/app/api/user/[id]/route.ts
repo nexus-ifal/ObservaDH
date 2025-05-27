@@ -4,6 +4,7 @@ import { RespostaApi } from "@/core/domain/models/resposta-api";
 import { AtualizarUserController } from "@/core/lib/api/controllers/user/atualizar-user-controller";
 import { BuscarUserController } from "@/core/lib/api/controllers/user/buscar-user-controller";
 import { DeletarUserController } from "@/core/lib/api/controllers/user/deletar-user-contoller";
+import { atualizarUserSchema } from "@/schemas/user-zod-schema";
 
 export async function DELETE(
 	request: NextRequest,
@@ -86,7 +87,9 @@ export async function PATCH(
 ) {
 	const params = await context.params;
 	const { id } = params;
-	const { name, email, passwordHash, role } = await request.json();
+	const dadosEntrada = await request.json();
+	const dadosValidados = atualizarUserSchema.parse(dadosEntrada);
+	const { name, email, passwordHash } = dadosValidados;
 
 	if (!id) {
 		const respostaApi = new RespostaApi({
@@ -106,7 +109,6 @@ export async function PATCH(
 			name: name,
 			email: email,
 			passwordHash: passwordHash,
-			role: role,
 		});
 
 		return NextResponse.json(resposta, {
