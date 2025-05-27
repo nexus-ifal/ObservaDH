@@ -3,12 +3,14 @@ import EstadoAPI from "../api/estado";
 import IdeologiaAPI from "../api/ideologia";
 import PartidoAPI from "../api/partido";
 import ProfissaoAPI from "../api/profissao";
+import ProjetoAPI from "../api/projeto";
 
 import DireitoVioladoService from "@/core/services/direito-violado.service";
 import EstadoService from "@/core/services/estado.service";
 import IdeologiaService from "@/core/services/ideologia.service";
 import PartidoService from "@/core/services/partido.service";
 import ProfissaoService from "@/core/services/profissao.service";
+import ProjetoService from "@/core/services/projeto.service";
 
 const DIContainer = {
 	getDireitoVioladoUseCase: () =>
@@ -17,6 +19,7 @@ const DIContainer = {
 	getPartidoUseCase: () => new PartidoService(new PartidoAPI()),
 	getIdeologiaUseCase: () => new IdeologiaService(new IdeologiaAPI()),
 	getProfissaoUseCase: () => new ProfissaoService(new ProfissaoAPI()),
+	getProjetoUseCase: () => new ProjetoService(new ProjetoAPI()),
 };
 
 export default DIContainer;

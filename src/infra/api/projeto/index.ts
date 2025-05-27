@@ -1,7 +1,10 @@
+import { ResponseProjetoDTO } from "@/core/domain/dtos/projeto.dto";
 import { Pauta } from "@/core/domain/models/pauta";
 import { Projeto } from "@/core/domain/models/projeto";
+import { ProjetoRepository } from "@/core/interfaces/repository/projeto.repository";
 import { conexaoBackend } from "@/infra/services/conexao-backend/client";
 
+//todo: remover quando o backend estiver pronto
 export async function buscarAnoProjeto(): Promise<string[]> {
 	try {
 		const resposta = await conexaoBackend.get("/projeto/");
@@ -102,3 +105,15 @@ export async function buscarPautasPorAno(): Promise<ContagemPorAno[]> {
 		throw new Error("Não foi possível buscar pautas por ano");
 	}
 }
+//! até aqui !
+
+//! novo projeto api
+class ProjetoAPI implements ProjetoRepository {
+	async listar(): Promise<ResponseProjetoDTO[]> {
+		const response = await conexaoBackend.get("/projeto");
+		const dados = response.data.dados;
+		return dados;
+	}
+}
+
+export default ProjetoAPI;
