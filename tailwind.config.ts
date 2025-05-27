@@ -1,3 +1,5 @@
+const plugin = require('tailwindcss/plugin');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
 	content: [
@@ -7,6 +9,9 @@ module.exports = {
 	],
 	theme: {
 		extend: {
+			colors: {
+				"layout-admin": "#050B17",
+			},
 			backgroundImage: {
 				"layout-principal":
 					"linear-gradient(135deg, #060C18 0%, #122144 49%, #1A326E 100%)",
@@ -21,5 +26,18 @@ module.exports = {
 			},
 		},
 	},
-	plugins: [require("tailwindcss-animate")],
+	plugins: [
+		require('tailwindcss-animate'),
+		plugin(function ({ addUtilities }: { addUtilities: (utilities: Record<string, any>) => void }) {
+			addUtilities({
+				'.no-scrollbar': {
+					'-ms-overflow-style': 'none',
+					'scrollbar-width': 'none',
+				},
+				'.no-scrollbar::-webkit-scrollbar': {
+					display: 'none',
+				},
+			});
+		}),
+	],
 };
