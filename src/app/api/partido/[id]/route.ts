@@ -105,7 +105,7 @@ export async function GET(
 				mensagem: "falta informação para atualizar o partido",
 			});
 
-			return NextResponse.json({ respostaApi }, { status: 400 });
+			return NextResponse.json(respostaApi, { status: 400 });
 		}
 
 		const controller = new BuscarPartidoController();

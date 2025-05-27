@@ -12,7 +12,6 @@ export class CriarUserService {
 				name: user.name,
 				email: user.email,
 				passwordHash: passwordHash,
-				role: "EDITOR",
 			},
 		});
 		return resposta;

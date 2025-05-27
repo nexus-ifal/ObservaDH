@@ -4,7 +4,7 @@ class User {
 	id?: string;
 	email: string;
 	passwordHash: string;
-	role?: string;
+	role: string;
 	name?: string;
 	emailVerified?: Date;
 	createdAt?: Date;
@@ -22,7 +22,7 @@ class User {
 	}: {
 		email: string;
 		passwordHash: string;
-		role?: string | "";
+		role: string;
 		createdAt?: Date;
 		updatedAt?: Date;
 		name?: string | "";
