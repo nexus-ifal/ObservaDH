@@ -8,7 +8,7 @@ interface mainLayoutProps {
 const MainLayout: React.FC<mainLayoutProps> = ({ children }) => {
 	return (
 		<>
-			<div className="bg-layout-principal antialiased no-scrollbar flex flex-col">
+			<div className="bg-layout-principal antialiased no-scrollbar flex flex-col overflow-hidden">
 				<header className="h-[34rem] w-full">
 					<NavBar />
 				</header>
