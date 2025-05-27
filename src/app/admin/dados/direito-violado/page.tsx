@@ -1,9 +1,11 @@
 "use client";
 
+import { ScaleLoader } from "react-spinners";
+
 import ActionButton from "@/components/ui/layouts/action-button";
+
 import { oswald } from "@/core/lib/fonts/fonts";
 import { useDireitoViolado } from "@/infra/hooks/direito-violado/use-direito-violado";
-import { ScaleLoader } from "react-spinners";
 
 const DIREITOS_VIOLADOS_ACTIONS = [
 	{

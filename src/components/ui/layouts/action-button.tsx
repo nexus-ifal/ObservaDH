@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { FaChevronRight } from "react-icons/fa6";
+import Link from "next/link";
 
 interface ActionButtonProps {
 	title: string;

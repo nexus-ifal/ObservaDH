@@ -1,9 +1,10 @@
 "use client";
 import React from "react";
+import { FaChevronRight } from "react-icons/fa6";
+import clsx from "clsx";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import clsx from "clsx";
-import { FaChevronRight } from "react-icons/fa6";
+
 import { oswald, titilliumWeb } from "@/core/lib/fonts/fonts";
 
 const sideBarOptions = [
