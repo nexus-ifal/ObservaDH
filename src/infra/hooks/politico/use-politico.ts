@@ -1,12 +1,13 @@
-import { listarPoliticosOptions } from "@/infra/options/politico";
 import { useQuery } from "@tanstack/react-query";
 
+import { listarPoliticosOptions } from "@/infra/options/politico";
+
 export const usePolitico = () => {
-	const { data: politicos,
+	const {
+		data: politicos,
 		isLoading: isLoadingPoliticos,
-		error } = useQuery(
-			listarPoliticosOptions()
-		);
+		error,
+	} = useQuery(listarPoliticosOptions());
 
 	return { politicos, isLoadingPoliticos, error };
 };
