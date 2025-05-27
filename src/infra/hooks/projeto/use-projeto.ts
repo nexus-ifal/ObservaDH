@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { listarProjetosOptions } from './../../options/projeto';
+import { listarProjetosOptions } from "./../../options/projeto";
 
 export const useProjeto = () => {
 	const {
@@ -9,4 +9,4 @@ export const useProjeto = () => {
 		error,
 	} = useQuery(listarProjetosOptions());
 	return { projetos, isLoadingProjeto, error };
-}
+};
