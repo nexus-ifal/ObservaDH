@@ -5,7 +5,7 @@ import { mutationOptions } from "../services/utils/utils";
 
 import { MutationVariables } from "./../services/utils/utils";
 
-import { CreateEstadoDTO } from "@/core/domain/dtos/estado.dto";
+import { CreateEstadoDTO, UpdateEstadoDTO } from "@/core/domain/dtos/estado.dto";
 
 const usecase = DIContainer.getEstadoUseCase();
 
@@ -17,15 +17,29 @@ export const listarEstadoOptions = () =>
 		queryFn: () => usecase.listar(),
 	});
 
-export interface ApiCreateEstadoPayload {
+export interface APICreateEstadoPayload {
 	estado: CreateEstadoDTO;
 }
 
-export const createEstadoOptions = () =>
+export const CriarEstadoOptions = () =>
 	mutationOptions({
-		mutationKey: [...getEstadoBaseQueryKey(), "createEstado"],
+		mutationKey: [...getEstadoBaseQueryKey(), "criarEstado"],
 		mutationFn: ({
 			payload,
-		}: MutationVariables<void, ApiCreateEstadoPayload>) =>
+		}: MutationVariables<void, APICreateEstadoPayload>) =>
 			usecase.criar(payload.estado),
 	});
+
+
+export interface APIAtualizarEstadoPayload {
+	id: string;
+	data: UpdateEstadoDTO;
+}
+
+export const AtualizarEstadoOptions = () => mutationOptions({
+	mutationKey: [...getEstadoBaseQueryKey(), "atualizarEstado"],
+	mutationFn: ({
+		payload
+	}: MutationVariables<void, APIAtualizarEstadoPayload>) =>
+		usecase.atualizar(payload.id, payload.data)
+})
