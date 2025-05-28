@@ -5,8 +5,8 @@ import { listarProfissoesOptions } from "@/infra/options/profissao";
 export const useProfissao = () => {
 	const {
 		data: profissoes,
-		isLoading: isLoadingProfissao,
+		isLoading: isLoadingProfissoes,
 		error,
 	} = useQuery(listarProfissoesOptions());
-	return { profissoes, isLoadingProfissao, error };
+	return { profissoes, isLoadingProfissoes, error };
 };
