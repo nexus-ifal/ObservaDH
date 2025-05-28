@@ -1,35 +1,32 @@
 "use client";
 
-import { oswald } from "@/core/lib/fonts/fonts";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import ScaleLoader from "react-spinners/ScaleLoader";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import {
-	FormField,
-	FormLabel,
-	FormControl,
-	FormMessage,
-	FormItem,
-	Form,
-} from "@/components/ui-shacnui/form";
-import { Input } from "@/components/ui-shacnui/input";
-import { Button } from "@/components/ui-shacnui/button";
-import { useEstadoCreate } from "@/infra/hooks/estado/use-estado-create";
-import ScaleLoader from "react-spinners/ScaleLoader";
-import { useEffect, useState } from "react";
-import { IoClose } from "react-icons/io5";
 
 import {
 	AlertDialog,
-	AlertDialogTrigger,
+	AlertDialogAction,
 	AlertDialogContent,
+	AlertDialogFooter,
 	AlertDialogHeader,
 	AlertDialogTitle,
-	AlertDialogDescription,
-	AlertDialogFooter,
-	AlertDialogAction,
-	AlertDialogCancel,
 } from "@/components/ui-shacnui/alert-dialog";
+import { Button } from "@/components/ui-shacnui/button";
+import {
+	Form,
+	FormControl,
+	FormField,
+	FormItem,
+	FormLabel,
+	FormMessage,
+} from "@/components/ui-shacnui/form";
+import { Input } from "@/components/ui-shacnui/input";
+
+import { oswald } from "@/core/lib/fonts/fonts";
+import { useEstadoCreate } from "@/infra/hooks/estado/use-estado-create";
 
 const formSchema = z.object({
 	nome: z.string().min(1, {
@@ -114,7 +111,9 @@ const Page: React.FC = () => {
 						</AlertDialogTitle>
 					</AlertDialogHeader>
 					<AlertDialogFooter>
-						<AlertDialogAction className="hover:bg-white hover:text-red-600 duration-500">Fechar</AlertDialogAction>
+						<AlertDialogAction className="hover:bg-white hover:text-red-600 duration-500">
+							Fechar
+						</AlertDialogAction>
 					</AlertDialogFooter>
 				</AlertDialogContent>
 			</AlertDialog>

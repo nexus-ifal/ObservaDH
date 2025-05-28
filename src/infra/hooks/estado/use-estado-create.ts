@@ -1,7 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { CreateEstadoDTO } from "@/core/domain/dtos/estado.dto";
-
 import {
 	createEstadoOptions,
 	getEstadoBaseQueryKey,
@@ -21,10 +20,8 @@ export function useEstadoCreate() {
 					queryClient.invalidateQueries({
 						queryKey: [...getEstadoBaseQueryKey(), "listarEstados"],
 					});
-
 				},
-				onError: () => {
-				},
+				onError: () => {},
 			}
 		);
 	return {
@@ -32,5 +29,5 @@ export function useEstadoCreate() {
 		isLoading: mutation.isPending,
 		error: mutation.error,
 		isSucess: mutation.isSuccess,
-	}
+	};
 }
