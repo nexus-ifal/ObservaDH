@@ -13,7 +13,7 @@ const sideBarOptions = [
 	{ title: "Ideologia", path: "/admin/dados/ideologia" },
 	{ title: "Partido", path: "/admin/dados/partido" },
 	{ title: "Pauta", path: "/admin/dados/pauta" },
-	{ title: "Parlamentar", path: "/admin/dados/parlamentar" },
+	{ title: "Parlamentar", path: "/admin/dados/politico" },
 	{ title: "Profissão", path: "/admin/dados/profissao" },
 	{ title: "Projeto", path: "/admin/dados/projeto" },
 ];

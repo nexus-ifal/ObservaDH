@@ -5,8 +5,8 @@ import { listarEstadoOptions } from "@/infra/options/estado";
 export const useEstado = () => {
 	const {
 		data: estados,
-		isLoading: isLoadingEstado,
+		isLoading: isLoadingEstados,
 		error: error,
 	} = useQuery(listarEstadoOptions());
-	return { estados, isLoadingEstado, error };
+	return { estados, isLoadingEstados, error };
 };

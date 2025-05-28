@@ -5,8 +5,8 @@ import { listarPartidosOptions } from "@/infra/options/partido";
 export const usePartido = () => {
 	const {
 		data: partidos,
-		isLoading: isLoadingPartido,
+		isLoading: isLoadingPartidos,
 		error: error,
 	} = useQuery(listarPartidosOptions());
-	return { partidos, isLoadingPartido, error };
+	return { partidos, isLoadingPartidos, error };
 };
