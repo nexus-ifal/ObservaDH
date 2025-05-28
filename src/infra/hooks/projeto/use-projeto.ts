@@ -5,8 +5,8 @@ import { listarProjetosOptions } from "./../../options/projeto";
 export const useProjeto = () => {
 	const {
 		data: projetos,
-		isLoading: isLoadingProjeto,
+		isLoading: isLoadingProjetos,
 		error,
 	} = useQuery(listarProjetosOptions());
-	return { projetos, isLoadingProjeto, error };
+	return { projetos, isLoadingProjetos, error };
 };

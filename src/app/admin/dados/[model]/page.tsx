@@ -1,8 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 "use client";
 import { ScaleLoader } from "react-spinners";
 import { useParams } from "next/navigation";
 
 import AdminNavBar from "@/components/ui/layouts/admin-nav-bar";
+
 import { useDireitoViolado } from "@/infra/hooks/direito-violado/use-direito-violado";
 import { useEstado } from "@/infra/hooks/estado/use-estado";
 import { useIdeologia } from "@/infra/hooks/ideologia/use-ideologia";
@@ -10,6 +13,7 @@ import { usePartido } from "@/infra/hooks/partido/use-partido";
 import { usePauta } from "@/infra/hooks/pauta/use-pauta";
 import { usePolitico } from "@/infra/hooks/politico/use-politico";
 import { useProfissao } from "@/infra/hooks/profissao/use-profissao";
+import { useProjeto } from "@/infra/hooks/projeto/use-projeto";
 
 const modelconfiguracao = {
 	estado: {
@@ -67,6 +71,15 @@ const modelconfiguracao = {
 		colunas: [
 			{ key: "nome", label: "Nome" },
 			{ key: "genero", label: "Gênero" },
+		],
+	},
+	projeto: {
+		hook: useProjeto,
+		dataKey: "projetos",
+		loadingKey: "isLoadingProjetos",
+		colunas: [
+			{ key: "numeroPl", label: "Número do PL" },
+			{ key: "ano", label: "ano" },
 		],
 	},
 };
