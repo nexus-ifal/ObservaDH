@@ -1,9 +1,12 @@
 import MainAdminLayout from "@/components/ui/layouts/main-admin-layout";
+import QueryProvider from "@/components/ui/layouts/query-provider";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
 	return (
 		<MainAdminLayout>
-			<div className="h-full w-full">{children}</div>
+			<div className="h-full w-full py-20 px-12">
+				<QueryProvider>{children}</QueryProvider>
+			</div>
 		</MainAdminLayout>
 	);
 }
