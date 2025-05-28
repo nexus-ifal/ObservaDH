@@ -8,7 +8,6 @@ import { atualizarUserSchema } from "@/schemas/user-zod-schema";
 
 export async function DELETE(
 	request: NextRequest,
-	_request: Request,
 	context: { params: Promise<{ id: string }> }
 ) {
 	const params = await context.params;
@@ -89,7 +88,7 @@ export async function PATCH(
 	const { id } = params;
 	const dadosEntrada = await request.json();
 	const dadosValidados = atualizarUserSchema.parse(dadosEntrada);
-	const { name, email, passwordHash } = dadosValidados;
+	const { name, email, password, role } = dadosValidados;
 
 	if (!id) {
 		const respostaApi = new RespostaApi({
@@ -108,7 +107,8 @@ export async function PATCH(
 			id: id,
 			name: name,
 			email: email,
-			passwordHash: passwordHash,
+			passwordHash: password,
+			role: role,
 		});
 
 		return NextResponse.json(resposta, {

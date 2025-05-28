@@ -1,10 +1,11 @@
 import { PrismaAdapter } from "@auth/prisma-adapter";
+import { Role } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { z } from "zod";
 
-import { userLoginSchema } from "./schemas/user-zod-schema";
+import { userLoginSchema } from "../../../../schemas/user-zod-schema";
 
 import { prismaClient } from "@/services/prisma/prisma";
 
@@ -32,7 +33,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
 				try {
 					const credenciaisValidadas = userLoginSchema.parse(credentials);
-					const { email, passwordHash } = credenciaisValidadas;
+					const { email, password } = credenciaisValidadas;
 
 					const user = await prismaClient.user.findUnique({
 						where: { email },
@@ -43,10 +44,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 						return null;
 					}
 
-					const senhaValida = await bcrypt.compare(
-						passwordHash,
-						user.passwordHash
-					);
+					const senhaValida = await bcrypt.compare(password, user.passwordHash);
 
 					if (!senhaValida) {
 						console.log("A senha é inválida");
@@ -54,6 +52,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 					}
 
 					return {
+						id: user.id,
 						name: user.name,
 						email: user.email,
 						role: user.role,
@@ -84,13 +83,17 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 			if (user) {
 				token.name = user.name;
 				token.email = user.email;
+				token.id = user.id;
+				token.role = user.role;
 			}
 			return token;
 		},
 		async session({ session, token }) {
-			if (token) {
+			if (token && session.user) {
 				session.user.name = token.name as string;
 				session.user.email = token.email as string;
+				session.user.id = token.id as string;
+				session.user.role = token.role as Role;
 			}
 			return session;
 		},
