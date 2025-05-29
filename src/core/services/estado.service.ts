@@ -25,7 +25,7 @@ class EstadoService implements EstadoUseCase {
 	}
 
 	excluir(id: string): Promise<ResponseEstadoDTO> {
-		return this.adapter.excluir(id)
+		return this.adapter.excluir(id);
 	}
 }
 

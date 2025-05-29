@@ -26,7 +26,7 @@ class EstadoAPI implements EstadoRepository {
 		return dados;
 	}
 	async excluir(id: string): Promise<ResponseEstadoDTO> {
-		const response = await conexaoBackend.delete(`/estado/${id}`)
+		const response = await conexaoBackend.delete(`/estado/${id}`);
 		const dados = response.data.dados;
 		return dados;
 	}

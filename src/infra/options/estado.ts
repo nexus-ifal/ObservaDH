@@ -47,7 +47,6 @@ export const AtualizarEstadoOptions = () =>
 			usecase.atualizar(payload.id, payload.data),
 	});
 
-
 export interface APIExcluirEstadoPayload {
 	id: string;
 }
@@ -58,4 +57,4 @@ export const ExcluirEstadoOptions = () =>
 			payload,
 		}: MutationVariables<void, APIExcluirEstadoPayload>) =>
 			usecase.excluir(payload.id),
-	})
+	});
