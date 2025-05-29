@@ -1,7 +1,7 @@
 import { Role } from "@prisma/client";
 import { NextResponse } from "next/server";
 
-import { auth } from "@/app/api/auth/[...nextauth]/auth";
+import { auth } from "@/auth";
 import { RespostaApi } from "@/core/domain/models/resposta-api";
 import { CriarUserController } from "@/core/lib/api/controllers/user/criar-user-controller";
 import { ListarUsersController } from "@/core/lib/api/controllers/user/listar-user-controller";
