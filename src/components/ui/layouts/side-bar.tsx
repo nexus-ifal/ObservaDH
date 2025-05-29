@@ -24,8 +24,7 @@ const SideBar: React.FC = () => {
 	return (
 		<aside className="w-full h-full border-r-2 border-[#AFC4F9] text-white">
 			<div className="flex flex-col items-center h-full p-4 overflow-auto no-scrollbar gap-4">
-				<h2 className={`${oswald.className} text-7xl p-8`}>Dados</h2>
-
+				<Link href={"/admin/home"} className={`${oswald.className} text-7xl p-8`}>Dados</Link>
 				<nav className="flex flex-col items-center gap-4 w-full flex-1">
 					{sideBarOptions.map(({ title, path }) => (
 						<SideBarButton

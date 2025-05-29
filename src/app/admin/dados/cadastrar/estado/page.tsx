@@ -81,7 +81,7 @@ const Page: React.FC = () => {
 	}
 
 	return (
-		<div className="min-h-screen text-white p-8 flex flex-col gap-8">
+		<div className="text-white p-8 flex flex-col gap-8">
 			<nav>
 				<h1 className={`text-7xl text-white ${oswald.className}`}>
 					Cadastro: Estado
