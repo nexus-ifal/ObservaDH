@@ -2,13 +2,13 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { CreateEstadoDTO } from "@/core/domain/dtos/estado.dto";
 import {
-	createEstadoOptions,
+	CriarEstadoOptions,
 	getEstadoBaseQueryKey,
 } from "@/infra/options/estado";
 
 export function useEstadoCreate() {
 	const queryClient = useQueryClient();
-	const mutation = useMutation(createEstadoOptions());
+	const mutation = useMutation(CriarEstadoOptions());
 
 	const createEstado = (estadoData: CreateEstadoDTO) =>
 		mutation.mutate(
