@@ -1,5 +1,6 @@
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+
 import { AtualizarEstadoOptions } from "@/infra/options/estado";
-import { useMutation, useQueryClient } from "@tanstack/react-query"
 
 export const useEstadoAtualizar = () => {
 	const queryClient = useQueryClient();
@@ -7,14 +8,14 @@ export const useEstadoAtualizar = () => {
 		...AtualizarEstadoOptions(),
 		onSuccess: () => {
 			queryClient.invalidateQueries({
-				queryKey: ["estado"]
+				queryKey: ["estado"],
 			});
-		}
+		},
 	});
 	return {
 		atualizarEstado: mutateAsync,
 		isUpdatingEstado: isPending,
 		hasAtualizarEstadoError: isError,
-		hasAtualizarEstadoSucess: isSuccess
-	}
-}
+		hasAtualizarEstadoSucess: isSuccess,
+	};
+};

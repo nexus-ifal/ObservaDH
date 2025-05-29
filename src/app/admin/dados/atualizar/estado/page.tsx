@@ -1,26 +1,12 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
-import { useEstado } from "@/infra/hooks/estado/use-estado";
+import { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-
-import { Input } from "@/components/ui-shacnui/input";
-import { Button } from "@/components/ui-shacnui/button";
-import {
-	Form,
-	FormField,
-	FormItem,
-	FormLabel,
-	FormControl,
-	FormMessage,
-} from "@/components/ui-shacnui/form";
-import { oswald } from "@/core/lib/fonts/fonts";
-import { ScaleLoader } from "react-spinners";
 import { FaTrash } from "react-icons/fa6";
-import { useEstadoAtualizar } from "@/infra/hooks/estado/use-estado-update";
-import { APIAtualizarEstadoPayload } from "@/infra/options/estado";
+import { ScaleLoader } from "react-spinners";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+
 import {
 	AlertDialog,
 	AlertDialogAction,
@@ -28,6 +14,21 @@ import {
 	AlertDialogHeader,
 	AlertDialogTitle,
 } from "@/components/ui-shacnui/alert-dialog";
+import { Button } from "@/components/ui-shacnui/button";
+import {
+	Form,
+	FormControl,
+	FormField,
+	FormItem,
+	FormLabel,
+	FormMessage,
+} from "@/components/ui-shacnui/form";
+import { Input } from "@/components/ui-shacnui/input";
+
+import { oswald } from "@/core/lib/fonts/fonts";
+import { useEstado } from "@/infra/hooks/estado/use-estado";
+import { useEstadoAtualizar } from "@/infra/hooks/estado/use-estado-update";
+import { APIAtualizarEstadoPayload } from "@/infra/options/estado";
 
 const formSchema = z.object({
 	nome: z.string().min(1, { message: "Entrada obrigatória!" }),
@@ -88,6 +89,7 @@ const Page: React.FC = () => {
 		hasAtualizarEstadoError,
 		isUpdatingEstado,
 	} = useEstadoAtualizar();
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	const [selectedEstado, setSelectedEstado] = useState<any>(null);
 	const [isOpenList, setIsOpenList] = useState(false);
 	const [searchTerm, setSearchTerm] = useState("");
@@ -106,7 +108,7 @@ const Page: React.FC = () => {
 			setSelectedEstado(null);
 			setTimeout(() => setShowSuccess(false), 4000);
 		}
-	}, [hasAtualizarEstadoSucess]);
+	}, [hasAtualizarEstadoSucess, form]);
 
 	useEffect(() => {
 		if (hasAtualizarEstadoError) {

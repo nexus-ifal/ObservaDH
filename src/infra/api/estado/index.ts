@@ -17,7 +17,10 @@ class EstadoAPI implements EstadoRepository {
 		const dados = response.data.resposta.dados;
 		return dados;
 	}
-	async atualizar(id: string, estado: UpdateEstadoDTO): Promise<ResponseEstadoDTO> {
+	async atualizar(
+		id: string,
+		estado: UpdateEstadoDTO
+	): Promise<ResponseEstadoDTO> {
 		const response = await conexaoBackend.patch(`/estado/${id}`, estado);
 		const dados = response.data.dados;
 		return dados;
