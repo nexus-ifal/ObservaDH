@@ -46,3 +46,16 @@ export const AtualizarEstadoOptions = () =>
 		}: MutationVariables<void, APIAtualizarEstadoPayload>) =>
 			usecase.atualizar(payload.id, payload.data),
 	});
+
+
+export interface APIExcluirEstadoPayload {
+	id: string;
+}
+export const ExcluirEstadoOptions = () =>
+	mutationOptions({
+		mutationKey: [...getEstadoBaseQueryKey(), "excluirEstado"],
+		mutationFn: ({
+			payload,
+		}: MutationVariables<void, APIExcluirEstadoPayload>) =>
+			usecase.excluir(payload.id),
+	})

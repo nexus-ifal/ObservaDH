@@ -23,6 +23,10 @@ class EstadoService implements EstadoUseCase {
 	atualizar(id: string, estado: UpdateEstadoDTO): Promise<ResponseEstadoDTO> {
 		return this.adapter.atualizar(id, estado);
 	}
+
+	excluir(id: string): Promise<ResponseEstadoDTO> {
+		return this.adapter.excluir(id)
+	}
 }
 
 export default EstadoService;
