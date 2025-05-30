@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 
-import LoginForm from "@/components/ui/login-form";
+import LoginForm from "@/components/ui/formularios/login-form";
 
 const page: React.FC = () => {
 	return (

@@ -14,7 +14,7 @@ const ROTAS_PUBLICAS = [
 ];
 
 const ROTAS_ADIMIN = ["/cadastro-usuario"];
-const ROTAS_USER = ["/"]; //TODO: adicionar as rotas de user
+const ROTAS_USER = ["/home"]; //TODO: adicionar as rotas de user
 
 export default auth((req) => {
 	const { nextUrl } = req;
