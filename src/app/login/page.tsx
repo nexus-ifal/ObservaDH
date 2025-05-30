@@ -1,12 +1,24 @@
-import { redirect } from "next/navigation";
+import { Suspense } from "react";
 
-import { auth } from "../../../auth";
+import LoginForm from "@/components/ui/login-form";
+
+//import AcmeLogo from "@/app/ui/acme-logo";
 
 const page: React.FC = async () => {
-	const session = await auth();
-	if (session) redirect("/");
-
-	return <div>{/* formulario de login */}</div>;
+	return (
+		<main className="flex items-center justify-center md:h-screen">
+			<div className="relative mx-auto flex w-full max-w-[400px] flex-col space-y-2.5 p-4 md:-mt-32">
+				<div className="flex h-20 w-full items-end rounded-lg bg-blue-500 p-3 md:h-36">
+					<div className="w-32 text-white md:w-36">
+						<h3>não sei</h3>
+					</div>
+				</div>
+				<Suspense>
+					<LoginForm />
+				</Suspense>
+			</div>
+		</main>
+	);
 };
 
 export default page;

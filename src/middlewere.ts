@@ -28,6 +28,7 @@ export default auth((req) => {
 
 	if (!autenticado && !rotaPublica) {
 		const redirecione = new URL("/login", nextUrl.origin);
+		redirecione.searchParams.set("callbackUrl", nextUrl.pathname);
 		return NextResponse.redirect(redirecione);
 	}
 
