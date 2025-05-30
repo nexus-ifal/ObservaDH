@@ -1,4 +1,4 @@
-const plugin = require('tailwindcss/plugin');
+import plugin from "tailwindcss/plugin";
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -27,15 +27,21 @@ module.exports = {
 		},
 	},
 	plugins: [
-		require('tailwindcss-animate'),
-		plugin(function ({ addUtilities }: { addUtilities: (utilities: Record<string, any>) => void }) {
+		// eslint-disable-next-line @typescript-eslint/no-require-imports
+		require("tailwindcss-animate"),
+		plugin(function ({
+			addUtilities,
+		}: {
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			addUtilities: (utilities: Record<string, any>) => void;
+		}) {
 			addUtilities({
-				'.no-scrollbar': {
-					'-ms-overflow-style': 'none',
-					'scrollbar-width': 'none',
+				".no-scrollbar": {
+					"-ms-overflow-style": "none",
+					"scrollbar-width": "none",
 				},
-				'.no-scrollbar::-webkit-scrollbar': {
-					display: 'none',
+				".no-scrollbar::-webkit-scrollbar": {
+					display: "none",
 				},
 			});
 		}),
