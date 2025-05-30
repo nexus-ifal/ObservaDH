@@ -4,21 +4,12 @@ import LoginForm from "@/components/ui/login-form";
 
 //import AcmeLogo from "@/app/ui/acme-logo";
 
-const page: React.FC = async () => {
+export default function loginPage() {
 	return (
-		<main className="flex items-center justify-center md:h-screen">
-			<div className="relative mx-auto flex w-full max-w-[400px] flex-col space-y-2.5 p-4 md:-mt-32">
-				<div className="flex h-20 w-full items-end rounded-lg bg-blue-500 p-3 md:h-36">
-					<div className="w-32 text-white md:w-36">
-						<h3>não sei</h3>
-					</div>
-				</div>
-				<Suspense>
-					<LoginForm />
-				</Suspense>
-			</div>
-		</main>
+		<div className="fundo-login flex items-center justify-center h-screen w-screen md:h-screen">
+			<Suspense>
+				<LoginForm />
+			</Suspense>
+		</div>
 	);
-};
-
-export default page;
+}

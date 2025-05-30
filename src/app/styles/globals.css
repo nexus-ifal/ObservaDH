@@ -119,7 +119,11 @@
 	color: white;
 }
 
-.login {
+.fundo-login {
 	background-color: #050b17;
 	background-size: cover;
+}
+
+.fundo-form {
+	background-color: #91adf4;
 }
