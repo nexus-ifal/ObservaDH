@@ -16,8 +16,12 @@
 	},
 	"dependencies": {
 		"@auth/prisma-adapter": "^2.9.1",
+		"@hookform/resolvers": "^5.0.1",
 		"@prisma/client": "^6.8.2",
 		"@radix-ui/react-alert-dialog": "^1.1.14",
+		"@radix-ui/react-dialog": "^1.1.14",
+		"@radix-ui/react-label": "^2.1.7",
+		"@radix-ui/react-popover": "^1.1.14",
 		"@radix-ui/react-select": "^2.2.5",
 		"@radix-ui/react-slot": "^1.2.3",
 		"@tanstack/react-query": "^5.77.0",

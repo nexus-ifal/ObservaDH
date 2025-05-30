@@ -28,6 +28,7 @@ export async function POST(request: NextRequest) {
 				sucesso: false,
 				mensagem: "Corpo da requisição inválido ou vazio",
 			});
+
 			return NextResponse.json(respostaNoBody, { status: 400 });
 		}
 
