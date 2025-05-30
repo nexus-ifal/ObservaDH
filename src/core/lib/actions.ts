@@ -2,7 +2,7 @@
 
 import { AuthError } from "next-auth";
 
-import { signIn } from "@/auth";
+import { signIn } from "../../../auth";
 
 export async function autenticar(
 	prevState: string | undefined,
