@@ -55,6 +55,7 @@
 	},
 	"devDependencies": {
 		"@tailwindcss/postcss": "^4.1.8",
+		"tailwindcss": "^4.1.8",
 		"@types/bcryptjs": "^2.4.6",
 		"@types/node": "^20",
 		"@types/react": "^18",

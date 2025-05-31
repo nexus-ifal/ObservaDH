@@ -1,5 +1,6 @@
 import { Role } from "@prisma/client";
 import { NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 
 import { auth } from "../../../../auth";
 
@@ -9,12 +10,12 @@ import { ListarUsersController } from "@/core/lib/api/controllers/user/listar-us
 import { criarUserSchema } from "@/schemas/user-zod-schema";
 import { prismaClient } from "@/services/prisma/prisma";
 
-const NUM_MAX_ADIMIN_USERS = parseInt(
-	process.env.NUM_MAX_ADIMIN_USERS || "3",
+const NUM_MAX_ADMIN_USERS = parseInt(
+	process.env.NUM_MAX_ADMIN_USERS || "3",
 	10
 );
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
 	const session = await auth();
 
 	if (!session) {
@@ -39,16 +40,16 @@ export async function POST(request: Request) {
 		const { name, email, password, role } = dadosValidados;
 
 		if (role === Role.ADMIN) {
-			const contarAdimins = await prismaClient.user.count({
+			const contarAdmins = await prismaClient.user.count({
 				where: {
 					role: Role.ADMIN,
 				},
 			});
 
-			if (contarAdimins >= NUM_MAX_ADIMIN_USERS) {
+			if (contarAdmins >= NUM_MAX_ADMIN_USERS) {
 				const respostaApi = new RespostaApi({
 					sucesso: false,
-					mensagem: `Limite de ${NUM_MAX_ADIMIN_USERS} máximmo de administradores atingido`,
+					mensagem: "Limite máximmo de administradores atingido",
 				});
 				return NextResponse.json(respostaApi, { status: 400 });
 			}

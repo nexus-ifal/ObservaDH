@@ -39,7 +39,7 @@ const Header: React.FC = () => {
 						</ul>
 					</div>
 				</div>
-				<span className="border-b-[1px] shadow-bottom shadow-white w-full" />
+				<span className="w-full border border-white shadow-white" />
 			</div>
 		</>
 	);

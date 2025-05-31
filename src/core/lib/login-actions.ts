@@ -24,7 +24,7 @@ export async function authenticate(
 	}
 
 	const { email, password } = camposValidados.data;
-	const redirectTo = (formData.get("redirectTo") as string) || "/dashboard";
+	const redirectTo = (formData.get("redirectTo") as string) || "/"; //TODO: adicionar rota certa
 
 	try {
 		await signIn("credentials", {
@@ -33,6 +33,10 @@ export async function authenticate(
 			redirectTo,
 		});
 	} catch (error) {
+		if (error instanceof Error && error.message.includes("NEXT_REDIRECT")) {
+			throw error;
+		}
+
 		if (error instanceof AuthError) {
 			switch (error.type) {
 				case "CredentialsSignin":
