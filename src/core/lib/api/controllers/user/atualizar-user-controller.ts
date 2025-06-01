@@ -1,3 +1,5 @@
+import { Role } from "@prisma/client";
+
 import { AtualizarUserService } from "../../service/user/atualizar-user-service";
 
 import { RespostaApi } from "@/core/domain/models/resposta-api";
@@ -26,14 +28,6 @@ export class AtualizarUserController {
 			return respostaApi;
 		}
 
-		const lowRole = role.toLowerCase();
-		if (lowRole !== "admin" && lowRole !== "user") {
-			return new RespostaApi({
-				sucesso: false,
-				mensagem: "O papel do usuário deve ser 'admin' ou 'user'",
-			});
-		}
-
 		const service = new AtualizarUserService();
 
 		const user = new User({
@@ -41,7 +35,7 @@ export class AtualizarUserController {
 			name: name,
 			email: email,
 			passwordHash: passwordHash,
-			role: role,
+			role: role as Role,
 		});
 
 		const resposta = await service.executar({ user: user });

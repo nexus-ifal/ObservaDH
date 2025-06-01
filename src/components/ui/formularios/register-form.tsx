@@ -8,7 +8,7 @@ import { oswald } from "@/core/lib/fonts/fonts";
 
 export default function RegisterForm() {
 	const searchParams = useSearchParams();
-	const callbackUrl = searchParams.get("callbackUrl") || "/admin-routes/home";
+	const callbackUrl = searchParams.get("callbackUrl") || "/user-routes/home";
 	const [errorMessage, formAction, isPending] = useActionState(
 		registerUser,
 		undefined

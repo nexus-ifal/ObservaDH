@@ -26,8 +26,6 @@ export async function authenticate(
 	}
 
 	const { email, password } = camposValidados.data;
-	//const redirectTo =
-	//(formData.get("redirectTo") as string) || "/user-routes/home"; //TODO: adicionar rota certa
 
 	try {
 		await signIn("credentials", {

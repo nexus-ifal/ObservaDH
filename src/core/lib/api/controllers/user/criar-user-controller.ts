@@ -1,3 +1,5 @@
+import { Role } from "@prisma/client";
+
 import { CriarUserService } from "../../service/user/criar-user-service";
 
 import { RespostaApi } from "@/core/domain/models/resposta-api";
@@ -25,7 +27,7 @@ export class CriarUserController {
 			name: name,
 			email: email,
 			passwordHash: passwordHash,
-			role: role,
+			role: role as Role,
 		});
 
 		const service = new CriarUserService();

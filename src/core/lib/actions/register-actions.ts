@@ -4,6 +4,8 @@ import axios from "axios";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 
+import { auth } from "../../../../auth";
+
 import { criarUserSchema } from "@/schemas/user-zod-schema";
 
 interface ApiResponse {
@@ -17,16 +19,17 @@ export async function registerUser(
 	prevState: string | undefined,
 	formData: FormData
 ): Promise<string | undefined> {
+	const session = await auth();
+
+	if (!session || !session.user) {
+		return "Usuário não autenticado";
+	}
+
 	const name = formData.get("name");
 	const email = formData.get("email");
 	const password = formData.get("password");
 	const role = formData.get("role");
 	const redirecione = (formData.get("redirectTo") as string) || "/";
-
-	console.log("Valor do role no Server Action:", role);
-	console.log("Valor do name no Server Action:", name);
-	console.log("Valor do email no Server Action:", email);
-	console.log("Valor do password no Server Action:", password);
 
 	const camposValidados = criarUserSchema.parse({
 		name,
@@ -36,7 +39,12 @@ export async function registerUser(
 	});
 	try {
 		const userApi = `${process.env.PUBLIC_BASE_URL}/api/user`;
-		const resposta = await axios.post<ApiResponse>(userApi, camposValidados, {
+		const dadosParaApi = {
+			...camposValidados,
+			roleUserDaSession: session.user.role,
+		};
+
+		const resposta = await axios.post<ApiResponse>(userApi, dadosParaApi, {
 			withCredentials: true,
 		});
 
