@@ -98,7 +98,18 @@ export async function GET(
 		if (idError) return idError;
 
 		const { id } = params;
+
+		if (!id) {
+			const respostaApi = new RespostaApi({
+				sucesso: false,
+				mensagem: "falta informação para atualizar o partido",
+			});
+
+			return NextResponse.json(respostaApi, { status: 400 });
+		}
+
 		const controller = new BuscarPartidoController();
+
 		const resposta = await controller.executar(id);
 
 		return NextResponse.json(resposta, {

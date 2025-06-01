@@ -1,4 +1,4 @@
-const plugin = require('tailwindcss/plugin');
+import plugin from "tailwindcss/plugin";
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -9,13 +9,6 @@ module.exports = {
 	],
 	theme: {
 		extend: {
-			colors: {
-				"layout-admin": "#050B17",
-			},
-			backgroundImage: {
-				"layout-principal":
-					"linear-gradient(135deg, #060C18 0%, #122144 49%, #1A326E 100%)",
-			},
 			boxShadow: {
 				bottom: "0 1px 4px 1px rgba(0, 0, 0, 0.1), 0 0 0 0 0  rgba(0, 0, 0, 0)",
 			},
@@ -27,15 +20,21 @@ module.exports = {
 		},
 	},
 	plugins: [
-		require('tailwindcss-animate'),
-		plugin(function ({ addUtilities }: { addUtilities: (utilities: Record<string, any>) => void }) {
+		// eslint-disable-next-line @typescript-eslint/no-require-imports
+		require("tailwindcss-animate"),
+		plugin(function ({
+			addUtilities,
+		}: {
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			addUtilities: (utilities: Record<string, any>) => void;
+		}) {
 			addUtilities({
-				'.no-scrollbar': {
-					'-ms-overflow-style': 'none',
-					'scrollbar-width': 'none',
+				".no-scrollbar": {
+					"-ms-overflow-style": "none",
+					"scrollbar-width": "none",
 				},
-				'.no-scrollbar::-webkit-scrollbar': {
-					display: 'none',
+				".no-scrollbar::-webkit-scrollbar": {
+					display: "none",
 				},
 			});
 		}),

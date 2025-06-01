@@ -4,10 +4,10 @@ import { RespostaApi } from "@/core/domain/models/resposta-api";
 import { AtualizarUserController } from "@/core/lib/api/controllers/user/atualizar-user-controller";
 import { BuscarUserController } from "@/core/lib/api/controllers/user/buscar-user-controller";
 import { DeletarUserController } from "@/core/lib/api/controllers/user/deletar-user-contoller";
+import { atualizarUserSchema } from "@/schemas/user-zod-schema";
 
 export async function DELETE(
 	request: NextRequest,
-	_request: Request,
 	context: { params: Promise<{ id: string }> }
 ) {
 	const params = await context.params;
@@ -29,15 +29,12 @@ export async function DELETE(
 		const resposta = await controller.executar({ id: id });
 
 		if (!resposta.sucesso) {
-			return NextResponse.json({ resposta }, { status: 400 });
+			return NextResponse.json(resposta, { status: 400 });
 		}
 
-		return NextResponse.json(
-			{ resposta },
-			{
-				status: resposta.sucesso ? 200 : 400,
-			}
-		);
+		return NextResponse.json(resposta, {
+			status: resposta.sucesso ? 200 : 400,
+		});
 	} catch (error) {
 		const respostaApi = new RespostaApi({
 			sucesso: false,
@@ -45,7 +42,7 @@ export async function DELETE(
 			dados: error,
 		});
 
-		return NextResponse.json({ respostaApi }, { status: 500 });
+		return NextResponse.json(respostaApi, { status: 500 });
 	}
 }
 
@@ -62,19 +59,16 @@ export async function GET(
 			mensagem: "O nome do usuário não foi informado",
 		});
 
-		return NextResponse.json({ resposta }, { status: 400 });
+		return NextResponse.json(resposta, { status: 400 });
 	}
 
 	try {
 		const controller = new BuscarUserController();
 		const resposta = await controller.executar({ name: name });
 
-		return NextResponse.json(
-			{ resposta },
-			{
-				status: resposta.sucesso ? 200 : 400,
-			}
-		);
+		return NextResponse.json(resposta, {
+			status: resposta.sucesso ? 200 : 400,
+		});
 	} catch (error) {
 		const resposta = new RespostaApi({
 			sucesso: false,
@@ -82,7 +76,7 @@ export async function GET(
 			dados: error,
 		});
 
-		return NextResponse.json({ resposta }, { status: 500 });
+		return NextResponse.json(resposta, { status: 500 });
 	}
 }
 
@@ -92,7 +86,9 @@ export async function PATCH(
 ) {
 	const params = await context.params;
 	const { id } = params;
-	const { name, email, passwordHash, role } = await request.json();
+	const dadosEntrada = await request.json();
+	const dadosValidados = atualizarUserSchema.parse(dadosEntrada);
+	const { name, email, password, role } = dadosValidados;
 
 	if (!id) {
 		const respostaApi = new RespostaApi({
@@ -111,16 +107,13 @@ export async function PATCH(
 			id: id,
 			name: name,
 			email: email,
-			passwordHash: passwordHash,
+			passwordHash: password,
 			role: role,
 		});
 
-		return NextResponse.json(
-			{ resposta },
-			{
-				status: resposta.sucesso ? 200 : 400,
-			}
-		);
+		return NextResponse.json(resposta, {
+			status: resposta.sucesso ? 200 : 400,
+		});
 	} catch (error) {
 		const respostaApi = new RespostaApi({
 			sucesso: false,
@@ -128,6 +121,6 @@ export async function PATCH(
 			dados: error,
 		});
 
-		return NextResponse.json({ respostaApi }, { status: 500 });
+		return NextResponse.json(respostaApi, { status: 500 });
 	}
 }

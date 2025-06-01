@@ -1,3 +1,5 @@
+import { Role } from "@prisma/client";
+
 import { CriarUserService } from "../../service/user/criar-user-service";
 
 import { RespostaApi } from "@/core/domain/models/resposta-api";
@@ -21,18 +23,11 @@ export class CriarUserController {
 				mensagem: "Falta informação para a criação do usuário",
 			});
 		}
-		const lowRole = role.toLowerCase();
-		if (lowRole !== "admin" && lowRole !== "editor") {
-			return new RespostaApi({
-				sucesso: false,
-				mensagem: "O papel do usuário não existe",
-			});
-		}
 		const user = new User({
 			name: name,
 			email: email,
 			passwordHash: passwordHash,
-			role: role,
+			role: role as Role,
 		});
 
 		const service = new CriarUserService();
