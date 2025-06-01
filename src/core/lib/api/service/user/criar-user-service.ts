@@ -8,13 +8,12 @@ export class CriarUserService {
 	async executar({ user }: { user: User }) {
 		const prisma = prismaClient;
 		const passwordHash = await bcrypt.hash(user.passwordHash, 10);
-		const upperRole = user.role.toUpperCase();
 		const resposta = await prisma.user.create({
 			data: {
 				name: user.name,
 				email: user.email,
 				passwordHash: passwordHash,
-				role: upperRole as Role,
+				role: user.role as Role,
 			},
 		});
 		return resposta;

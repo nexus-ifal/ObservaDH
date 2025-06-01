@@ -13,8 +13,15 @@ const ROTAS_PUBLICAS = [
 	"/",
 ];
 
-const ROTAS_ADIMIN = ["/cadastro-usuario"];
-const ROTAS_USER = ["/home"]; //TODO: adicionar as rotas de user
+const ROTAS_ADIMIN = ["/user-routes/cadastro-usuario"];
+const ROTAS_USER = [
+	//TODO: adicionar TODAS as rotas de user
+	"/user-routes/home",
+	"/user-routes/dados/[model]",
+	"/user-routes/dados/atualizar/estado",
+	"/user-routes/dados/cadastrar/estado",
+	"/user-routes/dados/atualizar/estado",
+];
 
 export default auth((req) => {
 	const { nextUrl } = req;

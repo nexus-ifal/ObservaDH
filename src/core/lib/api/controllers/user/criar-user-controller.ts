@@ -21,13 +21,6 @@ export class CriarUserController {
 				mensagem: "Falta informação para a criação do usuário",
 			});
 		}
-		const lowRole = role.toLowerCase();
-		if (lowRole !== "admin" && lowRole !== "user") {
-			return new RespostaApi({
-				sucesso: false,
-				mensagem: "O papel do usuário deve ser 'admin' ou 'user'",
-			});
-		}
 		const user = new User({
 			name: name,
 			email: email,

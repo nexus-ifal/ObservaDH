@@ -3,12 +3,12 @@
 import { useActionState } from "react";
 import { useSearchParams } from "next/navigation";
 
+import { authenticate } from "@/core/lib/actions/login-actions";
 import { oswald } from "@/core/lib/fonts/fonts";
-import { authenticate } from "@/core/lib/login-actions";
 
 export default function LoginForm() {
 	const searchParams = useSearchParams();
-	const callbackUrl = searchParams.get("callbackUrl") || "/"; //TODO: adicionar rota certa
+	const callbackUrl = searchParams.get("callbackUrl") || "/user-routes/home"; //TODO: adicionar rota certa
 	const [errorMessage, formAction, isPending] = useActionState(
 		authenticate,
 		undefined
@@ -17,10 +17,10 @@ export default function LoginForm() {
 	return (
 		<form
 			action={formAction}
-			className="fundo-form flex flex-col p-12 w-fit h-fit rounded-[5px] border-[2px] border-[#1A326E] justify-start shadow-2xl shadow-[#2C52A4]/50"
+			className="fundo-form flex flex-col p-8 w-fit h-fit rounded-[5px] border-[2px] border-[#1A326E] justify-start shadow-2xl shadow-[#2C52A4]/50"
 		>
 			<div className="overflow-auto no-scrollbar flex flex-col gap-8">
-				<h1 className={`${oswald.className} text-[70px] text-[#122144]`}>
+				<h1 className={`${oswald.className} text-[45px] text-[#122144]`}>
 					Login
 				</h1>
 				<div className="flex flex-col gap-6">
@@ -33,7 +33,7 @@ export default function LoginForm() {
 						</label>
 						<div className="relative">
 							<input
-								className="bg-white w-[400px] h-[48px] rounded-[5px] border-[2px] border-[#3E3E3E] py-[8px] pl-[4px] text-sm placeholder:text-gray-500"
+								className="bg-white w-[400px] h-[40px] rounded-[5px] border-[2px] border-[#3E3E3E] py-[8px] pl-[4px] text-sm placeholder:text-gray-500"
 								id="email"
 								type="email"
 								name="email"
@@ -51,7 +51,7 @@ export default function LoginForm() {
 						</label>
 						<div className="relative">
 							<input
-								className="bg-white w-[400px] h-[48px] rounded-[5px] border-[2px] border-[#3E3E3E] py-[8px] pl-[4px] text-sm placeholder:text-gray-500 flex justify-start"
+								className="bg-white w-[400px] h-[40px] rounded-[5px] border-[2px] border-[#3E3E3E] py-[8px] pl-[4px] text-sm placeholder:text-gray-500 flex justify-start"
 								id="password"
 								type="password"
 								name="password"

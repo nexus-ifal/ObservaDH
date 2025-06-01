@@ -1,9 +1,11 @@
 "use server";
 
+import { Role } from "@prisma/client";
+import { redirect } from "next/navigation";
 import { AuthError } from "next-auth";
 import { ZodError } from "zod";
 
-import { signIn } from "../../../auth";
+import { auth, signIn } from "../../../../auth";
 
 import { userLoginSchema } from "@/schemas/user-zod-schema";
 
@@ -24,14 +26,30 @@ export async function authenticate(
 	}
 
 	const { email, password } = camposValidados.data;
-	const redirectTo = (formData.get("redirectTo") as string) || "/"; //TODO: adicionar rota certa
+	//const redirectTo =
+	//(formData.get("redirectTo") as string) || "/user-routes/home"; //TODO: adicionar rota certa
 
 	try {
 		await signIn("credentials", {
 			email,
 			password,
-			redirectTo,
+			redirect: false,
 		});
+		const session = await auth();
+
+		if (!session) {
+			console.error("Usuário não autenticado");
+			return "Usuário não autenticado";
+		}
+
+		if (session.user.role == Role.ADMIN) {
+			redirect("/admin-routes/home");
+		} else if (session.user.role == Role.EDITOR) {
+			redirect("/user-routes/home");
+		} else {
+			console.error("Usuário sem permissão de acesso");
+			return "Usuário sem permissão de acesso";
+		}
 	} catch (error) {
 		if (error instanceof Error && error.message.includes("NEXT_REDIRECT")) {
 			throw error;
@@ -50,6 +68,6 @@ export async function authenticate(
 			return mensagensDeErro.join(", ");
 		}
 		console.error("Erro no login: ", error);
-		return "Falha ao fazer login. Tente novamente mais tarde.";
+		return "Falha ao fazer login. Tente novamente mais tarde";
 	}
 }
