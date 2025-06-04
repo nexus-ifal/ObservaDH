@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { listarPautasOptions } from "@/infra/options/pauta";
+import { listarPautaOptions } from "@/infra/options/pauta";
 
 export const usePauta = () => {
 	const {
 		data: pautas,
 		isLoading: isLoadingPautas,
 		error,
-	} = useQuery(listarPautasOptions());
+	} = useQuery(listarPautaOptions());
 	return { pautas, isLoadingPautas, error };
 };
