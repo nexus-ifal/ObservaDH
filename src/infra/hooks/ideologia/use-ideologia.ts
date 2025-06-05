@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { listarIdeologiasOptions } from "@/infra/options/ideologia";
+import { listarIdeologiaOptions } from "@/infra/options/ideologia";
 
 export const useIdeologia = () => {
 	const {
 		data: ideologias,
 		isLoading: isLoadingIdeologias,
 		error: error,
-	} = useQuery(listarIdeologiasOptions());
+	} = useQuery(listarIdeologiaOptions());
 	return { ideologias, isLoadingIdeologias, error };
 };
