@@ -1,7 +1,19 @@
-import { ResponseDireitoVioladoDTO } from "../../domain/dtos/direito-violado.dto";
+import {
+	CreateDireitoVioladoDTO,
+	ResponseDireitoVioladoDTO,
+	UpdateDireitoVioladoDTO,
+} from "@/core/domain/dtos/direito-violado.dto";
 
-interface DireitoVioladosUseCase {
+interface DireitoVioladoUseCase {
 	listar(): Promise<ResponseDireitoVioladoDTO[]>;
+	criar(
+		direitoViolado: CreateDireitoVioladoDTO
+	): Promise<ResponseDireitoVioladoDTO>;
+	atualizar(
+		id: string,
+		direitoViolado: UpdateDireitoVioladoDTO
+	): Promise<ResponseDireitoVioladoDTO>;
+	excluir(id: string): Promise<ResponseDireitoVioladoDTO>;
 }
 
-export default DireitoVioladosUseCase;
+export default DireitoVioladoUseCase;

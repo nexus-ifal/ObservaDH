@@ -1,8 +1,12 @@
-import { ResponseDireitoVioladoDTO } from "../domain/dtos/direito-violado.dto";
+import {
+	CreateDireitoVioladoDTO,
+	ResponseDireitoVioladoDTO,
+	UpdateDireitoVioladoDTO,
+} from "../domain/dtos/direito-violado.dto";
 import { DireitoVioladoRepository } from "../interfaces/repository/direito-violado.repository";
-import DireitoVioladosUseCase from "../interfaces/usecase/direito-violado.usecase";
+import DireitoVioladoUseCase from "../interfaces/usecase/direito-violado.usecase";
 
-class DireitoVioladoService implements DireitoVioladosUseCase {
+class DireitoVioladoService implements DireitoVioladoUseCase {
 	protected readonly adapter: DireitoVioladoRepository;
 
 	constructor(adapter: DireitoVioladoRepository) {
@@ -11,6 +15,22 @@ class DireitoVioladoService implements DireitoVioladosUseCase {
 
 	listar(): Promise<ResponseDireitoVioladoDTO[]> {
 		return this.adapter.listar();
+	}
+
+	criar(
+		direitoViolado: CreateDireitoVioladoDTO
+	): Promise<ResponseDireitoVioladoDTO> {
+		return this.adapter.criar(direitoViolado);
+	}
+	atualizar(
+		id: string,
+		direitoViolado: UpdateDireitoVioladoDTO
+	): Promise<ResponseDireitoVioladoDTO> {
+		return this.adapter.atualizar(id, direitoViolado);
+	}
+
+	excluir(id: string): Promise<ResponseDireitoVioladoDTO> {
+		return this.adapter.excluir(id);
 	}
 }
 

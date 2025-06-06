@@ -15,7 +15,7 @@ export function usePautaCreate() {
 			{
 				onSuccess: () => {
 					queryClient.invalidateQueries({
-						queryKey: [...getPautaBaseQueryKey(), "listarPautas"],
+						queryKey: [...getPautaBaseQueryKey(), "listarPauta"],
 					});
 				},
 				onError: () => {},
