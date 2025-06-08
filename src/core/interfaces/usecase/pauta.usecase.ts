@@ -6,8 +6,8 @@ import {
 
 interface PautaUseCase {
 	listar(): Promise<ResponsePautaDTO[]>;
-	criar(Pauta: CreatePautaDTO): Promise<ResponsePautaDTO>;
-	atualizar(id: string, Pauta: UpdatePautaDTO): Promise<ResponsePautaDTO>;
+	criar(pauta: CreatePautaDTO): Promise<ResponsePautaDTO>;
+	atualizar(id: string, pauta: UpdatePautaDTO): Promise<ResponsePautaDTO>;
 	excluir(id: string): Promise<ResponsePautaDTO>;
 }
 

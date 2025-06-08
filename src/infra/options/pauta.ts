@@ -13,7 +13,7 @@ export const getPautaBaseQueryKey = () => ["pauta"];
 
 export const listarPautaOptions = () =>
 	queryOptions({
-		queryKey: [...getPautaBaseQueryKey(), "listarPautas"],
+		queryKey: [...getPautaBaseQueryKey(), "listarPauta"],
 		queryFn: () => usecase.listar(),
 	});
 
