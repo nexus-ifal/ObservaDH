@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { listarPartidosOptions } from "@/infra/options/partido";
+import { listarPartidoOptions } from "@/infra/options/partido";
 
 export const usePartido = () => {
 	const {
 		data: partidos,
 		isLoading: isLoadingPartidos,
 		error: error,
-	} = useQuery(listarPartidosOptions());
+	} = useQuery(listarPartidoOptions());
 	return { partidos, isLoadingPartidos, error };
 };
