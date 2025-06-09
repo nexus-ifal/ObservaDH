@@ -9,7 +9,8 @@ import { conexaoBackend } from "@/infra/services/conexao-backend/client";
 class DireitoVioladoAPI implements DireitoVioladoRepository {
 	async listar(): Promise<ResponseDireitoVioladoDTO[]> {
 		const response = await conexaoBackend.get("/direito-violado");
-		const dados = response.data.resposta.dados;
+		const dados = response.data.dados;
+		console.log(dados);
 		return dados;
 	}
 	async criar(
@@ -19,7 +20,7 @@ class DireitoVioladoAPI implements DireitoVioladoRepository {
 			"/direito-violado",
 			direitoViolado
 		);
-		const dados = response.data.resposta.dados;
+		const dados = response.data.dados;
 		return dados;
 	}
 	async atualizar(

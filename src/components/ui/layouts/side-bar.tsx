@@ -8,14 +8,14 @@ import { usePathname } from "next/navigation";
 import { oswald, titilliumWeb } from "@/core/lib/fonts/fonts";
 
 const sideBarOptions = [
-	{ title: "Direito Violado", path: "/admin/dados/direito-violado" },
-	{ title: "Estado", path: "/admin/dados/estado" },
-	{ title: "Ideologia", path: "/admin/dados/ideologia" },
-	{ title: "Partido", path: "/admin/dados/partido" },
-	{ title: "Pauta", path: "/admin/dados/pauta" },
-	{ title: "Parlamentar", path: "/admin/dados/politico" },
-	{ title: "Profissão", path: "/admin/dados/profissao" },
-	{ title: "Projeto", path: "/admin/dados/projeto" },
+	{ title: "Direito Violado", path: "/user-routes/dados/direito-violado" },
+	{ title: "Estado", path: "/user-routes/dados/estado" },
+	{ title: "Ideologia", path: "/user-routes/dados/ideologia" },
+	{ title: "Partido", path: "/user-routes/dados/partido" },
+	{ title: "Pauta", path: "/user-routes/dados/pauta" },
+	{ title: "Parlamentar", path: "/user-routes/dados/politico" },
+	{ title: "Profissão", path: "/user-routes/dados/profissao" },
+	{ title: "Projeto", path: "/user-routes/dados/projeto" },
 ];
 
 const SideBar: React.FC = () => {

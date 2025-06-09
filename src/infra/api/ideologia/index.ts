@@ -9,12 +9,12 @@ import { conexaoBackend } from "@/infra/services/conexao-backend/client";
 class IdeologiaAPI implements IdeologiaRepository {
 	async listar(): Promise<ResponseIdeologiaDTO[]> {
 		const response = await conexaoBackend.get("/ideologia");
-		return response.data.resposta.dados;
+		return response.data.dados;
 	}
 
 	async criar(ideologia: CreateIdeologiaDTO): Promise<ResponseIdeologiaDTO> {
 		const response = await conexaoBackend.post("/ideologia", ideologia);
-		return response.data.resposta.dados;
+		return response.data.dados;
 	}
 
 	async atualizar(
