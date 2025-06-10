@@ -13,7 +13,11 @@ const ROTAS_PUBLICAS = [
 	"/",
 ];
 
-const ROTAS_ADIMIN = ["/user-routes/cadastro-usuario"];
+const ROTAS_ADIMIN = [
+	"/admin-routes/cadastro-usuario",
+	"/admin-routes/home",
+	"/admin-routes/acoes-usuario",
+];
 const ROTAS_USER = [
 	//TODO: adicionar TODAS as rotas de user
 	"/user-routes/home",
