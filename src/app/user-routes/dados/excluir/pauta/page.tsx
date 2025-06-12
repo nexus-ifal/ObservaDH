@@ -74,7 +74,7 @@ const Page: React.FC = () => {
 
 	useEffect(() => {
 		if (hasExcluirPautaSuccess) {
-			setSelectedPauta("");
+			setSelectedPauta(null);
 			setShowSuccess(true);
 			setTimeout(() => setShowSuccess(false), 4000);
 		}
