@@ -10,15 +10,15 @@ const AdminNavbar: React.FC<AdminNavBarProps> = ({ model }) => {
 	const ACTIONS = [
 		{
 			title: "Cadastrar",
-			path: `/admin/dados/cadastrar/${model}`,
+			path: `/user-routes/dados/cadastrar/${model}`,
 		},
 		{
 			title: "Excluir",
-			path: `/admin/dados/excluir/${model}`,
+			path: `/user-routes/dados/excluir/${model}`,
 		},
 		{
 			title: "Atualizar",
-			path: `/admin/dados/atualizar/${model}`,
+			path: `/user-routes/dados/atualizar/${model}`,
 		},
 	];
 	return (
