@@ -39,10 +39,11 @@ const modelconfiguracao = {
 		dataKey: "partidos",
 		loadingKey: "isLoadingPartidos",
 		colunas: [
+			{ key: "imagem", label: "Imagem" },
 			{ key: "nome", label: "Nome" },
 			{ key: "sigla", label: "Sigla" },
 		],
-	},
+	},	
 	ideologia: {
 		hook: useIdeologia,
 		dataKey: "ideologias",
@@ -99,7 +100,7 @@ const Page: React.FC = () => {
 	const columns = configuracao.colunas;
 
 	return (
-		<div className="flex h-full w-full flex-col gap-14">
+		<div className="flex h-full w-full flex-col gap-14 pb-6">
 			<AdminNavBar model={model as string} />
 			<div className="overflow-auto no-scrollbar h-full">
 				<p className="text-[40px]">{model} existentes:</p>
@@ -135,14 +136,22 @@ const Page: React.FC = () => {
 								data.map((item: any, index: number) => (
 									<tr
 										key={item.id}
-										className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}
+										className={index % 2 === 0 ? "bg-white" : "bg-gray-300"}
 									>
 										{columns.map((column) => (
 											<td
 												key={column.key}
-												className="border-2 border-black px-4 py-3 text-lg font-normal"
+												className={`border-2 border-black px-4 py-3 text-lg font-normal ${model === "partido" && column.key === "imagem" ? "text-center" : ""}`}
 											>
-												{item[column.key]}
+												{model === "partido" && column.key === "imagem" && item[column.key] ? (
+													<img
+														src={item[column.key]}
+														alt={item.nome}
+														className="h-10 w-10 object-cover mx-auto rounded-full"
+													/>
+												) : (
+													item[column.key]
+												)}
 											</td>
 										))}
 									</tr>
@@ -151,9 +160,9 @@ const Page: React.FC = () => {
 								<tr className="bg-white">
 									<td
 										colSpan={columns.length}
-										className="border-2 border-black px-4 py-3 text-lg"
+										className="border-2 border-black px-4 py-3 text-lg font-normal text-center"
 									>
-										Nenhum {model} cadastrado.
+										Nenhum dado encontrado.
 									</td>
 								</tr>
 							)}
