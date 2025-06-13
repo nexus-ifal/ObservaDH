@@ -89,7 +89,7 @@ const Page: React.FC = () => {
 			<h1 className={`text-7xl ${oswald.className}`}>Exclusão: Profissão</h1>
 			{isLoadingProfissoes ? (
 				<div className="h-full w-full justify-center items-center text-white">
-					<ScaleLoader color="" />
+					<ScaleLoader color="#ffffff" />
 				</div>
 			) : (
 				<form
