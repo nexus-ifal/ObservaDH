@@ -43,8 +43,14 @@ export default auth((req) => {
 		return NextResponse.redirect(redirecione);
 	}
 
-	if (autenticado && nextUrl.pathname === "/login") {
-		return NextResponse.redirect(new URL("/", nextUrl.origin)); //TODO: adicionar a rota da pagina inicial do cadastro dos dados
+	if (autenticado && nextUrl.pathname === "/login" && userRole === "EDITOR") {
+		return NextResponse.redirect(new URL("/user-routes/home", nextUrl.origin));
+	} else if (
+		autenticado &&
+		nextUrl.pathname === "/login" &&
+		userRole === "ADMIN"
+	) {
+		return NextResponse.redirect(new URL("/admin-routes/home", nextUrl.origin));
 	}
 
 	if (autenticado) {

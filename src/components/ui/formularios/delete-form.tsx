@@ -3,15 +3,15 @@
 import { useActionState } from "react";
 import { useSearchParams } from "next/navigation";
 
-import { registerUser } from "@/core/lib/actions/register-actions";
+import { deleteUser } from "@/core/lib/actions/delete-actions";
 import { oswald } from "@/core/lib/fonts/fonts";
 
-export default function RegisterForm() {
+export default function DeleteForm() {
 	const searchParams = useSearchParams();
 	const callbackUrl =
 		searchParams.get("callbackUrl") || "/admin-routes/acoes-usuario";
 	const [errorMessage, formAction, isPending] = useActionState(
-		registerUser,
+		deleteUser,
 		undefined
 	);
 
@@ -22,7 +22,7 @@ export default function RegisterForm() {
 		>
 			<div className="overflow-auto no-scrollbar flex flex-col gap-6 items-center">
 				<h1 className={`${oswald.className} text-[45px] text-[#122144]`}>
-					Cadastro
+					Exclusão
 				</h1>
 				<div className="flex flex-col gap-4">
 					<div className="flex flex-col gap-2">
@@ -46,24 +46,6 @@ export default function RegisterForm() {
 					<div className="flex flex-col gap-2">
 						<label
 							className={`${oswald.className} text-[#122144] text-[20px] font-medium block`}
-							htmlFor="email"
-						>
-							Email
-						</label>
-						<div className="relative">
-							<input
-								className="w-[400px] h-[40px] bg-white rounded-[5px] border-[2px] border-[#3E3E3E] py-[8px] pl-[4px] text-sm placeholder:text-gray-500 flex justify-start"
-								id="email"
-								type="email"
-								name="email"
-								placeholder="Email do usuário"
-								required
-							/>
-						</div>
-					</div>
-					<div className="flex flex-col gap-2">
-						<label
-							className={`${oswald.className} text-[#122144] text-[20px] font-medium block`}
 							htmlFor="password"
 						>
 							Senha
@@ -74,29 +56,10 @@ export default function RegisterForm() {
 								id="password"
 								type="password"
 								name="password"
-								placeholder="Senha do usuário"
+								placeholder="Sua senha de login"
 								required
 								minLength={8}
 							/>
-						</div>
-					</div>
-					<div className="flex flex-col gap-2">
-						<label
-							className={`${oswald.className} text-[#122144] text-[20px] font-medium block`}
-							htmlFor="role"
-						>
-							Escolha a função do usuário:
-						</label>
-						<div className="relative">
-							<select
-								name="role"
-								id="role"
-								required
-								className="bg-white rounded-[5px] h-[40px] border-[2px] border-[#3E3E3E] py-[8px] pl-[4px] text-sm"
-							>
-								<option value="EDITOR">Editor</option>
-								<option value="ADMIN">Administrador</option>
-							</select>
 						</div>
 					</div>
 				</div>
