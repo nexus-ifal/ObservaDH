@@ -32,7 +32,6 @@ import { APIAtualizarProfissaoPayload } from "@/infra/options/profissao";
 
 const formSchema = z.object({
 	nome: z.string().min(1, { message: "Entrada obrigatória!" }),
-	// sigla removido
 });
 
 interface DialogProps {
