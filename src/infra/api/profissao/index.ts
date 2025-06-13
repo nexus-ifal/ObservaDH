@@ -24,13 +24,13 @@ class ProfissaoAPI implements ProfissaoRepository {
 		profissao: UpdateProfissaoDTO
 	): Promise<ResponseProfissaoDTO> {
 		const response = await conexaoBackend.patch(`/profissao/${id}`, profissao);
-		const dados = response.data.resposta.dados;
+		const dados = response.data.dados;
 		return dados;
 	}
 
 	async excluir(id: string): Promise<ResponseProfissaoDTO> {
 		const response = await conexaoBackend.delete(`/profissao/${id}`);
-		const dados = response.data.resposta.dados;
+		const dados = response.data.dados;
 		return dados;
 	}
 }

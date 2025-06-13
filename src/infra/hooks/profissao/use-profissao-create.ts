@@ -27,6 +27,6 @@ export function useProfissaoCreate() {
 		createProfissao,
 		isLoading: mutation.isPending,
 		error: mutation.error,
-		isSuccess: mutation.isSuccess,
+		isSucess: mutation.isSuccess,
 	};
 }
