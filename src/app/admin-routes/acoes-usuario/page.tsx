@@ -15,7 +15,7 @@ const page: React.FC = () => {
 					<Link href="/admin-routes/cadastro-usuario" passHref>
 						<BotaoAdminUser texto={"Cadastrar"} />
 					</Link>
-					<Link href="/user-routes/home" passHref>
+					<Link href="/admin-routes/exclusao-usuario" passHref>
 						<BotaoAdminUser texto="Excluir" />
 					</Link>
 					<Link href="/user-routes/home" passHref>

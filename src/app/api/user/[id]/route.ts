@@ -1,3 +1,4 @@
+import { Role } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
 import { RespostaApi } from "@/core/domain/models/resposta-api";
@@ -10,21 +11,30 @@ export async function DELETE(
 	request: NextRequest,
 	context: { params: Promise<{ id: string }> }
 ) {
-	const params = await context.params;
-	const { id } = params;
-
-	if (!id) {
-		const respostaApi = new RespostaApi({
-			sucesso: false,
-			mensagem: "Estão faltando informações para deletar o usuário",
-		});
-		return NextResponse.json({
-			respostaApi,
-			status: 400,
-		});
-	}
-
 	try {
+		const params = await context.params;
+		const { id } = params;
+		const body = await request.json();
+		const { roleUserDaSession } = body;
+
+		if (roleUserDaSession !== Role.ADMIN) {
+			const respostaApi = new RespostaApi({
+				sucesso: false,
+				mensagem: "Apenas administradores podem deletar usuários",
+			});
+			return NextResponse.json(respostaApi, { status: 403 });
+		}
+
+		if (!id) {
+			const respostaApi = new RespostaApi({
+				sucesso: false,
+				mensagem: "Estão faltando informações para deletar o usuário",
+			});
+			return NextResponse.json(respostaApi, {
+				status: 400,
+			});
+		}
+
 		const controller = new DeletarUserController();
 		const resposta = await controller.executar({ id: id });
 
@@ -48,15 +58,15 @@ export async function DELETE(
 
 export async function GET(
 	request: NextRequest,
-	context: { params: Promise<{ name: string }> }
+	context: { params: Promise<{ id: string }> }
 ) {
 	const params = await context.params;
-	const { name } = params;
+	const { id } = params;
 
-	if (!name) {
+	if (!id) {
 		const resposta = new RespostaApi({
 			sucesso: false,
-			mensagem: "O nome do usuário não foi informado",
+			mensagem: "O id do usuário não foi informado",
 		});
 
 		return NextResponse.json(resposta, { status: 400 });
@@ -64,7 +74,7 @@ export async function GET(
 
 	try {
 		const controller = new BuscarUserController();
-		const resposta = await controller.executar({ name: name });
+		const resposta = await controller.buscarPorId({ id: id });
 
 		return NextResponse.json(resposta, {
 			status: resposta.sucesso ? 200 : 400,

@@ -17,6 +17,7 @@ const ROTAS_ADIMIN = [
 	"/admin-routes/cadastro-usuario",
 	"/admin-routes/home",
 	"/admin-routes/acoes-usuario",
+	"/admin-routes/exclusao-usuario",
 ];
 const ROTAS_USER = [
 	//TODO: adicionar TODAS as rotas de user

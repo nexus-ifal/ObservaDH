@@ -1,9 +1,12 @@
 "use server";
 
 import axios from "axios";
+import bcrypt from "bcryptjs";
 import { redirect } from "next/navigation";
 
 import { auth } from "../../../../auth";
+
+import { prismaClient } from "@/services/prisma/prisma";
 
 interface ApiResponse {
 	sucesso: boolean;
@@ -18,44 +21,60 @@ export async function deleteUser(
 ): Promise<string | undefined> {
 	const session = await auth();
 
-	if (!session || !session.user) {
-		return "Usuário não autenticado";
+	if (!session?.user?.id) {
+		return "Sessão de usuário inválida ou não autenticada";
+	}
+	if (session.user.role !== "ADMIN") {
+		return "Você não tem permissão para realizar esta ação";
 	}
 
-	const name = formData.get("name");
-	const password = formData.get("password");
-	const redirecione = (formData.get("redirectTo") as string) || "/";
+	const idUserDelete = formData.get("idUserDelete") as string;
+	const senhaAdmin = formData.get("senha") as string;
+	const redirectTo = (formData.get("redirectTo") as string) || "/";
 
-	const dados = {
-		name,
-		password,
-	};
+	if (!idUserDelete || !senhaAdmin) {
+		return "Informações faltando para completar a exclusão.";
+	}
+
 	try {
-		const userApi = `${process.env.PUBLIC_BASE_URL}/api/user`;
-		const dadosParaApi = {
-			...dados,
-			roleUserDaSession: session.user.role,
-		};
+		const userAdmin = await prismaClient.user.findUnique({
+			where: { id: session.user.id },
+		});
 
-		const resposta = await axios.post<ApiResponse>(userApi, dadosParaApi, {
+		if (!userAdmin || !userAdmin.passwordHash) {
+			return "Não foi possível verificar a identidade do administrador";
+		}
+
+		const isSenhaCorreta = await bcrypt.compare(
+			senhaAdmin,
+			userAdmin.passwordHash
+		);
+
+		if (!isSenhaCorreta) {
+			return "Senha de administrador incorreta.";
+		}
+
+		const userApiUrl = `${process.env.PUBLIC_BASE_URL}/api/user/${idUserDelete}`;
+
+		const resposta = await axios.delete<ApiResponse>(userApiUrl, {
+			data: { roleUserDaSession: session.user.role },
 			withCredentials: true,
 		});
 
 		if (resposta.data.sucesso) {
-			redirect(redirecione);
+			redirect(redirectTo);
 		} else {
 			return resposta.data.mensagem;
 		}
 	} catch (error) {
 		if (axios.isAxiosError(error) && error.response) {
-			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			console.error("Erro da API:", (error as any).response.data);
+			console.error("Erro da API:", error.response.data);
 			return (
 				error.response.data.mensagem || "Ocorreu um erro ao deletar o usuário"
 			);
 		}
 
-		console.error("Erro inesperado:", error);
-		return "Ocorreu um erro inesperado ao deletar o usuário";
+		console.error("Erro inesperado na Server Action:", error);
+		return "Ocorreu um erro inesperado ao processar sua solicitação";
 	}
 }
