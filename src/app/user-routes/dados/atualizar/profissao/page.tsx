@@ -86,7 +86,9 @@ const Page: React.FC = () => {
 		id: string;
 		nome: string;
 	}
-	const [selectedProfissao, setSelectedProfissao] = useState<Profissao | null>(null);
+	const [selectedProfissao, setSelectedProfissao] = useState<Profissao | null>(
+		null
+	);
 	const [isOpenList, setIsOpenList] = useState(false);
 	const [searchTerm, setSearchTerm] = useState("");
 	const [showSuccess, setShowSuccess] = useState(false);
