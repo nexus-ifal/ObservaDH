@@ -82,8 +82,11 @@ const Page: React.FC = () => {
 		hasAtualizarProfissaoError,
 		hasAtualizarProfissaoSuccess,
 	} = useProfissaoAtualizar();
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const [selectedProfissao, setSelectedProfissao] = useState<any>(null);
+	interface Profissao {
+		id: string;
+		nome: string;
+	}
+	const [selectedProfissao, setSelectedProfissao] = useState<Profissao | null>(null);
 	const [isOpenList, setIsOpenList] = useState(false);
 	const [searchTerm, setSearchTerm] = useState("");
 	const [showSuccess, setShowSuccess] = useState(false);
