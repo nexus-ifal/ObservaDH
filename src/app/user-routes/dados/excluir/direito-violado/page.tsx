@@ -74,15 +74,23 @@ const Page: React.FC = () => {
 	};
 
 	useEffect(() => {
+		let successTimeout: NodeJS.Timeout | null = null;
+		let errorTimeout: NodeJS.Timeout | null = null;
+
 		if (hasExcluirDireitoVioladoSuccess) {
 			setSelectedDireito(null);
 			setShowSuccess(true);
-			setTimeout(() => setShowSuccess(false), 4000);
+			successTimeout = setTimeout(() => setShowSuccess(false), 4000);
 		}
 		if (hasExcluirDireitoVioladoError) {
 			setShowError(true);
-			setTimeout(() => setShowError(false), 4000);
+			errorTimeout = setTimeout(() => setShowError(false), 4000);
 		}
+
+		return () => {
+			if (successTimeout) clearTimeout(successTimeout);
+			if (errorTimeout) clearTimeout(errorTimeout);
+		};
 	}, [hasExcluirDireitoVioladoSuccess, hasExcluirDireitoVioladoError]);
 
 	return (
