@@ -8,7 +8,7 @@ import { oswald } from "@/core/lib/fonts/fonts";
 
 export default function LoginForm() {
 	const searchParams = useSearchParams();
-	const callbackUrl = searchParams.get("callbackUrl") || "/user-routes/home"; //TODO: adicionar rota certa
+	const callbackUrl = searchParams.get("callbackUrl") || "/user-routes/home";
 	const [errorMessage, formAction, isPending] = useActionState(
 		authenticate,
 		undefined

@@ -5,7 +5,6 @@ import { RespostaApi } from "@/core/domain/models/resposta-api";
 import { AtualizarUserController } from "@/core/lib/api/controllers/user/atualizar-user-controller";
 import { BuscarUserController } from "@/core/lib/api/controllers/user/buscar-user-controller";
 import { DeletarUserController } from "@/core/lib/api/controllers/user/deletar-user-contoller";
-import { atualizarUserSchema } from "@/schemas/user-zod-schema";
 
 export async function DELETE(
 	request: NextRequest,
@@ -96,9 +95,16 @@ export async function PATCH(
 ) {
 	const params = await context.params;
 	const { id } = params;
-	const dadosEntrada = await request.json();
-	const dadosValidados = atualizarUserSchema.parse(dadosEntrada);
-	const { name, email, password, role } = dadosValidados;
+	const body = await request.json();
+	const { name, email, password, role, roleUserDaSession } = body;
+
+	if (roleUserDaSession !== Role.ADMIN) {
+		const respostaApi = new RespostaApi({
+			sucesso: false,
+			mensagem: "Apenas administradores podem atualizar usuários",
+		});
+		return NextResponse.json(respostaApi, { status: 403 });
+	}
 
 	if (!id) {
 		const respostaApi = new RespostaApi({

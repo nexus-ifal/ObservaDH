@@ -19,10 +19,10 @@ export class AtualizarUserController {
 		passwordHash: string;
 		role: string;
 	}) {
-		if (!id || !name || !email || !passwordHash || !role) {
+		if (!id && !name && !email && !passwordHash && !role) {
 			const respostaApi = new RespostaApi({
 				sucesso: false,
-				mensagem: "Estão faltando informações para a atualização do usuário",
+				mensagem: "Pelo menos um campo deve ser fornecido para atualização",
 			});
 
 			return respostaApi;

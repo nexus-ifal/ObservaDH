@@ -18,10 +18,10 @@ const page: React.FC = () => {
 					<Link href="/admin-routes/exclusao-usuario" passHref>
 						<BotaoAdminUser texto="Excluir" />
 					</Link>
-					<Link href="/user-routes/home" passHref>
+					<Link href="/admin-routes/atualizar-usuario" passHref>
 						<BotaoAdminUser texto="Atualizar" />
 					</Link>
-					<Link href="/user-routes/home" passHref>
+					<Link href="/admin-routes/listar-usuarios" passHref>
 						<BotaoAdminUser texto="Visualizar" />
 					</Link>
 				</div>

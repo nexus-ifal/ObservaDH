@@ -30,10 +30,10 @@ export async function deleteUser(
 
 	const idUserDelete = formData.get("idUserDelete") as string;
 	const senhaAdmin = formData.get("senha") as string;
-	const redirectTo = (formData.get("redirectTo") as string) || "/";
+	const redirecione = (formData.get("redirectTo") as string) || "/";
 
 	if (!idUserDelete || !senhaAdmin) {
-		return "Informações faltando para completar a exclusão.";
+		return "Informações faltando para completar a exclusão";
 	}
 
 	try {
@@ -54,15 +54,15 @@ export async function deleteUser(
 			return "Senha de administrador incorreta.";
 		}
 
-		const userApiUrl = `${process.env.PUBLIC_BASE_URL}/api/user/${idUserDelete}`;
+		const userApi = `${process.env.PUBLIC_BASE_URL}/api/user/${idUserDelete}`;
 
-		const resposta = await axios.delete<ApiResponse>(userApiUrl, {
+		const resposta = await axios.delete<ApiResponse>(userApi, {
 			data: { roleUserDaSession: session.user.role },
 			withCredentials: true,
 		});
 
 		if (resposta.data.sucesso) {
-			redirect(redirectTo);
+			redirect(redirecione);
 		} else {
 			return resposta.data.mensagem;
 		}
