@@ -8,6 +8,9 @@ export interface CreateProjetoDTO {
 	esferaId: string;
 	numeroPl: string;
 	justificativa: string;
+	autoresId: string[];
+	ideologiasId: string[];
+	direitosVioladosId?: string[];
 }
 
 export const CreateProjetoSchema = z.object({

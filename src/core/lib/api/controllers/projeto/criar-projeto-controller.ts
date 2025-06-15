@@ -32,8 +32,17 @@ export class CriarProjetoController {
 
 	async executar(params: CreateProjetoDTO): Promise<RespostaApi> {
 		try {
-			const { ano, ementa, pautaId, esferaId, numeroPl, justificativa } =
-				params;
+			const {
+				ano,
+				ementa,
+				pautaId,
+				esferaId,
+				numeroPl,
+				justificativa,
+				ideologiasId,
+				autoresId,
+				direitosVioladosId,
+			} = params;
 
 			if (
 				!ano ||
@@ -41,8 +50,15 @@ export class CriarProjetoController {
 				!pautaId ||
 				!esferaId ||
 				!numeroPl ||
-				!justificativa
+				!justificativa ||
+				!ideologiasId ||
+				!autoresId ||
+				!direitosVioladosId
 			) {
+				console.log(
+					"Faltam informações obrigatórias para criar o projeto",
+					params
+				);
 				return new RespostaApi({
 					sucesso: false,
 					mensagem: "Faltam informações obrigatórias para criar o projeto",

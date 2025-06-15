@@ -23,10 +23,21 @@ export class CriarProjetoService implements ICriarProjetoService {
 					esferaId: params.esferaId,
 					numeroPl: params.numeroPl,
 					justificativa: params.justificativa,
-					direitosViolados: {},
-					ideologias: {},
+
+					ideologias: {
+						connect: params.ideologiasId.map((ideologiaId) => ({
+							id: ideologiaId,
+						})),
+					},
+					autores: {
+						connect: params.autoresId?.map((autorId) => ({ id: autorId })),
+					},
+					direitosViolados: {
+						connect: params.direitosVioladosId?.map((direitoId) => ({
+							id: direitoId,
+						})),
+					},
 					partidos: {},
-					autores: {},
 				},
 				select: {
 					id: true,

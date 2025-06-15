@@ -15,6 +15,7 @@ class ProjetoAPI implements ProjetoRepository {
 
 	async criar(projeto: CreateProjetoDTO): Promise<ResponseProjetoDTO> {
 		const response = await conexaoBackend.post("/projeto", projeto);
+		console.log(response.data);
 		const dados = response.data.dados;
 		return dados;
 	}
