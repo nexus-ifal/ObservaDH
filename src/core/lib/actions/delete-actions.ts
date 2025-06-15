@@ -67,6 +67,10 @@ export async function deleteUser(
 			return resposta.data.mensagem;
 		}
 	} catch (error) {
+		if (error instanceof Error && error.message.includes("NEXT_REDIRECT")) {
+			throw error;
+		}
+
 		if (axios.isAxiosError(error) && error.response) {
 			console.error("Erro da API:", error.response.data);
 			return (
