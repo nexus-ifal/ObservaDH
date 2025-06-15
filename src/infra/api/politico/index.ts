@@ -1,4 +1,8 @@
-import { ResponsePoliticoDTO } from "@/core/domain/dtos/politico.dto";
+import {
+	CreatePoliticoDTO,
+	ResponsePoliticoDTO,
+	UpdatePoliticoDTO,
+} from "@/core/domain/dtos/politico.dto";
 import { PoliticoRepository } from "@/core/interfaces/repository/politico.repository";
 import { conexaoBackend } from "@/infra/services/conexao-backend/client";
 
@@ -8,6 +12,23 @@ class PoliticoAPI implements PoliticoRepository {
 		const dados = response.data.dados;
 		return dados;
 	}
+	async criar(politico: CreatePoliticoDTO): Promise<ResponsePoliticoDTO> {
+		const response = await conexaoBackend.post("/politico", politico);
+		const dados = response.data.dados;
+		return dados;
+	}
+	async atualizar(
+		id: string,
+		politico: UpdatePoliticoDTO
+	): Promise<ResponsePoliticoDTO> {
+		const response = await conexaoBackend.patch(`/politico/${id}`, politico);
+		const dados = response.data.dados;
+		return dados;
+	}
+	async excluir(id: string): Promise<ResponsePoliticoDTO> {
+		const response = await conexaoBackend.delete(`/politico/${id}`);
+		const dados = response.data.dados;
+		return dados;
+	}
 }
-
 export default PoliticoAPI;

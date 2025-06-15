@@ -9,13 +9,13 @@ import { conexaoBackend } from "@/infra/services/conexao-backend/client";
 class ProjetoAPI implements ProjetoRepository {
 	async listar(): Promise<ResponseProjetoDTO[]> {
 		const response = await conexaoBackend.get("/projeto");
-		const dados = response.data.resposta.dados;
+		const dados = response.data.dados;
 		return dados;
 	}
 
 	async criar(projeto: CreateProjetoDTO): Promise<ResponseProjetoDTO> {
 		const response = await conexaoBackend.post("/projeto", projeto);
-		const dados = response.data.resposta.dados;
+		const dados = response.data.dados;
 		return dados;
 	}
 
