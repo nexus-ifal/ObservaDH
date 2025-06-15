@@ -6,7 +6,7 @@ export const usePartidoAtualizar = () => {
 	const queryClient = useQueryClient();
 	const { mutateAsync, isPending, isSuccess, isError } = useMutation({
 		...AtualizarPartidoOptions(),
-		onSuccess: () => {	
+		onSuccess: () => {
 			queryClient.invalidateQueries({
 				queryKey: ["partido"],
 			});
@@ -19,4 +19,3 @@ export const usePartidoAtualizar = () => {
 		hasAtualizarPartidoSucess: isSuccess,
 	};
 };
-

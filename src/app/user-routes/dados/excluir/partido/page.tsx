@@ -14,6 +14,7 @@ import {
 	AlertDialogTitle,
 } from "@/components/ui-shacnui/alert-dialog";
 
+import { ResponsePartidoDTO } from "@/core/domain/dtos/partido.dto";
 import { oswald, titilliumWeb } from "@/core/lib/fonts/fonts";
 import { usePartido } from "@/infra/hooks/partido/use-partido";
 import { usePartidoExcluir } from "@/infra/hooks/partido/use-partido-delete";
@@ -29,12 +30,13 @@ const Page: React.FC = () => {
 	const { partidos, isLoadingPartidos } = usePartido();
 	const {
 		excluirPartido,
-        hasExcluirPartidoError,
-        hasExcluirPartidoSuccess,
-        isDeletingPartido,
+		hasExcluirPartidoError,
+		hasExcluirPartidoSuccess,
+		isDeletingPartido,
 	} = usePartidoExcluir();
 
-	const [selectedPartido, setSelectedPartido] = useState<any>(null);
+	const [selectedPartido, setSelectedPartido] =
+		useState<ResponsePartidoDTO | null>(null);
 	const [isOpenList, setIsOpenList] = useState(false);
 	const [searchTerm, setSearchTerm] = useState("");
 	const [showSuccess, setShowSuccess] = useState(false);
@@ -51,7 +53,7 @@ const Page: React.FC = () => {
 	const filteredPartidos = useMemo(() => {
 		if (!partidos) return [];
 		if (!searchTerm) return partidos;
-		return partidos.filter((e: any) =>
+		return partidos.filter((e: ResponsePartidoDTO) =>
 			e.nome.toLowerCase().includes(searchTerm.toLowerCase())
 		);
 	}, [partidos, searchTerm]);
@@ -64,7 +66,7 @@ const Page: React.FC = () => {
 		excluirPartido({ payload });
 	};
 
-	const handlePartidoSelect = (partido: any) => {
+	const handlePartidoSelect = (partido: ResponsePartidoDTO) => {
 		setSelectedPartido(partido);
 		setValue("partidoId", partido.id);
 		setIsOpenList(false);
@@ -121,7 +123,7 @@ const Page: React.FC = () => {
 												Nenhum partido encontrado
 											</div>
 										) : (
-											filteredPartidos.map((e: any) => (
+											filteredPartidos.map((e: ResponsePartidoDTO) => (
 												<div
 													key={e.id}
 													className="p-2 hover:bg-gray-100 cursor-pointer text-black"

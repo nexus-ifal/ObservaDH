@@ -42,7 +42,7 @@ const modelconfiguracao = {
 			{ key: "nome", label: "Nome" },
 			{ key: "sigla", label: "Sigla" },
 		],
-	},	
+	},
 	ideologia: {
 		hook: useIdeologia,
 		dataKey: "ideologias",
@@ -140,17 +140,9 @@ const Page: React.FC = () => {
 										{columns.map((column) => (
 											<td
 												key={column.key}
-												className={`border-2 border-black px-4 py-3 text-lg font-normal ${model === "partido" && column.key === "imagem" ? "text-center" : ""}`}
+												className="border-2 border-black px-4 py-3 text-lg font-normal"
 											>
-												{model === "partido" && column.key === "imagem" && item[column.key] ? (
-													<img
-														src={item[column.key]}
-														alt={item.nome}
-														className="h-10 w-10 object-cover mx-auto rounded-full"
-													/>
-												) : (
-													item[column.key]
-												)}
+												{item[column.key]}
 											</td>
 										))}
 									</tr>

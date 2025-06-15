@@ -42,7 +42,7 @@ const formSchema = z.object({
 		}),
 	imagem: z.string().url({
 		message: "URL inválida!",
-	}),	
+	}),
 });
 
 const Page: React.FC = () => {

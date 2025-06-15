@@ -2,10 +2,10 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
+import { FaTrash } from "react-icons/fa6";
 import { ScaleLoader } from "react-spinners";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { FaTrash } from "react-icons/fa6";
 
 import {
 	AlertDialog,
@@ -25,6 +25,7 @@ import {
 } from "@/components/ui-shacnui/form";
 import { Input } from "@/components/ui-shacnui/input";
 
+import { ResponsePartidoDTO } from "@/core/domain/dtos/partido.dto";
 import { oswald } from "@/core/lib/fonts/fonts";
 import { usePartido } from "@/infra/hooks/partido/use-partido";
 import { usePartidoAtualizar } from "@/infra/hooks/partido/use-partido-update";
@@ -87,7 +88,8 @@ const Page: React.FC = () => {
 		hasAtualizarPartidoSucess,
 	} = usePartidoAtualizar();
 
-	const [selectedPartido, setSelectedPartido] = useState<any>(null);
+	const [selectedPartido, setSelectedPartido] =
+		useState<ResponsePartidoDTO | null>(null);
 	const [isOpenList, setIsOpenList] = useState(false);
 	const [searchTerm, setSearchTerm] = useState("");
 	const [showSuccess, setShowSuccess] = useState(false);
@@ -102,12 +104,11 @@ const Page: React.FC = () => {
 		},
 	});
 
-	// Preenche o form ao selecionar partido
 	useEffect(() => {
 		if (selectedPartido) {
 			form.setValue("nome", selectedPartido.nome);
 			form.setValue("sigla", selectedPartido.sigla);
-			form.setValue("imagem", selectedPartido.imagem);
+			form.setValue("imagem", selectedPartido.imagem ?? "");
 		}
 	}, [selectedPartido, form]);
 
@@ -128,7 +129,7 @@ const Page: React.FC = () => {
 	const filteredPartidos = useMemo(() => {
 		if (!partidos) return [];
 		if (!searchTerm) return partidos;
-		return partidos.filter((e: any) =>
+		return partidos.filter((e: ResponsePartidoDTO) =>
 			e.nome.toLowerCase().includes(searchTerm.toLowerCase())
 		);
 	}, [partidos, searchTerm]);
@@ -177,7 +178,7 @@ const Page: React.FC = () => {
 								onChange={(e) => setSearchTerm(e.target.value)}
 							/>
 							<div className="max-h-40 overflow-y-auto">
-								{filteredPartidos.map((e: any) => (
+								{filteredPartidos.map((e: ResponsePartidoDTO) => (
 									<div
 										key={e.id}
 										className="p-2 hover:bg-gray-100 cursor-pointer text-black"
