@@ -13,7 +13,7 @@ const usecase = DIContainer.getProjetoUseCase();
 
 export const getProjetoBaseQueryKey = () => ["projeto"];
 
-export const listarProjetoOptions = () =>
+export const listarProjetosOptions = () =>
 	queryOptions({
 		queryKey: [...getProjetoBaseQueryKey(), "listarProjetos"],
 		queryFn: () => usecase.listar(),
