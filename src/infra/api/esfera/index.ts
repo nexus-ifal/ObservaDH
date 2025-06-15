@@ -3,7 +3,7 @@ import { conexaoBackend } from "../../services/conexao-backend/client";
 export async function buscarEsferas() {
 	const response = await conexaoBackend.get("/esfera");
 
-	const data = response.data.resposta.dados;
+	const data = response.data.dados;
 
 	if (data.length === 0) {
 		console.error("Nenhum dado encontrado");
