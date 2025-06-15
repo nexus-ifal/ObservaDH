@@ -39,7 +39,6 @@ const modelconfiguracao = {
 		dataKey: "partidos",
 		loadingKey: "isLoadingPartidos",
 		colunas: [
-			{ key: "imagem", label: "Imagem" },
 			{ key: "nome", label: "Nome" },
 			{ key: "sigla", label: "Sigla" },
 		],
