@@ -3,10 +3,10 @@ import { Role } from "@prisma/client";
 import { SerializacaoDesserializacao } from "./serializacao-desserializacao";
 class User {
 	id?: string;
-	email: string;
-	passwordHash: string;
-	role: Role;
-	name: string;
+	email?: string;
+	passwordHash?: string;
+	role?: Role;
+	name?: string;
 	emailVerified?: Date;
 	createdAt?: Date;
 	updatedAt?: Date;
@@ -21,10 +21,10 @@ class User {
 		createdAt,
 		updatedAt,
 	}: {
-		email: string;
-		passwordHash: string;
-		role: Role;
-		name: string;
+		email?: string;
+		passwordHash?: string;
+		role?: Role;
+		name?: string;
 		createdAt?: Date;
 		updatedAt?: Date;
 		emailVerified?: Date;

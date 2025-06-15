@@ -1,3 +1,4 @@
+"use server";
 import axios from "axios";
 import bcrypt from "bcryptjs";
 import { redirect } from "next/navigation";
@@ -70,7 +71,7 @@ export async function updateUser(
 		const dadosParaApi: {
 			name?: string;
 			email?: string;
-			passwordHash?: string;
+			password?: string;
 			role?: string;
 			roleUserDaSession: string;
 		} = {
@@ -84,7 +85,7 @@ export async function updateUser(
 			dadosParaApi.email = camposValidados.email;
 		}
 		if (camposValidados.password !== undefined) {
-			dadosParaApi.passwordHash = camposValidados.password;
+			dadosParaApi.password = camposValidados.password;
 		}
 		if (camposValidados.role !== undefined) {
 			dadosParaApi.role = camposValidados.role;
@@ -100,6 +101,10 @@ export async function updateUser(
 			return resposta.data.mensagem;
 		}
 	} catch (error) {
+		if (error instanceof Error && error.message.includes("NEXT_REDIRECT")) {
+			throw error;
+		}
+
 		if (error instanceof z.ZodError) {
 			const fieldErrors = error.flatten().fieldErrors;
 			if (fieldErrors.role?.length) return fieldErrors.role[0];

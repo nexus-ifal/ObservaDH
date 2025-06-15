@@ -54,6 +54,10 @@ export async function registerUser(
 			return resposta.data.mensagem;
 		}
 	} catch (error) {
+		if (error instanceof Error && error.message.includes("NEXT_REDIRECT")) {
+			throw error;
+		}
+
 		if (error instanceof z.ZodError) {
 			const fieldErrors = error.flatten().fieldErrors;
 			if (fieldErrors.role) return fieldErrors.role[0];

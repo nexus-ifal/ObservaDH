@@ -14,10 +14,10 @@ export class AtualizarUserController {
 		role,
 	}: {
 		id: string;
-		name: string;
-		email: string;
-		passwordHash: string;
-		role: string;
+		name?: string;
+		email?: string;
+		passwordHash?: string;
+		role?: string;
 	}) {
 		if (!id && !name && !email && !passwordHash && !role) {
 			const respostaApi = new RespostaApi({
@@ -35,7 +35,7 @@ export class AtualizarUserController {
 			name: name,
 			email: email,
 			passwordHash: passwordHash,
-			role: role as Role,
+			role: role ? (role as Role) : undefined,
 		});
 
 		const resposta = await service.executar({ user: user });
