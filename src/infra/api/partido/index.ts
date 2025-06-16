@@ -9,12 +9,12 @@ import { conexaoBackend } from "@/infra/services/conexao-backend/client";
 class PartidoAPI implements PartidoRepository {
 	async listar(): Promise<ResponsePartidoDTO[]> {
 		const response = await conexaoBackend.get("/partido");
-		const dados = response.data.resposta.dados;
+		const dados = response.data.dados;
 		return dados;
 	}
 	async criar(partido: CreatePartidoDTO): Promise<ResponsePartidoDTO> {
 		const response = await conexaoBackend.post("/partido", partido);
-		const dados = response.data.resposta.dados;
+		const dados = response.data.dados;
 		return dados;
 	}
 	async atualizar(

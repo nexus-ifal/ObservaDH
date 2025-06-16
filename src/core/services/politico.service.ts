@@ -1,4 +1,8 @@
-import { ResponsePoliticoDTO } from "../domain/dtos/politico.dto";
+import {
+	CreatePoliticoDTO,
+	ResponsePoliticoDTO,
+	UpdatePoliticoDTO,
+} from "../domain/dtos/politico.dto";
 import { PoliticoRepository } from "../interfaces/repository/politico.repository";
 import PoliticoUseCase from "../interfaces/usecase/politico.usecase";
 
@@ -9,8 +13,22 @@ class PoliticoService implements PoliticoUseCase {
 		this.adapter = adapter;
 	}
 
-	async listar(): Promise<ResponsePoliticoDTO[]> {
+	listar(): Promise<ResponsePoliticoDTO[]> {
 		return this.adapter.listar();
+	}
+
+	criar(politico: CreatePoliticoDTO): Promise<ResponsePoliticoDTO> {
+		return this.adapter.criar(politico);
+	}
+	atualizar(
+		id: string,
+		politico: UpdatePoliticoDTO
+	): Promise<ResponsePoliticoDTO> {
+		return this.adapter.atualizar(id, politico);
+	}
+
+	excluir(id: string): Promise<ResponsePoliticoDTO> {
+		return this.adapter.excluir(id);
 	}
 }
 

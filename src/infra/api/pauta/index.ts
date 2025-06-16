@@ -9,12 +9,12 @@ import { conexaoBackend } from "@/infra/services/conexao-backend/client";
 class PautaAPI implements PautaRepository {
 	async listar(): Promise<ResponsePautaDTO[]> {
 		const response = await conexaoBackend.get("/pauta");
-		const dados = response.data.resposta.dados;
+		const dados = response.data.dados;
 		return dados;
 	}
 	async criar(pauta: CreatePautaDTO): Promise<ResponsePautaDTO> {
 		const response = await conexaoBackend.post("/pauta", pauta);
-		const dados = response.data.resposta.dados;
+		const dados = response.data.dados;
 		return dados;
 	}
 	async atualizar(

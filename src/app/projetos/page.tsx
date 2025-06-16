@@ -34,11 +34,6 @@ import { ProjetoLei } from "@/core/domain/graficos/types/projeto-lei";
 import obterEstadosUnicos from "@/core/lib/web/mock-utils/projeto-utils/obter-estados-unico";
 import obterPautasUnicas from "@/core/lib/web/mock-utils/projeto-utils/obter-pautas-unicas";
 import { buscarEsferas } from "@/infra/api/esfera";
-import {
-	buscarAnoProjeto,
-	buscarPautasPorAno,
-	buscarProjetosPorAno,
-} from "@/infra/api/projeto";
 
 const Page: React.FC = () => {
 	const [esferas, setEsferas] = useState<ResponseEsferaDTO[]>([]);
@@ -53,11 +48,65 @@ const Page: React.FC = () => {
 	useEffect(() => {
 		const buscarDados = async () => {
 			const esferas = await buscarEsferas();
-			const anos = await buscarAnoProjeto();
-			const projetosPorAno = await buscarProjetosPorAno();
-			const projetosPorPauta = await buscarPautasPorAno();
-			setDadosPlAno(projetosPorAno);
-			setDadosPautas(projetosPorPauta);
+			// MOCK TEMPORÁRIO ENQUANTO O BANCO NÃO VOLTA
+			const anos = ["2021", "2022", "2023", "2024"];
+			const projetosPorAno = [
+				{ ano: "2021", quantidade: 10 },
+				{ ano: "2022", quantidade: 15 },
+				{ ano: "2023", quantidade: 20 },
+				{ ano: "2024", quantidade: 12 },
+			];
+			const projetosPorPauta = [
+				{
+					ano: "2021",
+					pautas: [
+						{ titulo: "Saúde", quantidade: 4 },
+						{ titulo: "Educação", quantidade: 6 },
+					],
+				},
+				{
+					ano: "2022",
+					pautas: [
+						{ titulo: "Saúde", quantidade: 7 },
+						{ titulo: "Educação", quantidade: 8 },
+					],
+				},
+				{
+					ano: "2023",
+					pautas: [
+						{ titulo: "Saúde", quantidade: 12 },
+						{ titulo: "Educação", quantidade: 8 },
+					],
+				},
+				{
+					ano: "2024",
+					pautas: [
+						{ titulo: "Saúde", quantidade: 5 },
+						{ titulo: "Educação", quantidade: 7 },
+					],
+				},
+			];
+			setDadosPlAno(
+				projetosPorAno.map(({ ano, quantidade }) => ({
+					ano,
+					projetos: quantidade,
+				}))
+			);
+			setDadosPautas(
+				projetosPorPauta.map(({ ano, pautas }) => ({
+					ano,
+					atletasTrans:
+						pautas.find((p) => p.titulo === "Atletas Trans")?.quantidade ?? 0,
+					propagandaLGBT:
+						pautas.find((p) => p.titulo === "Propaganda LGBT")?.quantidade ?? 0,
+					linguagensNeutra:
+						pautas.find((p) => p.titulo === "Linguagem Neutra")?.quantidade ??
+						0,
+					banheirosMultigenero:
+						pautas.find((p) => p.titulo === "Banheiros Multigênero")
+							?.quantidade ?? 0,
+				}))
+			);
 			setEsferas(esferas);
 			setAnos(anos);
 		};

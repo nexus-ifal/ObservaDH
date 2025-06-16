@@ -5,8 +5,8 @@ import { listarDireitoVioladoOptions } from "../../options/direito-violado";
 export const useDireitoViolado = () => {
 	const {
 		data: direitosViolados,
-		isLoading: isLoadindDireitosViolados,
+		isLoading: isLoadingDireitosViolados,
 		error: error,
 	} = useQuery(listarDireitoVioladoOptions());
-	return { direitosViolados, isLoadindDireitosViolados, error };
+	return { direitosViolados, isLoadingDireitosViolados, error };
 };

@@ -99,7 +99,7 @@ const Page: React.FC = () => {
 	const columns = configuracao.colunas;
 
 	return (
-		<div className="flex h-full w-full flex-col gap-14">
+		<div className="flex h-full w-full flex-col gap-14 pb-6">
 			<AdminNavBar model={model as string} />
 			<div className="overflow-auto no-scrollbar h-full">
 				<p className="text-[40px]">{model} existentes:</p>
@@ -135,7 +135,7 @@ const Page: React.FC = () => {
 								data.map((item: any, index: number) => (
 									<tr
 										key={item.id}
-										className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}
+										className={index % 2 === 0 ? "bg-white" : "bg-gray-300"}
 									>
 										{columns.map((column) => (
 											<td
@@ -151,9 +151,9 @@ const Page: React.FC = () => {
 								<tr className="bg-white">
 									<td
 										colSpan={columns.length}
-										className="border-2 border-black px-4 py-3 text-lg"
+										className="border-2 border-black px-4 py-3 text-lg font-normal text-center"
 									>
-										Nenhum {model} cadastrado.
+										Nenhum dado encontrado.
 									</td>
 								</tr>
 							)}
