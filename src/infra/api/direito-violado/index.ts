@@ -10,7 +10,6 @@ class DireitoVioladoAPI implements DireitoVioladoRepository {
 	async listar(): Promise<ResponseDireitoVioladoDTO[]> {
 		const response = await conexaoBackend.get("/direito-violado");
 		const dados = response.data.dados;
-		console.log(dados);
 		return dados;
 	}
 	async criar(
