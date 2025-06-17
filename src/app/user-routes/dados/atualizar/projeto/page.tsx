@@ -600,7 +600,7 @@ const Page: React.FC = () => {
 								disabled={!selectedProjeto || isUpdatingProjeto}
 								className="flex bg-[#122144] w-1/5 h-16 border-[#CDDBFF] border-2 text-lg md:text-2xl rounded-[3px] hover:bg-[#2C52A4] disabled:opacity-50 disabled:cursor-not-allowed duration-200 items-center justify-center"
 							>
-								{!isUpdatingProjeto ? (
+								{isUpdatingProjeto ? (
 									<>
 										<ScaleLoader color="#CDDBFF" height={20} />
 										<span className="ml-2">Atualizando...</span>
