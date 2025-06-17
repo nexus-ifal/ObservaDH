@@ -27,7 +27,10 @@ export class AtualizarProjetoService implements IAtualizarProjetoService {
 				pautaId?: string;
 				esferaId?: string;
 				numeroPl?: string;
+				autoresId?: string[];
+				ideologiasId?: string[];
 				justificativa?: string;
+				direitosVioladosId?: string[];
 			} = {};
 
 			if (projeto.ano !== undefined) dadosAtualizacao.ano = projeto.ano;
@@ -35,22 +38,76 @@ export class AtualizarProjetoService implements IAtualizarProjetoService {
 				dadosAtualizacao.ementa = projeto.ementa;
 			if (projeto.pautaId !== undefined)
 				dadosAtualizacao.pautaId = projeto.pautaId;
-			if (projeto.esferaId !== undefined)
-				dadosAtualizacao.esferaId = projeto.esferaId;
 			if (projeto.numeroPl !== undefined)
 				dadosAtualizacao.numeroPl = projeto.numeroPl;
+			if (projeto.esferaId !== undefined)
+				dadosAtualizacao.esferaId = projeto.esferaId;
+			if (projeto.autoresId !== undefined)
+				dadosAtualizacao.autoresId = projeto.autoresId;
+			if (projeto.ideologiasId !== undefined)
+				dadosAtualizacao.ideologiasId = projeto.ideologiasId;
 			if (projeto.justificativa !== undefined)
 				dadosAtualizacao.justificativa = projeto.justificativa;
+			if (projeto.direitosVioladosId !== undefined)
+				dadosAtualizacao.direitosVioladosId = projeto.direitosVioladosId;
 
 			if (Object.keys(dadosAtualizacao).length === 0) {
 				throw new Error("Nenhum campo fornecido para atualização");
 			}
 
+			let partidosData = undefined;
+			
+			if (projeto.autoresId && projeto.autoresId.length > 0) {
+				const autores = await this.prisma.politico.findMany({
+					where: { id: { in: projeto.autoresId } },
+					select: { partidoId: true },
+				});
+				const partidoIds = [
+					...new Set(
+						autores
+							.map((autor) => autor.partidoId)
+							.filter((id): id is string => !!id)
+					),
+				];
+				if (partidoIds.length > 0) {
+					partidosData = {
+						set: partidoIds.map((id) => ({ id })),
+					};
+				} else {
+					partidosData = { set: [] };
+				}
+			}
+
 			const projetoAtualizado = await this.prisma.projeto.update({
-				where: {
-					id: projeto.id,
+				where: { id: projeto.id },
+				data: {
+					ano: projeto.ano,
+					ementa: projeto.ementa,
+					pautaId: projeto.pautaId,
+					esferaId: projeto.esferaId,
+					numeroPl: projeto.numeroPl,
+					justificativa: projeto.justificativa,
+					ideologias: projeto.ideologiasId
+						? {
+								set: projeto.ideologiasId.map((ideologiaId) => ({
+									id: ideologiaId,
+								})),
+						  }
+						: undefined,
+					autores: projeto.autoresId
+						? {
+								set: projeto.autoresId.map((autorId) => ({ id: autorId })),
+						  }
+						: undefined,
+					direitosViolados: projeto.direitosVioladosId
+						? {
+								set: projeto.direitosVioladosId.map((direitoId) => ({
+									id: direitoId,
+								})),
+						  }
+						: undefined,
+					partidos: partidosData,
 				},
-				data: dadosAtualizacao,
 				select: {
 					id: true,
 					ano: true,

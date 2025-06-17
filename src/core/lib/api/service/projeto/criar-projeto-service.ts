@@ -15,6 +15,28 @@ export class CriarProjetoService implements ICriarProjetoService {
 
 	async executar(params: CreateProjetoDTO): Promise<ResponseProjetoDTO> {
 		try {
+			let partidosData = undefined;
+
+			if (params.autoresId && params.autoresId.length > 0) {
+				const autores = await this.prisma.politico.findMany({
+					where: { id: { in: params.autoresId } },
+					select: { partidoId: true },
+				});
+				const partidoIds = [
+					...new Set(
+						autores
+							.map((autor) => autor.partidoId)
+							.filter((id): id is string => !!id)
+					),
+				];
+				if (partidoIds.length > 0) {
+					partidosData = {
+						connect: partidoIds.map((id) => ({ id })),
+					};
+				} else {
+					partidosData = undefined;
+				}
+			}
 			const projeto = await this.prisma.projeto.create({
 				data: {
 					ano: params.ano,
@@ -37,7 +59,7 @@ export class CriarProjetoService implements ICriarProjetoService {
 							id: direitoId,
 						})),
 					},
-					partidos: {},
+					partidos: partidosData,
 				},
 				select: {
 					id: true,

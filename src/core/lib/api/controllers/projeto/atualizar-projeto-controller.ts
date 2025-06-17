@@ -34,8 +34,18 @@ export class AtualizarProjetoController {
 
 	async executar(params: UpdateProjetoDTO): Promise<RespostaApi> {
 		try {
-			const { id, ano, ementa, pautaId, esferaId, numeroPl, justificativa } =
-				params;
+			const {
+				id,
+				ano,
+				ementa,
+				pautaId,
+				numeroPl,
+				esferaId,
+				autoresId,
+				ideologiasId,
+				justificativa,
+				direitosVioladosId,
+			} = params;
 
 			if (!id) {
 				return new RespostaApi({
@@ -48,9 +58,12 @@ export class AtualizarProjetoController {
 				ano,
 				ementa,
 				pautaId,
-				esferaId,
 				numeroPl,
+				esferaId,
+				autoresId,
+				ideologiasId,
 				justificativa,
+				direitosVioladosId,
 			];
 			if (camposParaAtualizar.every((field) => field === undefined)) {
 				return new RespostaApi({
@@ -91,6 +104,9 @@ export class AtualizarProjetoController {
 					esferaId,
 					numeroPl,
 					justificativa,
+					autoresId,
+					ideologiasId,
+					direitosVioladosId,
 				},
 			});
 

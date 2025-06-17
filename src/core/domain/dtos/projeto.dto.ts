@@ -40,12 +40,15 @@ export interface ResponseProjetoDTO {
 
 export interface UpdateProjetoDTO {
 	id: string;
-	ano?: string;
-	ementa?: string;
-	pautaId?: string;
-	esferaId?: string;
-	numeroPl?: string;
-	justificativa?: string;
+	ano: string;
+	ementa: string;
+	pautaId: string;
+	esferaId: string;
+	numeroPl: string;
+	justificativa: string;
+	autoresId: string[];
+	ideologiasId: string[];
+	direitosVioladosId?: string[];
 }
 
 export const UpdateProjetoSchema = z.object({
