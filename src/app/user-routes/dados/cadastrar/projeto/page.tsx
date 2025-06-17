@@ -120,7 +120,6 @@ const Page: React.FC = () => {
 	}, [error]);
 
 	function onSubmit(values: z.infer<typeof formSchema>) {
-		console.log("Form values:", values);
 		createProjeto({
 			ano: values.ano,
 			pautaId: values.pauta,
@@ -134,7 +133,6 @@ const Page: React.FC = () => {
 				? values.direitosViolados.split(";")
 				: [],
 		});
-		console.log(error);
 	}
 
 	if (isLoadingSelects)

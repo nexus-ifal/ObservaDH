@@ -55,10 +55,6 @@ export class CriarProjetoController {
 				!autoresId ||
 				!direitosVioladosId
 			) {
-				console.log(
-					"Faltam informações obrigatórias para criar o projeto",
-					params
-				);
 				return new RespostaApi({
 					sucesso: false,
 					mensagem: "Faltam informações obrigatórias para criar o projeto",
