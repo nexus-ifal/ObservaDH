@@ -2,10 +2,10 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
-import { ScaleLoader } from "react-spinners";
 import { zodResolver } from "@hookform/resolvers/zod";
 import z from "zod";
 
+import Loading from "@/components/ui/loading";
 import {
 	AlertDialog,
 	AlertDialogAction,
@@ -14,13 +14,11 @@ import {
 	AlertDialogTitle,
 } from "@/components/ui-shacnui/alert-dialog";
 
+import { ResponseProjetoDTO } from "@/core/domain/dtos/projeto.dto";
 import { oswald, titilliumWeb } from "@/core/lib/fonts/fonts";
 import { useProjeto } from "@/infra/hooks/projeto/use-projeto";
 import { useProjetoExcluir } from "@/infra/hooks/projeto/use-projeto-delete";
 import { APIExcluirProjetoPayload } from "@/infra/options/projeto";
-import Loading from "@/components/ui/loading";
-import { ResponseProfissaoDTO } from "@/core/domain/dtos/profissao.dto";
-import { ResponseProjetoDTO } from "@/core/domain/dtos/projeto.dto";
 
 const deleteSchema = z.object({
 	projetoId: z.string().min(1, "Selecione um projeto de lei"),
@@ -66,7 +64,7 @@ const Page: React.FC = () => {
 		};
 		excluirProjeto({ payload });
 	};
-	const handleProjetoSelect = (projeto: any) => {
+	const handleProjetoSelect = (projeto: ResponseProjetoDTO) => {
 		setSelectedProjeto(projeto);
 		setValue("projetoId", projeto.id);
 		setIsOpenList(false);
@@ -84,7 +82,7 @@ const Page: React.FC = () => {
 			setTimeout(() => setShowError(false), 4000);
 		}
 	}, [hasExcluirProjetoSuccess, hasExcluirProjetoError]);
-	
+
 	return (
 		<div className="w-full h-full flex flex-col gap-14">
 			<h1 className={`text-7xl ${oswald.className}`}>

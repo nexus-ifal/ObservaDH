@@ -8,6 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 
 import { MultiSelectPopover } from "@/components/ui/dropdown/MultiSelectPopover";
+import Loading from "@/components/ui/loading";
 import {
 	AlertDialog,
 	AlertDialogAction,
@@ -34,17 +35,14 @@ import {
 } from "@/components/ui-shacnui/select";
 import { Textarea } from "@/components/ui-shacnui/textarea";
 
-import Loading from "@/components/ui/loading";
+import { ResponseProjetoDTO } from "@/core/domain/dtos/projeto.dto";
 import { oswald } from "@/core/lib/fonts/fonts";
-
+import { useDireitoViolado } from "@/infra/hooks/direito-violado/use-direito-violado";
+import { useIdeologia } from "@/infra/hooks/ideologia/use-ideologia";
+import { usePauta } from "@/infra/hooks/pauta/use-pauta";
+import { usePolitico } from "@/infra/hooks/politico/use-politico";
 import { useProjeto } from "@/infra/hooks/projeto/use-projeto";
 import { useProjetoAtualizar } from "@/infra/hooks/projeto/use-projeto-update";
-import { usePauta } from "@/infra/hooks/pauta/use-pauta";
-import { useIdeologia } from "@/infra/hooks/ideologia/use-ideologia";
-import { usePolitico } from "@/infra/hooks/politico/use-politico";
-import { useDireitoViolado } from "@/infra/hooks/direito-violado/use-direito-violado";
-
-import { ResponseProjetoDTO } from "@/core/domain/dtos/projeto.dto";
 import { APIAtualizarProjetoPayload } from "@/infra/options/projeto";
 
 const formSchema = z.object({

@@ -56,7 +56,7 @@ export class AtualizarProjetoService implements IAtualizarProjetoService {
 			}
 
 			let partidosData = undefined;
-			
+
 			if (projeto.autoresId && projeto.autoresId.length > 0) {
 				const autores = await this.prisma.politico.findMany({
 					where: { id: { in: projeto.autoresId } },
@@ -92,19 +92,19 @@ export class AtualizarProjetoService implements IAtualizarProjetoService {
 								set: projeto.ideologiasId.map((ideologiaId) => ({
 									id: ideologiaId,
 								})),
-						  }
+							}
 						: undefined,
 					autores: projeto.autoresId
 						? {
 								set: projeto.autoresId.map((autorId) => ({ id: autorId })),
-						  }
+							}
 						: undefined,
 					direitosViolados: projeto.direitosVioladosId
 						? {
 								set: projeto.direitosVioladosId.map((direitoId) => ({
 									id: direitoId,
 								})),
-						  }
+							}
 						: undefined,
 					partidos: partidosData,
 				},
