@@ -84,16 +84,7 @@ const Page: React.FC = () => {
 			setTimeout(() => setShowError(false), 4000);
 		}
 	}, [hasExcluirProjetoSuccess, hasExcluirProjetoError]);
-
-	if (!isLoadingProjetos) console.log("Projetos:", projetos);
-
-	if (isLoadingProjetos)
-		return (
-			<div className="h-full flex justify-center items-center">
-				<Loading />
-			</div>
-		);
-
+	
 	return (
 		<div className="w-full h-full flex flex-col gap-14">
 			<h1 className={`text-7xl ${oswald.className}`}>
@@ -101,7 +92,7 @@ const Page: React.FC = () => {
 			</h1>
 			{isLoadingProjetos ? (
 				<div className="h-full w-full justify-center items-center text-white">
-					<ScaleLoader color="" />
+					<Loading />
 				</div>
 			) : (
 				<form
