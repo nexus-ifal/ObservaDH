@@ -155,4 +155,3 @@ export class AtualizarProjetoService implements IAtualizarProjetoService {
 		}
 	}
 }
-

@@ -27,14 +27,21 @@ export class AtualizarPoliticoService implements IAtualizarPoliticoService {
 
 			if (politico.nome !== undefined) dadosAtualizacao.nome = politico.nome;
 			if (politico.foto !== undefined) dadosAtualizacao.foto = politico.foto;
-			if (politico.genero !== undefined) dadosAtualizacao.genero = politico.genero;
+			if (politico.genero !== undefined)
+				dadosAtualizacao.genero = politico.genero;
 			if (politico.raca !== undefined) dadosAtualizacao.raca = politico.raca;
-			if (politico.religiao !== undefined) dadosAtualizacao.religiao = politico.religiao;
-			if (politico.ideologia !== undefined) dadosAtualizacao.ideologia = politico.ideologia;
-			if (politico.esferaId !== undefined) dadosAtualizacao.esferaId = politico.esferaId;
-			if (politico.estadoId !== undefined) dadosAtualizacao.estadoId = politico.estadoId;
-			if (politico.partidoId !== undefined) dadosAtualizacao.partidoId = politico.partidoId;
-			if (politico.profissaoId !== undefined) dadosAtualizacao.profissaoId = politico.profissaoId;
+			if (politico.religiao !== undefined)
+				dadosAtualizacao.religiao = politico.religiao;
+			if (politico.ideologia !== undefined)
+				dadosAtualizacao.ideologia = politico.ideologia;
+			if (politico.esferaId !== undefined)
+				dadosAtualizacao.esferaId = politico.esferaId;
+			if (politico.estadoId !== undefined)
+				dadosAtualizacao.estadoId = politico.estadoId;
+			if (politico.partidoId !== undefined)
+				dadosAtualizacao.partidoId = politico.partidoId;
+			if (politico.profissaoId !== undefined)
+				dadosAtualizacao.profissaoId = politico.profissaoId;
 
 			if (politico.projetos !== undefined) {
 				if (Array.isArray(politico.projetos)) {
@@ -47,7 +54,8 @@ export class AtualizarPoliticoService implements IAtualizarPoliticoService {
 			}
 
 			Object.keys(dadosAtualizacao).forEach(
-				(key) => dadosAtualizacao[key] === undefined && delete dadosAtualizacao[key]
+				(key) =>
+					dadosAtualizacao[key] === undefined && delete dadosAtualizacao[key]
 			);
 
 			if (Object.keys(dadosAtualizacao).length === 0) {

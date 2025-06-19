@@ -2,11 +2,12 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { FaTrash } from "react-icons/fa6";
+import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 
 import { MultiSelectPopover } from "@/components/ui/dropdown/MultiSelectPopover";
+import Loading from "@/components/ui/loading";
 import {
 	AlertDialog,
 	AlertDialogAction,
@@ -33,7 +34,9 @@ import {
 	SelectValue,
 } from "@/components/ui-shacnui/select";
 
-import Loading from "@/components/ui/loading";
+import { APIAtualizarPoliticoPayload } from "./../../../../../infra/options/politico";
+
+import { ResponsePoliticoDTO } from "@/core/domain/dtos/politico.dto";
 import { oswald } from "@/core/lib/fonts/fonts";
 import { useEstado } from "@/infra/hooks/estado/use-estado";
 import { usePartido } from "@/infra/hooks/partido/use-partido";
@@ -41,7 +44,6 @@ import { usePolitico } from "@/infra/hooks/politico/use-politico";
 import { usePoliticoAtualizar } from "@/infra/hooks/politico/use-politico-update";
 import { useProfissao } from "@/infra/hooks/profissao/use-profissao";
 import { useProjeto } from "@/infra/hooks/projeto/use-projeto";
-import { APIAtualizarPoliticoPayload } from "./../../../../../infra/options/politico";
 
 // Adapte ou substitua pelo DTO correto
 const formSchema = z.object({
@@ -85,7 +87,8 @@ const Page: React.FC = () => {
 		hasAtualizarPoliticoError,
 	} = usePoliticoAtualizar();
 
-	const [selectedPolitico, setSelectedPolitico] = useState<any>();
+	const [selectedPolitico, setSelectedPolitico] =
+		useState<ResponsePoliticoDTO>();
 	const [isOpenList, setIsOpenList] = useState(false);
 	const [searchTerm, setSearchTerm] = useState("");
 	const [showSuccess, setShowSuccess] = useState(false);
@@ -128,7 +131,7 @@ const Page: React.FC = () => {
 			form.setValue(
 				"projetos",
 				selectedPolitico.projetos
-					? selectedPolitico.projetos.map((p: any) => p.id)
+					? selectedPolitico.projetos.map((p: ResponsePoliticoDTO) => p.id)
 					: []
 			);
 			form.setValue("esfera", selectedPolitico.esferaId || "");
@@ -160,7 +163,7 @@ const Page: React.FC = () => {
 	const filteredPoliticos = useMemo(() => {
 		if (!politicos) return [];
 		if (!searchTerm) return politicos;
-		return politicos.filter((p: any) =>
+		return politicos.filter((p: ResponsePoliticoDTO) =>
 			p.nome.toLowerCase().includes(searchTerm.toLowerCase())
 		);
 	}, [politicos, searchTerm]);
@@ -264,7 +267,7 @@ const Page: React.FC = () => {
 									onChange={(e) => setSearchTerm(e.target.value)}
 								/>
 								<div className="max-h-40 overflow-y-auto">
-									{filteredPoliticos.map((p: any) => (
+									{filteredPoliticos.map((p: ResponsePoliticoDTO) => (
 										<div
 											key={p.id}
 											className="p-2 hover:bg-gray-100 cursor-pointer text-black"

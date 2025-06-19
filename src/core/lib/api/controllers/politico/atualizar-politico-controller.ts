@@ -68,7 +68,7 @@ export class AtualizarPoliticoController {
 				ideologia,
 				foto,
 			];
-			
+
 			if (camposParaAtualizar.every((field) => field === undefined)) {
 				return new RespostaApi({
 					sucesso: false,

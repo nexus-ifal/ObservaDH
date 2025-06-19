@@ -2,10 +2,10 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
-import { ScaleLoader } from "react-spinners";
 import { zodResolver } from "@hookform/resolvers/zod";
 import z from "zod";
 
+import Loading from "@/components/ui/loading";
 import {
 	AlertDialog,
 	AlertDialogAction,
@@ -18,7 +18,6 @@ import { oswald, titilliumWeb } from "@/core/lib/fonts/fonts";
 import { usePolitico } from "@/infra/hooks/politico/use-politico";
 import { usePoliticoExcluir } from "@/infra/hooks/politico/use-politico-delete";
 import { APIExcluirPoliticoPayload } from "@/infra/options/politico";
-import Loading from "@/components/ui/loading";
 
 const deleteSchema = z.object({
 	politicoId: z.string().min(1, "Selecione um político"),

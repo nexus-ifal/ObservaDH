@@ -120,7 +120,6 @@ const Page: React.FC = () => {
 	}, [error]);
 
 	function onSubmit(values: z.infer<typeof formSchema>) {
-
 		function capitalizeFirst(str: string) {
 			return str
 				.trim()
