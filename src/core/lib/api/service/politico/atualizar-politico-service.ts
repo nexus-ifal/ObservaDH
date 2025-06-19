@@ -49,7 +49,7 @@ export class AtualizarPoliticoService implements IAtualizarPoliticoService {
 						set: politico.projetos.map((id) => ({ id })),
 					};
 				} else {
-					console.warn("O campo projetos precisa ser um array de IDs.");
+					throw new Error("O campo projetos precisa ser um array de IDs.");
 				}
 			}
 
