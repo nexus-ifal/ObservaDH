@@ -23,18 +23,7 @@ export class AtualizarPoliticoService implements IAtualizarPoliticoService {
 				throw new Error("Dados inválidos para atualização do político");
 			}
 
-			const dadosAtualizacao: {
-				nome?: string;
-				foto?: string | null;
-				genero?: string;
-				raca?: string;
-				religiao?: string;
-				ideologia?: string;
-				esferaId?: string;
-				estadoId?: string;
-				partidoId?: string;
-				profissaoId?: string;
-			} = {};
+			const dadosAtualizacao: Record<string, unknown> = {};
 
 			if (politico.nome !== undefined) dadosAtualizacao.nome = politico.nome;
 			if (politico.foto !== undefined) dadosAtualizacao.foto = politico.foto;
@@ -53,6 +42,21 @@ export class AtualizarPoliticoService implements IAtualizarPoliticoService {
 				dadosAtualizacao.partidoId = politico.partidoId;
 			if (politico.profissaoId !== undefined)
 				dadosAtualizacao.profissaoId = politico.profissaoId;
+
+			if (politico.projetos !== undefined) {
+				if (Array.isArray(politico.projetos)) {
+					dadosAtualizacao.projetos = {
+						set: politico.projetos.map((id) => ({ id })),
+					};
+				} else {
+					throw new Error("O campo projetos precisa ser um array de IDs.");
+				}
+			}
+
+			Object.keys(dadosAtualizacao).forEach(
+				(key) =>
+					dadosAtualizacao[key] === undefined && delete dadosAtualizacao[key]
+			);
 
 			if (Object.keys(dadosAtualizacao).length === 0) {
 				throw new Error("Nenhum campo fornecido para atualização");
@@ -75,6 +79,7 @@ export class AtualizarPoliticoService implements IAtualizarPoliticoService {
 					estadoId: true,
 					partidoId: true,
 					profissaoId: true,
+					projetos: true,
 				},
 			});
 
@@ -90,6 +95,7 @@ export class AtualizarPoliticoService implements IAtualizarPoliticoService {
 				estadoId: politicoAtualizado.estadoId,
 				partidoId: politicoAtualizado.partidoId,
 				profissaoId: politicoAtualizado.profissaoId,
+				projetos: politicoAtualizado.projetos,
 			};
 		} catch (error) {
 			if (typeof error === "object" && error !== null && "code" in error) {

@@ -36,15 +36,16 @@ export class AtualizarPoliticoController {
 			const {
 				id,
 				nome,
-				foto,
 				genero,
 				raca,
 				religiao,
-				ideologia,
 				esferaId,
 				estadoId,
 				partidoId,
 				profissaoId,
+				projetos,
+				ideologia,
+				foto,
 			} = params;
 
 			if (!id) {
@@ -56,16 +57,18 @@ export class AtualizarPoliticoController {
 
 			const camposParaAtualizar = [
 				nome,
-				foto,
 				genero,
 				raca,
 				religiao,
-				ideologia,
 				esferaId,
 				estadoId,
 				partidoId,
 				profissaoId,
+				projetos,
+				ideologia,
+				foto,
 			];
+
 			if (camposParaAtualizar.every((field) => field === undefined)) {
 				return new RespostaApi({
 					sucesso: false,
@@ -84,7 +87,6 @@ export class AtualizarPoliticoController {
 					mensagem: "O político não foi encontrado",
 				});
 			}
-
 			const politicoAtualizado = await this.atualizarPoliticoService.executar({
 				politico: params,
 			});

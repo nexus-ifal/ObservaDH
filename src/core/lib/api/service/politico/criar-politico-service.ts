@@ -27,7 +27,22 @@ export class CriarPoliticoService implements ICriarPoliticoService {
 					estadoId: params.estadoId,
 					partidoId: params.partidoId,
 					profissaoId: params.profissaoId,
-					projetos: {},
+					projetos:
+						Array.isArray(params.projetos) &&
+						params.projetos.length > 0 &&
+						typeof params.projetos[0] === "object"
+							? {
+									connect: (
+										params.projetos as unknown as {
+											id: string;
+											numeroPl: string;
+										}[]
+									).map((projeto) => ({
+										id: projeto.id,
+										numeroPl: projeto.numeroPl,
+									})),
+								}
+							: undefined,
 				},
 				select: {
 					id: true,
