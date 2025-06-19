@@ -12,6 +12,7 @@ export interface CreatePoliticoDTO {
 	estadoId: string;
 	partidoId: string;
 	profissaoId: string;
+	projetos?: string[];
 }
 
 export const CreatePoliticoSchema = z.object({
@@ -48,16 +49,17 @@ export interface ResponsePoliticoDTO {
 
 export interface UpdatePoliticoDTO {
 	id: string;
-	nome?: string;
+	nome: string;
+	genero: string;
+	raca: string;
+	religiao: string;
+	esferaId: string;
+	estadoId: string;
+	partidoId: string;
+	profissaoId: string;
+	projetos?: string[];
+	ideologia: string;
 	foto?: string | null;
-	genero?: string;
-	raca?: string;
-	religiao?: string;
-	ideologia?: string;
-	esferaId?: string;
-	estadoId?: string;
-	partidoId?: string;
-	profissaoId?: string;
 }
 
 export const UpdatePoliticoSchema = z.object({
