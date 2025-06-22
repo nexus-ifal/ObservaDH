@@ -221,8 +221,7 @@ const ChartTooltipContent = React.forwardRef<
 													)}
 													style={
 														{
-															 backgroundColor: indicatorColor,
-						
+															backgroundColor: indicatorColor,
 														} as React.CSSProperties
 													}
 												/>
