@@ -13,7 +13,7 @@ import {
 
 import { DadosGraficoRosquinha } from "@/core/domain/graficos/types/rosquinha";
 
-const chartConfig = {
+const chartConfig: ChartConfig = {
 	pl: {
 		label: "PL's",
 	},
@@ -33,7 +33,7 @@ const chartConfig = {
 		label: "Educação",
 		color: "#87D9FF",
 	},
-} satisfies ChartConfig;
+};
 
 interface graficoRosquinhaProps {
 	dados: DadosGraficoRosquinha[];
