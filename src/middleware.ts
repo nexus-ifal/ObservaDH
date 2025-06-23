@@ -1,7 +1,6 @@
-export { auth as middleware } from "./auth";
 import { NextResponse } from "next/server";
 
-import { auth } from "./auth";
+import { auth } from "../auth";
 
 const ROTAS_PUBLICAS = [
 	"/login",
@@ -10,10 +9,9 @@ const ROTAS_PUBLICAS = [
 	"/parlamentares",
 	"/projetos",
 	"/sobre",
-	"/",
 ];
 
-const ROTAS_ADIMIN = [
+const ROTAS_ADMIN = [
 	"/admin-routes/cadastro-usuario",
 	"/admin-routes/home",
 	"/admin-routes/acoes-usuario",
@@ -30,13 +28,22 @@ const ROTAS_USER = [
 	"/user-routes/dados/atualizar/estado",
 ];
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default auth((req) => {
 	const { nextUrl } = req;
 	const session = req.auth;
 	const autenticado = !!session;
 	const userRole = session?.user?.role;
 
-	const rotaPublica = ROTAS_PUBLICAS.some((route) =>
+	const rotaPublica =
+		ROTAS_PUBLICAS.some((route) => nextUrl.pathname.startsWith(route)) ||
+		nextUrl.pathname === "/";
+
+	const rotaAdmin = ROTAS_ADMIN.some((route) =>
+		nextUrl.pathname.startsWith(route)
+	);
+
+	const rotaUser = ROTAS_USER.some((route) =>
 		nextUrl.pathname.startsWith(route)
 	);
 
@@ -46,30 +53,26 @@ export default auth((req) => {
 		return NextResponse.redirect(redirecione);
 	}
 
-	if (autenticado && nextUrl.pathname === "/login" && userRole === "EDITOR") {
-		return NextResponse.redirect(new URL("/user-routes/home", nextUrl.origin));
-	} else if (
-		autenticado &&
-		nextUrl.pathname === "/login" &&
-		userRole === "ADMIN"
-	) {
-		return NextResponse.redirect(new URL("/admin-routes/home", nextUrl.origin));
+	if (autenticado && nextUrl.pathname === "/login") {
+		if (userRole === "EDITOR") {
+			return NextResponse.redirect(
+				new URL("/user-routes/home", nextUrl.origin)
+			);
+		} else if (userRole === "ADMIN") {
+			return NextResponse.redirect(
+				new URL("/admin-routes/home", nextUrl.origin)
+			);
+		}
 	}
 
 	if (autenticado) {
-		if (
-			ROTAS_ADIMIN.some((route) => nextUrl.pathname.startsWith(route)) &&
-			userRole !== "ADMIN"
-		) {
-			console.log("Apenas administradores podem acessar esta rota");
-			return NextResponse.redirect(new URL("/login", nextUrl.origin));
+		if (rotaAdmin && userRole !== "ADMIN") {
+			console.log("Acesso negado");
+			return NextResponse.redirect(new URL("/404", nextUrl.origin));
 		}
 
-		if (
-			ROTAS_USER.some((route) => nextUrl.pathname.startsWith(route)) &&
-			!userRole
-		) {
-			console.log("Acesso negado, usuário sem permissão de acesso");
+		if (rotaUser && userRole !== "EDITOR" && userRole !== "ADMIN") {
+			console.log("Acesso negado");
 			return NextResponse.redirect(new URL("/404", nextUrl.origin));
 		}
 	}
@@ -78,5 +81,5 @@ export default auth((req) => {
 });
 
 export const config = {
-	matcher: ["/((?!api|_next/static|_next/image|favicon.ico|.*\\.png$).*)"],
+	matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };
