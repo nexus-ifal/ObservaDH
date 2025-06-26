@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { ListarProjetosFiltradosController  } from "@/core/lib/api/controllers/projeto/listar-projetos-filtrados-controller";
+import { ListarProjetosFiltradosController } from "@/core/lib/api/controllers/projeto/listar-projetos-filtrados-controller";
 
 const controller = new ListarProjetosFiltradosController();
 
