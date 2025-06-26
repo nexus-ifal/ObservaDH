@@ -4,11 +4,13 @@ import { prismaClient } from "@/services/prisma/prisma";
 export interface IListarProjetosService {
 	executar(
 		filtros: FiltrosProjetosDTO
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	): Promise<{ dados: any[]; total: number }>;
 }
 
 export class ListarProjetosService implements IListarProjetosService {
 	async executar({ esfera, ano, estado, pauta }: FiltrosProjetosDTO) {
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		const where: any = {};
 
 		if (ano) where.ano = ano;
