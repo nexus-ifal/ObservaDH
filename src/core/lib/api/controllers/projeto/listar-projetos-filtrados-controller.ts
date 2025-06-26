@@ -14,7 +14,6 @@ export class ListarProjetosController {
 	) {}
 
 	async executar(request: Request) {
-		const x: any = "oi";
 		const url = new URL(request.url);
 		const raw = Object.fromEntries(url.searchParams.entries());
 		const filtros: FiltrosProjetosDTO = {
