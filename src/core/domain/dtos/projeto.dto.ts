@@ -73,3 +73,10 @@ export interface SearchProjetoDTO {
 	id?: string;
 	numeroPl?: string;
 }
+
+export interface FiltrosProjetosDTO {
+	estado?: string;
+	ano?: string;
+	esfera?: string;
+	pauta?: string;
+}
