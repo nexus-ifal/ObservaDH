@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { ListarProjetosFiltradosController } from "@/core/lib/api/controllers/projeto/listar-projetos-filtrados-controller";
+import { ListarPoliticoFiltradoController } from "@/core/lib/api/controllers/politico/listar-politico-filtrado-controller";
 
-const controller = new ListarProjetosFiltradosController();
+const controller = new ListarPoliticoFiltradoController();
 
 export async function GET(request: NextRequest) {
 	try {

@@ -90,3 +90,12 @@ export interface ResponseDeletePoliticoDTO {
 export interface SearchPoliticoDTO {
 	id?: string;
 }
+
+export interface FiltrosPoliticosDTO {
+	esfera?: string;
+	estado?: string;
+	genero?: string;
+	partido?: string;
+	ideologia?: string;
+	profissao?: string;
+}

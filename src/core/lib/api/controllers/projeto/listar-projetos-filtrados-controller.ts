@@ -8,7 +8,7 @@ import {
 import { FiltrosProjetosDTO } from "@/core/domain/dtos/projeto.dto";
 import { RespostaApi } from "@/core/domain/models/resposta-api";
 
-export class ListarProjetosController {
+export class ListarProjetosFiltradosController {
 	constructor(
 		private readonly service: IListarProjetosService = new ListarProjetosService()
 	) {}
