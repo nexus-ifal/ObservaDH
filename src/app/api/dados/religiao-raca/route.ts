@@ -1,10 +1,10 @@
 import { NextResponse } from "next/server";
 
-import { ListarIdeologiaGeneroController } from "@/core/lib/api/controllers/dados/ideologia-genero-controller";
+import { ListarReligiaoRacaController } from "@/core/lib/api/controllers/dados/religiao-raca-controller";
 
 export async function GET() {
 	try {
-		const controller = new ListarIdeologiaGeneroController();
+		const controller = new ListarReligiaoRacaController();
 
 		const resposta = await controller.executar();
 
@@ -15,7 +15,7 @@ export async function GET() {
 		return NextResponse.json(
 			{
 				sucesso: false,
-				mensagem: "Erro ao listar ideologia e gênero",
+				mensagem: "Erro ao listar religião e raça",
 				dados: error instanceof Error ? error.message : String(error),
 			},
 			{ status: 500 }
