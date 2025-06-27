@@ -1,5 +1,9 @@
+import {
+	IListarIdeologiaGeneroService,
+	ListarIdeologiaGeneroService,
+} from "../../service/dados/ideologia-genero-service";
+
 import { RespostaApi } from "@/core/domain/models/resposta-api";
-import { IListarIdeologiaGeneroService, ListarIdeologiaGeneroService } from "../../service/dados/ideologia-genero-service";
 
 export interface IListarIdeologiaGeneroController {
 	executar(): Promise<RespostaApi>;
