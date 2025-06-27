@@ -1,5 +1,6 @@
-import { ListarReligiaoRacaController } from "@/core/lib/api/controllers/dados/religiao-raca-controller";
 import { NextResponse } from "next/server";
+
+import { ListarReligiaoRacaController } from "@/core/lib/api/controllers/dados/religiao-raca-controller";
 
 export async function GET() {
 	try {

@@ -9,6 +9,7 @@ function normalizarRaca(raca: string): string {
 }
 
 export interface IListarReligiaoRacaService {
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	executar(): Promise<{ dados: any[]; total: number }>;
 }
 
@@ -23,20 +24,19 @@ export class ListarReligiaoRacaService implements IListarReligiaoRacaService {
 				},
 			});
 
-			// Mapas para garantir consistência de nomes
-			const racasFixas = [
-				"pardo",
-				"preto",
-				"branco",
-				"amarelo",
-				"indigena",
-			];
+			const racasFixas = ["pardo", "preto", "branco", "amarelo", "indigena"];
 			const mapaRacas: Record<string, string> = {};
 			for (const raca of racasFixas) {
 				mapaRacas[normalizarRaca(raca)] = raca;
 			}
 
-			type RacaKey = "pardo" | "preto" | "branco" | "amarelo" | "indigena" | "indefinido";
+			type RacaKey =
+				| "pardo"
+				| "preto"
+				| "branco"
+				| "amarelo"
+				| "indigena"
+				| "indefinido";
 			const agrupamento: Record<
 				string,
 				{
@@ -66,7 +66,8 @@ export class ListarReligiaoRacaService implements IListarReligiaoRacaService {
 						indefinido: 0,
 					};
 				}
-				const chaveRaca = (mapaRacas[racaNormalizada] || "indefinido") as RacaKey;
+				const chaveRaca = (mapaRacas[racaNormalizada] ||
+					"indefinido") as RacaKey;
 				agrupamento[religiao][chaveRaca] += 1;
 			}
 
