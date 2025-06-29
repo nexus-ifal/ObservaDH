@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+
 import Card from "@/components/ui/cards";
 import Texto from "@/components/ui/componente-texto";
 import DropdownButton from "@/components/ui/dropdown/dropdown-button";
@@ -36,11 +38,13 @@ const direitos: React.FC = () => {
 					pequeno={"Violações e Ideologias"}
 					grande={"dos Projetos de Lei"}
 				/>
-				<DadosEstatisticos
-					dadosGraficoVertical={graficoBarrasVerticalDadosMock}
-					dadosRosquinha={graficoRosquinhaDadosMock}
-					elementosDropdown={elementosDropdown}
-				/>
+				<Suspense fallback={<div>Carregando dados estatísticos...</div>}>
+					<DadosEstatisticos
+						dadosGraficoVertical={graficoBarrasVerticalDadosMock}
+						dadosRosquinha={graficoRosquinhaDadosMock}
+						elementosDropdown={elementosDropdown}
+					/>
+				</Suspense>
 				<Carrossel projetos={projetosMock} />
 			</div>
 		</MainLayout>

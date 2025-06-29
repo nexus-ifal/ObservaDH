@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { MdOutlineFilterAlt } from "react-icons/md";
 import { useSearchParams } from "next/navigation";
 
@@ -37,7 +37,17 @@ import obterPautasUnicas from "@/core/lib/web/mock-utils/projeto-utils/obter-pau
 import { buscarEsferas } from "@/infra/api/esfera";
 import { useProjetoEstado } from "@/infra/hooks/dados/use-projeto-estado";
 
-const Page = () => {
+const Page: React.FC = () => {
+	return (
+		<Suspense fallback={<div>Carregando página...</div>}>
+			<PageContent />
+		</Suspense>
+	);
+};
+
+export default Page;
+
+const PageContent = () => {
 	const [esferas, setEsferas] = useState<ResponseEsferaDTO[]>([]);
 	const [anos, setAnos] = useState<string[]>([]);
 	const [dadosPlAno, setDadosPlAno] = useState<DadosGraficoLinhaPontos[]>();
@@ -169,18 +179,18 @@ const Page = () => {
 					error={error ? error.message : undefined}
 				/>
 				<Divisor />
-				<PropostasDados
-					items={dropdownItems}
-					projetos={projetosMock}
-					dadosPlAno={dadosPlAno ?? []}
-					dadosPautas={dadosPautas ?? []}
-				/>
+				<Suspense fallback={<div>Carregando filtros...</div>}>
+					<PropostasDados
+						items={dropdownItems}
+						projetos={projetosMock}
+						dadosPlAno={dadosPlAno ?? []}
+						dadosPautas={dadosPautas ?? []}
+					/>
+				</Suspense>
 			</div>
 		</MainLayout>
 	);
 };
-
-export default Page;
 
 interface apresentacaoProps {
 	apresentacao: {

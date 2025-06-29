@@ -37,7 +37,7 @@ const GraficoMapa: React.FC<MapaBrasilProps> = ({
 		<article className="w-[80rem] h-[45.625rem] flex gap-2">
 			<section className="h-[45.625rem] w-[43.75rem] min-w-1/2">
 				{error && (
-					<div className="h-full w-full text-2xl bg-hite">
+					<div className="h-full w-full text-2xl">
 						<p className="text-red-500">
 							{error || "ERRO AO CARREGAR INFORMAÇÕES DO MAPA..."}
 						</p>
