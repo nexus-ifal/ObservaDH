@@ -52,7 +52,6 @@ const MapaBrasil: React.FC<mapaBrasilProps> = ({ className, dados }) => {
 	function handleMouseLeave() {
 		setHoveredUF(null);
 	}
-	console.log("dados", dados);
 	return (
 		<div style={{ position: "relative" }}>
 			<svg
