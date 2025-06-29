@@ -1,8 +1,9 @@
-import { RespostaApi } from "@/core/domain/models/resposta-api";
 import {
 	IListarProjetosPorUFService,
 	ListarProjetosPorUFService,
 } from "../../service/dados/projetos-estado-service";
+
+import { RespostaApi } from "@/core/domain/models/resposta-api";
 
 export interface IListarProjetosPorUFController {
 	executar(esfera?: string): Promise<RespostaApi>;

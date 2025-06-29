@@ -1,7 +1,9 @@
 import { PrismaClient } from "@prisma/client";
 
+import { DadosProjetoEstado } from "@/core/domain/dtos/dados.dto";
+
 export interface IListarProjetosPorUFService {
-	executar(esfera?: string): Promise<{ uf: string; valor: number }[]>;
+	executar(esfera?: string): Promise<DadosProjetoEstado[]>;
 }
 
 export class ListarProjetosPorUFService implements IListarProjetosPorUFService {
@@ -9,25 +11,26 @@ export class ListarProjetosPorUFService implements IListarProjetosPorUFService {
 		const prisma = new PrismaClient();
 		try {
 			const estados = await prisma.estado.findMany({
-				select: { sigla: true },
+				select: { sigla: true, nome: true },
 			});
 
-			const resultado: { uf: string; valor: number }[] = estados.map((e) => ({
+			const resultado: DadosProjetoEstado[] = estados.map((e) => ({
 				uf: e.sigla,
 				valor: 0,
+				nome: e.nome,
 			}));
 
 			const projetos = await prisma.projeto.findMany({
 				where: esfera
 					? {
-							esfera: { nome: { equals: esfera, mode: "insensitive" } }, // ou id, conforme sua modelagem
+							esfera: { nome: { equals: esfera, mode: "insensitive" } },
 						}
 					: undefined,
 				select: {
 					id: true,
 					autores: {
 						select: {
-							estado: { select: { sigla: true } },
+							estado: { select: { sigla: true, nome: true } },
 						},
 					},
 				},
