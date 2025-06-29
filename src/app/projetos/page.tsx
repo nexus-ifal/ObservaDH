@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { MdOutlineFilterAlt } from "react-icons/md";
+import { useSearchParams } from "next/navigation";
 
 import Card from "@/components/ui/cards";
 import Texto from "@/components/ui/componente-texto";
@@ -34,16 +35,28 @@ import { ProjetoLei } from "@/core/domain/graficos/types/projeto-lei";
 import obterEstadosUnicos from "@/core/lib/web/mock-utils/projeto-utils/obter-estados-unico";
 import obterPautasUnicas from "@/core/lib/web/mock-utils/projeto-utils/obter-pautas-unicas";
 import { buscarEsferas } from "@/infra/api/esfera";
+import { useProjetoEstado } from "@/infra/hooks/dados/use-projeto-estado";
 
-const Page: React.FC = () => {
+interface PageProps {
+	searchParams?: {
+		esfera?: string;
+	};
+}
+
+const Page: React.FC<PageProps> = () => {
 	const [esferas, setEsferas] = useState<ResponseEsferaDTO[]>([]);
 	const [anos, setAnos] = useState<string[]>([]);
 	const [dadosPlAno, setDadosPlAno] = useState<DadosGraficoLinhaPontos[]>();
 	const [dadosPautas, setDadosPautas] =
 		useState<DadosGraficoBarraEmpilhadaHorizontal[]>();
-
 	const estados = obterEstadosUnicos({ projetos: projetosMock });
 	const pautas = obterPautasUnicas({ projetos: projetosMock });
+
+	const searchParams = useSearchParams();
+	const esfera = searchParams.get("esfera");
+	const { projetosPorUF, isLoadingProjetosPorUF, error } = useProjetoEstado(
+		esfera ?? undefined
+	);
 
 	useEffect(() => {
 		const buscarDados = async () => {
@@ -156,7 +169,11 @@ const Page: React.FC = () => {
 		<MainLayout>
 			<div className="flex h-full w-full flex-col gap-24 items-center px-11">
 				<Apresentacao apresentacao={apresentacao} />
-				<GraficoMapa />
+				<GraficoMapa
+					dados={projetosPorUF ?? []}
+					isLoading={isLoadingProjetosPorUF}
+					error={error ? error.message : undefined}
+				/>
 				<Divisor />
 				<PropostasDados
 					items={dropdownItems}
