@@ -37,13 +37,7 @@ import obterPautasUnicas from "@/core/lib/web/mock-utils/projeto-utils/obter-pau
 import { buscarEsferas } from "@/infra/api/esfera";
 import { useProjetoEstado } from "@/infra/hooks/dados/use-projeto-estado";
 
-interface PageProps {
-	searchParams?: {
-		esfera?: string;
-	};
-}
-
-const Page: React.FC<PageProps> = () => {
+const Page = () => {
 	const [esferas, setEsferas] = useState<ResponseEsferaDTO[]>([]);
 	const [anos, setAnos] = useState<string[]>([]);
 	const [dadosPlAno, setDadosPlAno] = useState<DadosGraficoLinhaPontos[]>();
