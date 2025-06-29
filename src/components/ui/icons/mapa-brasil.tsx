@@ -309,7 +309,7 @@ const MapaBrasil: React.FC<mapaBrasilProps> = ({ className, dados }) => {
 
 			{hoveredUF && (
 				<div
-					className="fixed text-white z-[1000] pointer-events-none h-14 w-32 max-w-32 max-h-14 bg-[#4568BE] border-2 border-[#91ADF4] rounded-[3px] shadow-lg flex flex-col justify-center items-center gap-2.5"
+					className="fixed text-white z-[1000] pointer-events-none h-14 w-32 max-w-32 max-h-14 bg-[#4568BE] border-2 border-[#91ADF4] rounded-[3px] shadow-lg flex flex-col justify-center items-center gap-1"
 					style={{
 						left: mouse.x + 16,
 						top: mouse.y + 16,
