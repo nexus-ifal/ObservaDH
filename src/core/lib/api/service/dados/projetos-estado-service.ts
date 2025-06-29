@@ -1,11 +1,11 @@
 import { PrismaClient } from "@prisma/client";
 
 export interface IListarProjetosPorUFService {
-	executar(): Promise<{ uf: string; valor: number }[]>;
+	executar(esfera?: string): Promise<{ uf: string; valor: number }[]>;
 }
 
 export class ListarProjetosPorUFService implements IListarProjetosPorUFService {
-	async executar() {
+	async executar(esfera?: string) {
 		const prisma = new PrismaClient();
 		try {
 			const estados = await prisma.estado.findMany({
@@ -18,6 +18,11 @@ export class ListarProjetosPorUFService implements IListarProjetosPorUFService {
 			}));
 
 			const projetos = await prisma.projeto.findMany({
+				where: esfera
+					? {
+							esfera: { nome: { equals: esfera, mode: "insensitive" } }, // ou id, conforme sua modelagem
+						}
+					: undefined,
 				select: {
 					id: true,
 					autores: {

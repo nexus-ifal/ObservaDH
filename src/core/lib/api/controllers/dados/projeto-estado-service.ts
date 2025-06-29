@@ -1,12 +1,11 @@
+import { RespostaApi } from "@/core/domain/models/resposta-api";
 import {
 	IListarProjetosPorUFService,
 	ListarProjetosPorUFService,
 } from "../../service/dados/projetos-estado-service";
 
-import { RespostaApi } from "@/core/domain/models/resposta-api";
-
 export interface IListarProjetosPorUFController {
-	executar(): Promise<RespostaApi>;
+	executar(esfera?: string): Promise<RespostaApi>;
 }
 
 export class ListarProjetosPorUFController
@@ -16,9 +15,9 @@ export class ListarProjetosPorUFController
 		private readonly listarProjetosPorUFService: IListarProjetosPorUFService = new ListarProjetosPorUFService()
 	) {}
 
-	async executar() {
+	async executar(esfera?: string) {
 		try {
-			const dados = await this.listarProjetosPorUFService.executar();
+			const dados = await this.listarProjetosPorUFService.executar(esfera);
 			return new RespostaApi({
 				sucesso: true,
 				mensagem: `${dados.length} estados encontrados`,

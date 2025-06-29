@@ -1,12 +1,13 @@
 import { NextResponse } from "next/server";
-
 import { ListarProjetosPorUFController } from "@/core/lib/api/controllers/dados/projeto-estado-service";
 
-export async function GET() {
+export async function GET(request: Request) {
 	try {
-		const controller = new ListarProjetosPorUFController();
+		const url = new URL(request.url);
+		const esfera = url.searchParams.get("esfera") ?? undefined;
 
-		const resposta = await controller.executar();
+		const controller = new ListarProjetosPorUFController();
+		const resposta = await controller.executar(esfera);
 
 		return NextResponse.json(resposta, {
 			status: resposta.sucesso ? 200 : 404,
