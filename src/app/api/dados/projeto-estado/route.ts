@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+
 import { ListarProjetosPorUFController } from "@/core/lib/api/controllers/dados/projeto-estado-service";
 
 export async function GET(request: Request) {
