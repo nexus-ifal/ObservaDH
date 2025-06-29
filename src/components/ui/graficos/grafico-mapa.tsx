@@ -1,7 +1,9 @@
 import CardStatus from "../cards/card-status";
 import DropdownButton from "../dropdown/dropdown-button";
 import MapaBrasil from "../icons/mapa-brasil";
+import Loading from "../loading";
 
+import { DadosProjetoEstado } from "@/core/domain/dtos/dados.dto";
 import { mockStatus } from "@/mocks/mock-projetos";
 
 const esferas = [
@@ -11,16 +13,47 @@ const esferas = [
 	},
 	{
 		titulo: "Estadual",
-		value: "estadual 1",
+		value: "estadual",
+	},
+	{
+		titulo: "Geral",
+		value: "geral",
 	},
 ];
 
+interface MapaBrasilProps {
+	dados: DadosProjetoEstado[];
+	isLoading?: boolean;
+	error?: string;
+}
+
 //TODO: fazer o mapa de calor funcional
-const GraficoMapa: React.FC = () => {
+const GraficoMapa: React.FC<MapaBrasilProps> = ({
+	dados,
+	isLoading,
+	error,
+}) => {
 	return (
-		<article className="w-[80rem] h-[45.625rem] flex gap-2 ">
-			<section className="h-[45.625rem] w-[43.75rem]">
-				<MapaBrasil />
+		<article className="w-[80rem] h-[45.625rem] flex gap-2">
+			<section className="h-[45.625rem] w-[43.75rem] min-w-1/2">
+				{error && (
+					<div className="h-full w-full text-2xl">
+						<p className="text-red-500">
+							{error || "ERRO AO CARREGAR INFORMAÇÕES DO MAPA..."}
+						</p>
+						<p className="text-red-500">
+							Não é culpa sua, é um erro no servidor. Tente novamente mais
+							tarde.
+						</p>
+					</div>
+				)}
+				{isLoading ? (
+					<div className="h-full w-full flex items-center justify-center">
+						<Loading />
+					</div>
+				) : (
+					<MapaBrasil dados={dados} />
+				)}
 			</section>
 			<section className="w-full h-full flex items-end justify-between">
 				<div className="w-[25rem] h-full flex items-end">

@@ -1,3 +1,8 @@
+"use client";
+
+import { useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+
 import {
 	Select,
 	SelectContent,
@@ -19,8 +24,25 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({
 	className,
 	titulo,
 }) => {
+	const [filter, setFilter] = useState<string>("");
+
+	const searchParams = useSearchParams();
+	const pathName = usePathname();
+	const { replace } = useRouter();
+
+	function handleChange(value: string) {
+		const params = new URLSearchParams(searchParams.toString());
+		if (!value || value === "geral") {
+			params.delete("esfera");
+		} else {
+			params.set("esfera", value);
+		}
+		replace(`${pathName}?${params.toString()}`, { scroll: false });
+		setFilter(value);
+	}
+
 	return (
-		<Select>
+		<Select onValueChange={handleChange} value={filter}>
 			<SelectTrigger
 				className={`w-full h-12 border-[#4568BE] rounded-[3px] text-[#4568BE] ${className} `}
 			>

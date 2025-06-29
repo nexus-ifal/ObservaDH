@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { MdOutlineFilterAlt } from "react-icons/md";
 
 import Card from "@/components/ui/cards";
@@ -121,7 +122,10 @@ const RankingParlamentares = ({
 }: RankingParlamentaresProps) => {
 	return (
 		<article className="flex flex-col w-full gap-20">
-			<Filtro items={itemsFiltro} />
+			<Suspense fallback={<div>Carregando filtros...</div>}>
+				<Filtro items={itemsFiltro} />
+			</Suspense>
+
 			<div className="flex flex-col gap-10 justify-center">
 				<div className="flex flex-row w-full px-16 h-[4.25rem] bg-[#122144] border border-b-0 border-[#87D9FF] rounded-t-[5px] font-semibold text-2xl text-[#87D9FF]">
 					<section className="w-1/2 h-full px-16 grid grid-cols-2 gap-4 items-center">
