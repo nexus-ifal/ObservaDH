@@ -1,5 +1,6 @@
-import { listarProjetosPorAnoOptions } from "@/infra/options/dados";
 import { useQuery } from "@tanstack/react-query";
+
+import { listarProjetosPorAnoOptions } from "@/infra/options/dados";
 
 export const useProjetoPorAno = () => {
 	const {
