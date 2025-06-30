@@ -1,3 +1,5 @@
+"use client";
+
 import { Suspense } from "react";
 import { MdOutlineFilterAlt } from "react-icons/md";
 
@@ -8,13 +10,14 @@ import DropdownButton from "@/components/ui/dropdown/dropdown-button";
 import GraficoBarraEmpilhadaVertical from "@/components/ui/graficos/barra-empilhada-vertical";
 import GraficoBarraMultiplas from "@/components/ui/graficos/barras-multiplas";
 import MainLayout from "@/components/ui/layouts/main-layout";
+import Loading from "@/components/ui/loading";
 import Titulo from "@/components/ui/titulo-pages";
 import { Button } from "@/components/ui-shacnui/button";
 
+import { DadosIdeologiaGenero } from "@/core/domain/dtos/dados.dto";
 import { elemento } from "@/core/domain/graficos/types/elemento-dropdown";
 import { PartidoModel } from "@/core/domain/graficos/types/partido";
 import { ProjetoLei } from "@/core/domain/graficos/types/projeto-lei";
-import contarGeneroPorIdeologia from "@/core/lib/web/mock-utils/projeto-utils/contar-genero-por-ideologia";
 import contarPropostasPorParlamentar from "@/core/lib/web/mock-utils/projeto-utils/contar-proposta-por-parlamentar";
 import contarReligiaoPorEtnia from "@/core/lib/web/mock-utils/projeto-utils/contar-religiao-por-etnia";
 import obterEsferasUnicas from "@/core/lib/web/mock-utils/projeto-utils/obter-esferas-unicas";
@@ -23,10 +26,11 @@ import obterGeneroUnico from "@/core/lib/web/mock-utils/projeto-utils/obter-gene
 import obterIdeologiasUnica from "@/core/lib/web/mock-utils/projeto-utils/obter-ideologias-unica";
 import obterPartidosUnicos from "@/core/lib/web/mock-utils/projeto-utils/obter-partidos-unicos";
 import obterProfissoesUnicas from "@/core/lib/web/mock-utils/projeto-utils/obter-profissoes-unicas";
+import { useIdeologiaGenero } from "@/infra/hooks/dados/use-ideologia-genero";
 import { legendas } from "@/mocks/mock-parlamentares";
 import { partidosMock, projetosMock } from "@/mocks/mock-projetos";
 
-const page: React.FC = () => {
+const Page: React.FC = () => {
 	const partidosOrdenados = [...partidosMock].sort(
 		(a, b) => parseInt(b.propostas) - parseInt(a.propostas)
 	);
@@ -37,6 +41,9 @@ const page: React.FC = () => {
 	const partidos = obterPartidosUnicos({ projetos: projetosMock });
 	const ideologias = obterIdeologiasUnica({ projetos: projetosMock });
 	const profissoes = obterProfissoesUnicas({ projetos: projetosMock });
+
+	const { ideologiaGenero, isLoadingIdeologiaGenero } =
+		useIdeologiaGenero();
 
 	const dropdownItems = [
 		{
@@ -75,7 +82,17 @@ const page: React.FC = () => {
 					itemsFiltro={dropdownItems}
 				/>
 				<RankingPartidos partidosOrdenados={partidosOrdenados} />
-				<DadosEstatisticos projetos={projetosMock} legendas={legendas} />
+				{isLoadingIdeologiaGenero ? (
+					<Loading />
+				) : (
+					<DadosEstatisticos
+						projetos={projetosMock}
+						legendas={legendas}
+						ideologiaPorGenero={
+							(ideologiaGenero as DadosIdeologiaGenero[]) ?? []
+						}
+					/>
+				)}
 			</div>
 		</MainLayout>
 	);
@@ -206,6 +223,7 @@ const RankingPartidos = ({ partidosOrdenados }: RankingPartidosProps) => {
 
 interface DadosEstatisticosProps {
 	projetos: ProjetoLei[];
+	ideologiaPorGenero: DadosIdeologiaGenero[];
 	legendas: {
 		texto: string;
 		corTexto: string;
@@ -213,7 +231,11 @@ interface DadosEstatisticosProps {
 	}[];
 }
 
-const DadosEstatisticos = ({ projetos, legendas }: DadosEstatisticosProps) => {
+const DadosEstatisticos = ({
+	projetos,
+	legendas,
+	ideologiaPorGenero,
+}: DadosEstatisticosProps) => {
 	return (
 		<>
 			<article className="flex flex-col justify-center gap-20">
@@ -222,7 +244,7 @@ const DadosEstatisticos = ({ projetos, legendas }: DadosEstatisticosProps) => {
 				</Texto.Raiz>
 				<div className="flex flex-col gap-20">
 					<section className="flex justify-center gap-20">
-						<GraficoBarraMultiplas dados={contarGeneroPorIdeologia(projetos)} />
+						<GraficoBarraMultiplas dados={ideologiaPorGenero ?? []} />
 						<Card.Legenda
 							texto={legendas[0].texto}
 							corTexto={legendas[0].corTexto}
@@ -269,4 +291,4 @@ const DadosEstatisticos = ({ projetos, legendas }: DadosEstatisticosProps) => {
 	);
 };
 
-export default page;
+export default Page;
