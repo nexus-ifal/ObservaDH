@@ -31,6 +31,12 @@ class DadosAPI implements DadosRepository {
 
 		return dados;
 	}
+	async listarProjetosPorAno(): Promise<{ ano: string; quantidade: number }[]> {
+		const response = await conexaoBackend.get("/dados/pl-ano");
+		const dados = response.data.dados;
+
+		return dados;
+	}
 }
 
 export default DadosAPI;

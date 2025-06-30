@@ -1,5 +1,6 @@
 import {
 	DadosIdeologiaGenero,
+	DadosPlPorAno,
 	DadosProjetoEstado,
 	DadosReligiaoRaca,
 } from "../domain/dtos/dados.dto";
@@ -21,6 +22,9 @@ class DadosService implements DadosUseCase {
 	}
 	listarReligiaoRaca(): Promise<DadosReligiaoRaca[]> {
 		return this.adapter.listarReligiaoRaca();
+	}
+	listarProjetosPorAno(): Promise<DadosPlPorAno[]> {
+		return this.adapter.listarProjetosPorAno();
 	}
 }
 
