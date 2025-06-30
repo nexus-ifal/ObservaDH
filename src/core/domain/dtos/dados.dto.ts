@@ -8,3 +8,13 @@ export interface DadosIdeologiaGenero {
 	mulheres: number;
 	ideologia: string;
 }
+
+export interface DadosReligiaoRaca {
+	religiao: string;
+	pardo: number;
+	preto: number;
+	branco: number;
+	amarelo: number;
+	indigena: number;
+	indefinido: number;
+}

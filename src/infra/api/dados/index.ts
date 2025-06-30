@@ -1,6 +1,7 @@
 import {
 	DadosIdeologiaGenero,
 	DadosProjetoEstado,
+	DadosReligiaoRaca,
 } from "@/core/domain/dtos/dados.dto";
 import { DadosRepository } from "@/core/interfaces/repository/dados.repository";
 import { conexaoBackend } from "@/infra/services/conexao-backend/client";
@@ -21,6 +22,13 @@ class DadosAPI implements DadosRepository {
 		const response = await conexaoBackend.get("/dados/ideologia-genero");
 
 		const dados = response.data.dados;
+		return dados;
+	}
+
+	async listarReligiaoRaca(): Promise<DadosReligiaoRaca[]> {
+		const response = await conexaoBackend.get("/dados/religiao-raca");
+		const dados = response.data.dados;
+
 		return dados;
 	}
 }

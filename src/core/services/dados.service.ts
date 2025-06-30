@@ -1,6 +1,7 @@
 import {
 	DadosIdeologiaGenero,
 	DadosProjetoEstado,
+	DadosReligiaoRaca,
 } from "../domain/dtos/dados.dto";
 import { DadosRepository } from "../interfaces/repository/dados.repository";
 import DadosUseCase from "../interfaces/usecase/dados.usecase";
@@ -17,6 +18,9 @@ class DadosService implements DadosUseCase {
 	}
 	listarIdeologiaGenero(): Promise<DadosIdeologiaGenero[]> {
 		return this.adapter.listarIdeologiaGenero();
+	}
+	listarReligiaoRaca(): Promise<DadosReligiaoRaca[]> {
+		return this.adapter.listarReligiaoRaca();
 	}
 }
 
