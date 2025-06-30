@@ -128,23 +128,21 @@ const Filtro = ({ items }: FiltroElementosProps) => {
 	);
 };
 
-const TableHeader = ({ columns }: { columns: string[] }) => {
+const TableHeader = ({ columns }: { columns: { title: string; alignment: string }[] }) => {
 	return (
 		<div className={HEADER_STYLE}>
 			{columns.map((column, index) => (
 				<section
 					key={index}
 					className={
-						index === 0
+						column.alignment === "left"
 							? "w-1/2 h-full px-16 grid grid-cols-2 gap-4 items-center"
 							: "w-1/2 h-full px-12 grid grid-cols-3 gap-4 items-center"
 					}
 				>
-					{column.split(",").map((item, idx) => (
-						<p key={idx} className={item === "Sigla" ? "text-center" : ""}>
-							{item}
-						</p>
-					))}
+					<p className={column.title === "Sigla" ? "text-center" : ""}>
+						{column.title}
+					</p>
 				</section>
 			))}
 		</div>
