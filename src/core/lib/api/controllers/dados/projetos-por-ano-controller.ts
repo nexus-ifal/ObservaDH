@@ -1,8 +1,9 @@
-import { RespostaApi } from "@/core/domain/models/resposta-api";
 import {
 	IListarProjetoPorAnoService,
 	ListarProjetoPorAnoService,
 } from "../../service/dados/projetos-por-ano-service";
+
+import { RespostaApi } from "@/core/domain/models/resposta-api";
 
 export interface IListarProjetosPorAnoController {
 	executar(): Promise<RespostaApi>;

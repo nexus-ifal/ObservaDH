@@ -1,5 +1,6 @@
-import { DadosPlPorAno } from "@/core/domain/dtos/dados.dto";
 import { PrismaClient } from "@prisma/client";
+
+import { DadosPlPorAno } from "@/core/domain/dtos/dados.dto";
 
 export interface IListarProjetoPorAnoService {
 	executar(): Promise<DadosPlPorAno[]>;
@@ -19,7 +20,7 @@ export class ListarProjetoPorAnoService implements IListarProjetoPorAnoService {
 				},
 			});
 			return projetosPorAno.map(
-				(item: { ano: string; _count: { id: any } }) => ({
+				(item: { ano: string; _count: { id: number } }) => ({
 					ano: item.ano,
 					quantidade: item._count.id,
 				})
