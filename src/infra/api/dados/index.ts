@@ -1,5 +1,6 @@
 import {
 	DadosIdeologiaGenero,
+	DadosPautaPorAno,
 	DadosProjetoEstado,
 	DadosReligiaoRaca,
 } from "@/core/domain/dtos/dados.dto";
@@ -13,14 +14,12 @@ class DadosAPI implements DadosRepository {
 			: `/dados/projeto-estado`;
 
 		const response = await conexaoBackend.get(URL);
-
 		const dados = response.data.dados;
 		return dados;
 	}
 
 	async listarIdeologiaGenero(): Promise<DadosIdeologiaGenero[]> {
 		const response = await conexaoBackend.get("/dados/ideologia-genero");
-
 		const dados = response.data.dados;
 		return dados;
 	}
@@ -28,13 +27,16 @@ class DadosAPI implements DadosRepository {
 	async listarReligiaoRaca(): Promise<DadosReligiaoRaca[]> {
 		const response = await conexaoBackend.get("/dados/religiao-raca");
 		const dados = response.data.dados;
-
 		return dados;
 	}
 	async listarProjetosPorAno(): Promise<{ ano: string; quantidade: number }[]> {
 		const response = await conexaoBackend.get("/dados/projeto-por-ano");
 		const dados = response.data.dados;
-
+		return dados;
+	}
+	async listarPautaPorAno(): Promise<DadosPautaPorAno[]> {
+		const response = await conexaoBackend.get("/dados/pauta-por-ano");
+		const dados = response.data.dados;
 		return dados;
 	}
 }

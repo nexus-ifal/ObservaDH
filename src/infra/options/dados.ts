@@ -23,3 +23,8 @@ export const listarProjetosPorAnoOptions = () => ({
 	queryKey: [...getDadosBaseQueryKey(), "listarProjetosPorAno"],
 	queryFn: () => usecase.listarProjetosPorAno(),
 });
+
+export const listarPautaPorAnoOptions = () => ({
+	queryKey: [...getDadosBaseQueryKey(), "listarPautaPorAno"],
+	queryFn: () => usecase.listarPautaPorAno(),
+});

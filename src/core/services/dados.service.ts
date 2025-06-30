@@ -1,5 +1,6 @@
 import {
 	DadosIdeologiaGenero,
+	DadosPautaPorAno,
 	DadosPlPorAno,
 	DadosProjetoEstado,
 	DadosReligiaoRaca,
@@ -25,6 +26,9 @@ class DadosService implements DadosUseCase {
 	}
 	listarProjetosPorAno(): Promise<DadosPlPorAno[]> {
 		return this.adapter.listarProjetosPorAno();
+	}
+	listarPautaPorAno(): Promise<DadosPautaPorAno[]> {
+		return this.adapter.listarPautaPorAno();
 	}
 }
 
