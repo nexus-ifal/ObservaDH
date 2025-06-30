@@ -18,3 +18,8 @@ export interface DadosReligiaoRaca {
 	indigena: number;
 	indefinido: number;
 }
+
+export interface DadosPlPorAno {
+	ano: string;
+	quantidade: number;
+}
