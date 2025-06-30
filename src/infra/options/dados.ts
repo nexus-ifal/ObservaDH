@@ -18,3 +18,8 @@ export const listarReligiaoRacaOptions = () => ({
 	queryKey: [...getDadosBaseQueryKey(), "listarReligiaoRaca"],
 	queryFn: () => usecase.listarReligiaoRaca(),
 });
+
+export const listarProjetosPorAnoOptions = () => ({
+	queryKey: [...getDadosBaseQueryKey(), "listarProjetosPorAno"],
+	queryFn: () => usecase.listarProjetosPorAno(),
+});
