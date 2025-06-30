@@ -62,7 +62,7 @@ const cardsEsfera = [
 		titulo: "Federal",
 		texto:
 			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam eveniet inventore quo error est natus facilis. Quod odit voluptates libero dignissimos veniam accusamus omnis, autem architecto. Consequatur in error maxime.",
-		rota: "/projetos",
+		rota: "/projetos?esfera=federal",
 		cor: "text-[#FDFF78]",
 	},
 	{
@@ -70,7 +70,7 @@ const cardsEsfera = [
 		titulo: "Estadual",
 		texto:
 			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam eveniet inventore quo error est natus facilis. Quod odit voluptates libero dignissimos veniam accusamus omnis, autem architecto. Consequatur in error maxime.",
-		rota: "/projetos",
+		rota: "/projetos?esfera=estadual",
 		cor: "text-[#F693F9]",
 	},
 ];

@@ -14,6 +14,7 @@ const Header: React.FC = () => {
 						</Link>
 						<ul className="flex text-3xl font-normal text-white gap-[3.125rem] font">
 							{[
+								{ titulo: "Home", rota: "/" },
 								{ titulo: "PLs", rota: "/projetos" },
 								{ titulo: "Parlamentares", rota: "/parlamentares" },
 								{ titulo: "Direitos", rota: "/direitos" },
