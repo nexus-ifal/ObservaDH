@@ -3,3 +3,8 @@ export interface DadosProjetoEstado {
 	uf: string;
 	valor: number;
 }
+export interface DadosIdeologiaGenero {
+	homens: number;
+	mulheres: number;
+	ideologia: string;
+}
