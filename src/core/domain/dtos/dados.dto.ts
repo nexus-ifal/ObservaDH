@@ -23,3 +23,11 @@ export interface DadosPlPorAno {
 	ano: string;
 	quantidade: number;
 }
+
+export interface DadosPautaPorAno {
+	ano: string;
+	atletasTrans: number;
+	propagandaLGBT: number;
+	linguagensNeutra: number;
+	banheirosMultigenero: number;
+}
