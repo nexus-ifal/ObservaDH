@@ -15,6 +15,7 @@ import GraficoRosquinha from "@/components/ui/graficos/rosquinha";
 import MainLayout from "@/components/ui/layouts/main-layout";
 import Titulo from "@/components/ui/titulo-pages";
 
+import { legendas } from "@/content/content-parlamentares";
 import { DadosGraficoBarrasVertical } from "@/core/domain/types/barras-vertical";
 import { CarrosselPlsProps } from "@/core/domain/types/carrossel-interface";
 import { elemento } from "@/core/domain/types/elemento-dropdown";
@@ -23,7 +24,6 @@ import {
 	graficoBarrasVerticalDadosMock,
 	graficoRosquinhaDadosMock,
 } from "@/mocks/mock-direitos";
-import { legendas } from "@/content/content-parlamentares";
 import { projetosMock } from "@/mocks/mock-projetos";
 import obterPautasUnicas from "@/mocks/web/mock-utils/projeto-utils/obter-pautas-unicas";
 
