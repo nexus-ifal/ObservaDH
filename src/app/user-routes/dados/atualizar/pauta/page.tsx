@@ -32,7 +32,6 @@ import { APIAtualizarPautaPayload } from "@/infra/options/pauta";
 
 const formSchema = z.object({
 	nome: z.string().min(1, { message: "Entrada obrigatória!" }),
-	// sigla removido
 });
 
 interface DialogProps {

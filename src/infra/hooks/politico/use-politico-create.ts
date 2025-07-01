@@ -23,8 +23,6 @@ export function usePoliticoCreate() {
 				},
 				onError: (error) => {
 					console.error("Error creating politico:", error);
-					// Optionally, display a user-friendly error message
-					// toast.error("Failed to create politico. Please try again.");
 				},
 			}
 		);

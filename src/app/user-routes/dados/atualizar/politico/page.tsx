@@ -45,7 +45,6 @@ import { usePoliticoAtualizar } from "@/infra/hooks/politico/use-politico-update
 import { useProfissao } from "@/infra/hooks/profissao/use-profissao";
 import { useProjeto } from "@/infra/hooks/projeto/use-projeto";
 
-// Adapte ou substitua pelo DTO correto
 const formSchema = z.object({
 	nome: z.string().min(1, { message: "Nome obrigatório" }),
 	genero: z.string().min(1, { message: "Gênero obrigatório" }),

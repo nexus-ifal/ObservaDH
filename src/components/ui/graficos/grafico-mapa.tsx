@@ -27,7 +27,6 @@ interface MapaBrasilProps {
 	error?: string;
 }
 
-//TODO: fazer o mapa de calor funcional
 const GraficoMapa: React.FC<MapaBrasilProps> = ({
 	dados,
 	isLoading,

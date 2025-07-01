@@ -173,8 +173,7 @@ const Page: React.FC = () => {
 			return () => clearTimeout(timeout);
 		}
 	}, [hasAtualizarProjetoError]);
-
-	// Preencher o formulário ao selecionar
+	
 	useEffect(() => {
 		if (selectedProjeto) {
 			form.setValue("ano", selectedProjeto.ano?.toString() || "");
