@@ -106,5 +106,4 @@ const cardsInformativos = [
 	},
 ];
 
-
 export { apresentacao, cardsEsfera, cardsInformativos };

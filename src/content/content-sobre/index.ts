@@ -1,4 +1,11 @@
-const mockSobre = [
+interface SobreProps {
+	textoLongo: string;
+	texto: string;
+	urlImagem: string;
+	isReverse?: boolean;
+}
+
+const sobre: SobreProps[] = [
 	{
 		textoLongo:
 			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin accumsan nulla justo, sed molestie nisi scelerisque vulputate. Integer nibh risus, pretium et neque sed, efficitur vehicula tortor. Integer ut ullamcorper ex. Aenean porta, nisi sed gravida pellentesque, mi turpis porta leo, in euismod massa mauris eget augue. Aenean urna tortor, scelerisque vitae vulputate a, lobortis et metus. Vivamus ut turpis lobortis, vulputate mauris id, sodales enim. Fusce bibendum sapien leo, at vestibulum erat ornare eget. Maecenas accumsan, lectus fermentum dapibus mattis, velit leo euismod leo, non molestie odio enim ac nulla. Nam et ultricies erat.",
@@ -17,4 +24,4 @@ const mockSobre = [
 	},
 ];
 
-export { mockSobre };
+export { sobre };

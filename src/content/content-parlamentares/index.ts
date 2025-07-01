@@ -1,4 +1,10 @@
-const legendas = [
+interface LegendaProps {
+	corTexto: string;
+	resumo: string;
+	texto: string;
+}
+
+const legendas: LegendaProps[] = [
 	{
 		corTexto: "text-[#D974FD]",
 		resumo:

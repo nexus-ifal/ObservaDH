@@ -11,7 +11,7 @@ interface DevInfo {
 	bio: string;
 }
 
-const infoDevsMock: DevInfo[] = [
+const infoDevs: DevInfo[] = [
 	{
 		nome: "Júlio César",
 		foto: "https://github.com/follijulio.png",
@@ -49,4 +49,4 @@ const infoDevsMock: DevInfo[] = [
 		bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin accumsan nulla justo, sed molestie nisi scelerisque vulputate. Integer nibh risus, pretium et neque sed, efficitur vehicula tortor. Integer ut ullamcorper ex. Aenean porta, nisi sed gravida pellentesque, mi turpis porta leo, in euismod massa mauris eget augue. Aenean urna tortor, scelerisque vitae vulputate a, lobortis et metus.    ",
 	},
 ];
-export { infoDevsMock };
+export { infoDevs };
