@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { ListarProjetosPorAnoController } from "@/core/lib/api/controllers/dados/projetos-por-ano-controller";
+import { ListarProjetosPorAnoController } from "@/adapters/api/controllers/dados/projetos-por-ano-controller";
 
 export async function GET() {
 	try {

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
+import { BuscarEstadoController } from "@/adapters/api/controllers/estado/buscar-estado-controller";
 import { RespostaApi } from "@/core/domain/models/resposta-api";
-import { BuscarEstadoController } from "@/core/lib/api/controllers/estado/buscar-estado-controller";
 
 export async function GET(
 	request: Request,

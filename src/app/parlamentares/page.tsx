@@ -3,6 +3,7 @@
 import { Suspense } from "react";
 import { MdOutlineFilterAlt } from "react-icons/md";
 
+import { Button } from "@/components/external/ui-shacnui/button";
 import Card from "@/components/ui/cards";
 import CardLegenda from "@/components/ui/cards/card-legenda";
 import Texto from "@/components/ui/componente-texto";
@@ -12,26 +13,25 @@ import GraficoBarraMultiplas from "@/components/ui/graficos/barras-multiplas";
 import MainLayout from "@/components/ui/layouts/main-layout";
 import Loading from "@/components/ui/loading";
 import Titulo from "@/components/ui/titulo-pages";
-import { Button } from "@/components/ui-shacnui/button";
 
+import { legendas } from "@/content/content-parlamentares";
 import {
 	DadosIdeologiaGenero,
 	DadosReligiaoRaca,
 } from "@/core/domain/dtos/dados.dto";
-import { elemento } from "@/core/domain/graficos/types/elemento-dropdown";
-import { PartidoModel } from "@/core/domain/graficos/types/partido";
-import { ProjetoLei } from "@/core/domain/graficos/types/projeto-lei";
-import contarPropostasPorParlamentar from "@/core/lib/web/mock-utils/projeto-utils/contar-proposta-por-parlamentar";
-import obterEsferasUnicas from "@/core/lib/web/mock-utils/projeto-utils/obter-esferas-unicas";
-import obterEstadosUnicos from "@/core/lib/web/mock-utils/projeto-utils/obter-estados-unico";
-import obterGeneroUnico from "@/core/lib/web/mock-utils/projeto-utils/obter-genero-unico";
-import obterIdeologiasUnica from "@/core/lib/web/mock-utils/projeto-utils/obter-ideologias-unica";
-import obterPartidosUnicos from "@/core/lib/web/mock-utils/projeto-utils/obter-partidos-unicos";
-import obterProfissoesUnicas from "@/core/lib/web/mock-utils/projeto-utils/obter-profissoes-unicas";
-import { useIdeologiaGenero } from "@/infra/hooks/dados/use-ideologia-genero";
-import { useReligiaoRaca } from "@/infra/hooks/dados/use-religiao-raca";
-import { legendas } from "@/mocks/mock-parlamentares";
+import { elemento } from "@/core/domain/types/elemento-dropdown";
+import { PartidoModel } from "@/core/domain/types/partido";
+import { ProjetoLei } from "@/core/domain/types/projeto-lei";
+import { useIdeologiaGenero } from "@/hooks/dados/use-ideologia-genero";
+import { useReligiaoRaca } from "@/hooks/dados/use-religiao-raca";
 import { partidosMock, projetosMock } from "@/mocks/mock-projetos";
+import contarPropostasPorParlamentar from "@/mocks/web/mock-utils/projeto-utils/contar-proposta-por-parlamentar";
+import obterEsferasUnicas from "@/mocks/web/mock-utils/projeto-utils/obter-esferas-unicas";
+import obterEstadosUnicos from "@/mocks/web/mock-utils/projeto-utils/obter-estados-unico";
+import obterGeneroUnico from "@/mocks/web/mock-utils/projeto-utils/obter-genero-unico";
+import obterIdeologiasUnica from "@/mocks/web/mock-utils/projeto-utils/obter-ideologias-unica";
+import obterPartidosUnicos from "@/mocks/web/mock-utils/projeto-utils/obter-partidos-unicos";
+import obterProfissoesUnicas from "@/mocks/web/mock-utils/projeto-utils/obter-profissoes-unicas";
 
 const Page: React.FC = () => {
 	const partidosOrdenados = [...partidosMock].sort(

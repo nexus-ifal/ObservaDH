@@ -5,7 +5,7 @@ import {
 	apresentacao,
 	cardsEsfera,
 	cardsInformativos,
-} from "../mocks/mock-home";
+} from "../content/content-home";
 
 const page: React.FC = () => {
 	//render

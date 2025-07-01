@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 
+import { CriarEstadoController } from "@/adapters/api/controllers/estado/criar-estado-controller";
+import { ListarEstadoController } from "@/adapters/api/controllers/estado/listar-estado-controller";
 import { CreateEstadoDTO } from "@/core/domain/dtos/estado.dto";
 import { RespostaApi } from "@/core/domain/models/resposta-api";
-import { CriarEstadoController } from "@/core/lib/api/controllers/estado/criar-estado-controller";
-import { ListarEstadoController } from "@/core/lib/api/controllers/estado/listar-estado-controller";
 
 //! Handler - Criação de estados
 export async function POST(request: NextRequest) {

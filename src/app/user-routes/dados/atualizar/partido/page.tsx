@@ -13,8 +13,8 @@ import {
 	AlertDialogContent,
 	AlertDialogHeader,
 	AlertDialogTitle,
-} from "@/components/ui-shacnui/alert-dialog";
-import { Button } from "@/components/ui-shacnui/button";
+} from "@/components/external/ui-shacnui/alert-dialog";
+import { Button } from "@/components/external/ui-shacnui/button";
 import {
 	Form,
 	FormControl,
@@ -22,13 +22,14 @@ import {
 	FormItem,
 	FormLabel,
 	FormMessage,
-} from "@/components/ui-shacnui/form";
-import { Input } from "@/components/ui-shacnui/input";
+} from "@/components/external/ui-shacnui/form";
+import { Input } from "@/components/external/ui-shacnui/input";
+
+import { oswald } from "../../../../../fonts/fonts";
 
 import { ResponsePartidoDTO } from "@/core/domain/dtos/partido.dto";
-import { oswald } from "@/core/lib/fonts/fonts";
-import { usePartido } from "@/infra/hooks/partido/use-partido";
-import { usePartidoAtualizar } from "@/infra/hooks/partido/use-partido-update";
+import { usePartido } from "@/hooks/partido/use-partido";
+import { usePartidoAtualizar } from "@/hooks/partido/use-partido-update";
 
 const formSchema = z.object({
 	nome: z.string().min(1, { message: "Entrada obrigatória!" }),

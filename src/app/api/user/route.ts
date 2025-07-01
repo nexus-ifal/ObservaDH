@@ -2,10 +2,10 @@ import { Role } from "@prisma/client";
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 
+import { CriarUserController } from "@/adapters/api/controllers/user/criar-user-controller";
+import { ListarUsersController } from "@/adapters/api/controllers/user/listar-user-controller";
+import { prismaClient } from "@/adapters/db/prisma";
 import { RespostaApi } from "@/core/domain/models/resposta-api";
-import { CriarUserController } from "@/core/lib/api/controllers/user/criar-user-controller";
-import { ListarUsersController } from "@/core/lib/api/controllers/user/listar-user-controller";
-import { prismaClient } from "@/services/prisma/prisma";
 
 const NUM_MAX_ADMIN_USERS = parseInt(
 	process.env.NUM_MAX_ADMIN_USERS || "3",

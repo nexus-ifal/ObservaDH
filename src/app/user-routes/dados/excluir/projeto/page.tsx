@@ -5,20 +5,21 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import z from "zod";
 
-import Loading from "@/components/ui/loading";
 import {
 	AlertDialog,
 	AlertDialogAction,
 	AlertDialogContent,
 	AlertDialogHeader,
 	AlertDialogTitle,
-} from "@/components/ui-shacnui/alert-dialog";
+} from "@/components/external/ui-shacnui/alert-dialog";
+import Loading from "@/components/ui/loading";
+
+import { oswald, titilliumWeb } from "../../../../../fonts/fonts";
 
 import { ResponseProjetoDTO } from "@/core/domain/dtos/projeto.dto";
-import { oswald, titilliumWeb } from "@/core/lib/fonts/fonts";
-import { useProjeto } from "@/infra/hooks/projeto/use-projeto";
-import { useProjetoExcluir } from "@/infra/hooks/projeto/use-projeto-delete";
-import { APIExcluirProjetoPayload } from "@/infra/options/projeto";
+import { APIExcluirProjetoPayload } from "@/hooks/options/projeto";
+import { useProjeto } from "@/hooks/projeto/use-projeto";
+import { useProjetoExcluir } from "@/hooks/projeto/use-projeto-delete";
 
 const deleteSchema = z.object({
 	projetoId: z.string().min(1, "Selecione um projeto de lei"),

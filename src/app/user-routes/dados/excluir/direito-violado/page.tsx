@@ -12,13 +12,14 @@ import {
 	AlertDialogContent,
 	AlertDialogHeader,
 	AlertDialogTitle,
-} from "@/components/ui-shacnui/alert-dialog";
+} from "@/components/external/ui-shacnui/alert-dialog";
+
+import { oswald, titilliumWeb } from "../../../../../fonts/fonts";
 
 import { ResponseDireitoVioladoDTO } from "@/core/domain/dtos/direito-violado.dto";
-import { oswald, titilliumWeb } from "@/core/lib/fonts/fonts";
-import { useDireitoViolado } from "@/infra/hooks/direito-violado/use-direito-violado";
-import { useDireitoVioladoExcluir } from "@/infra/hooks/direito-violado/use-direito-violado-delete";
-import { APIExcluirDireitoVioladoPayload } from "@/infra/options/direito-violado";
+import { useDireitoViolado } from "@/hooks/direito-violado/use-direito-violado";
+import { useDireitoVioladoExcluir } from "@/hooks/direito-violado/use-direito-violado-delete";
+import { APIExcluirDireitoVioladoPayload } from "@/hooks/options/direito-violado";
 
 const deleteSchema = z.object({
 	direitoId: z.string().min(1, "Selecione um direito violado"),

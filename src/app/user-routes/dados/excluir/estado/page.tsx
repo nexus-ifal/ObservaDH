@@ -12,12 +12,13 @@ import {
 	AlertDialogContent,
 	AlertDialogHeader,
 	AlertDialogTitle,
-} from "@/components/ui-shacnui/alert-dialog";
+} from "@/components/external/ui-shacnui/alert-dialog";
 
-import { oswald, titilliumWeb } from "@/core/lib/fonts/fonts";
-import { useEstado } from "@/infra/hooks/estado/use-estado";
-import { useEstadoExcluir } from "@/infra/hooks/estado/use-estado-delete";
-import { APIExcluirEstadoPayload } from "@/infra/options/estado";
+import { oswald, titilliumWeb } from "../../../../../fonts/fonts";
+
+import { useEstado } from "@/hooks/estado/use-estado";
+import { useEstadoExcluir } from "@/hooks/estado/use-estado-delete";
+import { APIExcluirEstadoPayload } from "@/hooks/options/estado";
 
 const deleteSchema = z.object({
 	estadoId: z.string().min(1, "Selecione um estado"),

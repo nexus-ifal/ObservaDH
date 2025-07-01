@@ -12,13 +12,14 @@ import {
 	AlertDialogContent,
 	AlertDialogHeader,
 	AlertDialogTitle,
-} from "@/components/ui-shacnui/alert-dialog";
+} from "@/components/external/ui-shacnui/alert-dialog";
+
+import { oswald, titilliumWeb } from "../../../../../fonts/fonts";
 
 import { ResponsePartidoDTO } from "@/core/domain/dtos/partido.dto";
-import { oswald, titilliumWeb } from "@/core/lib/fonts/fonts";
-import { usePartido } from "@/infra/hooks/partido/use-partido";
-import { usePartidoExcluir } from "@/infra/hooks/partido/use-partido-delete";
-import { APIExcluirPartidoPayload } from "@/infra/options/partido";
+import { APIExcluirPartidoPayload } from "@/hooks/options/partido";
+import { usePartido } from "@/hooks/partido/use-partido";
+import { usePartidoExcluir } from "@/hooks/partido/use-partido-delete";
 
 const deleteSchema = z.object({
 	partidoId: z.string().min(1, "Selecione um partido"),

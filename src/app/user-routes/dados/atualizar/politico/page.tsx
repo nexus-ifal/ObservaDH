@@ -6,8 +6,6 @@ import { FaTrash } from "react-icons/fa6";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 
-import { MultiSelectPopover } from "@/components/ui/dropdown/MultiSelectPopover";
-import Loading from "@/components/ui/loading";
 import {
 	AlertDialog,
 	AlertDialogAction,
@@ -15,8 +13,8 @@ import {
 	AlertDialogFooter,
 	AlertDialogHeader,
 	AlertDialogTitle,
-} from "@/components/ui-shacnui/alert-dialog";
-import { Button } from "@/components/ui-shacnui/button";
+} from "@/components/external/ui-shacnui/alert-dialog";
+import { Button } from "@/components/external/ui-shacnui/button";
 import {
 	Form,
 	FormControl,
@@ -24,28 +22,29 @@ import {
 	FormItem,
 	FormLabel,
 	FormMessage,
-} from "@/components/ui-shacnui/form";
-import { Input } from "@/components/ui-shacnui/input";
+} from "@/components/external/ui-shacnui/form";
+import { Input } from "@/components/external/ui-shacnui/input";
 import {
 	Select,
 	SelectContent,
 	SelectItem,
 	SelectTrigger,
 	SelectValue,
-} from "@/components/ui-shacnui/select";
+} from "@/components/external/ui-shacnui/select";
+import { MultiSelectPopover } from "@/components/ui/dropdown/MultiSelectPopover";
+import Loading from "@/components/ui/loading";
 
-import { APIAtualizarPoliticoPayload } from "./../../../../../infra/options/politico";
+import { oswald } from "../../../../../fonts/fonts";
+import { APIAtualizarPoliticoPayload } from "../../../../../hooks/options/politico";
 
 import { ResponsePoliticoDTO } from "@/core/domain/dtos/politico.dto";
-import { oswald } from "@/core/lib/fonts/fonts";
-import { useEstado } from "@/infra/hooks/estado/use-estado";
-import { usePartido } from "@/infra/hooks/partido/use-partido";
-import { usePolitico } from "@/infra/hooks/politico/use-politico";
-import { usePoliticoAtualizar } from "@/infra/hooks/politico/use-politico-update";
-import { useProfissao } from "@/infra/hooks/profissao/use-profissao";
-import { useProjeto } from "@/infra/hooks/projeto/use-projeto";
+import { useEstado } from "@/hooks/estado/use-estado";
+import { usePartido } from "@/hooks/partido/use-partido";
+import { usePolitico } from "@/hooks/politico/use-politico";
+import { usePoliticoAtualizar } from "@/hooks/politico/use-politico-update";
+import { useProfissao } from "@/hooks/profissao/use-profissao";
+import { useProjeto } from "@/hooks/projeto/use-projeto";
 
-// Adapte ou substitua pelo DTO correto
 const formSchema = z.object({
 	nome: z.string().min(1, { message: "Nome obrigatório" }),
 	genero: z.string().min(1, { message: "Gênero obrigatório" }),
@@ -582,12 +581,12 @@ const Page: React.FC = () => {
 											Projetos:
 										</FormLabel>
 										<MultiSelectPopover
-											options={
-												projetos?.map((p) => ({
+											options={(Array.isArray(projetos) ? projetos : []).map(
+												(p) => ({
 													value: p.id,
 													label: p.numeroPl,
-												})) ?? []
-											}
+												})
+											)}
 											value={field.value}
 											onChange={field.onChange}
 											placeholder="Número do projeto"

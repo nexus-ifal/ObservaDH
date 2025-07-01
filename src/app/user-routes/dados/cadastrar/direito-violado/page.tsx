@@ -13,8 +13,8 @@ import {
 	AlertDialogFooter,
 	AlertDialogHeader,
 	AlertDialogTitle,
-} from "@/components/ui-shacnui/alert-dialog";
-import { Button } from "@/components/ui-shacnui/button";
+} from "@/components/external/ui-shacnui/alert-dialog";
+import { Button } from "@/components/external/ui-shacnui/button";
 import {
 	Form,
 	FormControl,
@@ -22,12 +22,13 @@ import {
 	FormItem,
 	FormLabel,
 	FormMessage,
-} from "@/components/ui-shacnui/form";
-import { Input } from "@/components/ui-shacnui/input";
-import { Textarea } from "@/components/ui-shacnui/textarea";
+} from "@/components/external/ui-shacnui/form";
+import { Input } from "@/components/external/ui-shacnui/input";
+import { Textarea } from "@/components/external/ui-shacnui/textarea";
 
-import { oswald } from "@/core/lib/fonts/fonts";
-import { useDireitoVioladoCreate } from "@/infra/hooks/direito-violado/use-direito-violado-create";
+import { oswald } from "../../../../../fonts/fonts";
+
+import { useDireitoVioladoCreate } from "@/hooks/direito-violado/use-direito-violado-create";
 
 const formSchema = z.object({
 	nome: z.string().min(1, {

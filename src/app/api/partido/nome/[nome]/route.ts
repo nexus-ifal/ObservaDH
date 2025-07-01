@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
+import { BuscarPartidoController } from "@/adapters/api/controllers/partido/buscar-partido-controller";
 import { RespostaApi } from "@/core/domain/models/resposta-api";
-import { BuscarPartidoController } from "@/core/lib/api/controllers/partido/buscar-partido-controller";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function handleError(error: any, message: string) {

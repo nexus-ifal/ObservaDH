@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { ListarIdeologiaGeneroController } from "@/core/lib/api/controllers/dados/ideologia-genero-controller";
+import { ListarIdeologiaGeneroController } from "@/adapters/api/controllers/dados/ideologia-genero-controller";
 
 export async function GET() {
 	try {

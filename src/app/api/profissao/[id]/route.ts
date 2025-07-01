@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 
+import { AtualizarProfissaoController } from "@/adapters/api/controllers/profissao/atualizar-profissao-controller";
+import { BuscarProfissaoController } from "@/adapters/api/controllers/profissao/buscar-profissao-controller";
+import { DeletarProfissaoController } from "@/adapters/api/controllers/profissao/deletar-profissao-controller";
 import { UpdateProfissaoDTO } from "@/core/domain/dtos/profissao.dto";
 import { RespostaApi } from "@/core/domain/models/resposta-api";
-import { AtualizarProfissaoController } from "@/core/lib/api/controllers/profissao/atualizar-profissao-controller";
-import { BuscarProfissaoController } from "@/core/lib/api/controllers/profissao/buscar-profissao-controller";
-import { DeletarProfissaoController } from "@/core/lib/api/controllers/profissao/deletar-profissao-controller";
 
 function validateId(id?: string): NextResponse | undefined {
 	if (!id || id.trim() === "") {

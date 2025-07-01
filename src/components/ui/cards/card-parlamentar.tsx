@@ -8,21 +8,21 @@ import {
 	AlertDialogContent,
 	AlertDialogDescription,
 	AlertDialogTrigger,
-} from "@/components/ui-shacnui/alert-dialog";
+} from "@/components/external/ui-shacnui/alert-dialog";
 import {
 	Carousel,
 	CarouselContent,
 	CarouselItem,
 	CarouselNext,
 	CarouselPrevious,
-} from "@/components/ui-shacnui/carousel";
+} from "@/components/external/ui-shacnui/carousel";
 
 import Texto from "../componente-texto";
 
 import CardItemRenderizacao from "./card-item-renderizacao";
 import CardMiniProjetos from "./card-mini-projeto";
 
-import { parlamentar } from "@/core/domain/graficos/types/parlamentar";
+import { parlamentar } from "@/core/domain/types/parlamentar";
 import { projetosMock } from "@/mocks/mock-projetos";
 
 interface saibaMaisProps {

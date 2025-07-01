@@ -13,8 +13,8 @@ import {
 	AlertDialogContent,
 	AlertDialogHeader,
 	AlertDialogTitle,
-} from "@/components/ui-shacnui/alert-dialog";
-import { Button } from "@/components/ui-shacnui/button";
+} from "@/components/external/ui-shacnui/alert-dialog";
+import { Button } from "@/components/external/ui-shacnui/button";
 import {
 	Form,
 	FormControl,
@@ -22,17 +22,17 @@ import {
 	FormItem,
 	FormLabel,
 	FormMessage,
-} from "@/components/ui-shacnui/form";
-import { Input } from "@/components/ui-shacnui/input";
+} from "@/components/external/ui-shacnui/form";
+import { Input } from "@/components/external/ui-shacnui/input";
 
-import { oswald } from "@/core/lib/fonts/fonts";
-import { usePauta } from "@/infra/hooks/pauta/use-pauta";
-import { usePautaAtualizar } from "@/infra/hooks/pauta/use-pauta-update";
-import { APIAtualizarPautaPayload } from "@/infra/options/pauta";
+import { oswald } from "../../../../../fonts/fonts";
+
+import { APIAtualizarPautaPayload } from "@/hooks/options/pauta";
+import { usePauta } from "@/hooks/pauta/use-pauta";
+import { usePautaAtualizar } from "@/hooks/pauta/use-pauta-update";
 
 const formSchema = z.object({
 	nome: z.string().min(1, { message: "Entrada obrigatória!" }),
-	// sigla removido
 });
 
 interface DialogProps {

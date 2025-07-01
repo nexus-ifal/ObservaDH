@@ -3,8 +3,8 @@ import {
 	ResponsePautaDTO,
 	UpdatePautaDTO,
 } from "@/core/domain/dtos/pauta.dto";
-import { PautaRepository } from "@/core/interfaces/repository/pauta.repository";
-import { conexaoBackend } from "@/infra/services/conexao-backend/client";
+import { PautaRepository } from "@/core/repositories/pauta.repository";
+import { conexaoBackend } from "@/infra/api/client";
 
 class PautaAPI implements PautaRepository {
 	async listar(): Promise<ResponsePautaDTO[]> {

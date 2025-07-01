@@ -3,8 +3,8 @@ import {
 	ResponseIdeologiaDTO,
 	UpdateIdeologiaDTO,
 } from "@/core/domain/dtos/ideologia.dto";
-import { IdeologiaRepository } from "@/core/interfaces/repository/ideologia.repository";
-import { conexaoBackend } from "@/infra/services/conexao-backend/client";
+import { IdeologiaRepository } from "@/core/repositories/ideologia.repository";
+import { conexaoBackend } from "@/infra/api/client";
 
 class IdeologiaAPI implements IdeologiaRepository {
 	async listar(): Promise<ResponseIdeologiaDTO[]> {

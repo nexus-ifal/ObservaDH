@@ -7,16 +7,14 @@ import { ScaleLoader } from "react-spinners";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 
-import { MultiSelectPopover } from "@/components/ui/dropdown/MultiSelectPopover";
-import Loading from "@/components/ui/loading";
 import {
 	AlertDialog,
 	AlertDialogAction,
 	AlertDialogContent,
 	AlertDialogHeader,
 	AlertDialogTitle,
-} from "@/components/ui-shacnui/alert-dialog";
-import { Button } from "@/components/ui-shacnui/button";
+} from "@/components/external/ui-shacnui/alert-dialog";
+import { Button } from "@/components/external/ui-shacnui/button";
 import {
 	Form,
 	FormControl,
@@ -24,26 +22,29 @@ import {
 	FormItem,
 	FormLabel,
 	FormMessage,
-} from "@/components/ui-shacnui/form";
-import { Input } from "@/components/ui-shacnui/input";
+} from "@/components/external/ui-shacnui/form";
+import { Input } from "@/components/external/ui-shacnui/input";
 import {
 	Select,
 	SelectContent,
 	SelectItem,
 	SelectTrigger,
 	SelectValue,
-} from "@/components/ui-shacnui/select";
-import { Textarea } from "@/components/ui-shacnui/textarea";
+} from "@/components/external/ui-shacnui/select";
+import { Textarea } from "@/components/external/ui-shacnui/textarea";
+import { MultiSelectPopover } from "@/components/ui/dropdown/MultiSelectPopover";
+import Loading from "@/components/ui/loading";
+
+import { oswald } from "../../../../../fonts/fonts";
 
 import { ResponseProjetoDTO } from "@/core/domain/dtos/projeto.dto";
-import { oswald } from "@/core/lib/fonts/fonts";
-import { useDireitoViolado } from "@/infra/hooks/direito-violado/use-direito-violado";
-import { useIdeologia } from "@/infra/hooks/ideologia/use-ideologia";
-import { usePauta } from "@/infra/hooks/pauta/use-pauta";
-import { usePolitico } from "@/infra/hooks/politico/use-politico";
-import { useProjeto } from "@/infra/hooks/projeto/use-projeto";
-import { useProjetoAtualizar } from "@/infra/hooks/projeto/use-projeto-update";
-import { APIAtualizarProjetoPayload } from "@/infra/options/projeto";
+import { useDireitoViolado } from "@/hooks/direito-violado/use-direito-violado";
+import { useIdeologia } from "@/hooks/ideologia/use-ideologia";
+import { APIAtualizarProjetoPayload } from "@/hooks/options/projeto";
+import { usePauta } from "@/hooks/pauta/use-pauta";
+import { usePolitico } from "@/hooks/politico/use-politico";
+import { useProjeto } from "@/hooks/projeto/use-projeto";
+import { useProjetoAtualizar } from "@/hooks/projeto/use-projeto-update";
 
 const formSchema = z.object({
 	ano: z
@@ -174,7 +175,6 @@ const Page: React.FC = () => {
 		}
 	}, [hasAtualizarProjetoError]);
 
-	// Preencher o formulário ao selecionar
 	useEffect(() => {
 		if (selectedProjeto) {
 			form.setValue("ano", selectedProjeto.ano?.toString() || "");
@@ -202,7 +202,7 @@ const Page: React.FC = () => {
 	}, [selectedProjeto]);
 
 	const filteredProjetos = useMemo(() => {
-		if (!projetos) return [];
+		if (!Array.isArray(projetos)) return [];
 		if (!searchTerm) return projetos;
 		return projetos.filter((p) =>
 			p.numeroPl.toLowerCase().includes(searchTerm.toLowerCase())
@@ -507,12 +507,13 @@ const Page: React.FC = () => {
 										</FormLabel>
 										<FormControl>
 											<MultiSelectPopover
-												options={
-													direitosViolados?.map((d) => ({
-														value: d.id,
-														label: d.nome,
-													})) ?? []
-												}
+												options={(Array.isArray(direitosViolados)
+													? direitosViolados
+													: []
+												).map((d) => ({
+													value: d.id,
+													label: d.nome,
+												}))}
 												value={field.value ? field.value.split(";") : []}
 												onChange={(vals) => field.onChange(vals.join(";"))}
 												placeholder="Direitos Violados"

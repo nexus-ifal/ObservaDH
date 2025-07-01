@@ -2,15 +2,15 @@
 
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 
-import { Card, CardContent } from "@/components/ui-shacnui/card";
+import { Card, CardContent } from "@/components/external/ui-shacnui/card";
 import {
 	ChartConfig,
 	ChartContainer,
 	ChartTooltip,
 	ChartTooltipContent,
-} from "@/components/ui-shacnui/chart";
+} from "@/components/external/ui-shacnui/chart";
 
-import { DadosGraficoBarrasVertical } from "@/core/domain/graficos/types/barras-vertical";
+import { DadosGraficoBarrasVertical } from "@/core/domain/types/barras-vertical";
 
 const chartConfig = {
 	pauta: {

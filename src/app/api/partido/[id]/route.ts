@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 
+import { AtualizarPartidoController } from "@/adapters/api/controllers/partido/atualizar-partido-controller";
+import { BuscarPartidoController } from "@/adapters/api/controllers/partido/buscar-partido-controller";
+import { DeletarPartidoController } from "@/adapters/api/controllers/partido/deletar-partido-controller";
 import { UpdatePartidoDTO } from "@/core/domain/dtos/partido.dto";
 import { RespostaApi } from "@/core/domain/models/resposta-api";
-import { AtualizarPartidoController } from "@/core/lib/api/controllers/partido/atualizar-partido-controller";
-import { BuscarPartidoController } from "@/core/lib/api/controllers/partido/buscar-partido-controller";
-import { DeletarPartidoController } from "@/core/lib/api/controllers/partido/deletar-partido-controller";
 
 function validateId(id?: string): NextResponse | undefined {
 	if (!id || id.trim() === "") {

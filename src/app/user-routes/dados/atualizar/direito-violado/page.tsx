@@ -13,8 +13,8 @@ import {
 	AlertDialogContent,
 	AlertDialogHeader,
 	AlertDialogTitle,
-} from "@/components/ui-shacnui/alert-dialog";
-import { Button } from "@/components/ui-shacnui/button";
+} from "@/components/external/ui-shacnui/alert-dialog";
+import { Button } from "@/components/external/ui-shacnui/button";
 import {
 	Form,
 	FormControl,
@@ -22,15 +22,16 @@ import {
 	FormItem,
 	FormLabel,
 	FormMessage,
-} from "@/components/ui-shacnui/form";
-import { Input } from "@/components/ui-shacnui/input";
-import { Textarea } from "@/components/ui-shacnui/textarea";
+} from "@/components/external/ui-shacnui/form";
+import { Input } from "@/components/external/ui-shacnui/input";
+import { Textarea } from "@/components/external/ui-shacnui/textarea";
+
+import { oswald } from "../../../../../fonts/fonts";
 
 import { ResponseDireitoVioladoDTO } from "@/core/domain/dtos/direito-violado.dto";
-import { oswald } from "@/core/lib/fonts/fonts";
-import { useDireitoViolado } from "@/infra/hooks/direito-violado/use-direito-violado";
-import { useDireitoVioladoAtualizar } from "@/infra/hooks/direito-violado/use-direito-violado-update";
-import { APIAtualizarDireitoVioladoPayload } from "@/infra/options/direito-violado";
+import { useDireitoViolado } from "@/hooks/direito-violado/use-direito-violado";
+import { useDireitoVioladoAtualizar } from "@/hooks/direito-violado/use-direito-violado-update";
+import { APIAtualizarDireitoVioladoPayload } from "@/hooks/options/direito-violado";
 
 const formSchema = z.object({
 	nome: z.string().min(1, { message: "Entrada obrigatória!" }),
@@ -116,9 +117,13 @@ const Page: React.FC = () => {
 	}, [hasAtualizarDireitoVioladoError]);
 
 	const filteredDireitos = useMemo(() => {
-		if (!direitosViolados) return [];
-		if (!searchTerm) return direitosViolados;
-		return direitosViolados.filter((d: ResponseDireitoVioladoDTO) =>
+		const direitosArray: ResponseDireitoVioladoDTO[] = Array.isArray(
+			direitosViolados
+		)
+			? direitosViolados
+			: [];
+		if (!searchTerm) return direitosArray;
+		return direitosArray.filter((d: ResponseDireitoVioladoDTO) =>
 			d.nome.toLowerCase().includes(searchTerm.toLowerCase())
 		);
 	}, [direitosViolados, searchTerm]);
