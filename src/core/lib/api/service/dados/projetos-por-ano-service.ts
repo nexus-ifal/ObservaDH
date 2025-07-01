@@ -22,7 +22,7 @@ export class ListarProjetoPorAnoService implements IListarProjetoPorAnoService {
 			return projetosPorAno.map(
 				(item: { ano: string; _count: { id: number } }) => ({
 					ano: item.ano,
-					quantidade: item._count.id,
+					projetos: item._count.id,
 				})
 			);
 		} finally {
