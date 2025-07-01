@@ -21,7 +21,7 @@ export interface DadosReligiaoRaca {
 
 export interface DadosPlPorAno {
 	ano: string;
-	quantidade: number;
+	projetos: number;
 }
 
 export interface DadosPautaPorAno {

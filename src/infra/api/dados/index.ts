@@ -1,6 +1,7 @@
 import {
 	DadosIdeologiaGenero,
 	DadosPautaPorAno,
+	DadosPlPorAno,
 	DadosProjetoEstado,
 	DadosReligiaoRaca,
 } from "@/core/domain/dtos/dados.dto";
@@ -29,7 +30,7 @@ class DadosAPI implements DadosRepository {
 		const dados = response.data.dados;
 		return dados;
 	}
-	async listarProjetosPorAno(): Promise<{ ano: string; quantidade: number }[]> {
+	async listarProjetosPorAno(): Promise<DadosPlPorAno[]> {
 		const response = await conexaoBackend.get("/dados/projeto-por-ano");
 		const dados = response.data.dados;
 		return dados;
