@@ -76,7 +76,7 @@ const PageContent = () => {
 	} = useProjetoEstado(esfera ?? undefined);
 
 	const isLoading =
-		isLoadingProjetosPorUF || isLoadingProjetosPorAno || isLoadingPautaPorAno;
+		isLoadingProjetosPorUF && isLoadingProjetosPorAno && isLoadingPautaPorAno;
 
 	const error = projetoPorEstadoError || projetoPorAnoError || pautaPorAnoError;
 
