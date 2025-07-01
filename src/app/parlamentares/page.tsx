@@ -21,17 +21,17 @@ import {
 import { elemento } from "@/core/domain/types/elemento-dropdown";
 import { PartidoModel } from "@/core/domain/types/partido";
 import { ProjetoLei } from "@/core/domain/types/projeto-lei";
-import contarPropostasPorParlamentar from "@/core/lib/web/mock-utils/projeto-utils/contar-proposta-por-parlamentar";
-import obterEsferasUnicas from "@/core/lib/web/mock-utils/projeto-utils/obter-esferas-unicas";
-import obterEstadosUnicos from "@/core/lib/web/mock-utils/projeto-utils/obter-estados-unico";
-import obterGeneroUnico from "@/core/lib/web/mock-utils/projeto-utils/obter-genero-unico";
-import obterIdeologiasUnica from "@/core/lib/web/mock-utils/projeto-utils/obter-ideologias-unica";
-import obterPartidosUnicos from "@/core/lib/web/mock-utils/projeto-utils/obter-partidos-unicos";
-import obterProfissoesUnicas from "@/core/lib/web/mock-utils/projeto-utils/obter-profissoes-unicas";
-import { useIdeologiaGenero } from "@/infra/hooks/dados/use-ideologia-genero";
-import { useReligiaoRaca } from "@/infra/hooks/dados/use-religiao-raca";
+import { useIdeologiaGenero } from "@/hooks/dados/use-ideologia-genero";
+import { useReligiaoRaca } from "@/hooks/dados/use-religiao-raca";
 import { legendas } from "@/mocks/mock-parlamentares";
 import { partidosMock, projetosMock } from "@/mocks/mock-projetos";
+import contarPropostasPorParlamentar from "@/mocks/web/mock-utils/projeto-utils/contar-proposta-por-parlamentar";
+import obterEsferasUnicas from "@/mocks/web/mock-utils/projeto-utils/obter-esferas-unicas";
+import obterEstadosUnicos from "@/mocks/web/mock-utils/projeto-utils/obter-estados-unico";
+import obterGeneroUnico from "@/mocks/web/mock-utils/projeto-utils/obter-genero-unico";
+import obterIdeologiasUnica from "@/mocks/web/mock-utils/projeto-utils/obter-ideologias-unica";
+import obterPartidosUnicos from "@/mocks/web/mock-utils/projeto-utils/obter-partidos-unicos";
+import obterProfissoesUnicas from "@/mocks/web/mock-utils/projeto-utils/obter-profissoes-unicas";
 
 const Page: React.FC = () => {
 	const partidosOrdenados = [...partidosMock].sort(
