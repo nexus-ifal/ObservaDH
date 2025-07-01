@@ -5,7 +5,7 @@ import clsx from "clsx";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { oswald, titilliumWeb } from "@/core/lib/fonts/fonts";
+import { oswald, titilliumWeb } from "../../../fonts/fonts";
 
 const sideBarOptions = [
 	{ title: "Direito Violado", path: "/user-routes/dados/direito-violado" },

@@ -5,8 +5,8 @@ import {
 	DadosProjetoEstado,
 	DadosReligiaoRaca,
 } from "@/core/domain/dtos/dados.dto";
-import { DadosRepository } from "@/core/interfaces/repository/dados.repository";
-import { conexaoBackend } from "@/infra/services/conexao-backend/client";
+import { DadosRepository } from "@/core/repositories/dados.repository";
+import { conexaoBackend } from "@/infra/api/client";
 
 class DadosAPI implements DadosRepository {
 	async listarProjetosPorUF(esfera?: string): Promise<DadosProjetoEstado[]> {

@@ -4,6 +4,14 @@ import { Suspense, useEffect, useState } from "react";
 import { MdOutlineFilterAlt } from "react-icons/md";
 import { useSearchParams } from "next/navigation";
 
+import { Button } from "@/components/external/ui-shacnui/button";
+import {
+	Carousel,
+	CarouselContent,
+	CarouselItem,
+	CarouselNext,
+	CarouselPrevious,
+} from "@/components/external/ui-shacnui/carousel";
 import Card from "@/components/ui/cards";
 import Texto from "@/components/ui/componente-texto";
 import DropdownButton from "@/components/ui/dropdown/dropdown-button";
@@ -12,14 +20,6 @@ import GraficoMapa from "@/components/ui/graficos/grafico-mapa";
 import GraficoLinhaPontos from "@/components/ui/graficos/linha-pontos";
 import MainLayout from "@/components/ui/layouts/main-layout";
 import Loading from "@/components/ui/loading";
-import { Button } from "@/components/ui-shacnui/button";
-import {
-	Carousel,
-	CarouselContent,
-	CarouselItem,
-	CarouselNext,
-	CarouselPrevious,
-} from "@/components/ui-shacnui/carousel";
 
 import {
 	apresentacao,
@@ -28,11 +28,11 @@ import {
 } from "../../mocks/mock-projetos";
 
 import { ResponseEsferaDTO } from "@/core/domain/dtos/esfera.dto";
-import { CarrosselPlsProps } from "@/core/domain/graficos/interfaces/carrossel-interface";
-import { DadosGraficoBarraEmpilhadaHorizontal } from "@/core/domain/graficos/types/barra-empilhada-horizontal";
-import { elemento } from "@/core/domain/graficos/types/elemento-dropdown";
-import { DadosGraficoLinhaPontos } from "@/core/domain/graficos/types/linha-pontos";
-import { ProjetoLei } from "@/core/domain/graficos/types/projeto-lei";
+import { DadosGraficoBarraEmpilhadaHorizontal } from "@/core/domain/types/barra-empilhada-horizontal";
+import { CarrosselPlsProps } from "@/core/domain/types/carrossel-interface";
+import { elemento } from "@/core/domain/types/elemento-dropdown";
+import { DadosGraficoLinhaPontos } from "@/core/domain/types/linha-pontos";
+import { ProjetoLei } from "@/core/domain/types/projeto-lei";
 import obterEstadosUnicos from "@/core/lib/web/mock-utils/projeto-utils/obter-estados-unico";
 import obterPautasUnicas from "@/core/lib/web/mock-utils/projeto-utils/obter-pautas-unicas";
 import { buscarEsferas } from "@/infra/api/esfera";

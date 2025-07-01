@@ -3,8 +3,8 @@ import {
 	ResponseProjetoDTO,
 	UpdateProjetoDTO,
 } from "@/core/domain/dtos/projeto.dto";
-import { ProjetoRepository } from "@/core/interfaces/repository/projeto.repository";
-import { conexaoBackend } from "@/infra/services/conexao-backend/client";
+import { ProjetoRepository } from "@/core/repositories/projeto.repository";
+import { conexaoBackend } from "@/infra/api/client";
 
 class ProjetoAPI implements ProjetoRepository {
 	async listar(): Promise<ResponseProjetoDTO[]> {

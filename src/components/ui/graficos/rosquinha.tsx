@@ -1,7 +1,7 @@
 "use client";
 import { Pie, PieChart } from "recharts";
 
-import { Card, CardContent } from "@/components/ui-shacnui/card";
+import { Card, CardContent } from "@/components/external/ui-shacnui/card";
 import {
 	ChartConfig,
 	ChartContainer,
@@ -9,9 +9,9 @@ import {
 	ChartLegendContent,
 	ChartTooltip,
 	ChartTooltipContent,
-} from "@/components/ui-shacnui/chart";
+} from "@/components/external/ui-shacnui/chart";
 
-import { DadosGraficoRosquinha } from "@/core/domain/graficos/types/rosquinha";
+import { DadosGraficoRosquinha } from "@/core/domain/types/rosquinha";
 
 const chartConfig: ChartConfig = {
 	pl: {

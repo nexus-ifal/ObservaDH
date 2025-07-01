@@ -3,7 +3,7 @@
 import React from "react";
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 
-import { Card, CardContent } from "@/components/ui-shacnui/card";
+import { Card, CardContent } from "@/components/external/ui-shacnui/card";
 import {
 	ChartConfig,
 	ChartContainer,
@@ -11,9 +11,9 @@ import {
 	ChartLegendContent,
 	ChartTooltip,
 	ChartTooltipContent,
-} from "@/components/ui-shacnui/chart";
+} from "@/components/external/ui-shacnui/chart";
 
-import { DadosGraficoBarraEmpilhadaVertical } from "@/core/domain/graficos/types/barra-empilhada-vertical";
+import { DadosGraficoBarraEmpilhadaVertical } from "@/core/domain/types/barra-empilhada-vertical";
 
 const chartConfig = {
 	branco: {

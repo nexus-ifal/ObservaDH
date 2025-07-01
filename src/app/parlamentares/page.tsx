@@ -3,6 +3,7 @@
 import { Suspense } from "react";
 import { MdOutlineFilterAlt } from "react-icons/md";
 
+import { Button } from "@/components/external/ui-shacnui/button";
 import Card from "@/components/ui/cards";
 import CardLegenda from "@/components/ui/cards/card-legenda";
 import Texto from "@/components/ui/componente-texto";
@@ -12,15 +13,14 @@ import GraficoBarraMultiplas from "@/components/ui/graficos/barras-multiplas";
 import MainLayout from "@/components/ui/layouts/main-layout";
 import Loading from "@/components/ui/loading";
 import Titulo from "@/components/ui/titulo-pages";
-import { Button } from "@/components/ui-shacnui/button";
 
 import {
 	DadosIdeologiaGenero,
 	DadosReligiaoRaca,
 } from "@/core/domain/dtos/dados.dto";
-import { elemento } from "@/core/domain/graficos/types/elemento-dropdown";
-import { PartidoModel } from "@/core/domain/graficos/types/partido";
-import { ProjetoLei } from "@/core/domain/graficos/types/projeto-lei";
+import { elemento } from "@/core/domain/types/elemento-dropdown";
+import { PartidoModel } from "@/core/domain/types/partido";
+import { ProjetoLei } from "@/core/domain/types/projeto-lei";
 import contarPropostasPorParlamentar from "@/core/lib/web/mock-utils/projeto-utils/contar-proposta-por-parlamentar";
 import obterEsferasUnicas from "@/core/lib/web/mock-utils/projeto-utils/obter-esferas-unicas";
 import obterEstadosUnicos from "@/core/lib/web/mock-utils/projeto-utils/obter-estados-unico";

@@ -3,8 +3,8 @@ import {
 	ResponseEstadoDTO,
 	UpdateEstadoDTO,
 } from "@/core/domain/dtos/estado.dto";
-import { EstadoRepository } from "@/core/interfaces/repository/estado.repository";
-import { conexaoBackend } from "@/infra/services/conexao-backend/client";
+import { EstadoRepository } from "@/core/repositories/estado.repository";
+import { conexaoBackend } from "@/infra/api/client";
 
 class EstadoAPI implements EstadoRepository {
 	async listar(): Promise<ResponseEstadoDTO[]> {

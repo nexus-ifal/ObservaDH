@@ -1,7 +1,8 @@
 import { useState } from "react";
 
+import { oswald, titilliumWeb } from "../../../fonts/fonts";
+
 import { DadosProjetoEstado } from "@/core/domain/dtos/dados.dto";
-import { oswald, titilliumWeb } from "@/core/lib/fonts/fonts";
 
 interface mapaBrasilProps {
 	className?: string;

@@ -1,13 +1,13 @@
 import * as React from "react";
 
-import { Button } from "@/components/ui-shacnui/button";
-import { Checkbox } from "@/components/ui-shacnui/checkbox";
-import { Input } from "@/components/ui-shacnui/input";
+import { Button } from "@/components/external/ui-shacnui/button";
+import { Checkbox } from "@/components/external/ui-shacnui/checkbox";
+import { Input } from "@/components/external/ui-shacnui/input";
 import {
 	Popover,
 	PopoverContent,
 	PopoverTrigger,
-} from "@/components/ui-shacnui/popover";
+} from "@/components/external/ui-shacnui/popover";
 
 import { cn } from "@/core/lib/utils/utils";
 

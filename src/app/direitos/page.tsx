@@ -1,5 +1,12 @@
 import { Suspense } from "react";
 
+import {
+	Carousel,
+	CarouselContent,
+	CarouselItem,
+	CarouselNext,
+	CarouselPrevious,
+} from "@/components/external/ui-shacnui/carousel";
 import Card from "@/components/ui/cards";
 import Texto from "@/components/ui/componente-texto";
 import DropdownButton from "@/components/ui/dropdown/dropdown-button";
@@ -7,18 +14,11 @@ import GraficoBarrasVertical from "@/components/ui/graficos/barras-vertical";
 import GraficoRosquinha from "@/components/ui/graficos/rosquinha";
 import MainLayout from "@/components/ui/layouts/main-layout";
 import Titulo from "@/components/ui/titulo-pages";
-import {
-	Carousel,
-	CarouselContent,
-	CarouselItem,
-	CarouselNext,
-	CarouselPrevious,
-} from "@/components/ui-shacnui/carousel";
 
-import { CarrosselPlsProps } from "@/core/domain/graficos/interfaces/carrossel-interface";
-import { DadosGraficoBarrasVertical } from "@/core/domain/graficos/types/barras-vertical";
-import { elemento } from "@/core/domain/graficos/types/elemento-dropdown";
-import { DadosGraficoRosquinha } from "@/core/domain/graficos/types/rosquinha";
+import { DadosGraficoBarrasVertical } from "@/core/domain/types/barras-vertical";
+import { CarrosselPlsProps } from "@/core/domain/types/carrossel-interface";
+import { elemento } from "@/core/domain/types/elemento-dropdown";
+import { DadosGraficoRosquinha } from "@/core/domain/types/rosquinha";
 import obterPautasUnicas from "@/core/lib/web/mock-utils/projeto-utils/obter-pautas-unicas";
 import {
 	graficoBarrasVerticalDadosMock,

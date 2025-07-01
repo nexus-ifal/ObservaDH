@@ -12,12 +12,13 @@ import {
 	AlertDialogContent,
 	AlertDialogHeader,
 	AlertDialogTitle,
-} from "@/components/ui-shacnui/alert-dialog";
+} from "@/components/external/ui-shacnui/alert-dialog";
 
-import { oswald, titilliumWeb } from "@/core/lib/fonts/fonts";
+import { oswald, titilliumWeb } from "../../../../../fonts/fonts";
+
+import { APIExcluirPautaPayload } from "@/hooks/options/pauta";
 import { usePauta } from "@/infra/hooks/pauta/use-pauta";
 import { usePautaExcluir } from "@/infra/hooks/pauta/use-pauta-delete";
-import { APIExcluirPautaPayload } from "@/infra/options/pauta";
 
 const deleteSchema = z.object({
 	pautaId: z.string().min(1, "Selecione uma pauta"),

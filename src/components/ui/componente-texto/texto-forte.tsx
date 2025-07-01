@@ -1,4 +1,4 @@
-import { oswald, titilliumWeb } from "../../../core/lib/fonts/fonts";
+import { oswald, titilliumWeb } from "../../../fonts/fonts";
 
 interface TextProps {
 	children?: React.ReactNode;

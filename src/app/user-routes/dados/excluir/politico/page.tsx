@@ -5,19 +5,20 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import z from "zod";
 
-import Loading from "@/components/ui/loading";
 import {
 	AlertDialog,
 	AlertDialogAction,
 	AlertDialogContent,
 	AlertDialogHeader,
 	AlertDialogTitle,
-} from "@/components/ui-shacnui/alert-dialog";
+} from "@/components/external/ui-shacnui/alert-dialog";
+import Loading from "@/components/ui/loading";
 
-import { oswald, titilliumWeb } from "@/core/lib/fonts/fonts";
+import { oswald, titilliumWeb } from "../../../../../fonts/fonts";
+
+import { APIExcluirPoliticoPayload } from "@/hooks/options/politico";
 import { usePolitico } from "@/infra/hooks/politico/use-politico";
 import { usePoliticoExcluir } from "@/infra/hooks/politico/use-politico-delete";
-import { APIExcluirPoliticoPayload } from "@/infra/options/politico";
 
 const deleteSchema = z.object({
 	politicoId: z.string().min(1, "Selecione um político"),

@@ -7,16 +7,14 @@ import { ScaleLoader } from "react-spinners";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 
-import { MultiSelectPopover } from "@/components/ui/dropdown/MultiSelectPopover";
-import Loading from "@/components/ui/loading";
 import {
 	AlertDialog,
 	AlertDialogAction,
 	AlertDialogContent,
 	AlertDialogHeader,
 	AlertDialogTitle,
-} from "@/components/ui-shacnui/alert-dialog";
-import { Button } from "@/components/ui-shacnui/button";
+} from "@/components/external/ui-shacnui/alert-dialog";
+import { Button } from "@/components/external/ui-shacnui/button";
 import {
 	Form,
 	FormControl,
@@ -24,26 +22,29 @@ import {
 	FormItem,
 	FormLabel,
 	FormMessage,
-} from "@/components/ui-shacnui/form";
-import { Input } from "@/components/ui-shacnui/input";
+} from "@/components/external/ui-shacnui/form";
+import { Input } from "@/components/external/ui-shacnui/input";
 import {
 	Select,
 	SelectContent,
 	SelectItem,
 	SelectTrigger,
 	SelectValue,
-} from "@/components/ui-shacnui/select";
-import { Textarea } from "@/components/ui-shacnui/textarea";
+} from "@/components/external/ui-shacnui/select";
+import { Textarea } from "@/components/external/ui-shacnui/textarea";
+import { MultiSelectPopover } from "@/components/ui/dropdown/MultiSelectPopover";
+import Loading from "@/components/ui/loading";
+
+import { oswald } from "../../../../../fonts/fonts";
 
 import { ResponseProjetoDTO } from "@/core/domain/dtos/projeto.dto";
-import { oswald } from "@/core/lib/fonts/fonts";
+import { APIAtualizarProjetoPayload } from "@/hooks/options/projeto";
 import { useDireitoViolado } from "@/infra/hooks/direito-violado/use-direito-violado";
 import { useIdeologia } from "@/infra/hooks/ideologia/use-ideologia";
 import { usePauta } from "@/infra/hooks/pauta/use-pauta";
 import { usePolitico } from "@/infra/hooks/politico/use-politico";
 import { useProjeto } from "@/infra/hooks/projeto/use-projeto";
 import { useProjetoAtualizar } from "@/infra/hooks/projeto/use-projeto-update";
-import { APIAtualizarProjetoPayload } from "@/infra/options/projeto";
 
 const formSchema = z.object({
 	ano: z
@@ -173,7 +174,7 @@ const Page: React.FC = () => {
 			return () => clearTimeout(timeout);
 		}
 	}, [hasAtualizarProjetoError]);
-	
+
 	useEffect(() => {
 		if (selectedProjeto) {
 			form.setValue("ano", selectedProjeto.ano?.toString() || "");

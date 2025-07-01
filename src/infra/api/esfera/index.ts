@@ -1,4 +1,4 @@
-import { conexaoBackend } from "../../services/conexao-backend/client";
+import { conexaoBackend } from "../client";
 
 export async function buscarEsferas() {
 	const response = await conexaoBackend.get("/esfera");
