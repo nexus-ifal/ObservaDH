@@ -23,7 +23,7 @@ import {
 	graficoBarrasVerticalDadosMock,
 	graficoRosquinhaDadosMock,
 } from "@/mocks/mock-direitos";
-import { legendas } from "@/mocks/mock-parlamentares";
+import { legendas } from "@/content/content-parlamentares";
 import { projetosMock } from "@/mocks/mock-projetos";
 import obterPautasUnicas from "@/mocks/web/mock-utils/projeto-utils/obter-pautas-unicas";
 

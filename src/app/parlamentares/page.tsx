@@ -23,7 +23,7 @@ import { PartidoModel } from "@/core/domain/types/partido";
 import { ProjetoLei } from "@/core/domain/types/projeto-lei";
 import { useIdeologiaGenero } from "@/hooks/dados/use-ideologia-genero";
 import { useReligiaoRaca } from "@/hooks/dados/use-religiao-raca";
-import { legendas } from "@/mocks/mock-parlamentares";
+import { legendas } from "@/content/content-parlamentares";
 import { partidosMock, projetosMock } from "@/mocks/mock-projetos";
 import contarPropostasPorParlamentar from "@/mocks/web/mock-utils/projeto-utils/contar-proposta-por-parlamentar";
 import obterEsferasUnicas from "@/mocks/web/mock-utils/projeto-utils/obter-esferas-unicas";

@@ -1,7 +1,7 @@
 import Card from "@/components/ui/cards";
 import MainLayout from "@/components/ui/layouts/main-layout";
 
-import { infoDevsMock } from "@/mocks/mock-devs";
+import { infoDevsMock } from "@/content/content-desenvolvedores";
 
 const desenvolvedores: React.FC = () => {
 	//render
