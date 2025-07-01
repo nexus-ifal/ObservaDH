@@ -1,8 +1,8 @@
+import { prismaClient } from "@/adapters/db/prisma";
 import {
 	DeleteIdeologiaDTO,
 	ResponseDeleteIdeologiaDTO,
 } from "@/core/domain/dtos/ideologia.dto";
-import { prismaClient } from "@/services/prisma/prisma";
 
 interface IDeletarIdeologiaService {
 	executar(params: { id: string }): Promise<ResponseDeleteIdeologiaDTO>;

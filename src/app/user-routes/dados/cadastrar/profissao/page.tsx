@@ -27,7 +27,7 @@ import { Input } from "@/components/external/ui-shacnui/input";
 
 import { oswald } from "../../../../../fonts/fonts";
 
-import { useProfissaoCreate } from "@/infra/hooks/profissao/use-profissao-create";
+import { useProfissaoCreate } from "@/hooks/profissao/use-profissao-create";
 
 const formSchema = z.object({
 	nome: z.string().min(1, {

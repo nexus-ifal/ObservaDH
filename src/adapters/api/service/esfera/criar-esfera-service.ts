@@ -1,10 +1,10 @@
 import { Prisma } from "@prisma/client";
 
+import { prismaClient } from "@/adapters/db/prisma";
 import {
 	CreateEsferaDTO,
 	ResponseEsferaDTO,
 } from "@/core/domain/dtos/esfera.dto";
-import { prismaClient } from "@/services/prisma/prisma";
 
 interface ICriarEsferaService {
 	executar(params: CreateEsferaDTO): Promise<ResponseEsferaDTO>;

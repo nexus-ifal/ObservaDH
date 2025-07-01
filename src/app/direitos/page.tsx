@@ -19,13 +19,13 @@ import { DadosGraficoBarrasVertical } from "@/core/domain/types/barras-vertical"
 import { CarrosselPlsProps } from "@/core/domain/types/carrossel-interface";
 import { elemento } from "@/core/domain/types/elemento-dropdown";
 import { DadosGraficoRosquinha } from "@/core/domain/types/rosquinha";
-import obterPautasUnicas from "@/core/lib/web/mock-utils/projeto-utils/obter-pautas-unicas";
 import {
 	graficoBarrasVerticalDadosMock,
 	graficoRosquinhaDadosMock,
 } from "@/mocks/mock-direitos";
 import { legendas } from "@/mocks/mock-parlamentares";
 import { projetosMock } from "@/mocks/mock-projetos";
+import obterPautasUnicas from "@/mocks/web/mock-utils/projeto-utils/obter-pautas-unicas";
 
 const direitos: React.FC = () => {
 	const elementosDropdown = obterPautasUnicas({ projetos: projetosMock });

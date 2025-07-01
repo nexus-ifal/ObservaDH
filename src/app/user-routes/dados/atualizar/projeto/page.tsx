@@ -38,13 +38,13 @@ import Loading from "@/components/ui/loading";
 import { oswald } from "../../../../../fonts/fonts";
 
 import { ResponseProjetoDTO } from "@/core/domain/dtos/projeto.dto";
+import { useDireitoViolado } from "@/hooks/direito-violado/use-direito-violado";
+import { useIdeologia } from "@/hooks/ideologia/use-ideologia";
 import { APIAtualizarProjetoPayload } from "@/hooks/options/projeto";
-import { useDireitoViolado } from "@/infra/hooks/direito-violado/use-direito-violado";
-import { useIdeologia } from "@/infra/hooks/ideologia/use-ideologia";
-import { usePauta } from "@/infra/hooks/pauta/use-pauta";
-import { usePolitico } from "@/infra/hooks/politico/use-politico";
-import { useProjeto } from "@/infra/hooks/projeto/use-projeto";
-import { useProjetoAtualizar } from "@/infra/hooks/projeto/use-projeto-update";
+import { usePauta } from "@/hooks/pauta/use-pauta";
+import { usePolitico } from "@/hooks/politico/use-politico";
+import { useProjeto } from "@/hooks/projeto/use-projeto";
+import { useProjetoAtualizar } from "@/hooks/projeto/use-projeto-update";
 
 const formSchema = z.object({
 	ano: z
@@ -202,7 +202,7 @@ const Page: React.FC = () => {
 	}, [selectedProjeto]);
 
 	const filteredProjetos = useMemo(() => {
-		if (!projetos) return [];
+		if (!Array.isArray(projetos)) return [];
 		if (!searchTerm) return projetos;
 		return projetos.filter((p) =>
 			p.numeroPl.toLowerCase().includes(searchTerm.toLowerCase())
@@ -507,12 +507,13 @@ const Page: React.FC = () => {
 										</FormLabel>
 										<FormControl>
 											<MultiSelectPopover
-												options={
-													direitosViolados?.map((d) => ({
-														value: d.id,
-														label: d.nome,
-													})) ?? []
-												}
+												options={(Array.isArray(direitosViolados)
+													? direitosViolados
+													: []
+												).map((d) => ({
+													value: d.id,
+													label: d.nome,
+												}))}
 												value={field.value ? field.value.split(";") : []}
 												onChange={(vals) => field.onChange(vals.join(";"))}
 												placeholder="Direitos Violados"

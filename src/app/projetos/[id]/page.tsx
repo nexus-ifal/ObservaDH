@@ -9,7 +9,7 @@ import Titulo from "@/components/ui/titulo-pages";
 import { oswald } from "../../../fonts/fonts";
 
 import { ProjetoLei } from "@/core/domain/types/projeto-lei";
-import { buscarProjetoPorId } from "@/core/lib/web/mock-utils/busca";
+import { buscarProjetoPorId } from "@/mocks/web/mock-utils/busca";
 
 const Page: React.FC<{ params: Promise<{ id: string }> }> = ({ params }) => {
 	const { id } = use(params);

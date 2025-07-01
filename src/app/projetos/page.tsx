@@ -33,12 +33,12 @@ import { CarrosselPlsProps } from "@/core/domain/types/carrossel-interface";
 import { elemento } from "@/core/domain/types/elemento-dropdown";
 import { DadosGraficoLinhaPontos } from "@/core/domain/types/linha-pontos";
 import { ProjetoLei } from "@/core/domain/types/projeto-lei";
-import obterEstadosUnicos from "@/core/lib/web/mock-utils/projeto-utils/obter-estados-unico";
-import obterPautasUnicas from "@/core/lib/web/mock-utils/projeto-utils/obter-pautas-unicas";
+import { usePautaPorAno } from "@/hooks/dados/use-pauta-por-ano";
+import { useProjetoEstado } from "@/hooks/dados/use-projeto-estado";
+import { useProjetoPorAno } from "@/hooks/dados/use-projeto-por-ano";
 import { buscarEsferas } from "@/infra/api/esfera";
-import { usePautaPorAno } from "@/infra/hooks/dados/use-pauta-por-ano";
-import { useProjetoEstado } from "@/infra/hooks/dados/use-projeto-estado";
-import { useProjetoPorAno } from "@/infra/hooks/dados/use-projeto-por-ano";
+import obterEstadosUnicos from "@/mocks/web/mock-utils/projeto-utils/obter-estados-unico";
+import obterPautasUnicas from "@/mocks/web/mock-utils/projeto-utils/obter-pautas-unicas";
 
 const Page: React.FC = () => (
 	<Suspense fallback={<div>Carregando página...</div>}>

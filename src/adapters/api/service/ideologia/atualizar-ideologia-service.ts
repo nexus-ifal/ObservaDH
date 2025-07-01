@@ -1,8 +1,8 @@
+import { prismaClient } from "@/adapters/db/prisma";
 import {
 	ResponseIdeologiaDTO,
 	UpdateIdeologiaDTO,
 } from "@/core/domain/dtos/ideologia.dto";
-import { prismaClient } from "@/services/prisma/prisma";
 
 interface IAtualizarIdeologiaService {
 	executar(params: {

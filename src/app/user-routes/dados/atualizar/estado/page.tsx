@@ -27,9 +27,9 @@ import { Input } from "@/components/external/ui-shacnui/input";
 
 import { oswald } from "../../../../../fonts/fonts";
 
+import { useEstado } from "@/hooks/estado/use-estado";
+import { useEstadoAtualizar } from "@/hooks/estado/use-estado-update";
 import { APIAtualizarEstadoPayload } from "@/hooks/options/estado";
-import { useEstado } from "@/infra/hooks/estado/use-estado";
-import { useEstadoAtualizar } from "@/infra/hooks/estado/use-estado-update";
 
 const formSchema = z.object({
 	nome: z.string().min(1, { message: "Entrada obrigatória!" }),

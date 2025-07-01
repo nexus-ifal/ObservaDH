@@ -1,10 +1,10 @@
 import { Prisma } from "@prisma/client";
 
+import { prismaClient } from "@/adapters/db/prisma";
 import {
 	CreateDireitoVioladoDTO,
 	ResponseDireitoVioladoDTO,
 } from "@/core/domain/dtos/direito-violado.dto";
-import { prismaClient } from "@/services/prisma/prisma";
 
 interface ICriarDireitoVioladoService {
 	executar(params: CreateDireitoVioladoDTO): Promise<ResponseDireitoVioladoDTO>;

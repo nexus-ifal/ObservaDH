@@ -1,8 +1,8 @@
+import { prismaClient } from "@/adapters/db/prisma";
 import {
 	ResponseProjetoDTO,
 	UpdateProjetoDTO,
 } from "@/core/domain/dtos/projeto.dto";
-import { prismaClient } from "@/services/prisma/prisma";
 
 interface IAtualizarProjetoService {
 	executar(params: { projeto: UpdateProjetoDTO }): Promise<ResponseProjetoDTO>;

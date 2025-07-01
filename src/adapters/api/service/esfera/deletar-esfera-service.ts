@@ -1,8 +1,8 @@
+import { prismaClient } from "@/adapters/db/prisma";
 import {
 	DeleteEsferaDTO,
 	ResponseDeleteEsferaDTO,
 } from "@/core/domain/dtos/esfera.dto";
-import { prismaClient } from "@/services/prisma/prisma";
 
 interface IDeletarEsferaService {
 	executar(params: { id: string }): Promise<ResponseDeleteEsferaDTO>;

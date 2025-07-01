@@ -18,8 +18,8 @@ import { oswald, titilliumWeb } from "../../../../../fonts/fonts";
 
 import { ResponseProjetoDTO } from "@/core/domain/dtos/projeto.dto";
 import { APIExcluirProjetoPayload } from "@/hooks/options/projeto";
-import { useProjeto } from "@/infra/hooks/projeto/use-projeto";
-import { useProjetoExcluir } from "@/infra/hooks/projeto/use-projeto-delete";
+import { useProjeto } from "@/hooks/projeto/use-projeto";
+import { useProjetoExcluir } from "@/hooks/projeto/use-projeto-delete";
 
 const deleteSchema = z.object({
 	projetoId: z.string().min(1, "Selecione um projeto de lei"),

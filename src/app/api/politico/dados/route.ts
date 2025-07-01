@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { ListarPoliticoFiltradoController } from "@/core/lib/api/controllers/politico/listar-politico-filtrado-controller";
+import { ListarPoliticoFiltradoController } from "@/adapters/api/controllers/politico/listar-politico-filtrado-controller";
 
 const controller = new ListarPoliticoFiltradoController();
 

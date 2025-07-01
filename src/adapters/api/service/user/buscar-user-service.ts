@@ -1,4 +1,4 @@
-import { prismaClient } from "@/services/prisma/prisma";
+import { prismaClient } from "@/adapters/db/prisma";
 
 export class BuscarUserService {
 	async buscarPorID({ id }: { id: string }) {

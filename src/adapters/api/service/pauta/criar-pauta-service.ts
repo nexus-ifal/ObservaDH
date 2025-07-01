@@ -1,7 +1,7 @@
 import { Prisma } from "@prisma/client";
 
+import { prismaClient } from "@/adapters/db/prisma";
 import { CreatePautaDTO, ResponsePautaDTO } from "@/core/domain/dtos/pauta.dto";
-import { prismaClient } from "@/services/prisma/prisma";
 
 interface ICriarPautaService {
 	executar(params: CreatePautaDTO): Promise<ResponsePautaDTO>;

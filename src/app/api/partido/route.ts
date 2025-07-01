@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 
+import { CriarPartidoController } from "@/adapters/api/controllers/partido/criar-partido-controller";
+import { ListarPartidoController } from "@/adapters/api/controllers/partido/listar-partido-controller";
 import { CreatePartidoDTO } from "@/core/domain/dtos/partido.dto";
 import { RespostaApi } from "@/core/domain/models/resposta-api";
-import { CriarPartidoController } from "@/core/lib/api/controllers/partido/criar-partido-controller";
-import { ListarPartidoController } from "@/core/lib/api/controllers/partido/listar-partido-controller";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function handleError(error: any, message: string) {

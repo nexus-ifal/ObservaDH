@@ -1,8 +1,8 @@
 import { Role } from "@prisma/client";
 import bcrypt from "bcryptjs";
 
+import { prismaClient } from "@/adapters/db/prisma";
 import { User } from "@/core/domain/models/user";
-import { prismaClient } from "@/services/prisma/prisma";
 
 export class CriarUserService {
 	async executar({ user }: { user: User }) {

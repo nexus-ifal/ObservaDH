@@ -28,7 +28,7 @@ import { Textarea } from "@/components/external/ui-shacnui/textarea";
 
 import { oswald } from "../../../../../fonts/fonts";
 
-import { useDireitoVioladoCreate } from "@/infra/hooks/direito-violado/use-direito-violado-create";
+import { useDireitoVioladoCreate } from "@/hooks/direito-violado/use-direito-violado-create";
 
 const formSchema = z.object({
 	nome: z.string().min(1, {

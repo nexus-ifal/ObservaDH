@@ -17,9 +17,9 @@ import {
 import { oswald, titilliumWeb } from "../../../../../fonts/fonts";
 
 import { ResponseDireitoVioladoDTO } from "@/core/domain/dtos/direito-violado.dto";
+import { useDireitoViolado } from "@/hooks/direito-violado/use-direito-violado";
+import { useDireitoVioladoExcluir } from "@/hooks/direito-violado/use-direito-violado-delete";
 import { APIExcluirDireitoVioladoPayload } from "@/hooks/options/direito-violado";
-import { useDireitoViolado } from "@/infra/hooks/direito-violado/use-direito-violado";
-import { useDireitoVioladoExcluir } from "@/infra/hooks/direito-violado/use-direito-violado-delete";
 
 const deleteSchema = z.object({
 	direitoId: z.string().min(1, "Selecione um direito violado"),

@@ -1,8 +1,8 @@
+import { prismaClient } from "@/adapters/db/prisma";
 import {
 	ResponseProfissaoDTO,
 	SearchProfissaoDTO,
 } from "@/core/domain/dtos/profissao.dto";
-import { prismaClient } from "@/services/prisma/prisma";
 
 export interface IBuscarProfissaoService {
 	buscarPorId(

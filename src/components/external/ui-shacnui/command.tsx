@@ -9,7 +9,7 @@ import {
 import { Command as CommandPrimitive } from "cmdk";
 import { Search } from "lucide-react";
 
-import { cn } from "@/core/lib/utils/utils";
+import { cn } from "@/utils/cn/utils";
 
 const Command = React.forwardRef<
 	React.ElementRef<typeof CommandPrimitive>,

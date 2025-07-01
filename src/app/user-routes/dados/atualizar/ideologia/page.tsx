@@ -29,9 +29,9 @@ import { Textarea } from "@/components/external/ui-shacnui/textarea";
 import { oswald } from "../../../../../fonts/fonts";
 
 import { ResponseIdeologiaDTO } from "@/core/domain/dtos/ideologia.dto";
+import { useIdeologia } from "@/hooks/ideologia/use-ideologia";
+import { useIdeologiaAtualizar } from "@/hooks/ideologia/use-ideologia-update";
 import { APIAtualizarIdeologiaPayload } from "@/hooks/options/ideologia";
-import { useIdeologia } from "@/infra/hooks/ideologia/use-ideologia";
-import { useIdeologiaAtualizar } from "@/infra/hooks/ideologia/use-ideologia-update";
 
 const formSchema = z.object({
 	nome: z.string().min(1, { message: "Entrada obrigatória!" }),

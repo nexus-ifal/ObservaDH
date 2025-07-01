@@ -28,8 +28,8 @@ import { Input } from "@/components/external/ui-shacnui/input";
 import { oswald } from "../../../../../fonts/fonts";
 
 import { ResponsePartidoDTO } from "@/core/domain/dtos/partido.dto";
-import { usePartido } from "@/infra/hooks/partido/use-partido";
-import { usePartidoAtualizar } from "@/infra/hooks/partido/use-partido-update";
+import { usePartido } from "@/hooks/partido/use-partido";
+import { usePartidoAtualizar } from "@/hooks/partido/use-partido-update";
 
 const formSchema = z.object({
 	nome: z.string().min(1, { message: "Entrada obrigatória!" }),

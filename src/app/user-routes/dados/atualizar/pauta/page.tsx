@@ -28,8 +28,8 @@ import { Input } from "@/components/external/ui-shacnui/input";
 import { oswald } from "../../../../../fonts/fonts";
 
 import { APIAtualizarPautaPayload } from "@/hooks/options/pauta";
-import { usePauta } from "@/infra/hooks/pauta/use-pauta";
-import { usePautaAtualizar } from "@/infra/hooks/pauta/use-pauta-update";
+import { usePauta } from "@/hooks/pauta/use-pauta";
+import { usePautaAtualizar } from "@/hooks/pauta/use-pauta-update";
 
 const formSchema = z.object({
 	nome: z.string().min(1, { message: "Entrada obrigatória!" }),

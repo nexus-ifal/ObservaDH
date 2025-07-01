@@ -35,11 +35,11 @@ import { MultiSelectPopover } from "@/components/ui/dropdown/MultiSelectPopover"
 import Loading from "../../../../../components/ui/loading";
 import { oswald } from "../../../../../fonts/fonts";
 
-import { useEstado } from "@/infra/hooks/estado/use-estado";
-import { usePartido } from "@/infra/hooks/partido/use-partido";
-import { usePoliticoCreate } from "@/infra/hooks/politico/use-politico-create";
-import { useProfissao } from "@/infra/hooks/profissao/use-profissao";
-import { useProjeto } from "@/infra/hooks/projeto/use-projeto";
+import { useEstado } from "@/hooks/estado/use-estado";
+import { usePartido } from "@/hooks/partido/use-partido";
+import { usePoliticoCreate } from "@/hooks/politico/use-politico-create";
+import { useProfissao } from "@/hooks/profissao/use-profissao";
+import { useProjeto } from "@/hooks/projeto/use-projeto";
 
 const formSchema = z.object({
 	nome: z.string().min(1, { message: "Nome obrigatório" }),

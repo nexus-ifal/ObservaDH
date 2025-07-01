@@ -1,8 +1,8 @@
+import { prismaClient } from "@/adapters/db/prisma";
 import {
 	DeleteDireitoVioladoDTO,
 	ResponseDeleteDireitoVioladoDTO,
 } from "@/core/domain/dtos/direito-violado.dto";
-import { prismaClient } from "@/services/prisma/prisma";
 
 interface IDeletarDireitoVioladoService {
 	executar(params: { id: string }): Promise<ResponseDeleteDireitoVioladoDTO>;

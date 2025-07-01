@@ -1,5 +1,5 @@
+import { prismaClient } from "@/adapters/db/prisma";
 import { ResponsePautaDTO, UpdatePautaDTO } from "@/core/domain/dtos/pauta.dto";
-import { prismaClient } from "@/services/prisma/prisma";
 
 interface IAtualizarPautaService {
 	executar(params: { pauta: UpdatePautaDTO }): Promise<ResponsePautaDTO>;

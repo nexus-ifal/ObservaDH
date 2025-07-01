@@ -9,7 +9,7 @@ import {
 	PopoverTrigger,
 } from "@/components/external/ui-shacnui/popover";
 
-import { cn } from "@/core/lib/utils/utils";
+import { cn } from "@/utils/cn/utils";
 
 type Option = {
 	value: string;

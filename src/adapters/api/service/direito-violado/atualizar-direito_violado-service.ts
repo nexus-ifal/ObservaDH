@@ -1,8 +1,8 @@
+import { prismaClient } from "@/adapters/db/prisma";
 import {
 	ResponseDireitoVioladoDTO,
 	UpdateDireitoVioladoDTO,
 } from "@/core/domain/dtos/direito-violado.dto";
-import { prismaClient } from "@/services/prisma/prisma";
 
 interface IAtualizarDireitoVioladoService {
 	executar(params: {

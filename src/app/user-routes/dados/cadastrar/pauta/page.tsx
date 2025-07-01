@@ -27,7 +27,7 @@ import { Input } from "@/components/external/ui-shacnui/input";
 
 import { oswald } from "../../../../../fonts/fonts";
 
-import { usePautaCreate } from "@/infra/hooks/pauta/use-pauta-create";
+import { usePautaCreate } from "@/hooks/pauta/use-pauta-create";
 
 const formSchema = z.object({
 	nome: z.string().min(1, {

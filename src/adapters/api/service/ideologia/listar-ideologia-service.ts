@@ -1,5 +1,5 @@
+import { prismaClient } from "@/adapters/db/prisma";
 import { ResponseIdeologiaDTO } from "@/core/domain/dtos/ideologia.dto";
-import { prismaClient } from "@/services/prisma/prisma";
 
 export interface IListarIdeologiaService {
 	executar(): Promise<ResponseIdeologiaDTO[]>;

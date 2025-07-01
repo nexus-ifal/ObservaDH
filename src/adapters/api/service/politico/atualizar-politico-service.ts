@@ -1,8 +1,8 @@
+import { prismaClient } from "@/adapters/db/prisma";
 import {
 	ResponsePoliticoDTO,
 	UpdatePoliticoDTO,
 } from "@/core/domain/dtos/politico.dto";
-import { prismaClient } from "@/services/prisma/prisma";
 
 interface IAtualizarPoliticoService {
 	executar(params: {

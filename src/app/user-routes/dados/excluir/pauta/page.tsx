@@ -17,8 +17,8 @@ import {
 import { oswald, titilliumWeb } from "../../../../../fonts/fonts";
 
 import { APIExcluirPautaPayload } from "@/hooks/options/pauta";
-import { usePauta } from "@/infra/hooks/pauta/use-pauta";
-import { usePautaExcluir } from "@/infra/hooks/pauta/use-pauta-delete";
+import { usePauta } from "@/hooks/pauta/use-pauta";
+import { usePautaExcluir } from "@/hooks/pauta/use-pauta-delete";
 
 const deleteSchema = z.object({
 	pautaId: z.string().min(1, "Selecione uma pauta"),

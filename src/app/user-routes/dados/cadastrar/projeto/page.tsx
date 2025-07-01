@@ -36,11 +36,11 @@ import { MultiSelectPopover } from "@/components/ui/dropdown/MultiSelectPopover"
 import Loading from "../../../../../components/ui/loading";
 import { oswald } from "../../../../../fonts/fonts";
 
-import { useDireitoViolado } from "@/infra/hooks/direito-violado/use-direito-violado";
-import { useIdeologia } from "@/infra/hooks/ideologia/use-ideologia";
-import { usePauta } from "@/infra/hooks/pauta/use-pauta";
-import { usePolitico } from "@/infra/hooks/politico/use-politico";
-import { useProjetoCreate } from "@/infra/hooks/projeto/use-projeto-create";
+import { useDireitoViolado } from "@/hooks/direito-violado/use-direito-violado";
+import { useIdeologia } from "@/hooks/ideologia/use-ideologia";
+import { usePauta } from "@/hooks/pauta/use-pauta";
+import { usePolitico } from "@/hooks/politico/use-politico";
+import { useProjetoCreate } from "@/hooks/projeto/use-projeto-create";
 
 const formSchema = z.object({
 	ano: z

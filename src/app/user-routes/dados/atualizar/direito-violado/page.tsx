@@ -29,9 +29,9 @@ import { Textarea } from "@/components/external/ui-shacnui/textarea";
 import { oswald } from "../../../../../fonts/fonts";
 
 import { ResponseDireitoVioladoDTO } from "@/core/domain/dtos/direito-violado.dto";
+import { useDireitoViolado } from "@/hooks/direito-violado/use-direito-violado";
+import { useDireitoVioladoAtualizar } from "@/hooks/direito-violado/use-direito-violado-update";
 import { APIAtualizarDireitoVioladoPayload } from "@/hooks/options/direito-violado";
-import { useDireitoViolado } from "@/infra/hooks/direito-violado/use-direito-violado";
-import { useDireitoVioladoAtualizar } from "@/infra/hooks/direito-violado/use-direito-violado-update";
 
 const formSchema = z.object({
 	nome: z.string().min(1, { message: "Entrada obrigatória!" }),
@@ -117,9 +117,13 @@ const Page: React.FC = () => {
 	}, [hasAtualizarDireitoVioladoError]);
 
 	const filteredDireitos = useMemo(() => {
-		if (!direitosViolados) return [];
-		if (!searchTerm) return direitosViolados;
-		return direitosViolados.filter((d: ResponseDireitoVioladoDTO) =>
+		const direitosArray: ResponseDireitoVioladoDTO[] = Array.isArray(
+			direitosViolados
+		)
+			? direitosViolados
+			: [];
+		if (!searchTerm) return direitosArray;
+		return direitosArray.filter((d: ResponseDireitoVioladoDTO) =>
 			d.nome.toLowerCase().includes(searchTerm.toLowerCase())
 		);
 	}, [direitosViolados, searchTerm]);

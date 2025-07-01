@@ -1,10 +1,10 @@
 import { Prisma } from "@prisma/client";
 
+import { prismaClient } from "@/adapters/db/prisma";
 import {
 	CreateProjetoDTO,
 	ResponseProjetoDTO,
 } from "@/core/domain/dtos/projeto.dto";
-import { prismaClient } from "@/services/prisma/prisma";
 
 interface ICriarProjetoService {
 	executar(params: CreateProjetoDTO): Promise<ResponseProjetoDTO>;

@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 
 import Header from "./header";
 
-import useDescobertaCabecalho from "@/core/lib/web/mock-utils/cabecalho-utils";
+import useDescobertaCabecalho from "@/mocks/web/mock-utils/cabecalho-utils";
 
 interface Cabecalho {
 	titulo: string;

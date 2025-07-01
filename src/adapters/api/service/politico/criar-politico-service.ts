@@ -1,10 +1,10 @@
 import { Prisma } from "@prisma/client";
 
+import { prismaClient } from "@/adapters/db/prisma";
 import {
 	CreatePoliticoDTO,
 	ResponsePoliticoDTO,
 } from "@/core/domain/dtos/politico.dto";
-import { prismaClient } from "@/services/prisma/prisma";
 
 interface ICriarPoliticoService {
 	executar(params: CreatePoliticoDTO): Promise<ResponsePoliticoDTO>;

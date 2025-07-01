@@ -1,5 +1,5 @@
+import { prismaClient } from "@/adapters/db/prisma";
 import { ResponseEstadoDTO } from "@/core/domain/dtos/estado.dto";
-import { prismaClient } from "@/services/prisma/prisma";
 
 export interface IListarEstadoService {
 	executar(): Promise<ResponseEstadoDTO[]>;

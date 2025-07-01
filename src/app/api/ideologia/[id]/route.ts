@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 
+import { AtualizarIdeologiaController } from "@/adapters/api/controllers/ideologia/atualizar-ideologia-controller";
+import { BuscarIdeologiaController } from "@/adapters/api/controllers/ideologia/buscar-ideologia-controller";
+import { DeletarIdeologiaController } from "@/adapters/api/controllers/ideologia/deletar-ideologia-controller";
 import { UpdateIdeologiaDTO } from "@/core/domain/dtos/ideologia.dto";
 import { RespostaApi } from "@/core/domain/models/resposta-api";
-import { AtualizarIdeologiaController } from "@/core/lib/api/controllers/ideologia/atualizar-ideologia-controller";
-import { BuscarIdeologiaController } from "@/core/lib/api/controllers/ideologia/buscar-ideologia-controller";
-import { DeletarIdeologiaController } from "@/core/lib/api/controllers/ideologia/deletar-ideologia-controller";
 
 function validateId(id?: string): NextResponse | undefined {
 	if (!id || id.trim() === "") {

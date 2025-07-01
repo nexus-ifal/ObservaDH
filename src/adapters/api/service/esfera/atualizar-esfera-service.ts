@@ -1,8 +1,8 @@
+import { prismaClient } from "@/adapters/db/prisma";
 import {
 	ResponseEsferaDTO,
 	UpdateEsferaDTO,
 } from "@/core/domain/dtos/esfera.dto";
-import { prismaClient } from "@/services/prisma/prisma";
 
 interface IAtualizarEsferaService {
 	executar(params: { esfera: UpdateEsferaDTO }): Promise<ResponseEsferaDTO>;

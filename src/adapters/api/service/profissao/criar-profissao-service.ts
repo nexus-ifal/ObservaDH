@@ -1,10 +1,10 @@
 import { Prisma } from "@prisma/client";
 
+import { prismaClient } from "@/adapters/db/prisma";
 import {
 	CreateProfissaoDTO,
 	ResponseProfissaoDTO,
 } from "@/core/domain/dtos/profissao.dto";
-import { prismaClient } from "@/services/prisma/prisma";
 
 interface ICriarProfissaoService {
 	executar(params: CreateProfissaoDTO): Promise<ResponseProfissaoDTO>;

@@ -5,7 +5,7 @@ import * as RechartsPrimitive from "recharts";
 
 import { oswald } from "../../../fonts/fonts";
 
-import { cn } from "@/core/lib/utils/utils";
+import { cn } from "@/utils/cn/utils";
 
 // Format: { THEME_NAME: CSS_SELECTOR }
 const THEMES = { light: "sas", dark: "" } as const;

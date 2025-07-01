@@ -1,10 +1,10 @@
 import { Prisma } from "@prisma/client";
 
+import { prismaClient } from "@/adapters/db/prisma";
 import {
 	CreateEstadoDTO,
 	ResponseEstadoDTO,
 } from "@/core/domain/dtos/estado.dto";
-import { prismaClient } from "@/services/prisma/prisma";
 
 export class CriarEstadoService {
 	private readonly prisma = prismaClient;

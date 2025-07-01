@@ -1,4 +1,4 @@
-import { prismaClient } from "@/services/prisma/prisma";
+import { prismaClient } from "@/adapters/db/prisma";
 
 export class DeletarUserService {
 	async executar({ id }: { id: string }) {

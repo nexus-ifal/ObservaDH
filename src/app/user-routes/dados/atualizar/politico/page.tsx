@@ -38,12 +38,12 @@ import { oswald } from "../../../../../fonts/fonts";
 import { APIAtualizarPoliticoPayload } from "../../../../../hooks/options/politico";
 
 import { ResponsePoliticoDTO } from "@/core/domain/dtos/politico.dto";
-import { useEstado } from "@/infra/hooks/estado/use-estado";
-import { usePartido } from "@/infra/hooks/partido/use-partido";
-import { usePolitico } from "@/infra/hooks/politico/use-politico";
-import { usePoliticoAtualizar } from "@/infra/hooks/politico/use-politico-update";
-import { useProfissao } from "@/infra/hooks/profissao/use-profissao";
-import { useProjeto } from "@/infra/hooks/projeto/use-projeto";
+import { useEstado } from "@/hooks/estado/use-estado";
+import { usePartido } from "@/hooks/partido/use-partido";
+import { usePolitico } from "@/hooks/politico/use-politico";
+import { usePoliticoAtualizar } from "@/hooks/politico/use-politico-update";
+import { useProfissao } from "@/hooks/profissao/use-profissao";
+import { useProjeto } from "@/hooks/projeto/use-projeto";
 
 const formSchema = z.object({
 	nome: z.string().min(1, { message: "Nome obrigatório" }),
@@ -581,12 +581,12 @@ const Page: React.FC = () => {
 											Projetos:
 										</FormLabel>
 										<MultiSelectPopover
-											options={
-												projetos?.map((p) => ({
+											options={(Array.isArray(projetos) ? projetos : []).map(
+												(p) => ({
 													value: p.id,
 													label: p.numeroPl,
-												})) ?? []
-											}
+												})
+											)}
 											value={field.value}
 											onChange={field.onChange}
 											placeholder="Número do projeto"

@@ -27,7 +27,7 @@ import { Input } from "@/components/external/ui-shacnui/input";
 
 import { oswald } from "../../../../../fonts/fonts";
 
-import { useEstadoCreate } from "@/infra/hooks/estado/use-estado-create";
+import { useEstadoCreate } from "@/hooks/estado/use-estado-create";
 
 const formSchema = z.object({
 	nome: z.string().min(1, {

@@ -1,8 +1,8 @@
+import { prismaClient } from "@/adapters/db/prisma";
 import {
 	DeletePartidoDTO,
 	ResponseDeletePartidoDTO,
 } from "@/core/domain/dtos/partido.dto";
-import { prismaClient } from "@/services/prisma/prisma";
 
 interface IDeletarPartidoService {
 	executar(params: { id: string }): Promise<ResponseDeletePartidoDTO>;

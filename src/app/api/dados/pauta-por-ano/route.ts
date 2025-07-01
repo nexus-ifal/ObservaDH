@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { ListarPautasPorAnoController } from "@/core/lib/api/controllers/dados/pauta-por-ano-controller";
+import { ListarPautasPorAnoController } from "@/adapters/api/controllers/dados/pauta-por-ano-controller";
 
 export async function GET() {
 	try {

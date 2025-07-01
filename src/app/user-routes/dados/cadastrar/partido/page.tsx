@@ -27,7 +27,7 @@ import { Input } from "@/components/external/ui-shacnui/input";
 
 import { oswald } from "../../../../../fonts/fonts";
 
-import { usePartidoCreate } from "@/infra/hooks/partido/use-partido-create";
+import { usePartidoCreate } from "@/hooks/partido/use-partido-create";
 
 const formSchema = z.object({
 	nome: z.string().min(1, {

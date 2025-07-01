@@ -1,8 +1,8 @@
+import { prismaClient } from "@/adapters/db/prisma";
 import {
 	DeletePautaDTO,
 	ResponseDeletePautaDTO,
 } from "@/core/domain/dtos/pauta.dto";
-import { prismaClient } from "@/services/prisma/prisma";
 
 interface IDeletarPautaService {
 	executar(params: { id: string }): Promise<ResponseDeletePautaDTO>;

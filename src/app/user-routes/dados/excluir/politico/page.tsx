@@ -17,8 +17,8 @@ import Loading from "@/components/ui/loading";
 import { oswald, titilliumWeb } from "../../../../../fonts/fonts";
 
 import { APIExcluirPoliticoPayload } from "@/hooks/options/politico";
-import { usePolitico } from "@/infra/hooks/politico/use-politico";
-import { usePoliticoExcluir } from "@/infra/hooks/politico/use-politico-delete";
+import { usePolitico } from "@/hooks/politico/use-politico";
+import { usePoliticoExcluir } from "@/hooks/politico/use-politico-delete";
 
 const deleteSchema = z.object({
 	politicoId: z.string().min(1, "Selecione um político"),

@@ -16,9 +16,9 @@ import {
 
 import { oswald, titilliumWeb } from "../../../../../fonts/fonts";
 
+import { useEstado } from "@/hooks/estado/use-estado";
+import { useEstadoExcluir } from "@/hooks/estado/use-estado-delete";
 import { APIExcluirEstadoPayload } from "@/hooks/options/estado";
-import { useEstado } from "@/infra/hooks/estado/use-estado";
-import { useEstadoExcluir } from "@/infra/hooks/estado/use-estado-delete";
 
 const deleteSchema = z.object({
 	estadoId: z.string().min(1, "Selecione um estado"),

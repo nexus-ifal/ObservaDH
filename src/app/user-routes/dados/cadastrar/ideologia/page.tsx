@@ -28,7 +28,7 @@ import { Textarea } from "@/components/external/ui-shacnui/textarea";
 
 import { oswald } from "../../../../../fonts/fonts";
 
-import { useIdeologiaCreate } from "@/infra/hooks/ideologia/use-ideologia-create";
+import { useIdeologiaCreate } from "@/hooks/ideologia/use-ideologia-create";
 
 const formSchema = z.object({
 	nome: z.string().min(1, {

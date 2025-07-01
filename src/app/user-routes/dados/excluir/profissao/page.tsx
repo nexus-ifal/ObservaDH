@@ -17,8 +17,8 @@ import {
 import { oswald, titilliumWeb } from "../../../../../fonts/fonts";
 
 import { APIExcluirProfissaoPayload } from "@/hooks/options/profissao";
-import { useProfissao } from "@/infra/hooks/profissao/use-profissao";
-import { useProfissaoExcluir } from "@/infra/hooks/profissao/use-profissao-delete";
+import { useProfissao } from "@/hooks/profissao/use-profissao";
+import { useProfissaoExcluir } from "@/hooks/profissao/use-profissao-delete";
 
 const deleteSchema = z.object({
 	profissaoId: z.string().min(1, "Selecione uma profissão"),

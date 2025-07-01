@@ -1,8 +1,8 @@
+import { prismaClient } from "@/adapters/db/prisma";
 import {
 	DeleteEstadoDTO,
 	ResponseDeleteEstadoDTO,
 } from "@/core/domain/dtos/estado.dto";
-import { prismaClient } from "@/services/prisma/prisma";
 
 export class DeletarEstadoService {
 	private readonly prisma = prismaClient;

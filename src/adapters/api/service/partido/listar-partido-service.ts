@@ -1,5 +1,5 @@
+import { prismaClient } from "@/adapters/db/prisma";
 import { ResponsePartidoDTO } from "@/core/domain/dtos/partido.dto";
-import { prismaClient } from "@/services/prisma/prisma";
 
 export interface IListarPartidoService {
 	executar(): Promise<ResponsePartidoDTO[]>;

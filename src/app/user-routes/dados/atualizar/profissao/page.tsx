@@ -28,8 +28,8 @@ import { Input } from "@/components/external/ui-shacnui/input";
 import { oswald } from "../../../../../fonts/fonts";
 
 import { APIAtualizarProfissaoPayload } from "@/hooks/options/profissao";
-import { useProfissao } from "@/infra/hooks/profissao/use-profissao";
-import { useProfissaoAtualizar } from "@/infra/hooks/profissao/use-profissao-update";
+import { useProfissao } from "@/hooks/profissao/use-profissao";
+import { useProfissaoAtualizar } from "@/hooks/profissao/use-profissao-update";
 
 const formSchema = z.object({
 	nome: z.string().min(1, { message: "Entrada obrigatória!" }),

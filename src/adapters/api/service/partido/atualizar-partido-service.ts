@@ -1,8 +1,8 @@
+import { prismaClient } from "@/adapters/db/prisma";
 import {
 	ResponsePartidoDTO,
 	UpdatePartidoDTO,
 } from "@/core/domain/dtos/partido.dto";
-import { prismaClient } from "@/services/prisma/prisma";
 
 interface IAtualizarPartidoService {
 	executar(params: { partido: UpdatePartidoDTO }): Promise<ResponsePartidoDTO>;

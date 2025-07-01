@@ -1,10 +1,10 @@
 import { Prisma } from "@prisma/client";
 
+import { prismaClient } from "@/adapters/db/prisma";
 import {
 	CreateIdeologiaDTO,
 	ResponseIdeologiaDTO,
 } from "@/core/domain/dtos/ideologia.dto";
-import { prismaClient } from "@/services/prisma/prisma";
 
 interface ICriarIdeologiaService {
 	executar(params: CreateIdeologiaDTO): Promise<ResponseIdeologiaDTO>;

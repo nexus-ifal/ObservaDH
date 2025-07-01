@@ -17,9 +17,9 @@ import {
 import { oswald, titilliumWeb } from "../../../../../fonts/fonts";
 
 import { ResponseIdeologiaDTO } from "@/core/domain/dtos/ideologia.dto";
+import { useIdeologia } from "@/hooks/ideologia/use-ideologia";
+import { useIdeologiaExcluir } from "@/hooks/ideologia/use-ideologia-delete";
 import { APIExcluirIdeologiaPayload } from "@/hooks/options/ideologia";
-import { useIdeologia } from "@/infra/hooks/ideologia/use-ideologia";
-import { useIdeologiaExcluir } from "@/infra/hooks/ideologia/use-ideologia-delete";
 
 const deleteSchema = z.object({
 	ideologiaId: z.string().min(1, "Selecione uma ideologia"),

@@ -1,5 +1,5 @@
+import { prismaClient } from "@/adapters/db/prisma";
 import { FiltrosPoliticosDTO } from "@/core/domain/dtos/politico.dto";
-import { prismaClient } from "@/services/prisma/prisma";
 
 export interface IListarPoliticosFiltradosService {
 	executar(

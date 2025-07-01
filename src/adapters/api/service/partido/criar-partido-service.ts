@@ -1,10 +1,10 @@
 import { Prisma } from "@prisma/client";
 
+import { prismaClient } from "@/adapters/db/prisma";
 import {
 	CreatePartidoDTO,
 	ResponsePartidoDTO,
 } from "@/core/domain/dtos/partido.dto";
-import { prismaClient } from "@/services/prisma/prisma";
 
 interface ICriarPartidoService {
 	executar(params: CreatePartidoDTO): Promise<ResponsePartidoDTO>;

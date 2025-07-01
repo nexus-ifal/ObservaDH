@@ -1,8 +1,8 @@
+import { prismaClient } from "@/adapters/db/prisma";
 import {
 	ResponsePartidoDTO,
 	SearchPartidoDTO,
 } from "@/core/domain/dtos/partido.dto";
-import { prismaClient } from "@/services/prisma/prisma";
 
 export interface IBuscarPartidoService {
 	buscarPorId(

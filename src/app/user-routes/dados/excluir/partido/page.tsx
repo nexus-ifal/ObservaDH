@@ -18,8 +18,8 @@ import { oswald, titilliumWeb } from "../../../../../fonts/fonts";
 
 import { ResponsePartidoDTO } from "@/core/domain/dtos/partido.dto";
 import { APIExcluirPartidoPayload } from "@/hooks/options/partido";
-import { usePartido } from "@/infra/hooks/partido/use-partido";
-import { usePartidoExcluir } from "@/infra/hooks/partido/use-partido-delete";
+import { usePartido } from "@/hooks/partido/use-partido";
+import { usePartidoExcluir } from "@/hooks/partido/use-partido-delete";
 
 const deleteSchema = z.object({
 	partidoId: z.string().min(1, "Selecione um partido"),
