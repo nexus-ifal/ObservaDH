@@ -68,7 +68,9 @@ const GraficoBarraEmpilhadaHorizontal: React.FC<GraficoBarraEmpilhadaProps> = ({
 							content={<ChartTooltipContent className="min-w-56" />}
 						/>
 						<ChartLegend
-							content={<ChartLegendContent className="text-white text-sm" />}
+							content={
+								<ChartLegendContent className="text-white text-sm justify-around" />
+							}
 						/>
 						<Bar
 							dataKey="linguagensNeutra"
