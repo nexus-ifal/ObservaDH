@@ -1,4 +1,17 @@
-const infoDevsMock = [
+interface DevLink {
+	site?: string;
+	imagem?: string;
+	link?: string;
+}
+interface DevInfo {
+	nome: string;
+	foto: string;
+	funcao: string;
+	links: DevLink[];
+	bio: string;
+}
+
+const infoDevsMock: DevInfo[] = [
 	{
 		nome: "Júlio César",
 		foto: "https://github.com/follijulio.png",
