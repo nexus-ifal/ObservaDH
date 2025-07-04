@@ -15,6 +15,7 @@ import { elemento } from "@/core/domain/types/elemento-dropdown";
 
 interface DropdownButtonProps {
 	titulo?: string;
+	param: string;
 	elementos: elemento[];
 	className?: string;
 }
@@ -23,6 +24,7 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({
 	elementos,
 	className,
 	titulo,
+	param,
 }) => {
 	const [filter, setFilter] = useState<string>("");
 
@@ -33,9 +35,9 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({
 	function handleChange(value: string) {
 		const params = new URLSearchParams(searchParams.toString());
 		if (!value || value === "geral") {
-			params.delete("esfera");
+			params.delete(param);
 		} else {
-			params.set("esfera", value);
+			params.set(param, value);
 		}
 		replace(`${pathName}?${params.toString()}`, { scroll: false });
 		setFilter(value);
