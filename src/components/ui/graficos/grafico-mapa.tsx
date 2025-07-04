@@ -2,6 +2,7 @@ import CardStatus from "../cards/card-status";
 import DropdownButton from "../dropdown/dropdown-button";
 import MapaBrasil from "../icons/mapa-brasil";
 import Loading from "../loading";
+import UserError from "../user-erro";
 
 import { DadosProjetoEstado } from "@/core/domain/dtos/dados.dto";
 import { mockStatus } from "@/mocks/mock-projetos";
@@ -35,17 +36,7 @@ const GraficoMapa: React.FC<MapaBrasilProps> = ({
 	return (
 		<article className="w-[80rem] h-[45.625rem] flex gap-2">
 			<section className="h-[45.625rem] w-[43.75rem] min-w-1/2">
-				{error && (
-					<div className="h-full w-full text-2xl">
-						<p className="text-red-500">
-							{error || "ERRO AO CARREGAR INFORMAÇÕES DO MAPA..."}
-						</p>
-						<p className="text-red-500">
-							Não é culpa sua, é um erro no servidor. Tente novamente mais
-							tarde.
-						</p>
-					</div>
-				)}
+				{error && <UserError error={error} />}
 				{isLoading ? (
 					<div className="h-full w-full flex items-center justify-center">
 						<Loading />

@@ -20,6 +20,7 @@ import GraficoMapa from "@/components/ui/graficos/grafico-mapa";
 import GraficoLinhaPontos from "@/components/ui/graficos/linha-pontos";
 import MainLayout from "@/components/ui/layouts/main-layout";
 import Loading from "@/components/ui/loading";
+import UserError from "@/components/ui/user-erro";
 
 import {
 	apresentacao,
@@ -121,14 +122,7 @@ const PageContent = () => {
 		<MainLayout>
 			<div className="flex h-full w-full flex-col gap-24 items-center px-11">
 				<Apresentacao apresentacao={apresentacao} />
-				{error && (
-					<h2 className="text-center text-5xl text-[#AFC4F9]">
-						<p>Erro ao carregar dados</p>
-						<p>Não é culpa sua 😊</p>
-						<p>tente novamente mais tarde.</p>
-						erro: {error instanceof Error ? error.message : "Erro desconhecido"}
-					</h2>
-				)}
+				{error && <UserError error={error} />}
 				{isLoading ? (
 					<Loading />
 				) : (
