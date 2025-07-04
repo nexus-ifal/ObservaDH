@@ -111,10 +111,10 @@ const PageContent = () => {
 	}));
 
 	const dropdownItems = [
-		{ titulo: "Esfera", elementos: esferasElementos },
-		{ titulo: "Ano", elementos: anosElementos },
-		{ titulo: "Estado", elementos: estadosElementos },
-		{ titulo: "Pauta", elementos: pautasElementos },
+		{ titulo: "Esfera", elementos: esferasElementos, param: "esfera" },
+		{ titulo: "Ano", elementos: anosElementos, param: "ano" },
+		{ titulo: "Estado", elementos: estadosElementos, param: "estado" },
+		{ titulo: "Pauta", elementos: pautasElementos, param: "pauta" },
 	];
 
 	return (
@@ -181,6 +181,7 @@ interface FiltroElementosProps {
 	items: {
 		elementos: elemento[];
 		titulo: string;
+		param: string;
 	}[];
 }
 
@@ -189,6 +190,7 @@ const Filtro = ({ items }: FiltroElementosProps) => (
 		<section className="flex gap-12 px-10">
 			{items.map((item, index) => (
 				<DropdownButton
+					param={item.param}
 					key={index}
 					elementos={item.elementos}
 					titulo={item.titulo}
@@ -291,6 +293,7 @@ interface PropostasDadosProps {
 	items: {
 		elementos: elemento[];
 		titulo: string;
+		param: string;
 	}[];
 	projetos: ProjetoLei[];
 	dadosPlAno: DadosGraficoLinhaPontos[];
