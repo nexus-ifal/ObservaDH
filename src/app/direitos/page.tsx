@@ -69,6 +69,7 @@ const DadosEstatisticos = ({
 					<DropdownButton
 						className="w-32"
 						titulo="Pauta"
+						param="pauta"
 						elementos={elementosDropdown}
 					/>
 				</div>

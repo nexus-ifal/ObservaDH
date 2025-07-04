@@ -60,12 +60,12 @@ const Page: React.FC = () => {
 	const error = !!(errorIdeologiaGenero || errorReligiaoRaca);
 
 	const dropdownItems = [
-		{ elementos: esferas, titulo: "Esfera" },
-		{ elementos: estados, titulo: "Estado" },
-		{ elementos: genero, titulo: "Gênero" },
-		{ elementos: partidos, titulo: "Partidos" },
-		{ elementos: ideologias, titulo: "Ideologia" },
-		{ elementos: profissoes, titulo: "Profissão" },
+		{ elementos: esferas, titulo: "Esfera", param: "esfera" },
+		{ elementos: estados, titulo: "Estado", param: "estado" },
+		{ elementos: genero, titulo: "Gênero", param: "genero" },
+		{ elementos: partidos, titulo: "Partidos", param: "partido" },
+		{ elementos: ideologias, titulo: "Ideologia", param: "ideologia" },
+		{ elementos: profissoes, titulo: "Profissão", param: "profissao" },
 	];
 
 	return (
@@ -93,6 +93,7 @@ interface FiltroElementosProps {
 	items: {
 		elementos: elemento[];
 		titulo: string;
+		param: string;
 	}[];
 }
 
@@ -102,6 +103,7 @@ const Filtro = ({ items }: FiltroElementosProps) => (
 			{items.map((item, index) => (
 				<DropdownButton
 					key={index}
+					param={item.param}
 					elementos={item.elementos}
 					titulo={item.titulo}
 					className="w-32"
@@ -119,6 +121,7 @@ interface RankingParlamentaresProps {
 	itemsFiltro: {
 		elementos: elemento[];
 		titulo: string;
+		param: string;
 	}[];
 }
 
