@@ -128,7 +128,7 @@ export default function DeleteForm() {
 						{isDeleting ? "Deletando..." : `Deletar`}
 					</button>
 					{deleteMessage && (
-						<div className="text-red-500 text-sm mt-2">{deleteMessage}</div>
+						<div className="text-black text-sm mt-2">{deleteMessage}</div>
 					)}
 				</form>
 			)}

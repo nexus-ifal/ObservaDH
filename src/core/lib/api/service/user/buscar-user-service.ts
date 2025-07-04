@@ -15,9 +15,12 @@ export class BuscarUserService {
 	async buscarPorNome({ name }: { name: string }) {
 		const prisma = prismaClient;
 
-		const resposta = await prisma.user.findUnique({
+		const resposta = await prisma.user.findFirst({
 			where: {
-				name: name,
+				name: {
+					equals: name,
+					mode: "insensitive",
+				},
 			},
 		});
 		return resposta;

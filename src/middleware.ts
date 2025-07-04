@@ -22,10 +22,9 @@ const ROTAS_ADMIN = [
 const ROTAS_USER = [
 	//TODO: adicionar TODAS as rotas de user
 	"/user-routes/home",
-	"/user-routes/dados/[model]",
 	"/user-routes/dados/atualizar/estado",
 	"/user-routes/dados/cadastrar/estado",
-	"/user-routes/dados/atualizar/estado",
+	"/user-routes/dados/excluir/estado",
 ];
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

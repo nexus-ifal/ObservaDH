@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
 import { registerUser } from "@/core/lib/actions/register-actions";
@@ -10,10 +10,24 @@ export default function RegisterForm() {
 	const searchParams = useSearchParams();
 	const callbackUrl =
 		searchParams.get("callbackUrl") || "/admin-routes/acoes-usuario";
-	const [errorMessage, formAction, isPending] = useActionState(
-		registerUser,
+	const [state, formAction, isPending] = useActionState(registerUser, {
+		message: undefined,
+		emailSent: false,
+	});
+
+	const [successMessage, setSuccessMessage] = useState<string | undefined>(
 		undefined
 	);
+
+	useEffect(() => {
+		if (state?.emailSent) {
+			setSuccessMessage(
+				"Usuário criado! Um e-mail de verificação foi enviado para o endereço fornecido."
+			);
+		} else if (state?.message) {
+			setSuccessMessage(undefined);
+		}
+	}, [state]);
 
 	return (
 		<form
@@ -72,7 +86,7 @@ export default function RegisterForm() {
 							<input
 								className="w-[400px] h-[40px] bg-white rounded-[5px] border-[2px] border-[#3E3E3E] py-[8px] pl-[4px] text-sm placeholder:text-gray-500 flex justify-start"
 								id="password"
-								type="password"
+								type="text"
 								name="password"
 								placeholder="Senha do usuário"
 								required
@@ -106,10 +120,13 @@ export default function RegisterForm() {
 					className={`bg-[#121A2B] rounded-[4px] border-[2px] border-[#2C52A4] ${oswald.className} text-[#91ADF4] text-[15px] font-medium w-fit p-2 hover:cursor-pointer hover:bg-[#2C52A4] hover:border-[#121A2B] hover:text-[#121A2B] transition-colors duration-300`}
 					aria-disabled={isPending}
 				>
-					Cadastrar
+					{isPending ? "Cadastrando..." : `Cadastrar`}
 				</button>
-				{errorMessage && (
-					<div className="text-red-500 text-sm mt-2">{errorMessage}</div>
+				{state?.message && (
+					<div className="text-black text-sm mt-2">{state.message}</div>
+				)}
+				{successMessage && (
+					<div className="text-green-600 text-sm mt-2">{successMessage}</div>
 				)}
 			</div>
 		</form>

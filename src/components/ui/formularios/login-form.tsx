@@ -68,11 +68,11 @@ export default function LoginForm() {
 					className={`bg-[#121A2B] rounded-[4px] border-[2px] border-[#2C52A4] ${oswald.className} text-[#91ADF4] text-[15px] font-medium w-fit p-2 hover:cursor-pointer hover:bg-[#2C52A4] hover:border-[#121A2B] hover:text-[#121A2B] transition-colors duration-300`}
 					aria-disabled={isPending}
 				>
-					Entrar
+					{isPending ? "Entrando..." : `Entrar`}
 				</button>
 				{errorMessage && (
 					<div className="w-full flex justify-center">
-						<div className="text-red-500 text-[12px] mt-2">{errorMessage}</div>
+						<div className="text-black text-[12px] mt-2">{errorMessage}</div>
 					</div>
 				)}
 			</div>

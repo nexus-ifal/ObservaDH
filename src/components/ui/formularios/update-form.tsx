@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import axios from "axios";
 import { useSearchParams } from "next/navigation";
 
@@ -10,6 +10,8 @@ import { oswald } from "@/core/lib/fonts/fonts";
 interface FoundUser {
 	id: string;
 	name: string;
+	email: string;
+	role: string;
 }
 
 export default function UpdateForm() {
@@ -22,10 +24,26 @@ export default function UpdateForm() {
 	const [erroProcura, seterroProcura] = useState<string | null>(null);
 	const [isProcurando, setIsProcurando] = useState(false);
 
-	const [updateMessage, formAction, isUpdating] = useActionState(
-		updateUser,
+	const [state, formAction, isUpdating] = useActionState(updateUser, {
+		message: undefined,
+		emailVerificationSent: false,
+	});
+
+	const [successMessage, setSuccessMessage] = useState<string | undefined>(
 		undefined
 	);
+
+	useEffect(() => {
+		if (state?.emailVerificationSent) {
+			setSuccessMessage(
+				"Usuário atualizado! Um e-mail de verificação foi enviado para o novo endereço, se ele foi alterado."
+			);
+		} else if (state?.message) {
+			setSuccessMessage(undefined);
+		} else if (state?.sucesso) {
+			setSuccessMessage("Usuário atualizado com sucesso!");
+		}
+	}, [state]);
 
 	const pesquisa = async () => {
 		if (!procurarNome) {
@@ -35,6 +53,7 @@ export default function UpdateForm() {
 		setIsProcurando(true);
 		seterroProcura(null);
 		setFoundUser(null);
+		setSuccessMessage(undefined);
 
 		try {
 			const response = await axios.get(`/api/user/nome/${procurarNome}`);
@@ -94,7 +113,7 @@ export default function UpdateForm() {
 				<form action={formAction} className="overflow-auto flex flex-col gap-6">
 					<input type="hidden" name="idUserUpdate" value={foundUser.id} />
 					<p className={`${oswald.className} text-[#122144] text-[15px] mb-2`}>
-						Usuário encontrado
+						Usuário encontrado: {foundUser.name}
 					</p>
 
 					<div className="flex gap-4">
@@ -146,7 +165,7 @@ export default function UpdateForm() {
 									<input
 										className="w-[300px] h-[40px] bg-white rounded-[5px] border-[2px] border-[#3E3E3E] py-[8px] pl-[4px] text-sm placeholder:text-gray-500 flex justify-start"
 										id="password"
-										type="password"
+										type="text"
 										name="password"
 										placeholder="Senha do usuário"
 										minLength={8}
@@ -165,6 +184,7 @@ export default function UpdateForm() {
 										name="role"
 										id="role"
 										className="bg-white rounded-[5px] h-[40px] border-[2px] border-[#3E3E3E] py-[8px] pl-[4px] text-sm"
+										defaultValue={foundUser.role}
 									>
 										<option value="EDITOR">Editor</option>
 										<option value="ADMIN">Administrador</option>
@@ -176,7 +196,7 @@ export default function UpdateForm() {
 					<div className="flex flex-col gap-2">
 						<label
 							className={`${oswald.className} text-[#122144] text-[15px] font-medium block`}
-							htmlFor="password"
+							htmlFor="senha"
 						>
 							Sua Senha (Admin)
 						</label>
@@ -187,6 +207,7 @@ export default function UpdateForm() {
 							name="senha"
 							placeholder="Confirme sua senha para deletar"
 							minLength={8}
+							required
 						/>
 					</div>
 					<input type="hidden" name="redirectTo" value={callbackUrl} />
@@ -199,8 +220,11 @@ export default function UpdateForm() {
 							{isUpdating ? "Atualizando..." : `Atualizar`}
 						</button>
 					</div>
-					{updateMessage && (
-						<div className="text-red-500 text-sm mt-2">{updateMessage}</div>
+					{state?.message && (
+						<div className="text-black text-sm mt-2">{state.message}</div>
+					)}
+					{successMessage && (
+						<div className="text-green-600 text-sm mt-2">{successMessage}</div>
 					)}
 				</form>
 			)}

@@ -1,7 +1,6 @@
 "use server";
 import axios from "axios";
 import bcrypt from "bcryptjs";
-import { redirect } from "next/navigation";
 import { z } from "zod";
 
 import { auth } from "../../../../auth";
@@ -14,24 +13,30 @@ interface ApiResponse {
 	mensagem: string;
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	dados?: any;
+	emailVerificationSent?: boolean;
+}
+
+interface UpdateUserResponse {
+	message?: string;
+	sucesso?: boolean;
+	emailVerificationSent?: boolean;
 }
 
 export async function updateUser(
-	prevState: string | undefined,
+	prevState: UpdateUserResponse | undefined,
 	formData: FormData
-): Promise<string | undefined> {
+): Promise<UpdateUserResponse> {
 	const session = await auth();
 
 	if (!session?.user?.id) {
-		return "Sessão de usuário inválida ou não autenticada";
+		return { message: "Sessão de usuário inválida ou não autenticada" };
 	}
 	if (session.user.role !== "ADMIN") {
-		return "Você não tem permissão para realizar esta ação";
+		return { message: "Você não tem permissão para realizar esta ação" };
 	}
 
 	const idUserUpdate = formData.get("idUserUpdate") as string;
 	const senhaAdmin = formData.get("senha") as string;
-	const redirecione = (formData.get("redirectTo") as string) || "/";
 
 	const name = formData.get("name") || undefined;
 	const email = formData.get("email") || undefined;
@@ -39,7 +44,7 @@ export async function updateUser(
 	const role = formData.get("role") || undefined;
 
 	if (!idUserUpdate || !senhaAdmin) {
-		return "Informações faltando para completar a atualização";
+		return { message: "Informações faltando para completar a atualização" };
 	}
 
 	try {
@@ -55,7 +60,9 @@ export async function updateUser(
 		});
 
 		if (!userAdmin || !userAdmin.passwordHash) {
-			return "Não foi possível verificar a identidade do administrador";
+			return {
+				message: "Não foi possível verificar a identidade do administrador",
+			};
 		}
 
 		const isSenhaCorreta = await bcrypt.compare(
@@ -64,7 +71,7 @@ export async function updateUser(
 		);
 
 		if (!isSenhaCorreta) {
-			return "Senha de administrador incorreta.";
+			return { message: "Senha de administrador incorreta." };
 		}
 
 		const userApi = `${process.env.PUBLIC_BASE_URL}/api/user/${idUserUpdate}`;
@@ -96,9 +103,13 @@ export async function updateUser(
 		});
 
 		if (resposta.data.sucesso) {
-			redirect(redirecione);
+			return {
+				sucesso: true,
+				message: "Usuário atualizado com sucesso.",
+				emailVerificationSent: resposta.data.emailVerificationSent,
+			};
 		} else {
-			return resposta.data.mensagem;
+			return { message: resposta.data.mensagem };
 		}
 	} catch (error) {
 		if (error instanceof Error && error.message.includes("NEXT_REDIRECT")) {
@@ -107,23 +118,26 @@ export async function updateUser(
 
 		if (error instanceof z.ZodError) {
 			const fieldErrors = error.flatten().fieldErrors;
-			if (fieldErrors.role?.length) return fieldErrors.role[0];
-			if (fieldErrors.email?.length) return fieldErrors.email[0];
-			if (fieldErrors.password?.length) return fieldErrors.password[0];
-			if (fieldErrors.name?.length) return fieldErrors.name[0];
-			if (fieldErrors._?.length) return fieldErrors._[0];
-			return "Os dados não foram validados corretamente";
+			if (fieldErrors.role?.length) return { message: fieldErrors.role[0] };
+			if (fieldErrors.email?.length) return { message: fieldErrors.email[0] };
+			if (fieldErrors.password?.length)
+				return { message: fieldErrors.password[0] };
+			if (fieldErrors.name?.length) return { message: fieldErrors.name[0] };
+			if (fieldErrors._?.length) return { message: fieldErrors._[0] };
+			return { message: "Os dados não foram validados corretamente" };
 		}
 
 		if (axios.isAxiosError(error) && error.response) {
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			console.error("Erro da API:", (error as any).response.data);
-			return (
-				error.response.data.mensagem || "Ocorreu um erro ao atualizar o usuário"
-			);
+			return {
+				message:
+					error.response.data.mensagem ||
+					"Ocorreu um erro ao atualizar o usuário",
+			};
 		}
 
 		console.error("Erro inesperado:", error);
-		return "Ocorreu um erro inesperado ao atualizar o usuário";
+		return { message: "Ocorreu um erro inesperado ao atualizar o usuário" };
 	}
 }

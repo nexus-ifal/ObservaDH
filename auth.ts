@@ -51,6 +51,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 						return null;
 					}
 
+					if (!user.emailVerified) {
+						console.log("Email não verificado");
+						throw new Error(
+							"Seu e-mail ainda não foi verificado. Por favor, verifique sua caixa de entrada."
+						);
+					}
+
 					return {
 						id: user.id,
 						name: user.name,
@@ -68,6 +75,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 							"Credenciais inválidas: " +
 								JSON.stringify(error.flatten().fieldErrors)
 						);
+					}
+					if (
+						error instanceof Error &&
+						error.message.includes("Seu e-mail ainda não foi verificado")
+					) {
+						throw error;
 					}
 					console.error("Erro na autorização do NextAuth:", error);
 					throw new Error("Erro interno ao tentar fazer login.");
@@ -96,25 +109,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 			return token;
 		},
 		async session({ session, token }) {
-			if (token && session.user) {
+			if (session.user) {
+				session.user.id = token.id as string;
 				session.user.name = token.name as string;
 				session.user.email = token.email as string;
-				session.user.id = token.id as string;
 				session.user.role = token.role as Role;
 			}
 			return session;
 		},
 	},
-	cookies: {
-		sessionToken: {
-			name: `next-auth.session-token`,
-			options: {
-				httpOnly: true,
-				sameSite: "lax",
-				path: "/",
-				secure: process.env.NODE_ENV === "production",
-			},
-		},
-	},
-	secret: process.env.AUTH_SECRET,
 });
