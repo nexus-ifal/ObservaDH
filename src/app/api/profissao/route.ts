@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 
+import { CriarProfissaoController } from "@/adapters/api/controllers/profissao/criar-profissao-controller";
+import { ListarProfissaoController } from "@/adapters/api/controllers/profissao/listar-profissao-controller";
 import { CreateProfissaoDTO } from "@/core/domain/dtos/profissao.dto";
 import { RespostaApi } from "@/core/domain/models/resposta-api";
-import { CriarProfissaoController } from "@/core/lib/api/controllers/profissao/criar-profissao-controller";
-import { ListarProfissaoController } from "@/core/lib/api/controllers/profissao/listar-profissao-controller";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function handleError(error: any, message: string) {

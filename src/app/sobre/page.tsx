@@ -2,14 +2,14 @@ import Image from "next/image";
 
 import MainLayout from "@/components/ui/layouts/main-layout";
 
-import { mockSobre } from "@/mocks/mock-sobre";
+import { sobre } from "@/content/content-sobre";
 
 const page: React.FC = () => {
 	//render
 	return (
 		<MainLayout>
 			<div className="flex h-full w-full flex-col gap-[4.25rem] items-center px-36 text-white text-3xl text-justify">
-				{mockSobre.map((item, index) => {
+				{sobre.map((item, index) => {
 					return (
 						<Sobre
 							key={index}

@@ -1,4 +1,4 @@
-import { oswald } from "@/core/lib/fonts/fonts";
+import { oswald } from "../../../fonts/fonts";
 
 const Page: React.FC = () => {
 	return (

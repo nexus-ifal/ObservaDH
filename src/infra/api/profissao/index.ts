@@ -3,8 +3,8 @@ import {
 	ResponseProfissaoDTO,
 	UpdateProfissaoDTO,
 } from "@/core/domain/dtos/profissao.dto";
-import { ProfissaoRepository } from "@/core/interfaces/repository/profissao.repository";
-import { conexaoBackend } from "@/infra/services/conexao-backend/client";
+import { ProfissaoRepository } from "@/core/repositories/profissao.repository";
+import { conexaoBackend } from "@/infra/api/client";
 
 class ProfissaoAPI implements ProfissaoRepository {
 	async listar(): Promise<ResponseProfissaoDTO[]> {

@@ -1,4 +1,4 @@
-import { titilliumWeb } from "../../../core/lib/fonts/fonts";
+import { titilliumWeb } from "../../../fonts/fonts";
 
 import CardSaibaMais from "./card-saiba-mais";
 

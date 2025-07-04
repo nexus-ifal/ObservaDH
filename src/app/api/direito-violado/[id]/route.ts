@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 
+import { AtualizarDireitoVioladoController } from "@/adapters/api/controllers/direito-violado/atualizar-direito_violado-controller";
+import { BuscarDireitoVioladoController } from "@/adapters/api/controllers/direito-violado/buscar-direito_violado-controller";
+import { DeletarDireitoVioladoController } from "@/adapters/api/controllers/direito-violado/deletar-direito_violado-controller";
 import { UpdateDireitoVioladoDTO } from "@/core/domain/dtos/direito-violado.dto";
 import { RespostaApi } from "@/core/domain/models/resposta-api";
-import { AtualizarDireitoVioladoController } from "@/core/lib/api/controllers/direito-violado/atualizar-direito_violado-controller";
-import { BuscarDireitoVioladoController } from "@/core/lib/api/controllers/direito-violado/buscar-direito_violado-controller";
-import { DeletarDireitoVioladoController } from "@/core/lib/api/controllers/direito-violado/deletar-direito_violado-controller";
 
 function validateId(id?: string): NextResponse | undefined {
 	if (!id || id.trim() === "") {

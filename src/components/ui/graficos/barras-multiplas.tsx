@@ -2,7 +2,7 @@
 
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 
-import { Card, CardContent } from "@/components/ui-shacnui/card";
+import { Card, CardContent } from "@/components/external/ui-shacnui/card";
 import {
 	ChartConfig,
 	ChartContainer,
@@ -10,9 +10,9 @@ import {
 	ChartLegendContent,
 	ChartTooltip,
 	ChartTooltipContent,
-} from "@/components/ui-shacnui/chart";
+} from "@/components/external/ui-shacnui/chart";
 
-import { DadosGraficoBarrasMultiplas } from "@/core/domain/graficos/types/barras-multiplas";
+import { DadosGraficoBarrasMultiplas } from "@/core/domain/types/barras-multiplas";
 
 interface GraficoBarraMultiplasProps {
 	dados: DadosGraficoBarrasMultiplas[];

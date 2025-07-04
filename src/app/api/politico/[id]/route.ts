@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 
+import { AtualizarPoliticoController } from "@/adapters/api/controllers/politico/atualizar-politico-controller";
+import { BuscarPoliticoController } from "@/adapters/api/controllers/politico/buscar-politico-controller";
+import { DeletarPoliticoController } from "@/adapters/api/controllers/politico/deletar-politico-controller";
 import { UpdatePoliticoDTO } from "@/core/domain/dtos/politico.dto";
 import { RespostaApi } from "@/core/domain/models/resposta-api";
-import { AtualizarPoliticoController } from "@/core/lib/api/controllers/politico/atualizar-politico-controller";
-import { BuscarPoliticoController } from "@/core/lib/api/controllers/politico/buscar-politico-controller";
-import { DeletarPoliticoController } from "@/core/lib/api/controllers/politico/deletar-politico-controller";
 
 function validateId(id?: string): NextResponse | undefined {
 	if (!id || id.trim() === "") {

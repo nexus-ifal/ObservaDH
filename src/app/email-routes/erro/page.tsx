@@ -2,7 +2,7 @@
 import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 
-import { oswald } from "@/core/lib/fonts/fonts";
+import { oswald } from "@/fonts/fonts";
 
 function ErroConteudo() {
 	const searchParams = useSearchParams();

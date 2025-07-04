@@ -8,7 +8,7 @@ import {
 	AlertDialogDescription,
 	AlertDialogTitle,
 	AlertDialogTrigger,
-} from "@/components/ui-shacnui/alert-dialog";
+} from "@/components/external/ui-shacnui/alert-dialog";
 
 import Texto from "../componente-texto";
 

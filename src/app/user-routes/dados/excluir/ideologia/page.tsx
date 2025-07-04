@@ -12,13 +12,14 @@ import {
 	AlertDialogContent,
 	AlertDialogHeader,
 	AlertDialogTitle,
-} from "@/components/ui-shacnui/alert-dialog";
+} from "@/components/external/ui-shacnui/alert-dialog";
+
+import { oswald, titilliumWeb } from "../../../../../fonts/fonts";
 
 import { ResponseIdeologiaDTO } from "@/core/domain/dtos/ideologia.dto";
-import { oswald, titilliumWeb } from "@/core/lib/fonts/fonts";
-import { useIdeologia } from "@/infra/hooks/ideologia/use-ideologia";
-import { useIdeologiaExcluir } from "@/infra/hooks/ideologia/use-ideologia-delete";
-import { APIExcluirIdeologiaPayload } from "@/infra/options/ideologia";
+import { useIdeologia } from "@/hooks/ideologia/use-ideologia";
+import { useIdeologiaExcluir } from "@/hooks/ideologia/use-ideologia-delete";
+import { APIExcluirIdeologiaPayload } from "@/hooks/options/ideologia";
 
 const deleteSchema = z.object({
 	ideologiaId: z.string().min(1, "Selecione uma ideologia"),

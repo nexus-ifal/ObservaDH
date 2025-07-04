@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 
+import { CriarDireitoVioladoController } from "@/adapters/api/controllers/direito-violado/criar-direito_violado-controller";
+import { ListarDireitoVioladoController } from "@/adapters/api/controllers/direito-violado/listar-direito_violado-controller";
 import { CreateDireitoVioladoDTO } from "@/core/domain/dtos/direito-violado.dto";
 import { RespostaApi } from "@/core/domain/models/resposta-api";
-import { CriarDireitoVioladoController } from "@/core/lib/api/controllers/direito-violado/criar-direito_violado-controller";
-import { ListarDireitoVioladoController } from "@/core/lib/api/controllers/direito-violado/listar-direito_violado-controller";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function handleError(error: any, message: string) {

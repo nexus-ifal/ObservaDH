@@ -6,14 +6,14 @@ import { useParams } from "next/navigation";
 
 import AdminNavBar from "@/components/ui/layouts/admin-nav-bar";
 
-import { useDireitoViolado } from "@/infra/hooks/direito-violado/use-direito-violado";
-import { useEstado } from "@/infra/hooks/estado/use-estado";
-import { useIdeologia } from "@/infra/hooks/ideologia/use-ideologia";
-import { usePartido } from "@/infra/hooks/partido/use-partido";
-import { usePauta } from "@/infra/hooks/pauta/use-pauta";
-import { usePolitico } from "@/infra/hooks/politico/use-politico";
-import { useProfissao } from "@/infra/hooks/profissao/use-profissao";
-import { useProjeto } from "@/infra/hooks/projeto/use-projeto";
+import { useDireitoViolado } from "@/hooks/direito-violado/use-direito-violado";
+import { useEstado } from "@/hooks/estado/use-estado";
+import { useIdeologia } from "@/hooks/ideologia/use-ideologia";
+import { usePartido } from "@/hooks/partido/use-partido";
+import { usePauta } from "@/hooks/pauta/use-pauta";
+import { usePolitico } from "@/hooks/politico/use-politico";
+import { useProfissao } from "@/hooks/profissao/use-profissao";
+import { useProjeto } from "@/hooks/projeto/use-projeto";
 
 const modelconfiguracao = {
 	estado: {

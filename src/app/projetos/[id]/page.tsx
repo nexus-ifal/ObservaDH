@@ -6,9 +6,10 @@ import Card from "@/components/ui/cards";
 import MainLayout from "@/components/ui/layouts/main-layout";
 import Titulo from "@/components/ui/titulo-pages";
 
-import { ProjetoLei } from "@/core/domain/graficos/types/projeto-lei";
-import { oswald } from "@/core/lib/fonts/fonts";
-import { buscarProjetoPorId } from "@/core/lib/web/mock-utils/busca";
+import { oswald } from "../../../fonts/fonts";
+
+import { ProjetoLei } from "@/core/domain/types/projeto-lei";
+import { buscarProjetoPorId } from "@/mocks/web/mock-utils/busca";
 
 const Page: React.FC<{ params: Promise<{ id: string }> }> = ({ params }) => {
 	const { id } = use(params);

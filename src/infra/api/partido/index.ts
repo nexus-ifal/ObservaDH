@@ -3,8 +3,8 @@ import {
 	ResponsePartidoDTO,
 	UpdatePartidoDTO,
 } from "@/core/domain/dtos/partido.dto";
-import { PartidoRepository } from "@/core/interfaces/repository/partido.repository";
-import { conexaoBackend } from "@/infra/services/conexao-backend/client";
+import { PartidoRepository } from "@/core/repositories/partido.repository";
+import { conexaoBackend } from "@/infra/api/client";
 
 class PartidoAPI implements PartidoRepository {
 	async listar(): Promise<ResponsePartidoDTO[]> {

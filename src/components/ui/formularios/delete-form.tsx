@@ -4,8 +4,8 @@ import { useActionState, useState } from "react";
 import axios from "axios";
 import { useSearchParams } from "next/navigation";
 
-import { deleteUser } from "@/core/lib/actions/delete-actions";
-import { oswald } from "@/core/lib/fonts/fonts";
+import { deleteUser } from "@/app/actions/delete-actions";
+import { oswald } from "@/fonts/fonts";
 
 interface FoundUser {
 	id: string;

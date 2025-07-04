@@ -3,14 +3,13 @@ import {
 	ResponseDireitoVioladoDTO,
 	UpdateDireitoVioladoDTO,
 } from "@/core/domain/dtos/direito-violado.dto";
-import { DireitoVioladoRepository } from "@/core/interfaces/repository/direito-violado.repository";
-import { conexaoBackend } from "@/infra/services/conexao-backend/client";
+import { DireitoVioladoRepository } from "@/core/repositories/direito-violado.repository";
+import { conexaoBackend } from "@/infra/api/client";
 
 class DireitoVioladoAPI implements DireitoVioladoRepository {
 	async listar(): Promise<ResponseDireitoVioladoDTO[]> {
 		const response = await conexaoBackend.get("/direito-violado");
 		const dados = response.data.dados;
-		console.log(dados);
 		return dados;
 	}
 	async criar(

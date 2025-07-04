@@ -3,8 +3,9 @@
 import { useActionState, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
-import { registerUser } from "@/core/lib/actions/register-actions";
-import { oswald } from "@/core/lib/fonts/fonts";
+import { oswald } from "../../../fonts/fonts";
+
+import { registerUser } from "@/app/actions/register-actions";
 
 export default function RegisterForm() {
 	const searchParams = useSearchParams();

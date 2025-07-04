@@ -5,15 +5,15 @@ import {
 	Card,
 	CardContent,
 	CardDescription,
-} from "@/components/ui-shacnui/card";
+} from "@/components/external/ui-shacnui/card";
 import {
 	ChartConfig,
 	ChartContainer,
 	ChartTooltip,
 	ChartTooltipContent,
-} from "@/components/ui-shacnui/chart";
+} from "@/components/external/ui-shacnui/chart";
 
-import { DadosGraficoLinhaPontos } from "@/core/domain/graficos/types/linha-pontos";
+import { DadosGraficoLinhaPontos } from "@/core/domain/types/linha-pontos";
 
 const chartConfig = {
 	projetos: {

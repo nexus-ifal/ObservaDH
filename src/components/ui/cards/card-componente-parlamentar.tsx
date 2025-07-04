@@ -1,11 +1,11 @@
 import Image from "next/image";
 
-import { oswald } from "../../../core/lib/fonts/fonts";
+import { oswald } from "../../../fonts/fonts";
 
 import CardDivider from "./card-divider";
 import CardParlamentar from "./card-parlamentar";
 
-import { parlamentar } from "@/core/domain/graficos/types/parlamentar";
+import { parlamentar } from "@/core/domain/types/parlamentar";
 
 interface componentePros {
 	parlamentar: parlamentar;
@@ -21,7 +21,7 @@ const CardComponenteParlamentar: React.FC<componentePros> = ({
 			<div className={`${oswald.className} flex flex-row w-full h-full`}>
 				<section className="flex flex-row h-full w-1/2 ">
 					<CardParlamentar parlamentar={parlamentar}>
-						<section className="w-full items-center imagem-hover text-white hover:text-[#93F996] h-full px-16 grid grid-cols-2">
+						<section className="w-full items-center cursor-pointer imagem-hover text-white hover:text-[#93F996] h-full px-16 grid grid-cols-2">
 							<div className="w-1/2">
 								<div className="relative h-24 w-24">
 									<Image

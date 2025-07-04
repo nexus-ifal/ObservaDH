@@ -12,12 +12,13 @@ import {
 	AlertDialogContent,
 	AlertDialogHeader,
 	AlertDialogTitle,
-} from "@/components/ui-shacnui/alert-dialog";
+} from "@/components/external/ui-shacnui/alert-dialog";
 
-import { oswald, titilliumWeb } from "@/core/lib/fonts/fonts";
-import { useProfissao } from "@/infra/hooks/profissao/use-profissao";
-import { useProfissaoExcluir } from "@/infra/hooks/profissao/use-profissao-delete";
-import { APIExcluirProfissaoPayload } from "@/infra/options/profissao";
+import { oswald, titilliumWeb } from "../../../../../fonts/fonts";
+
+import { APIExcluirProfissaoPayload } from "@/hooks/options/profissao";
+import { useProfissao } from "@/hooks/profissao/use-profissao";
+import { useProfissaoExcluir } from "@/hooks/profissao/use-profissao-delete";
 
 const deleteSchema = z.object({
 	profissaoId: z.string().min(1, "Selecione uma profissão"),

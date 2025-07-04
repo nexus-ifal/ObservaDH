@@ -6,8 +6,9 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { z } from "zod";
 
 import { userLoginSchema } from "./src/schemas/user-zod-schema";
+import { prismaClient } from "@/adapters/db/prisma";
 
-import { prismaClient } from "@/services/prisma/prisma";
+
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
 	adapter: PrismaAdapter(prismaClient),

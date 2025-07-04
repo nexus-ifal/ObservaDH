@@ -1,4 +1,4 @@
-import { oswald } from "@/core/lib/fonts/fonts";
+import { oswald } from "@/fonts/fonts";
 
 export default function PaginaDeSucesso() {
 	return (

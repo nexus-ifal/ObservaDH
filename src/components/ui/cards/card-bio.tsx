@@ -1,11 +1,11 @@
 import { FaGithub } from "react-icons/fa6";
 import Image from "next/image";
 
-import { oswald, titilliumWeb } from "../../../core/lib/fonts/fonts";
+import { oswald, titilliumWeb } from "../../../fonts/fonts";
 import IconLattes from "../icons/icon-lattes";
 
-import { Desenvolvedor } from "@/core/domain/graficos/types/desenvolvedor";
-import { LinkType } from "@/core/domain/graficos/types/link-type";
+import { Desenvolvedor } from "@/core/domain/types/desenvolvedor";
+import { LinkType } from "@/core/domain/types/link-type";
 
 interface CardBioProps {
 	desenvolvedor: Desenvolvedor;

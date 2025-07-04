@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 
 import QueryProvider from "@/components/ui/layouts/query-provider";
 
-import "./styles/globals.css";
+import { titilliumWeb } from "../fonts/fonts";
 
-import { titilliumWeb } from "@/core/lib/fonts/fonts";
+import "./styles/globals.css";
 
 export const metadata: Metadata = {
 	title: "ObservaDH",

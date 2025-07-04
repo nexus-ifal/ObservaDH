@@ -13,8 +13,8 @@ import {
 	AlertDialogContent,
 	AlertDialogHeader,
 	AlertDialogTitle,
-} from "@/components/ui-shacnui/alert-dialog";
-import { Button } from "@/components/ui-shacnui/button";
+} from "@/components/external/ui-shacnui/alert-dialog";
+import { Button } from "@/components/external/ui-shacnui/button";
 import {
 	Form,
 	FormControl,
@@ -22,13 +22,14 @@ import {
 	FormItem,
 	FormLabel,
 	FormMessage,
-} from "@/components/ui-shacnui/form";
-import { Input } from "@/components/ui-shacnui/input";
+} from "@/components/external/ui-shacnui/form";
+import { Input } from "@/components/external/ui-shacnui/input";
 
-import { oswald } from "@/core/lib/fonts/fonts";
-import { useProfissao } from "@/infra/hooks/profissao/use-profissao";
-import { useProfissaoAtualizar } from "@/infra/hooks/profissao/use-profissao-update";
-import { APIAtualizarProfissaoPayload } from "@/infra/options/profissao";
+import { oswald } from "../../../../../fonts/fonts";
+
+import { APIAtualizarProfissaoPayload } from "@/hooks/options/profissao";
+import { useProfissao } from "@/hooks/profissao/use-profissao";
+import { useProfissaoAtualizar } from "@/hooks/profissao/use-profissao-update";
 
 const formSchema = z.object({
 	nome: z.string().min(1, { message: "Entrada obrigatória!" }),

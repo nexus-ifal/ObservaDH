@@ -1,8 +1,7 @@
 import Link from "next/link";
-
 import { BotaoAdmin } from "@/components/ui/botao/botao";
 
-import { oswald } from "@/core/lib/fonts/fonts";
+import { oswald } from "@/fonts/fonts";
 
 const page: React.FC = () => {
 	return (

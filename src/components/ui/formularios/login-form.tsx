@@ -3,8 +3,9 @@
 import { useActionState } from "react";
 import { useSearchParams } from "next/navigation";
 
-import { authenticate } from "@/core/lib/actions/login-actions";
-import { oswald } from "@/core/lib/fonts/fonts";
+import { oswald } from "../../../fonts/fonts";
+
+import { authenticate } from "@/app/actions/login-actions";
 
 export default function LoginForm() {
 	const searchParams = useSearchParams();

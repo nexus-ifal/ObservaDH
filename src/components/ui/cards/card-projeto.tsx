@@ -1,10 +1,10 @@
 "use client";
 
-import { oswald, titilliumWeb } from "../../../core/lib/fonts/fonts";
+import { oswald, titilliumWeb } from "../../../fonts/fonts";
 
 import CardRenderizarTexto from "./card-renderizar-texto";
 
-import { ProjetoLei } from "@/core/domain/graficos/types/projeto-lei";
+import { ProjetoLei } from "@/core/domain/types/projeto-lei";
 
 interface CardProjetosProps {
 	projeto: ProjetoLei;

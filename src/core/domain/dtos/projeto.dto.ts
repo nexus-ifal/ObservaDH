@@ -8,6 +8,9 @@ export interface CreateProjetoDTO {
 	esferaId: string;
 	numeroPl: string;
 	justificativa: string;
+	autoresId: string[];
+	ideologiasId: string[];
+	direitosVioladosId?: string[];
 }
 
 export const CreateProjetoSchema = z.object({
@@ -37,12 +40,15 @@ export interface ResponseProjetoDTO {
 
 export interface UpdateProjetoDTO {
 	id: string;
-	ano?: string;
-	ementa?: string;
-	pautaId?: string;
-	esferaId?: string;
-	numeroPl?: string;
-	justificativa?: string;
+	ano: string;
+	ementa: string;
+	pautaId: string;
+	esferaId: string;
+	numeroPl: string;
+	justificativa: string;
+	autoresId: string[];
+	ideologiasId: string[];
+	direitosVioladosId?: string[];
 }
 
 export const UpdateProjetoSchema = z.object({
@@ -66,4 +72,11 @@ export interface ResponseDeleteProjetoDTO {
 export interface SearchProjetoDTO {
 	id?: string;
 	numeroPl?: string;
+}
+
+export interface FiltrosProjetosDTO {
+	estado?: string;
+	ano?: string;
+	esfera?: string;
+	pauta?: string;
 }

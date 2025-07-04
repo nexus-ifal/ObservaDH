@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 
+import { AtualizarProjetoController } from "@/adapters/api/controllers/projeto/atualizar-projeto-controller";
+import { BuscarProjetoController } from "@/adapters/api/controllers/projeto/buscar-projeto-controller";
+import { DeletarProjetoController } from "@/adapters/api/controllers/projeto/deletar-projeto-controller";
 import { UpdateProjetoDTO } from "@/core/domain/dtos/projeto.dto";
 import { RespostaApi } from "@/core/domain/models/resposta-api";
-import { AtualizarProjetoController } from "@/core/lib/api/controllers/projeto/atualizar-projeto-controller";
-import { BuscarProjetoController } from "@/core/lib/api/controllers/projeto/buscar-projeto-controller";
-import { DeletarProjetoController } from "@/core/lib/api/controllers/projeto/deletar-projeto-controller";
 
 function validateId(id?: string): NextResponse | undefined {
 	if (!id || id.trim() === "") {

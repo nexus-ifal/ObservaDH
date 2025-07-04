@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
+import { BuscarProjetoController } from "@/adapters/api/controllers/projeto/buscar-projeto-controller";
 import { RespostaApi } from "@/core/domain/models/resposta-api";
-import { BuscarProjetoController } from "@/core/lib/api/controllers/projeto/buscar-projeto-controller";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function handleError(error: any, message: string) {

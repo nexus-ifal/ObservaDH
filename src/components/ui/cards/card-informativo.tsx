@@ -2,7 +2,7 @@ import React from "react";
 import { BsArrowRight } from "react-icons/bs";
 import Link from "next/link";
 
-import { oswald, titilliumWeb } from "../../../core/lib/fonts/fonts";
+import { oswald, titilliumWeb } from "../../../fonts/fonts";
 
 interface CardInformativoProps {
 	titulo: string;

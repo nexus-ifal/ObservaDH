@@ -1,6 +1,6 @@
-import ActionButton from "./action-button";
+import { oswald } from "../../../fonts/fonts";
 
-import { oswald } from "@/core/lib/fonts/fonts";
+import ActionButton from "./action-button";
 
 interface AdminNavBarProps {
 	model: string;

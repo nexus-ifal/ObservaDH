@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 
+import { CriarPoliticoController } from "@/adapters/api/controllers/politico/criar-politico-controller";
+import { ListarPoliticoController } from "@/adapters/api/controllers/politico/listar-politico-controller";
 import { CreatePoliticoDTO } from "@/core/domain/dtos/politico.dto";
 import { RespostaApi } from "@/core/domain/models/resposta-api";
-import { CriarPoliticoController } from "@/core/lib/api/controllers/politico/criar-politico-controller";
-import { ListarPoliticoController } from "@/core/lib/api/controllers/politico/listar-politico-controller";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function handleError(error: any, message: string) {
