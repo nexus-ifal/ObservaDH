@@ -1,6 +1,6 @@
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
 
-import { titilliumWeb } from "@/core/lib/fonts/fonts";
+import { titilliumWeb } from "@/fonts/fonts";
 
 type BotaoAdminProps = {
 	texto: string;

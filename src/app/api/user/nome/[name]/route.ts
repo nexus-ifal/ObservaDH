@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
+import { BuscarUserController } from "@/adapters/api/controllers/user/buscar-user-controller";
 import { RespostaApi } from "@/core/domain/models/resposta-api";
-import { BuscarUserController } from "@/core/lib/api/controllers/user/buscar-user-controller";
 
 export async function GET(
 	request: NextRequest,

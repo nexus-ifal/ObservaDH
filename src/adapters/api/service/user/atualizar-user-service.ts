@@ -6,7 +6,6 @@ import { User } from "@/core/domain/models/user";
 import { EnviarEmailService } from "@/services/email/enviar-email-service";
 import { TokenDeVerificacaoService } from "@/services/email/token-verificacao-service";
 
-
 export class AtualizarUserService {
 	async executar({ user }: { user: User }) {
 		const prisma = prismaClient;

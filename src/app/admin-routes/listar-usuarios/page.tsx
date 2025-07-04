@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
 
-import { oswald } from "@/core/lib/fonts/fonts";
+import { oswald } from "@/fonts/fonts";
 
 export interface User {
 	id: string;

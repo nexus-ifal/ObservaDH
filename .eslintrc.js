@@ -17,10 +17,7 @@ module.exports = {
 		"next/typescript",
 		"plugin:prettier/recommended",
 	],
-	plugins: [
-		"simple-import-sort",
-		"prettier",
-	],
+	plugins: ["simple-import-sort", "prettier"],
 	rules: {
 		"linebreak-style": ["error", "unix"],
 		"simple-import-sort/imports": [

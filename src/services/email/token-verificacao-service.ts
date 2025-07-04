@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 
-import { prismaClient } from "@/services/prisma/prisma";
+import { prismaClient } from "@/adapters/db/prisma";
 
 export class TokenDeVerificacaoService {
 	async gerarTokenDeVerificacao(userId: string) {

@@ -2,9 +2,9 @@ import { Role } from "@prisma/client";
 
 import { AtualizarUserService } from "../../service/user/atualizar-user-service";
 
+import { prismaClient } from "@/adapters/db/prisma";
 import { RespostaApi } from "@/core/domain/models/resposta-api";
 import { User } from "@/core/domain/models/user";
-import { prismaClient } from "@/services/prisma/prisma";
 
 export class AtualizarUserController {
 	async executar({

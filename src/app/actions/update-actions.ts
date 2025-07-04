@@ -2,9 +2,11 @@
 import axios from "axios";
 import bcrypt from "bcryptjs";
 import { z } from "zod";
-import { atualizarUserSchema } from "@/schemas/user-zod-schema";
-import { prismaClient } from "@/adapters/db/prisma";
+
 import { auth } from "../../../auth";
+
+import { prismaClient } from "@/adapters/db/prisma";
+import { atualizarUserSchema } from "@/schemas/user-zod-schema";
 
 interface ApiResponse {
 	sucesso: boolean;
