@@ -20,8 +20,36 @@ export const userLoginSchema = z.object({
 	password: z.string().min(1, "A senha é obrigatória."),
 });
 
-export const atualizarUserSchema = z.object({
-	email: z.string().email("O email é inválido").min(1, "O email é obrigatório"),
+export const atualizarUserSchema = z
+	.object({
+		email: z.string().email("O email é inválido").optional(),
+		password: z
+			.string()
+			.min(8, "A senha deve conter pelo menos 8 caracteres")
+			.max(24, "A senha deve conter no máximo 24 caracteres")
+			.regex(/[a-z]/, "A senha deve conter pelo menos uma letra minúscula")
+			.regex(/[A-Z]/, "A senha deve conter pelo menos uma letra maiúscula")
+			.regex(/\d/, "A senha deve conter pelo menos um número")
+			.regex(
+				/[@$!%*?&]/,
+				"A senha deve conter pelo menos um caractere especial"
+			)
+			.optional(),
+		name: z.string().min(1, "O nome do usuário é obrigatório").optional(),
+		role: z.nativeEnum(Role).optional(),
+	})
+	.refine((data) => data.email || data.password || data.name || data.role, {
+		message:
+			"Pelo menos um campo (email, senha, nome ou role) deve ser fornecido para a atualização.",
+		path: ["_"],
+	});
+
+export const requisicaoResetSenhaSchema = z.object({
+	email: z.string().email("E-mail inválido.").min(1, "E-mail é obrigatório."),
+});
+
+export const resetSenhaSchema = z.object({
+	token: z.string().min(1, "Token é obrigatório."),
 	password: z
 		.string()
 		.min(8, "A senha deve conter pelo menos 8 caracteres")
@@ -30,6 +58,4 @@ export const atualizarUserSchema = z.object({
 		.regex(/[A-Z]/, "A senha deve conter pelo menos uma letra maiúscula")
 		.regex(/\d/, "A senha deve conter pelo menos um número")
 		.regex(/[@$!%*?&]/, "A senha deve conter pelo menos um caractere especial"),
-	name: z.string().min(1, "O nome do usuário é obrigatório"),
-	role: z.nativeEnum(Role),
 });

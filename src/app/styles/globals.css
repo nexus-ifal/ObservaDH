@@ -139,8 +139,8 @@
 }
 
 .bg-[--color-bg] {
-  background-color: var(--color-bg);
+	background-color: var(--color-bg);
 }
 .border-[--color-border] {
-  border-color: var(--color-border);
+	border-color: var(--color-border);
 }

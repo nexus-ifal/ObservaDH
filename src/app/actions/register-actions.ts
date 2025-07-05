@@ -1,7 +1,6 @@
 "use server";
 
 import axios from "axios";
-import { redirect } from "next/navigation";
 import { z } from "zod";
 
 import { auth } from "../../../auth";
@@ -13,31 +12,37 @@ interface ApiResponse {
 	mensagem: string;
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	dados?: any;
+	emailSent?: boolean;
+}
+
+interface RegisterUserResponse {
+	message?: string;
+	emailSent?: boolean;
 }
 
 export async function registerUser(
-	prevState: string | undefined,
+	prevState: RegisterUserResponse | undefined,
 	formData: FormData
-): Promise<string | undefined> {
+): Promise<RegisterUserResponse> {
 	const session = await auth();
 
 	if (!session || !session.user) {
-		return "Usuário não autenticado";
+		return { message: "Usuário não autenticado" };
 	}
 
 	const name = formData.get("name");
 	const email = formData.get("email");
 	const password = formData.get("password");
 	const role = formData.get("role");
-	const redirecione = (formData.get("redirectTo") as string) || "/";
 
-	const camposValidados = criarUserSchema.parse({
-		name,
-		email,
-		password,
-		role,
-	});
 	try {
+		const camposValidados = criarUserSchema.parse({
+			name,
+			email,
+			password,
+			role,
+		});
+
 		const userApi = `${process.env.PUBLIC_BASE_URL}/api/user`;
 		const dadosParaApi = {
 			...camposValidados,
@@ -49,29 +54,34 @@ export async function registerUser(
 		});
 
 		if (resposta.data.sucesso) {
-			redirect(redirecione);
+			return { message: "Usuário criado com sucesso.", emailSent: true };
 		} else {
-			return resposta.data.mensagem;
+			return { message: resposta.data.mensagem };
 		}
 	} catch (error) {
+		if (error instanceof Error && error.message.includes("NEXT_REDIRECT")) {
+			throw error;
+		}
+
 		if (error instanceof z.ZodError) {
 			const fieldErrors = error.flatten().fieldErrors;
-			if (fieldErrors.role) return fieldErrors.role[0];
-			if (fieldErrors.email) return fieldErrors.email[0];
-			if (fieldErrors.password) return fieldErrors.password[0];
-			if (fieldErrors.name) return fieldErrors.name[0];
-			return "Os dados não foram validados corretamente";
+			if (fieldErrors.role) return { message: fieldErrors.role[0] };
+			if (fieldErrors.email) return { message: fieldErrors.email[0] };
+			if (fieldErrors.password) return { message: fieldErrors.password[0] };
+			if (fieldErrors.name) return { message: fieldErrors.name[0] };
+			return { message: "Os dados não foram validados corretamente" };
 		}
 
 		if (axios.isAxiosError(error) && error.response) {
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			console.error("Erro da API:", (error as any).response.data);
-			return (
-				error.response.data.mensagem || "Ocorreu um erro ao criar o usuário"
-			);
+			return {
+				message:
+					error.response.data.mensagem || "Ocorreu um erro ao criar o usuário",
+			};
 		}
 
 		console.error("Erro inesperado:", error);
-		return "Ocorreu um erro inesperado ao criar o usuário";
+		return { message: "Ocorreu um erro inesperado ao criar o usuário" };
 	}
 }

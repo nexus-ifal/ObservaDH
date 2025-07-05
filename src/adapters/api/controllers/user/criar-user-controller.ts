@@ -32,15 +32,16 @@ export class CriarUserController {
 
 		const service = new CriarUserService();
 
-		const resposta = await service.executar({ user: user });
-
-		if (resposta) {
+		try {
+			const resposta = await service.executar({ user: user });
 			return new RespostaApi({
 				sucesso: true,
-				mensagem: "Usuário criado",
+				mensagem: "Usuário criado com sucesso e e-mail de verificação enviado.",
 				dados: resposta,
+				emailVerificationSent: true,
 			});
-		} else {
+		} catch (error) {
+			console.error("Erro no controller de criação de usuário:", error);
 			return new RespostaApi({
 				sucesso: false,
 				mensagem: "Houve algum problema na criação do usuário",
