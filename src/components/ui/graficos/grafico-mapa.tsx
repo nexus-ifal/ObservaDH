@@ -50,7 +50,12 @@ const GraficoMapa: React.FC<MapaBrasilProps> = ({
 					<CardStatus status={mockStatus} />
 				</div>
 				<div className="bg- w-32 h-full">
-					<DropdownButton elementos={esferas} titulo="Esfera" param="esfera" />
+					<DropdownButton
+						elementos={esferas}
+						titulo="Esfera"
+						param="esfera"
+						className="w-40"
+					/>
 				</div>
 			</section>
 		</article>
