@@ -176,7 +176,7 @@ const Filtro = ({ items, isLoading }: FiltroElementosProps) => (
 				<section className="flex flex-wrap gap-4 sm:gap-12 px-0 sm:px-10">
 					{items.map((item, index) => (
 						<DropdownButton
-							key={item.param}
+							key={item.param + index}
 							param={item.param}
 							elementos={item.elementos}
 							titulo={item.titulo}

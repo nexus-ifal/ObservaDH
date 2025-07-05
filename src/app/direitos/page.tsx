@@ -1,5 +1,5 @@
 "use client";
-import { Suspense } from "react";
+
 import {
 	Carousel,
 	CarouselContent,
@@ -35,7 +35,7 @@ const Direitos: React.FC = () => {
 			titulo: pauta.nome,
 			value: pauta.id.toString(),
 		})) || [];
-		
+
 	const legendaPadrao = legendas[0];
 
 	return (
