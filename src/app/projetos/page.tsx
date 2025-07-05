@@ -37,9 +37,9 @@ import { ProjetoLei } from "@/core/domain/types/projeto-lei";
 import { usePautaPorAno } from "@/hooks/dados/use-pauta-por-ano";
 import { useProjetoEstado } from "@/hooks/dados/use-projeto-estado";
 import { useProjetoPorAno } from "@/hooks/dados/use-projeto-por-ano";
+import { useEstado } from "@/hooks/estado/use-estado";
+import { usePauta } from "@/hooks/pauta/use-pauta";
 import { buscarEsferas } from "@/infra/api/esfera";
-import obterEstadosUnicos from "@/mocks/web/mock-utils/projeto-utils/obter-estados-unico";
-import obterPautasUnicas from "@/mocks/web/mock-utils/projeto-utils/obter-pautas-unicas";
 
 const Page: React.FC = () => (
 	<Suspense fallback={<div>Carregando página...</div>}>
@@ -53,8 +53,9 @@ const PageContent = () => {
 	const [esferas, setEsferas] = useState<ResponseEsferaDTO[]>([]);
 	const [anos, setAnos] = useState<string[]>([]);
 
-	const estados = obterEstadosUnicos({ projetos: projetosMock });
-	const pautas = obterPautasUnicas({ projetos: projetosMock });
+	const { estados, isLoadingEstados, error: errorEstado } = useEstado();
+
+	const { pautas, isLoadingPautas, error: errorPauta } = usePauta();
 	const searchParams = useSearchParams();
 	const esfera = searchParams.get("esfera");
 
@@ -77,13 +78,23 @@ const PageContent = () => {
 	} = useProjetoEstado(esfera ?? undefined);
 
 	const isLoading =
-		isLoadingProjetosPorUF && isLoadingProjetosPorAno && isLoadingPautaPorAno;
+		isLoadingProjetosPorUF &&
+		isLoadingProjetosPorAno &&
+		isLoadingPautaPorAno &&
+		isLoadingPautas &&
+		isLoadingEstados;
 
-	const error = projetoPorEstadoError || projetoPorAnoError || pautaPorAnoError;
+	const error =
+		projetoPorEstadoError ||
+		projetoPorAnoError ||
+		pautaPorAnoError ||
+		errorEstado ||
+		errorPauta;
 
 	useEffect(() => {
 		const buscarDados = async () => {
 			const esferasData = await buscarEsferas();
+
 			//! mock
 			const anosMock = ["2021", "2022", "2023", "2024"];
 
@@ -102,20 +113,20 @@ const PageContent = () => {
 		titulo: ano ?? "",
 		value: ano ?? "",
 	}));
-	const estadosElementos = estados.map((estado) => ({
-		titulo: estado.titulo ?? "",
-		value: estado.value ?? "",
+	const estadosElementos = estados?.map((estado) => ({
+		titulo: estado.nome ?? "",
+		value: estado.id ?? "",
 	}));
-	const pautasElementos = pautas.map((pauta) => ({
-		titulo: pauta.titulo ?? "",
-		value: pauta.value ?? "",
+	const pautasElementos = pautas?.map((pauta) => ({
+		titulo: pauta.nome ?? "",
+		value: pauta.id ?? "",
 	}));
 
 	const dropdownItems = [
 		{ titulo: "Esfera", elementos: esferasElementos, param: "esfera" },
 		{ titulo: "Ano", elementos: anosElementos, param: "ano" },
-		{ titulo: "Estado", elementos: estadosElementos, param: "estado" },
-		{ titulo: "Pauta", elementos: pautasElementos, param: "pauta" },
+		{ titulo: "Estado", elementos: estadosElementos ?? [], param: "estado" },
+		{ titulo: "Pauta", elementos: pautasElementos ?? [], param: "pauta" },
 	];
 
 	return (
@@ -188,7 +199,7 @@ const Filtro = ({ items }: FiltroElementosProps) => (
 					key={index}
 					elementos={item.elementos}
 					titulo={item.titulo}
-					className="w-32 text-center"
+					className="w-32"
 				/>
 			))}
 		</section>
