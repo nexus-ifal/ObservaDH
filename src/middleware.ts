@@ -36,7 +36,9 @@ export default auth((req) => {
 
 	const rotaPublica =
 		ROTAS_PUBLICAS.some((route) => nextUrl.pathname.startsWith(route)) ||
-		nextUrl.pathname === "/";
+		nextUrl.pathname === "/" ||
+		nextUrl.pathname.startsWith("/email-routes/redefinir-senha") ||
+		nextUrl.pathname.startsWith("/email-routes/solicitar-redefinicao");
 
 	const rotaAdmin = ROTAS_ADMIN.some((route) =>
 		nextUrl.pathname.startsWith(route)
@@ -53,14 +55,20 @@ export default auth((req) => {
 	}
 
 	if (autenticado && nextUrl.pathname === "/login") {
-		if (userRole === "EDITOR") {
-			return NextResponse.redirect(
-				new URL("/user-routes/home", nextUrl.origin)
-			);
-		} else if (userRole === "ADMIN") {
-			return NextResponse.redirect(
-				new URL("/admin-routes/home", nextUrl.origin)
-			);
+		const callbackUrl = nextUrl.searchParams.get("callbackUrl");
+
+		if (callbackUrl) {
+			return NextResponse.redirect(new URL(callbackUrl, nextUrl.origin));
+		} else {
+			if (userRole === "EDITOR") {
+				return NextResponse.redirect(
+					new URL("/user-routes/home", nextUrl.origin)
+				);
+			} else if (userRole === "ADMIN") {
+				return NextResponse.redirect(
+					new URL("/admin-routes/home", nextUrl.origin)
+				);
+			}
 		}
 	}
 

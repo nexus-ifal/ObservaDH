@@ -34,6 +34,16 @@ model VerificationToken {
     user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
+model ResetSenhaToken {
+    id        String   @id @default(cuid())
+    email     String   @unique
+    token     String   @unique
+    expires   DateTime
+
+    @@index([email])
+    @@index([token])
+}
+
 model Projeto {
     id               String           @id @default(uuid()) @db.VarChar(36)
     ano              String
