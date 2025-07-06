@@ -1,35 +1,48 @@
-import React from "react";
-
 import { titilliumWeb } from "../../../fonts/fonts";
 
 import CardDivider from "./card-divider";
 import CardStatusItem from "./card-status-item";
 
-import { StatusType } from "@/core/domain/types/status";
+import {
+	DadosParlamentarProjetosEsfera,
+	DadosPautaEsfera,
+} from "@/core/domain/dtos/dados.dto";
 
 interface StatusCardProps {
-	status: StatusType;
+	dadosParlamentarProjetosEsfera: DadosParlamentarProjetosEsfera;
+	dadosPautaEsfera: DadosPautaEsfera[];
 }
 
-const CardStatus: React.FC<StatusCardProps> = ({ status }) => {
+// ಠ_ಠ
+const CardStatus: React.FC<StatusCardProps> = ({
+	dadosParlamentarProjetosEsfera,
+	dadosPautaEsfera,
+}) => {
+	const ambito =
+		dadosParlamentarProjetosEsfera?.esfera === "nacional"
+			? "Nacionais"
+			: dadosParlamentarProjetosEsfera?.esfera === "federal"
+				? "Federais"
+				: "Estaduais";
 	return (
 		<article className="flex flex-col gap-4 border-l-[1px] border-white rounded-lg h-[20.75rem] p-8">
 			<section className="flex items-center justify-center gap-4">
 				<h1
 					className={`${titilliumWeb.className} text-4xl font-semibold text-white`}
 				>
-					Dados Nacionais
+					Dados {ambito}
 				</h1>
 				<CardDivider className="w-9" />
 			</section>
 			<section>
-				{status.dados.dados.map((item) => (
-					<CardStatusItem
-						titulo={item.titulo}
-						valor={item.valor}
-						key={item.titulo}
-					/>
-				))}
+				<CardStatusItem
+					titulo={"Parlamentares"}
+					valor={dadosParlamentarProjetosEsfera?.parlamentares}
+				/>
+				<CardStatusItem
+					titulo={"Projetos de Lei"}
+					valor={dadosParlamentarProjetosEsfera?.projetosLei}
+				/>
 			</section>
 			<section className="flex items-center gap-4">
 				<h1
@@ -40,11 +53,11 @@ const CardStatus: React.FC<StatusCardProps> = ({ status }) => {
 				<CardDivider className="w-9" />
 			</section>
 			<section>
-				{status.pautas.pautas.map((item) => (
+				{dadosPautaEsfera.map((item) => (
 					<CardStatusItem
-						titulo={item.titulo}
+						titulo={item.pauta}
 						valor={item.valor}
-						key={item.titulo}
+						key={item.pauta}
 					/>
 				))}
 			</section>

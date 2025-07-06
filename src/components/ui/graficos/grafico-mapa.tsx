@@ -4,10 +4,13 @@ import MapaBrasil from "../icons/mapa-brasil";
 import Loading from "../loading";
 import UserError from "../user-erro";
 
-import { DadosProjetoEstado } from "@/core/domain/dtos/dados.dto";
-import { mockStatus } from "@/mocks/mock-projetos";
+import {
+	DadosParlamentarProjetosEsfera,
+	DadosPautaEsfera,
+	DadosProjetoEstado,
+} from "@/core/domain/dtos/dados.dto";
 
-const esferas = [
+const dadosDropDown = [
 	{
 		titulo: "Federal",
 		value: "federal",
@@ -23,35 +26,54 @@ const esferas = [
 ];
 
 interface MapaBrasilProps {
-	dados: DadosProjetoEstado[];
-	isLoading?: boolean;
-	error?: string;
+	dadosMapa: DadosProjetoEstado[];
+	dadosStatus: {
+		dadosProjetoPoliticoPorEsfera: DadosParlamentarProjetosEsfera;
+		dadosPautaEsfera: DadosPautaEsfera[];
+	};
+	isLoadingDadosMapa?: boolean;
+	isLoadingDadosStatus?: boolean;
+	errorMapa?: string;
+	errorStatus?: string;
 }
 
 const GraficoMapa: React.FC<MapaBrasilProps> = ({
-	dados,
-	isLoading,
-	error,
+	isLoadingDadosMapa,
+	isLoadingDadosStatus,
+	dadosMapa,
+	dadosStatus,
+	errorMapa,
+	errorStatus,
 }) => {
 	return (
-		<article className="w-[80rem] h-[45.625rem] flex gap-2">
+		<article className="w-[80rem] h-[45.625rem] flex gap-2 ">
 			<section className="h-[45.625rem] w-[43.75rem] min-w-1/2">
-				{error && <UserError error={error} />}
-				{isLoading ? (
+				{errorMapa && <UserError error={errorMapa} />}
+				{isLoadingDadosMapa ? (
 					<div className="h-full w-full flex items-center justify-center">
 						<Loading />
 					</div>
 				) : (
-					<MapaBrasil dados={dados} />
+					<MapaBrasil dados={dadosMapa} />
 				)}
 			</section>
 			<section className="w-full h-full flex items-end justify-between">
-				<div className="w-[25rem] h-full flex items-end">
-					<CardStatus status={mockStatus} />
-				</div>
+				{errorStatus && <UserError error={errorStatus} />}
+				{isLoadingDadosStatus ? (
+					<Loading />
+				) : (
+					<div className="w-[25rem] h-full flex items-end">
+						<CardStatus
+							dadosParlamentarProjetosEsfera={
+								dadosStatus.dadosProjetoPoliticoPorEsfera
+							}
+							dadosPautaEsfera={dadosStatus.dadosPautaEsfera}
+						/>
+					</div>
+				)}
 				<div className="bg- w-32 h-full">
 					<DropdownButton
-						elementos={esferas}
+						elementos={dadosDropDown}
 						titulo="Esfera"
 						param="esfera"
 						className="w-40"
