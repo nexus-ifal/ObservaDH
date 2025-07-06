@@ -28,3 +28,13 @@ export const listarPautaPorAnoOptions = () => ({
 	queryKey: [...getDadosBaseQueryKey(), "listarPautaPorAno"],
 	queryFn: () => usecase.listarPautaPorAno(),
 });
+
+export const listarPautaPorEsferaOptions = (esfera?: string) => ({
+	queryKey: [...getDadosBaseQueryKey(), "listarPautaPorEsfera", esfera],
+	queryFn: () => usecase.listarPautaPorEsfera(esfera),
+});
+
+export const listarParlamentarEsferaOptions = (esfera?: string) => ({
+	queryKey: [...getDadosBaseQueryKey(), "listarParlamentarEsfera", esfera],
+	queryFn: () => usecase.listarParlamentarEsfera(esfera),
+});

@@ -1,5 +1,7 @@
 import {
 	DadosIdeologiaGenero,
+	DadosParlamentarProjetosEsfera,
+	DadosPautaEsfera,
 	DadosPautaPorAno,
 	DadosPlPorAno,
 	DadosProjetoEstado,
@@ -12,5 +14,9 @@ interface DadosUseCase {
 	listarReligiaoRaca(): Promise<DadosReligiaoRaca[]>;
 	listarProjetosPorAno(): Promise<DadosPlPorAno[]>;
 	listarPautaPorAno(): Promise<DadosPautaPorAno[]>;
+	listarParlamentarEsfera(
+		esfera?: string
+	): Promise<DadosParlamentarProjetosEsfera>;
+	listarPautaPorEsfera(esfera?: string): Promise<DadosPautaEsfera[]>;
 }
 export default DadosUseCase;

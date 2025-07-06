@@ -34,6 +34,8 @@ import { CarrosselPlsProps } from "@/core/domain/types/carrossel-interface";
 import { elemento } from "@/core/domain/types/elemento-dropdown";
 import { DadosGraficoLinhaPontos } from "@/core/domain/types/linha-pontos";
 import { ProjetoLei } from "@/core/domain/types/projeto-lei";
+import { useParlamentarProjeto } from "@/hooks/dados/use-parlamentar-projeto-esfera";
+import { usePautaEsfera } from "@/hooks/dados/use-pauta-esfera";
 import { usePautaPorAno } from "@/hooks/dados/use-pauta-por-ano";
 import { useProjetoEstado } from "@/hooks/dados/use-projeto-estado";
 import { useProjetoPorAno } from "@/hooks/dados/use-projeto-por-ano";
@@ -77,19 +79,34 @@ const PageContent = () => {
 		error: projetoPorEstadoError,
 	} = useProjetoEstado(esfera ?? undefined);
 
+	const {
+		parlamentarProjetoEsfera,
+		isLoadingParlamentarProjetoEsfera,
+		error: errorParlamentarProjeto,
+	} = useParlamentarProjeto(esfera ?? undefined);
+
+	const {
+		pautaEsfera,
+		isLoadingPautaEsfera,
+		error: errorPautaEsfera,
+	} = usePautaEsfera(esfera ?? undefined);
 	const isLoading =
 		isLoadingProjetosPorUF &&
 		isLoadingProjetosPorAno &&
 		isLoadingPautaPorAno &&
 		isLoadingPautas &&
-		isLoadingEstados;
+		isLoadingEstados &&
+		isLoadingParlamentarProjetoEsfera &&
+		isLoadingPautaEsfera;
 
 	const error =
 		projetoPorEstadoError ||
 		projetoPorAnoError ||
 		pautaPorAnoError ||
 		errorEstado ||
-		errorPauta;
+		errorPauta ||
+		errorPautaEsfera ||
+		errorParlamentarProjeto;
 
 	useEffect(() => {
 		const buscarDados = async () => {
@@ -139,10 +156,22 @@ const PageContent = () => {
 				) : (
 					<>
 						<GraficoMapa
-							dados={projetosPorUF ?? []}
-							isLoading={isLoadingProjetosPorUF}
-							error={
-								projetoPorAnoError ? projetoPorAnoError.message : undefined
+							dadosMapa={projetosPorUF ?? []}
+							dadosStatus={{
+								dadosProjetoPoliticoPorEsfera: parlamentarProjetoEsfera ?? {
+									esfera: "",
+									parlamentares: 0,
+									projetosLei: 0,
+								},
+								dadosPautaEsfera: pautaEsfera ?? [],
+							}}
+							isLoadingDadosMapa={isLoadingProjetosPorUF}
+							isLoadingDadosStatus={
+								isLoadingParlamentarProjetoEsfera || isLoadingPautaEsfera
+							}
+							errorMapa={projetoPorEstadoError?.message}
+							errorStatus={
+								errorParlamentarProjeto?.message || errorPautaEsfera?.message
 							}
 						/>
 						<Divisor />

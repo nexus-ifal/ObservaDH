@@ -1,5 +1,7 @@
 import {
 	DadosIdeologiaGenero,
+	DadosParlamentarProjetosEsfera,
+	DadosPautaEsfera,
 	DadosPautaPorAno,
 	DadosPlPorAno,
 	DadosProjetoEstado,
@@ -12,4 +14,8 @@ export interface DadosRepository {
 	listarReligiaoRaca(): Promise<DadosReligiaoRaca[]>;
 	listarProjetosPorAno(): Promise<DadosPlPorAno[]>;
 	listarPautaPorAno(): Promise<DadosPautaPorAno[]>;
+	listarParlamentarEsfera(
+		esfera?: string
+	): Promise<DadosParlamentarProjetosEsfera>;
+	listarPautaPorEsfera(esfera?: string): Promise<DadosPautaEsfera[]>;
 }
