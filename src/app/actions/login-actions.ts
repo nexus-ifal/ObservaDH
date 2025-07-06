@@ -25,8 +25,7 @@ export async function authenticate(
 	}
 
 	const { email, password } = camposValidados.data;
-	const redirectTo =
-		(formData.get("redirectTo") as string) || "/user-routes/home";
+	const redirectTo = formData.get("redirectTo") as string;
 
 	try {
 		await signIn("credentials", {
