@@ -13,11 +13,11 @@ export async function GET(request: Request) {
 		});
 	} catch (error) {
 		return NextResponse.json(
-			JSON.stringify({
+			{
 				sucesso: false,
 				mensagem: "Erro ao listar parlamentares por esfera",
 				dados: error instanceof Error ? error.message : String(error),
-			}),
+			},
 			{ status: 500 }
 		);
 	}
