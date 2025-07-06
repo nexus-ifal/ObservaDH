@@ -18,7 +18,7 @@ class DadosAPI implements DadosRepository {
 	}
 
 	async listarProjetosPorUF(esfera?: string): Promise<DadosProjetoEstado[]> {
-		const url = this.organizarUrl("/dados/projeto-estado", esfera);
+		const url = this.organizarUrl("/dados/projeto-por-estado", esfera);
 		const response = await conexaoBackend.get(url);
 		return response.data.dados;
 	}
@@ -29,12 +29,12 @@ class DadosAPI implements DadosRepository {
 	}
 
 	async listarIdeologiaGenero(): Promise<DadosIdeologiaGenero[]> {
-		const response = await conexaoBackend.get("/dados/ideologia-genero");
+		const response = await conexaoBackend.get("/dados/ideologia-por-genero");
 		return response.data.dados;
 	}
 
 	async listarReligiaoRaca(): Promise<DadosReligiaoRaca[]> {
-		const response = await conexaoBackend.get("/dados/religiao-raca");
+		const response = await conexaoBackend.get("/dados/religiao-por-raca");
 		return response.data.dados;
 	}
 
@@ -44,7 +44,7 @@ class DadosAPI implements DadosRepository {
 	}
 
 	async listarPautaPorEsfera(esfera?: string): Promise<DadosPautaEsfera[]> {
-		const url = this.organizarUrl("/dados/pauta-esfera", esfera);
+		const url = this.organizarUrl("/dados/pauta-por-esfera", esfera);
 		const response = await conexaoBackend.get(url);
 		return response.data.dados;
 	}
@@ -52,7 +52,7 @@ class DadosAPI implements DadosRepository {
 	async listarParlamentarEsfera(
 		esfera?: string
 	): Promise<DadosParlamentarProjetosEsfera> {
-		const url = this.organizarUrl("/dados/parlamentar-esfera", esfera);
+		const url = this.organizarUrl("/dados/parlamentares-por-esfera", esfera);
 		const response = await conexaoBackend.get(url);
 		return response.data.dados;
 	}
