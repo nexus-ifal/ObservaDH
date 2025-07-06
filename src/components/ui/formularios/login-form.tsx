@@ -41,6 +41,8 @@ export default function LoginForm() {
 								name="email"
 								placeholder="Seu email"
 								required
+								onChange={(e) => e.target.value}
+								autoComplete="username"
 							/>
 						</div>
 					</div>
@@ -61,6 +63,8 @@ export default function LoginForm() {
 									placeholder="Sua senha"
 									required
 									minLength={6}
+									onChange={(e) => e.target.value}
+									autoComplete="current-password"
 								/>
 							</div>
 						</div>
