@@ -1,12 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
+
 import { listarParlamentarEsferaOptions } from "../options/dados";
 
 export const useParlamentarProjeto = (esfera?: string) => {
 	const {
-		data: parlamentarEsfera,
-		isLoading: isLoadingParlamentarEsfera,
+		data: parlamentarProjetoEsfera,
+		isLoading: isLoadingParlamentarProjetoEsfera,
 		error: error,
 	} = useQuery(listarParlamentarEsferaOptions(esfera));
 
-	return { parlamentarEsfera, isLoadingParlamentarEsfera, error };
+	return { parlamentarProjetoEsfera, isLoadingParlamentarProjetoEsfera, error };
 };

@@ -33,20 +33,20 @@ export class ListarParlamentaresPorEsferaService
 						},
 					}),
 				]);
-				return { 
-					esfera, 
-					parlamentares: parlamentaresCount, 
-					projetosLei: projetosLeiCount 
+				return {
+					esfera,
+					parlamentares: parlamentaresCount,
+					projetosLei: projetosLeiCount,
 				};
 			} else {
 				const [parlamentaresCount, projetosLeiCount] = await Promise.all([
 					prisma.politico.count(),
 					prisma.projeto.count(),
 				]);
-				return { 
-					esfera: "nacional", 
-					parlamentares: parlamentaresCount, 
-					projetosLei: projetosLeiCount 
+				return {
+					esfera: "nacional",
+					parlamentares: parlamentaresCount,
+					projetosLei: projetosLeiCount,
 				};
 			}
 		} catch (error) {

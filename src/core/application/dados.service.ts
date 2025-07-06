@@ -33,7 +33,9 @@ class DadosService implements DadosUseCase {
 		return this.adapter.listarPautaPorAno();
 	}
 
-	listarParlamentarEsfera(esfera?: string): Promise<DadosParlamentarProjetosEsfera> {
+	listarParlamentarEsfera(
+		esfera?: string
+	): Promise<DadosParlamentarProjetosEsfera> {
 		return this.adapter.listarParlamentarEsfera(esfera);
 	}
 	listarPautaPorEsfera(esfera?: string): Promise<DadosPautaEsfera[]> {
