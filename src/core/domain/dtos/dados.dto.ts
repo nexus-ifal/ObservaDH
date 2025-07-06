@@ -31,3 +31,12 @@ export interface DadosPautaPorAno {
 	linguagensNeutra: number;
 	banheirosMultigenero: number;
 }
+
+export interface DadosParlamentarEsfera {
+	esfera: string;
+	valor: number;
+}
+export interface DadosPautaEsfera {
+	pauta: string;
+	valor: number;
+}
