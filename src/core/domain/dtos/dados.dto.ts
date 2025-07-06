@@ -42,11 +42,11 @@ export interface DadosPautaEsfera {
 	valor: number;
 }
 export interface DadosParaPesquisaParlamenta {
-  esfera?: string;
-  estado?: string;
-  genero?: string;
-  partido?: string;
-  ideologia?: string;
-  profissao?: string;
-  ordemProjetos?: "asc" | "desc";
+	esfera?: string;
+	estado?: string;
+	genero?: string;
+	partido?: string;
+	ideologia?: string;
+	profissao?: string;
+	ordemProjetos?: "asc" | "desc";
 }

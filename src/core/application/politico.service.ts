@@ -1,3 +1,4 @@
+import { DadosParaPesquisaParlamenta } from "../domain/dtos/dados.dto";
 import {
 	CreatePoliticoDTO,
 	ResponsePoliticoDTO,
@@ -29,6 +30,11 @@ class PoliticoService implements PoliticoUseCase {
 
 	excluir(id: string): Promise<ResponsePoliticoDTO> {
 		return this.adapter.excluir(id);
+	}
+	listarFiltrados(
+		filtros: DadosParaPesquisaParlamenta
+	): Promise<ResponsePoliticoDTO[]> {
+		return this.adapter.listarFiltrados(filtros);
 	}
 }
 

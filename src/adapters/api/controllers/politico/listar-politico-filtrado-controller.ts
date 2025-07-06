@@ -1,8 +1,10 @@
 import { NextResponse } from "next/server";
+
 import {
 	IListarPoliticosFiltradosService,
 	ListarPoliticosFiltradosService,
 } from "../../service/politico/listar-politico-filtrados-services";
+
 import { FiltrosPoliticosDTO } from "@/core/domain/dtos/politico.dto";
 import { RespostaApi } from "@/core/domain/models/resposta-api";
 

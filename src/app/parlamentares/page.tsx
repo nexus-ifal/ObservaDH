@@ -30,8 +30,6 @@ import { usePartido } from "@/hooks/partido/use-partido";
 import { useProfissao } from "@/hooks/profissao/use-profissao";
 import { partidosMock, projetosMock } from "@/mocks/mock-projetos";
 import contarPropostasPorParlamentar from "@/mocks/web/mock-utils/projeto-utils/contar-proposta-por-parlamentar";
-import obterEsferasUnicas from "@/mocks/web/mock-utils/projeto-utils/obter-esferas-unicas";
-import obterGeneroUnico from "@/mocks/web/mock-utils/projeto-utils/obter-genero-unico";
 
 const Page: React.FC = () => {
 	const partidosOrdenados = useMemo(

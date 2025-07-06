@@ -4,6 +4,7 @@ import DIContainer from "../../config/dicontainer";
 import { mutationOptions } from "../../utils/mutation/utils";
 import { MutationVariables } from "../../utils/mutation/utils";
 
+import { DadosParaPesquisaParlamenta } from "@/core/domain/dtos/dados.dto";
 import {
 	CreatePoliticoDTO,
 	UpdatePoliticoDTO,
@@ -56,4 +57,14 @@ export const ExcluirPoliticoOptions = () =>
 			payload,
 		}: MutationVariables<void, APIExcluirPoliticoPayload>) =>
 			usecase.excluir(payload.id),
+	});
+
+export interface APIFiltrarPoliticosPayload {
+	filtros: DadosParaPesquisaParlamenta;
+}
+
+export const FiltrarPoliticosOptions = (filtros: DadosParaPesquisaParlamenta) =>
+	queryOptions({
+		queryKey: [...getPoliticoBaseQueryKey(), "filtrarPoliticos", filtros],
+		queryFn: () => usecase.listarFiltrados(filtros),
 	});
