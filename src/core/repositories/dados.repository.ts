@@ -14,6 +14,8 @@ export interface DadosRepository {
 	listarReligiaoRaca(): Promise<DadosReligiaoRaca[]>;
 	listarProjetosPorAno(): Promise<DadosPlPorAno[]>;
 	listarPautaPorAno(): Promise<DadosPautaPorAno[]>;
-	listarParlamentarEsfera(esfera?: string): Promise<DadosParlamentarProjetosEsfera>;
+	listarParlamentarEsfera(
+		esfera?: string
+	): Promise<DadosParlamentarProjetosEsfera>;
 	listarPautaPorEsfera(esfera?: string): Promise<DadosPautaEsfera[]>;
 }
