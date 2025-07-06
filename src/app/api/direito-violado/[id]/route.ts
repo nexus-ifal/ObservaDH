@@ -116,24 +116,3 @@ export async function GET(
 		return handleError(error, "Erro ao buscar Direito Violado por ID");
 	}
 }
-
-// ! Handler - Buscar Direito Violado por ID
-// export async function GET(
-//     request: NextRequest,
-//     context: { params: { id: string } }
-// ): Promise<NextResponse> {
-//     try {
-//         const idError = validateId(context.params.id);
-//         if (idError) return idError;
-
-//         const { id } = context.params;
-//         const controller = new BuscarDireitoVioladoController();
-//         const resposta = await controller.executar(id);
-
-//         return NextResponse.json(resposta, {
-//             status: resposta.sucesso ? 200 : 404,
-//         });
-//     } catch (error) {
-//         return handleError(error, "Erro ao buscar Direito Violado por ID");
-//     }
-// }
