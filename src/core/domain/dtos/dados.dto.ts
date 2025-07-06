@@ -32,9 +32,10 @@ export interface DadosPautaPorAno {
 	banheirosMultigenero: number;
 }
 
-export interface DadosParlamentarEsfera {
+export interface DadosParlamentarProjetosEsfera {
 	esfera: string;
-	valor: number;
+	parlamentares: number;
+	projetosLei: number;
 }
 export interface DadosPautaEsfera {
 	pauta: string;

@@ -1,6 +1,6 @@
 import {
 	DadosIdeologiaGenero,
-	DadosParlamentarEsfera,
+	DadosParlamentarProjetosEsfera,
 	DadosPautaEsfera,
 	DadosPautaPorAno,
 	DadosPlPorAno,
@@ -11,7 +11,6 @@ import { DadosRepository } from "@/core/repositories/dados.repository";
 import { conexaoBackend } from "@/infra/api/client";
 
 class DadosAPI implements DadosRepository {
-
 	private organizarUrl(basePath: string, esfera?: string): string {
 		return esfera
 			? `${basePath}?esfera=${encodeURIComponent(esfera)}`
@@ -44,15 +43,15 @@ class DadosAPI implements DadosRepository {
 		return response.data.dados;
 	}
 
-	async listarPautaPorEsfera(esfera: string): Promise<DadosPautaEsfera[]> {
+	async listarPautaPorEsfera(esfera?: string): Promise<DadosPautaEsfera[]> {
 		const url = this.organizarUrl("/dados/pauta-esfera", esfera);
 		const response = await conexaoBackend.get(url);
 		return response.data.dados;
 	}
 
 	async listarParlamentarEsfera(
-		esfera: string
-	): Promise<DadosParlamentarEsfera> {
+		esfera?: string
+	): Promise<DadosParlamentarProjetosEsfera> {
 		const url = this.organizarUrl("/dados/parlamentar-esfera", esfera);
 		const response = await conexaoBackend.get(url);
 		return response.data.dados;

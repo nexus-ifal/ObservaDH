@@ -1,12 +1,13 @@
 import { prismaClient } from "@/adapters/db/prisma";
 
-export interface DadosParlamentarEsfera {
+export interface DadosParlamentarProjetosEsfera {
 	esfera: string;
-	valor: number;
+	parlamentares: number;
+	projetosLei: number;
 }
 
 export interface IListarParlamentaresPorEsferaService {
-	executar(esfera?: string): Promise<DadosParlamentarEsfera>;
+	executar(esfera?: string): Promise<DadosParlamentarProjetosEsfera>;
 }
 
 export class ListarParlamentaresPorEsferaService
@@ -16,17 +17,37 @@ export class ListarParlamentaresPorEsferaService
 		const prisma = prismaClient;
 		try {
 			if (esfera) {
-				const count = await prisma.politico.count({
-					where: {
-						esfera: {
-							nome: { equals: esfera, mode: "insensitive" },
+				const [parlamentaresCount, projetosLeiCount] = await Promise.all([
+					prisma.politico.count({
+						where: {
+							esfera: {
+								nome: { equals: esfera, mode: "insensitive" },
+							},
 						},
-					},
-				});
-				return { esfera, valor: count };
+					}),
+					prisma.projeto.count({
+						where: {
+							esfera: {
+								nome: { equals: esfera, mode: "insensitive" },
+							},
+						},
+					}),
+				]);
+				return { 
+					esfera, 
+					parlamentares: parlamentaresCount, 
+					projetosLei: projetosLeiCount 
+				};
 			} else {
-				const count = await prisma.politico.count();
-				return { esfera: "nacional", valor: count };
+				const [parlamentaresCount, projetosLeiCount] = await Promise.all([
+					prisma.politico.count(),
+					prisma.projeto.count(),
+				]);
+				return { 
+					esfera: "nacional", 
+					parlamentares: parlamentaresCount, 
+					projetosLei: projetosLeiCount 
+				};
 			}
 		} catch (error) {
 			throw new Error(

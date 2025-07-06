@@ -1,6 +1,6 @@
 import {
 	DadosIdeologiaGenero,
-	DadosParlamentarEsfera,
+	DadosParlamentarProjetosEsfera,
 	DadosPautaEsfera,
 	DadosPautaPorAno,
 	DadosPlPorAno,
@@ -33,10 +33,10 @@ class DadosService implements DadosUseCase {
 		return this.adapter.listarPautaPorAno();
 	}
 
-	listarParlamentarEsfera(esfera: string): Promise<DadosParlamentarEsfera> {
+	listarParlamentarEsfera(esfera?: string): Promise<DadosParlamentarProjetosEsfera> {
 		return this.adapter.listarParlamentarEsfera(esfera);
 	}
-	listarPautaPorEsfera(esfera: string): Promise<DadosPautaEsfera[]> {
+	listarPautaPorEsfera(esfera?: string): Promise<DadosPautaEsfera[]> {
 		return this.adapter.listarPautaPorEsfera(esfera);
 	}
 }
