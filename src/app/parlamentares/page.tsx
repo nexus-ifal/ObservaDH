@@ -42,15 +42,6 @@ const Page: React.FC = () => {
 		[]
 	);
 
-	const esferas = useMemo(
-		() => obterEsferasUnicas({ projetos: projetosMock }),
-		[]
-	);
-	const genero = useMemo(
-		() => obterGeneroUnico({ parlamentares: projetosMock }),
-		[]
-	);
-
 	const { estados, isLoadingEstados, error: errorEstado } = useEstado();
 	const { partidos, isLoadingPartidos, error: errorPartido } = usePartido();
 	const {
@@ -92,6 +83,33 @@ const Page: React.FC = () => {
 		errorProfissao,
 	].some(Boolean);
 
+	const esferas = useMemo(
+		() => [
+			{
+				titulo: "Federal",
+				value: "federal",
+			},
+			{
+				titulo: "Estadual",
+				value: "estadual",
+			},
+		],
+		[]
+	);
+
+	const genero = useMemo(
+		() => [
+			{
+				titulo: "Masculino",
+				value: "Masculino",
+			},
+			{
+				titulo: "Feminino",
+				value: "Feminino",
+			},
+		],
+		[]
+	);
 	const dropdownItems = useMemo(
 		() => [
 			{ elementos: esferas, titulo: "Esfera", param: "esfera" },
