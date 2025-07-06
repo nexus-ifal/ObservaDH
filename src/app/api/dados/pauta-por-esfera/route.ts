@@ -16,7 +16,7 @@ export async function GET(request: Request) {
 		return NextResponse.json(
 			{
 				sucesso: false,
-				mensagem: "Erro ao listar parlamentares por esfera",
+				mensagem: "Erro ao listar pautas por esfera",
 				dados: error instanceof Error ? error.message : String(error),
 			},
 			{ status: 500 }
