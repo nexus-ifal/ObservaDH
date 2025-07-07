@@ -27,7 +27,7 @@ export class ListarPoliticosFiltradosService
 			where.genero = { equals: filtros.genero, mode: "insensitive" };
 		if (filtros.partido)
 			where.partido = {
-				is: { nome: { equals: filtros.partido, mode: "insensitive" } },
+				is: { sigla: { equals: filtros.partido, mode: "insensitive" } },
 			};
 
 		if (filtros.ideologia)
@@ -45,7 +45,6 @@ export class ListarPoliticosFiltradosService
 				projetos: true,
 			},
 		});
-
 		let dados = politicos.map((p) => ({
 			foto: p.foto,
 			nome: p.nome,
