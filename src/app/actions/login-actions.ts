@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import { AuthError } from "next-auth";
 import { ZodError } from "zod";
 
-import { signIn } from "../../../auth";
+import { auth, signIn } from "../../../auth";
 
 import { userLoginSchema } from "@/schemas/user-zod-schema";
 
@@ -25,7 +25,6 @@ export async function authenticate(
 	}
 
 	const { email, password } = camposValidados.data;
-	const redirectTo = formData.get("redirectTo") as string;
 
 	try {
 		await signIn("credentials", {
@@ -34,7 +33,18 @@ export async function authenticate(
 			redirect: false,
 		});
 
-		redirect(redirectTo);
+		const session = await auth();
+
+		let finalRedirectTo = "/";
+		if (session?.user?.redirectTo) {
+			finalRedirectTo = session.user.redirectTo;
+		} else if (session?.user?.role === "ADMIN") {
+			finalRedirectTo = "/admin-routes/home";
+		} else if (session?.user?.role === "EDITOR") {
+			finalRedirectTo = "/user-routes/home";
+		}
+
+		redirect(finalRedirectTo);
 	} catch (error) {
 		if (error instanceof Error && error.message.includes("NEXT_REDIRECT")) {
 			throw error;

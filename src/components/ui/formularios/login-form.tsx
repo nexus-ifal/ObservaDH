@@ -1,8 +1,9 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 import { oswald } from "../../../fonts/fonts";
 
@@ -10,11 +11,25 @@ import { authenticate } from "@/app/actions/login-actions";
 
 export default function LoginForm() {
 	const searchParams = useSearchParams();
-	const callbackUrl = searchParams.get("callbackUrl") || "/user-routes/home";
+	const router = useRouter();
+	const { data: session, status } = useSession();
+	const callbackUrl = searchParams.get("callbackUrl");
 	const [errorMessage, formAction, isPending] = useActionState(
 		authenticate,
 		undefined
 	);
+
+	useEffect(() => {
+		if (status === "authenticated") {
+			if (callbackUrl) {
+				router.push(callbackUrl);
+			} else if (session?.user?.redirectTo) {
+				router.push(session.user.redirectTo);
+			} else {
+				router.push("/");
+			}
+		}
+	}, [status, session, callbackUrl, router]);
 
 	return (
 		<form
@@ -78,7 +93,6 @@ export default function LoginForm() {
 						</div>
 					</div>
 				</div>
-				<input type="hidden" name="redirectTo" value={callbackUrl} />
 				<button
 					type="submit"
 					className={`bg-[#121A2B] rounded-[4px] border-[2px] border-[#2C52A4] ${oswald.className} text-[#91ADF4] text-[15px] font-medium w-fit p-2 hover:cursor-pointer hover:bg-[#2C52A4] hover:border-[#121A2B] hover:text-[#121A2B] transition-colors duration-300`}

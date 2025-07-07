@@ -57,11 +57,21 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 						);
 					}
 
+					let redirectTo: string;
+					if (user.role === "ADMIN") {
+						redirectTo = "/admin-routes/home";
+					} else if (user.role === "EDITOR") {
+						redirectTo = "/user-routes/home";
+					} else {
+						redirectTo = "/";
+					}
+
 					return {
 						id: user.id,
 						name: user.name,
 						email: user.email,
 						role: user.role,
+						redirectTo: redirectTo,
 					};
 				} catch (error) {
 					if (error instanceof z.ZodError) {
@@ -104,6 +114,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 				token.email = user.email;
 				token.id = user.id;
 				token.role = user.role;
+				if ("redirectTo" in user) {
+					token.redirectTo = user.redirectTo;
+				}
 			}
 			return token;
 		},
@@ -113,6 +126,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 				session.user.name = token.name as string;
 				session.user.email = token.email as string;
 				session.user.role = token.role as Role;
+				if ("redirectTo" in token) {
+					session.user.redirectTo = token.redirectTo as string;
+				}
 			}
 			return session;
 		},
