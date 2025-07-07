@@ -36,8 +36,8 @@ const CardComponenteParlamentar: React.FC<componentePros> = ({
 									/>
 								</div>
 							</div>
-							<div className="w-1/2">
-								<p className=" text-3xl font-medium text-nowrap">
+							<div className="w-1/2 bg-amber-300 text-start	">
+								<p className=" text-3xl font-medium text-nowrap ">
 									{parlamentar.nome}
 								</p>
 							</div>
