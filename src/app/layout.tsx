@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import AuthProvider from "@/components/ui/layouts/auth-provider";
 import QueryProvider from "@/components/ui/layouts/query-provider";
 
 import { titilliumWeb } from "../fonts/fonts";
@@ -17,7 +18,9 @@ export default function RootLayout({
 	return (
 		<html lang="pt-br" className={titilliumWeb.className}>
 			<body className="layout-principal antialiased no-scrollbar flex flex-col">
-				<QueryProvider>{children}</QueryProvider>
+				<AuthProvider>
+					<QueryProvider>{children}</QueryProvider>
+				</AuthProvider>
 			</body>
 		</html>
 	);

@@ -33,6 +33,7 @@ export default auth((req) => {
 	const session = req.auth;
 	const autenticado = !!session;
 	const userRole = session?.user?.role;
+	const userRedirectTo = session?.user?.redirectTo;
 
 	const rotaPublica =
 		ROTAS_PUBLICAS.some((route) => nextUrl.pathname.startsWith(route)) ||
@@ -59,16 +60,10 @@ export default auth((req) => {
 
 		if (callbackUrl) {
 			return NextResponse.redirect(new URL(callbackUrl, nextUrl.origin));
+		} else if (userRedirectTo) {
+			return NextResponse.redirect(new URL(userRedirectTo, nextUrl.origin));
 		} else {
-			if (userRole === "EDITOR") {
-				return NextResponse.redirect(
-					new URL("/user-routes/home", nextUrl.origin)
-				);
-			} else if (userRole === "ADMIN") {
-				return NextResponse.redirect(
-					new URL("/admin-routes/home", nextUrl.origin)
-				);
-			}
+			return NextResponse.redirect(new URL("/", nextUrl.origin));
 		}
 	}
 

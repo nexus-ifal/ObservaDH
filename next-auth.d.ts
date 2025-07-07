@@ -8,6 +8,7 @@ declare module "next-auth" {
 			name: string;
 			email: string;
 			role: Role;
+			redirectTo?: string;
 		};
 	}
 	interface User {
@@ -25,6 +26,7 @@ declare module "next-auth/jwt" {
 		name: string;
 		email: string;
 		role: Role;
+		redirectTo?: string;
 	}
 }
 
