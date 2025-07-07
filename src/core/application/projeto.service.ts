@@ -31,6 +31,10 @@ class ProjetoService implements ProjetoUseCase {
 	excluir(id: string): Promise<ResponseProjetoDTO> {
 		return this.adapter.excluir(id);
 	}
+
+	buscar(id: string): Promise<ResponseProjetoDTO | null> {
+		return this.adapter.buscar(id);
+	}
 }
 
 export default ProjetoService;

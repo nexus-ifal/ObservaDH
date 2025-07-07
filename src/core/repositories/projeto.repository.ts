@@ -9,4 +9,5 @@ export interface ProjetoRepository {
 	criar(projeto: CreateProjetoDTO): Promise<ResponseProjetoDTO>;
 	atualizar(id: string, projeto: UpdateProjetoDTO): Promise<ResponseProjetoDTO>;
 	excluir(id: string): Promise<ResponseProjetoDTO>;
+	buscar(id: string): Promise<ResponseProjetoDTO | null>;
 }
