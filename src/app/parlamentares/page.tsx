@@ -2,7 +2,6 @@
 
 import { useMemo, useState } from "react";
 import { MdOutlineFilterAlt } from "react-icons/md";
-
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { Button } from "@/components/external/ui-shacnui/button";
@@ -28,7 +27,6 @@ import { PartidoModel } from "@/core/domain/types/partido";
 import { useIdeologiaGenero } from "@/hooks/dados/use-ideologia-genero";
 import { useReligiaoRaca } from "@/hooks/dados/use-religiao-raca";
 import { useEstado } from "@/hooks/estado/use-estado";
-import { useIdeologia } from "@/hooks/ideologia/use-ideologia";
 import { usePartido } from "@/hooks/partido/use-partido";
 import { usePoliticoFiltrados } from "@/hooks/politico/use-politico-filtrados";
 import { useProfissao } from "@/hooks/profissao/use-profissao";
@@ -97,7 +95,6 @@ const Page: React.FC = () => {
 		router.replace(`${pathname}?${params.toString()}`, { scroll: false });
 	}
 
-	
 	const {
 		profissoes,
 		isLoadingProfissoes,
@@ -114,7 +111,6 @@ const Page: React.FC = () => {
 		error: errorReligiaoRaca,
 	} = useReligiaoRaca();
 
-	
 	const {
 		politicosFiltrados,
 		isLoadingPoliticosFiltrados,
@@ -178,7 +174,7 @@ const Page: React.FC = () => {
 				titulo: "Partidos",
 				param: "partido",
 			},
-			
+
 			{
 				elementos:
 					profissoes?.map((profissao) => ({
@@ -195,7 +191,6 @@ const Page: React.FC = () => {
 	const isLoading =
 		isLoadingEstados ||
 		isLoadingPartidos ||
-		
 		isLoadingProfissoes ||
 		isLoadingReligiaoRaca ||
 		isLoadingIdeologiaGenero ||
@@ -204,7 +199,7 @@ const Page: React.FC = () => {
 	const error = [
 		errorEstado,
 		errorPartido,
-	
+
 		errorProfissao,
 		errorReligiaoRaca,
 		errorIdeologiaGenero,
