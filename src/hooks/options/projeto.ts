@@ -3,8 +3,11 @@ import { queryOptions } from "@tanstack/react-query";
 import DIContainer from "../../config/dicontainer";
 import { mutationOptions } from "../../utils/mutation/utils";
 import { MutationVariables } from "../../utils/mutation/utils";
-import { CreateProjetoDTO, UpdateProjetoDTO } from "@/core/domain/dtos/projeto.dto";
 
+import {
+	CreateProjetoDTO,
+	UpdateProjetoDTO,
+} from "@/core/domain/dtos/projeto.dto";
 
 const usecase = DIContainer.getProjetoUseCase();
 
@@ -56,10 +59,6 @@ export const ExcluirProjetoOptions = () =>
 			usecase.excluir(payload.id),
 	});
 
-
-	export interface APIBuscarProjetoPayload {
-		id: string;
-	}	
 export const BuscarProjetoOptions = (id: string) =>
 	queryOptions({
 		queryKey: [...getProjetoBaseQueryKey(), "buscarProjeto"],
