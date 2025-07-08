@@ -38,6 +38,7 @@ import { oswald } from "../../../../../fonts/fonts";
 import { APIAtualizarPoliticoPayload } from "../../../../../hooks/options/politico";
 
 import { ResponsePoliticoDTO } from "@/core/domain/dtos/politico.dto";
+import { ResponseProjetoDTO } from "@/core/domain/dtos/projeto.dto";
 import { useEstado } from "@/hooks/estado/use-estado";
 import { usePartido } from "@/hooks/partido/use-partido";
 import { usePolitico } from "@/hooks/politico/use-politico";
@@ -59,6 +60,7 @@ const formSchema = z.object({
 	foto: z.string().min(1, { message: "Foto obrigatória" }),
 });
 
+//! ＼（〇_ｏ）／GAMBIARRA
 const esferas = [
 	{
 		value: "federal",
@@ -130,7 +132,7 @@ const Page: React.FC = () => {
 			form.setValue(
 				"projetos",
 				selectedPolitico.projetos
-					? selectedPolitico.projetos.map((p: ResponsePoliticoDTO) => p.id)
+					? selectedPolitico.projetos.map((p: ResponseProjetoDTO) => p.id)
 					: []
 			);
 			form.setValue("esfera", selectedPolitico.esferaId || "");
