@@ -1,41 +1,32 @@
 "use client";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
 import Header from "./header";
 
-import useDescobertaCabecalho from "@/content/content-navbar-utils";
-
-interface Cabecalho {
-	titulo: string;
-	text: string;
-}
+import {
+	buscarCabecalhoPorLink,
+	Cabecalho,
+} from "@/content/content-navbar-utils";
 
 const NavBar: React.FC = () => {
-	const [title, setTitle] = useState<Cabecalho>({
+	const [title, setTitle] = useState<Omit<Cabecalho, "link">>({
 		titulo: "",
 		text: "",
 	});
 	const currentPath = usePathname();
 
-	const { buscarCabecalhoPorLink } = useDescobertaCabecalho();
-
-	const buscarCabecalho = useCallback(
-		() => buscarCabecalhoPorLink(currentPath),
-		[buscarCabecalhoPorLink, currentPath]
-	);
-
 	useEffect(() => {
-		const item = buscarCabecalho();
+		const item = buscarCabecalhoPorLink(currentPath);
 		if (item) {
-			setTitle(item);
+			setTitle({ titulo: item.titulo, text: item.text });
 		} else {
 			setTitle({
 				titulo: "Projeto de Lei",
 				text: "",
 			});
 		}
-	}, [buscarCabecalho]);
+	}, [currentPath]); // Só depende do path!
 
 	return (
 		<div className="w-full h-full flex flex-col items-center bg-senado bg-cover bg-center border-b-2 border-[#001745]">

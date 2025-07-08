@@ -16,14 +16,14 @@ const FooterBar: React.FC = () => {
 				<div className="flex gap-8">
 					<Image
 						src="/assets/images/nexus-logo.svg"
-						className=""
+						className="w-36 h-11"
 						alt="Nexus Logo"
 						width={178}
-						height={29.75}
+						height={29}
 					/>
 					<Image
 						src="/assets/images/ifal-logo.svg"
-						className=" w-36 h-11"
+						className="w-36 h-11"
 						width={150}
 						height={42}
 						alt="Ifal Logo"

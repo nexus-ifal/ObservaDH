@@ -1,7 +1,8 @@
 "use client";
 
-import { useMemo } from "react";
+import { Suspense, useMemo, useState } from "react";
 import { MdOutlineFilterAlt } from "react-icons/md";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { Button } from "@/components/external/ui-shacnui/button";
 import Card from "@/components/ui/cards";
@@ -17,23 +18,29 @@ import Titulo from "@/components/ui/titulo-pages";
 import { legendas } from "@/content/content-parlamentares";
 import {
 	DadosIdeologiaGenero,
+	DadosParaPesquisaParlamenta,
 	DadosReligiaoRaca,
 } from "@/core/domain/dtos/dados.dto";
+import { ResponsePoliticoDTO } from "@/core/domain/dtos/politico.dto";
 import { elemento } from "@/core/domain/types/elemento-dropdown";
 import { PartidoModel } from "@/core/domain/types/partido";
-import { ProjetoLei } from "@/core/domain/types/projeto-lei";
 import { useIdeologiaGenero } from "@/hooks/dados/use-ideologia-genero";
 import { useReligiaoRaca } from "@/hooks/dados/use-religiao-raca";
 import { useEstado } from "@/hooks/estado/use-estado";
-import { useIdeologia } from "@/hooks/ideologia/use-ideologia";
 import { usePartido } from "@/hooks/partido/use-partido";
+import { usePoliticoFiltrados } from "@/hooks/politico/use-politico-filtrados";
 import { useProfissao } from "@/hooks/profissao/use-profissao";
-import { partidosMock, projetosMock } from "@/mocks/mock-projetos";
-import contarPropostasPorParlamentar from "@/mocks/web/mock-utils/projeto-utils/contar-proposta-por-parlamentar";
-import obterEsferasUnicas from "@/mocks/web/mock-utils/projeto-utils/obter-esferas-unicas";
-import obterGeneroUnico from "@/mocks/web/mock-utils/projeto-utils/obter-genero-unico";
+import { partidosMock } from "@/mocks/mock-projetos";
 
-const Page: React.FC = () => {
+const Page = () => {
+	return (
+		<Suspense fallback={<Loading />}>
+			<PageContent />
+		</Suspense>
+	);
+};
+
+const PageContent: React.FC = () => {
 	const partidosOrdenados = useMemo(
 		() =>
 			[...partidosMock].sort(
@@ -42,28 +49,61 @@ const Page: React.FC = () => {
 		[]
 	);
 
-	const esferas = useMemo(
-		() => obterEsferasUnicas({ projetos: projetosMock }),
-		[]
-	);
-	const genero = useMemo(
-		() => obterGeneroUnico({ parlamentares: projetosMock }),
-		[]
-	);
-
 	const { estados, isLoadingEstados, error: errorEstado } = useEstado();
 	const { partidos, isLoadingPartidos, error: errorPartido } = usePartido();
-	const {
-		ideologias,
-		isLoadingIdeologias,
-		error: errorIdeologia,
-	} = useIdeologia();
+	const searchParams = useSearchParams();
+
+	const esferaURL = searchParams.get("esfera") || "";
+	const estadoURL = searchParams.get("estado") || "";
+	const generoURL = searchParams.get("genero") || "";
+	const partidoURL = searchParams.get("partido") || "";
+	const ideologiaURL = searchParams.get("ideologia") || "";
+	const profissaoURL = searchParams.get("profissao") || "";
+
+	const [filtros, setFiltros] = useState({
+		esfera: esferaURL,
+		estado: estadoURL,
+		genero: generoURL,
+		partido: partidoURL,
+		ideologia: ideologiaURL,
+		profissao: profissaoURL,
+	});
+
+	const [filtrosAplicados, setFiltrosAplicados] = useState({
+		esfera: esferaURL,
+		estado: estadoURL,
+		genero: generoURL,
+		partido: partidoURL,
+		ideologia: ideologiaURL,
+		profissao: profissaoURL,
+	});
+
+	const router = useRouter();
+	const pathname = usePathname();
+
+	function handleFiltroChange(param: string, value: string) {
+		setFiltros((prev) => ({
+			...prev,
+			[param]: value,
+		}));
+	}
+
+	function aplicarFiltros() {
+		setFiltrosAplicados(filtros);
+		const params = new URLSearchParams();
+		Object.entries(filtros).forEach(([key, value]) => {
+			if (value && value !== "geral") {
+				params.set(key, value);
+			}
+		});
+		router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+	}
+
 	const {
 		profissoes,
 		isLoadingProfissoes,
 		error: errorProfissao,
 	} = useProfissao();
-
 	const {
 		ideologiaGenero,
 		isLoadingIdeologiaGenero,
@@ -75,22 +115,46 @@ const Page: React.FC = () => {
 		error: errorReligiaoRaca,
 	} = useReligiaoRaca();
 
-	const isLoading =
-		isLoadingIdeologiaGenero ||
-		isLoadingReligiaoRaca ||
-		isLoadingEstados ||
-		isLoadingPartidos ||
-		isLoadingIdeologias ||
-		isLoadingProfissoes;
+	const {
+		politicosFiltrados,
+		isLoadingPoliticosFiltrados,
+		error: errorPoliticoFiltrados,
+	} = usePoliticoFiltrados({
+		esfera: filtrosAplicados.esfera,
+		estado: filtrosAplicados.estado,
+		genero: filtrosAplicados.genero,
+		partido: filtrosAplicados.partido,
+		ideologia: filtrosAplicados.ideologia,
+		profissao: filtrosAplicados.profissao,
+	} as DadosParaPesquisaParlamenta);
 
-	const error = [
-		errorIdeologiaGenero,
-		errorReligiaoRaca,
-		errorEstado,
-		errorPartido,
-		errorIdeologia,
-		errorProfissao,
-	].some(Boolean);
+	const esferas = useMemo(
+		() => [
+			{
+				titulo: "Federal",
+				value: "federal",
+			},
+			{
+				titulo: "Estadual",
+				value: "estadual",
+			},
+		],
+		[]
+	);
+
+	const generos = useMemo(
+		() => [
+			{
+				titulo: "Masculino",
+				value: "Masculino",
+			},
+			{
+				titulo: "Feminino",
+				value: "Feminino",
+			},
+		],
+		[]
+	);
 
 	const dropdownItems = useMemo(
 		() => [
@@ -104,7 +168,7 @@ const Page: React.FC = () => {
 				titulo: "Estado",
 				param: "estado",
 			},
-			{ elementos: genero, titulo: "Gênero", param: "genero" },
+			{ elementos: generos, titulo: "Gênero", param: "genero" },
 			{
 				elementos:
 					partidos?.map((partido) => ({
@@ -114,15 +178,7 @@ const Page: React.FC = () => {
 				titulo: "Partidos",
 				param: "partido",
 			},
-			{
-				elementos:
-					ideologias?.map((ideologia) => ({
-						titulo: ideologia.nome,
-						value: ideologia.nome,
-					})) ?? [],
-				titulo: "Ideologia",
-				param: "ideologia",
-			},
+
 			{
 				elementos:
 					profissoes?.map((profissao) => ({
@@ -133,17 +189,38 @@ const Page: React.FC = () => {
 				param: "profissao",
 			},
 		],
-		[esferas, estados, genero, partidos, ideologias, profissoes]
+		[esferas, estados, generos, partidos, profissoes]
 	);
+
+	const isLoading =
+		isLoadingEstados ||
+		isLoadingPartidos ||
+		isLoadingProfissoes ||
+		isLoadingReligiaoRaca ||
+		isLoadingIdeologiaGenero ||
+		isLoadingPoliticosFiltrados;
+
+	const error = [
+		errorEstado,
+		errorPartido,
+
+		errorProfissao,
+		errorReligiaoRaca,
+		errorIdeologiaGenero,
+		errorPoliticoFiltrados,
+	].some(Boolean);
 
 	return (
 		<MainLayout>
 			<div className="flex h-full w-full flex-col gap-24 items-center px-4 sm:px-11">
 				<Titulo pequeno={"Ranking"} grande={"dos Parlamentares"} />
 				<RankingParlamentares
-					projetos={projetosMock}
+					parlamentares={politicosFiltrados ?? []}
 					itemsFiltro={dropdownItems}
 					isLoading={isLoading}
+					filtros={filtros}
+					onFiltroChange={handleFiltroChange}
+					aplicarFiltros={aplicarFiltros}
 				/>
 				<RankingPartidos partidosOrdenados={partidosOrdenados} />
 				<DadosEstatisticos
@@ -165,9 +242,18 @@ interface FiltroElementosProps {
 		param: string;
 	}[];
 	isLoading?: boolean;
+	filtros: Record<string, string>;
+	onFiltroChange: (param: string, value: string) => void;
+	aplicarFiltros: () => void;
 }
 
-const Filtro = ({ items, isLoading }: FiltroElementosProps) => (
+const Filtro = ({
+	items,
+	isLoading,
+	filtros,
+	onFiltroChange,
+	aplicarFiltros,
+}: FiltroElementosProps) => (
 	<>
 		{isLoading ? (
 			<Loading />
@@ -182,10 +268,16 @@ const Filtro = ({ items, isLoading }: FiltroElementosProps) => (
 							titulo={item.titulo}
 							className="w-40"
 							classNameContent="min-h-40"
+							value={filtros[item.param] || ""}
+							onChange={(v) => onFiltroChange(item.param, v)}
+							autoApply={false}
 						/>
 					))}
 				</section>
-				<Button className="flex flex-row justify-center border-[#D974FD] text-[#D974FD] bg-transparent border-[1px] rounded-[3px] w-32 h-12 hover:bg-inherit active:text-white active:bg-[#D974FD] transition-colors duration-75 mt-4 sm:mt-0">
+				<Button
+					className="flex flex-row justify-center border-[#D974FD] text-[#D974FD] bg-transparent border-[1px] rounded-[3px] w-32 h-12 hover:bg-inherit active:text-white active:bg-[#D974FD] transition-colors duration-75 mt-4 sm:mt-0"
+					onClick={aplicarFiltros}
+				>
 					Filtrar <MdOutlineFilterAlt />
 				</Button>
 			</section>
@@ -194,22 +286,34 @@ const Filtro = ({ items, isLoading }: FiltroElementosProps) => (
 );
 
 interface RankingParlamentaresProps {
-	projetos: ProjetoLei[];
+	parlamentares: ResponsePoliticoDTO[];
 	itemsFiltro: {
 		elementos: elemento[];
 		titulo: string;
 		param: string;
 	}[];
 	isLoading: boolean;
+	filtros: Record<string, string>;
+	onFiltroChange: (param: string, value: string) => void;
+	aplicarFiltros: () => void;
 }
 
 const RankingParlamentares = ({
-	projetos,
+	parlamentares,
 	itemsFiltro,
 	isLoading,
+	filtros,
+	onFiltroChange,
+	aplicarFiltros,
 }: RankingParlamentaresProps) => (
 	<article className="flex flex-col w-full gap-12 sm:gap-20">
-		<Filtro items={itemsFiltro} isLoading={isLoading} />
+		<Filtro
+			items={itemsFiltro}
+			isLoading={isLoading}
+			filtros={filtros}
+			onFiltroChange={onFiltroChange}
+			aplicarFiltros={aplicarFiltros}
+		/>
 		<div className="flex flex-col gap-6 sm:gap-10 justify-center">
 			<div className="flex flex-row w-full px-2 sm:px-16 h-14 sm:h-[4.25rem] bg-[#122144] border border-b-0 border-[#87D9FF] rounded-t-[5px] font-semibold text-lg sm:text-2xl text-[#87D9FF]">
 				<section className="w-1/2 h-full px-2 sm:px-16 grid grid-cols-2 gap-2 sm:gap-4 items-center">
@@ -223,21 +327,16 @@ const RankingParlamentares = ({
 				</section>
 			</div>
 			<div
-				className="h-96 sm:h-[800px] w-full rounded-md flex flex-col items-center gap-6 sm:gap-10 overflow-auto"
+				className="min-h-96 max-h-96 sm:min-h-[400px] sm:max-h-[800px] w-full rounded-md flex flex-col items-center gap-6 sm:gap-10 overflow-auto"
 				color="black"
 			>
-				{projetos.map((item) =>
-					item.parlamentares.map((parlamentar) => (
-						<Card.ComponenteParlamentar
-							key={`${item.numeroPl}-${parlamentar.nome} - ${parlamentar.esfera}`}
-							parlamentar={parlamentar}
-							propostas={contarPropostasPorParlamentar(
-								projetos,
-								parlamentar.nome
-							)}
-						/>
-					))
-				)}
+				{parlamentares.map((parlamentar, i) => (
+					<Card.ComponenteParlamentar
+						key={`${i}`}
+						parlamentar={parlamentar}
+						propostas={parlamentar.numeroProjetos || 0}
+					/>
+				))}
 			</div>
 		</div>
 	</article>

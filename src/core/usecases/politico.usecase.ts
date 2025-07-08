@@ -1,3 +1,5 @@
+import { DadosParaPesquisaParlamenta } from "../domain/dtos/dados.dto";
+
 import {
 	CreatePoliticoDTO,
 	ResponsePoliticoDTO,
@@ -12,6 +14,9 @@ interface PoliticoUseCase {
 		politico: UpdatePoliticoDTO
 	): Promise<ResponsePoliticoDTO>;
 	excluir(id: string): Promise<ResponsePoliticoDTO>;
+	listarFiltrados(
+		filtros: DadosParaPesquisaParlamenta
+	): Promise<ResponsePoliticoDTO[]>;
 }
 
 export default PoliticoUseCase;

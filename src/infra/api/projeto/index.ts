@@ -33,6 +33,11 @@ class ProjetoAPI implements ProjetoRepository {
 		const dados = response.data.dados;
 		return dados;
 	}
+	async buscar(id: string): Promise<ResponseProjetoDTO | null> {
+		const response = await conexaoBackend.get(`/projeto/${id}`);
+		const dados = response.data.dados;
+		return dados;
+	}
 }
 
 export default ProjetoAPI;

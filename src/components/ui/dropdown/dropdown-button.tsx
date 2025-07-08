@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import {
@@ -19,6 +19,9 @@ interface DropdownButtonProps {
 	elementos: elemento[];
 	className?: string;
 	classNameContent?: string;
+	value?: string;
+	onChange?: (value: string) => void;
+	autoApply?: boolean;
 }
 
 const DropdownButton: React.FC<DropdownButtonProps> = ({
@@ -27,26 +30,45 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({
 	titulo,
 	param,
 	classNameContent,
+	value,
+	onChange,
+	autoApply = true,
 }) => {
-	const [filter, setFilter] = useState<string>("");
+	const [internalValue, setInternalValue] = useState<string>("");
 
 	const searchParams = useSearchParams();
 	const pathName = usePathname();
 	const { replace } = useRouter();
 
-	function handleChange(value: string) {
-		const params = new URLSearchParams(searchParams.toString());
-		if (!value || value === "geral") {
-			params.delete(param);
-		} else {
-			params.set(param, value);
+	useEffect(() => {
+		if (value !== undefined) setInternalValue(value);
+	}, [value]);
+
+	function handleChange(valueSelected: string) {
+		if (onChange) {
+			onChange(valueSelected);
+			setInternalValue(valueSelected);
+			return;
 		}
-		replace(`${pathName}?${params.toString()}`, { scroll: false });
-		setFilter(value);
+		if (autoApply) {
+			const params = new URLSearchParams(searchParams.toString());
+			if (!valueSelected || valueSelected === "geral") {
+				params.delete(param);
+			} else {
+				params.set(param, valueSelected);
+			}
+			replace(`${pathName}?${params.toString()}`, { scroll: false });
+			setInternalValue(valueSelected);
+		} else {
+			setInternalValue(valueSelected);
+		}
 	}
 
 	return (
-		<Select onValueChange={handleChange} value={filter}>
+		<Select
+			onValueChange={handleChange}
+			value={value !== undefined ? value : internalValue}
+		>
 			<SelectTrigger
 				className={`w-full h-12 border-[#4568BE] rounded-[3px] text-[#4568BE] ${className}`}
 			>
@@ -55,17 +77,15 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({
 			<SelectContent
 				className={`text-[#4568BE] focus:text-[#4568BE] border-[#91ADF4] bg-[#91ADF4] ${className} ${classNameContent}`}
 			>
-				{elementos.map((item) => {
-					return (
-						<SelectItem
-							value={item.value}
-							key={item.value}
-							className={`text-[#4568BE] focus:bg-[#1A326E] focus:text-[#91ADF4] flex text-start justify-start items-center min-h-12 ${className}`}
-						>
-							{item.titulo}
-						</SelectItem>
-					);
-				})}
+				{elementos.map((item) => (
+					<SelectItem
+						value={item.value}
+						key={item.value}
+						className={`text-[#4568BE] focus:bg-[#1A326E] focus:text-[#91ADF4] flex text-start justify-start items-center min-h-12 ${className}`}
+					>
+						{item.titulo}
+					</SelectItem>
+				))}
 			</SelectContent>
 		</Select>
 	);

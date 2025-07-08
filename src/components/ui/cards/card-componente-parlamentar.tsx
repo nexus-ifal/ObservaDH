@@ -5,10 +5,10 @@ import { oswald } from "../../../fonts/fonts";
 import CardDivider from "./card-divider";
 import CardParlamentar from "./card-parlamentar";
 
-import { parlamentar } from "@/core/domain/types/parlamentar";
+import { ResponsePoliticoDTO } from "@/core/domain/dtos/politico.dto";
 
 interface componentePros {
-	parlamentar: parlamentar;
+	parlamentar: ResponsePoliticoDTO;
 	propostas: number;
 }
 
@@ -25,7 +25,10 @@ const CardComponenteParlamentar: React.FC<componentePros> = ({
 							<div className="w-1/2">
 								<div className="relative h-24 w-24">
 									<Image
-										src={parlamentar.urlImagem}
+										src={
+											parlamentar.foto ||
+											"https://deepgrouplondon.com/wp-content/uploads/2019/06/person-placeholder-5.png"
+										}
 										alt={`${parlamentar.nome}-${parlamentar.genero}`}
 										fill
 										unoptimized
@@ -33,8 +36,8 @@ const CardComponenteParlamentar: React.FC<componentePros> = ({
 									/>
 								</div>
 							</div>
-							<div className="w-1/2">
-								<p className=" text-3xl font-medium text-nowrap">
+							<div className="w-1/2 bg-amber-300 text-start	">
+								<p className=" text-3xl font-medium text-nowrap ">
 									{parlamentar.nome}
 								</p>
 							</div>
@@ -42,8 +45,8 @@ const CardComponenteParlamentar: React.FC<componentePros> = ({
 					</CardParlamentar>
 				</section>
 				<div className="grid grid-cols-3 h-full w-1/2 px-16 justify-between items-center text-3xl text-white">
-					<p className="">{parlamentar.partido}</p>
-					<p className="">{parlamentar.estado}</p>
+					<p className="">{parlamentar?.partido?.sigla}</p>
+					<p className="">{parlamentar?.estado?.nome}</p>
 					<p className="text-center">{propostas}</p>
 				</div>
 			</div>

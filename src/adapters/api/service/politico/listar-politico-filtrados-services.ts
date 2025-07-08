@@ -3,7 +3,7 @@ import { FiltrosPoliticosDTO } from "@/core/domain/dtos/politico.dto";
 
 export interface IListarPoliticosFiltradosService {
 	executar(
-		filtros: FiltrosPoliticosDTO
+		filtros: FiltrosPoliticosDTO & { ordenacaoProjetos?: "asc" | "desc" }
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	): Promise<{ dados: any; total: number }>;
 }
@@ -11,7 +11,9 @@ export interface IListarPoliticosFiltradosService {
 export class ListarPoliticosFiltradosService
 	implements IListarPoliticosFiltradosService
 {
-	async executar(filtros: FiltrosPoliticosDTO) {
+	async executar(
+		filtros: FiltrosPoliticosDTO & { ordenacaoProjetos?: "asc" | "desc" }
+	) {
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		const where: any = {};
 
@@ -25,7 +27,7 @@ export class ListarPoliticosFiltradosService
 			where.genero = { equals: filtros.genero, mode: "insensitive" };
 		if (filtros.partido)
 			where.partido = {
-				is: { nome: { equals: filtros.partido, mode: "insensitive" } },
+				is: { sigla: { equals: filtros.partido, mode: "insensitive" } },
 			};
 
 		if (filtros.ideologia)
@@ -43,14 +45,17 @@ export class ListarPoliticosFiltradosService
 				projetos: true,
 			},
 		});
-
-		const dados = politicos.map((p) => ({
+		let dados = politicos.map((p) => ({
 			foto: p.foto,
 			nome: p.nome,
 			partido: p.partido,
 			estado: p.estado,
 			numeroProjetos: p.projetos.length,
+			projetos: p.projetos,
 		}));
+
+		const ordem = filtros.ordenacaoProjetos === "asc" ? 1 : -1;
+		dados = dados.sort((a, b) => ordem * (a.numeroProjetos - b.numeroProjetos));
 
 		const total = await prismaClient.politico.count({ where });
 

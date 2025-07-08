@@ -16,13 +16,16 @@ export class ListarPoliticoFiltradoController {
 	async executar(request: Request) {
 		const url = new URL(request.url);
 		const raw = Object.fromEntries(url.searchParams.entries());
-		const filtros: FiltrosPoliticosDTO = {
+		const filtros: FiltrosPoliticosDTO & {
+			ordenacaoProjetos?: "asc" | "desc";
+		} = {
 			esfera: raw.esfera,
 			estado: raw.estado,
 			genero: raw.genero,
 			partido: raw.partido,
 			ideologia: raw.ideologia,
 			profissao: raw.profissao,
+			ordenacaoProjetos: raw.ordenacaoProjetos === "asc" ? "asc" : "desc",
 		};
 
 		try {

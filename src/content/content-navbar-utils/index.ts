@@ -1,4 +1,4 @@
-interface Cabecalho {
+export interface Cabecalho {
 	titulo: string;
 	text: string;
 	link: string;
@@ -37,18 +37,6 @@ const cabecalhos: Cabecalho[] = [
 	},
 ];
 
-interface UseDescobertaCabecalho {
-	buscarCabecalhoPorLink: (route: string) => Cabecalho | undefined;
+export function buscarCabecalhoPorLink(route: string): Cabecalho | undefined {
+	return cabecalhos.find((item) => item.link === route);
 }
-
-const useDescobertaCabecalho = (): UseDescobertaCabecalho => {
-	const buscarCabecalhoPorLink = (route: string): Cabecalho | undefined => {
-		return cabecalhos.find((item) => item.link === route);
-	};
-
-	return {
-		buscarCabecalhoPorLink,
-	};
-};
-
-export default useDescobertaCabecalho;

@@ -58,3 +58,9 @@ export const ExcluirProjetoOptions = () =>
 		}: MutationVariables<void, APIExcluirProjetoPayload>) =>
 			usecase.excluir(payload.id),
 	});
+
+export const BuscarProjetoOptions = (id: string) =>
+	queryOptions({
+		queryKey: [...getProjetoBaseQueryKey(), "buscarProjeto"],
+		queryFn: () => usecase.buscar(id),
+	});

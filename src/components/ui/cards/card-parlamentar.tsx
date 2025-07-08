@@ -22,11 +22,10 @@ import Texto from "../componente-texto";
 import CardItemRenderizacao from "./card-item-renderizacao";
 import CardMiniProjetos from "./card-mini-projeto";
 
-import { parlamentar } from "@/core/domain/types/parlamentar";
-import { projetosMock } from "@/mocks/mock-projetos";
+import { ResponsePoliticoDTO } from "@/core/domain/dtos/politico.dto";
 
 interface saibaMaisProps {
-	parlamentar: parlamentar;
+	parlamentar: ResponsePoliticoDTO;
 	children: React.ReactNode;
 }
 
@@ -48,8 +47,11 @@ const CardParlamentar: React.FC<saibaMaisProps> = ({
 							<div className="flex flex-row items-center gap-10">
 								<div className="relative h-44 w-44">
 									<Image
-										src={parlamentar.urlImagem}
-										alt=""
+										src={
+											parlamentar.foto ||
+											"https://deepgrouplondon.com/wp-content/uploads/2019/06/person-placeholder-5.png"
+										}
+										alt={`${parlamentar.nome}-${parlamentar.genero}`}
 										fill
 										unoptimized
 										className="rounded-full border-2 border-white object-cover"
@@ -68,16 +70,16 @@ const CardParlamentar: React.FC<saibaMaisProps> = ({
 								["Gênero", parlamentar.genero],
 								["Religião", parlamentar.religiao],
 								["Raça", parlamentar.raca],
-								["Esfera", parlamentar.esfera],
-								["Estado", parlamentar.estado],
-								["Profissão", parlamentar.profissao],
-								["Partido", parlamentar.partido],
+								["Esfera", parlamentar?.esfera?.nome],
+								["Estado", parlamentar?.estado?.nome],
+								["Profissão", parlamentar?.profissao?.nome],
+								["Partido", parlamentar?.partido?.sigla],
 								["Ideologia Política", parlamentar.ideologia],
 							].map(([titulo, valor], index) => (
 								<CardItemRenderizacao
 									key={index}
-									titulo={titulo}
-									valor={valor}
+									titulo={titulo || ""}
+									valor={valor || ""}
 								/>
 							))}
 						</section>
@@ -101,7 +103,7 @@ const CardParlamentar: React.FC<saibaMaisProps> = ({
 								className="w-[40rem]"
 							>
 								<CarouselContent className="">
-									{projetosMock.map((item, index) => (
+									{parlamentar?.projetos?.map((item, index) => (
 										<CarouselItem key={index} className="flex justify-center">
 											<CardMiniProjetos
 												miniProjeto={{

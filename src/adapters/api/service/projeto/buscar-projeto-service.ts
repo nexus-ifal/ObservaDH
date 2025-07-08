@@ -29,7 +29,11 @@ export class BuscarProjetoService implements IBuscarProjetoService {
 				direitosViolados: true,
 				ideologias: true,
 				partidos: true,
-				autores: true,
+				autores: {
+					include: {
+						partido: true,
+					},
+				},
 			},
 		});
 

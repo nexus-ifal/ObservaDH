@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { z } from "zod";
 
+import { ResponsePartidoDTO } from "./partido.dto";
+
 export interface CreateProjetoDTO {
 	ano: string;
 	ementa: string;
@@ -34,7 +36,7 @@ export interface ResponseProjetoDTO {
 	pauta?: any;
 	direitosViolados?: any[];
 	ideologias?: any[];
-	partidos?: any[];
+	partidos?: ResponsePartidoDTO[];
 	autores?: any[];
 }
 

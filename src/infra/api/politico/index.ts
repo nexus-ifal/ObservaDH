@@ -1,3 +1,4 @@
+import { DadosParaPesquisaParlamenta } from "@/core/domain/dtos/dados.dto";
 import {
 	CreatePoliticoDTO,
 	ResponsePoliticoDTO,
@@ -27,6 +28,16 @@ class PoliticoAPI implements PoliticoRepository {
 	}
 	async excluir(id: string): Promise<ResponsePoliticoDTO> {
 		const response = await conexaoBackend.delete(`/politico/${id}`);
+		const dados = response.data.dados;
+		return dados;
+	}
+
+	async listarFiltrados(
+		filtros: DadosParaPesquisaParlamenta
+	): Promise<ResponsePoliticoDTO[]> {
+		const response = await conexaoBackend.get("/politico/dados", {
+			params: filtros,
+		});
 		const dados = response.data.dados;
 		return dados;
 	}

@@ -1,6 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { z } from "zod";
 
+import { ResponseEsferaDTO } from "./esfera.dto";
+import { ResponseEstadoDTO } from "./estado.dto";
+import { ResponsePartidoDTO } from "./partido.dto";
+import { ResponseProfissaoDTO } from "./profissao.dto";
+import { ResponseProjetoDTO } from "./projeto.dto";
+
 export interface CreatePoliticoDTO {
 	nome: string;
 	foto?: string | null;
@@ -40,11 +46,12 @@ export interface ResponsePoliticoDTO {
 	estadoId: string;
 	partidoId: string;
 	profissaoId: string;
-	esfera?: any;
-	estado?: any;
-	partido?: any;
-	profissao?: any;
-	projetos?: any[];
+	numeroProjetos?: number;
+	esfera?: ResponseEsferaDTO;
+	estado?: ResponseEstadoDTO;
+	partido?: ResponsePartidoDTO;
+	profissao?: ResponseProfissaoDTO;
+	projetos?: ResponseProjetoDTO[];
 }
 
 export interface UpdatePoliticoDTO {
