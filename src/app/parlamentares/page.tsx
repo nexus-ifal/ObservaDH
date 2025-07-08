@@ -53,7 +53,6 @@ const PageContent: React.FC = () => {
 	const { partidos, isLoadingPartidos, error: errorPartido } = usePartido();
 	const searchParams = useSearchParams();
 
-	
 	const esferaURL = searchParams.get("esfera") || "";
 	const estadoURL = searchParams.get("estado") || "";
 	const generoURL = searchParams.get("genero") || "";
@@ -82,14 +81,12 @@ const PageContent: React.FC = () => {
 	const router = useRouter();
 	const pathname = usePathname();
 
-	
 	function handleFiltroChange(param: string, value: string) {
 		setFiltros((prev) => ({
 			...prev,
 			[param]: value,
 		}));
 	}
-
 
 	function aplicarFiltros() {
 		setFiltrosAplicados(filtros);
