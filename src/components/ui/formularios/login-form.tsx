@@ -12,7 +12,7 @@ import { authenticate } from "@/app/actions/login-actions";
 export default function LoginForm() {
 	const searchParams = useSearchParams();
 	const router = useRouter();
-	const { data: session, status } = useSession();
+	const { status } = useSession();
 	const callbackUrl = searchParams.get("callbackUrl");
 	const [errorMessage, formAction, isPending] = useActionState(
 		authenticate,
@@ -21,15 +21,8 @@ export default function LoginForm() {
 
 	useEffect(() => {
 		if (status === "authenticated") {
-			if (callbackUrl) {
-				router.push(callbackUrl);
-			} else if (session?.user?.redirectTo) {
-				router.push(session.user.redirectTo);
-			} else {
-				router.push("/");
-			}
 		}
-	}, [status, session, callbackUrl, router]);
+	}, [status, callbackUrl, router]);
 
 	return (
 		<form
