@@ -53,7 +53,7 @@ const PageContent: React.FC = () => {
 	const { partidos, isLoadingPartidos, error: errorPartido } = usePartido();
 	const searchParams = useSearchParams();
 
-	// Inicializa filtros pelo valor na URL
+	
 	const esferaURL = searchParams.get("esfera") || "";
 	const estadoURL = searchParams.get("estado") || "";
 	const generoURL = searchParams.get("genero") || "";
@@ -61,7 +61,6 @@ const PageContent: React.FC = () => {
 	const ideologiaURL = searchParams.get("ideologia") || "";
 	const profissaoURL = searchParams.get("profissao") || "";
 
-	// Estado local dos filtros (dropdowns)
 	const [filtros, setFiltros] = useState({
 		esfera: esferaURL,
 		estado: estadoURL,
@@ -70,7 +69,7 @@ const PageContent: React.FC = () => {
 		ideologia: ideologiaURL,
 		profissao: profissaoURL,
 	});
-	// Estado dos filtros "aplicados" (usados na busca)
+
 	const [filtrosAplicados, setFiltrosAplicados] = useState({
 		esfera: esferaURL,
 		estado: estadoURL,
@@ -83,7 +82,7 @@ const PageContent: React.FC = () => {
 	const router = useRouter();
 	const pathname = usePathname();
 
-	// Atualiza o estado local ao mexer no dropdown
+	
 	function handleFiltroChange(param: string, value: string) {
 		setFiltros((prev) => ({
 			...prev,
@@ -91,7 +90,7 @@ const PageContent: React.FC = () => {
 		}));
 	}
 
-	// Só aplica os filtros ao clicar em "Filtrar" (URL + busca)
+
 	function aplicarFiltros() {
 		setFiltrosAplicados(filtros);
 		const params = new URLSearchParams();

@@ -54,7 +54,6 @@ export class ListarPoliticosFiltradosService
 			projetos: p.projetos,
 		}));
 
-		// Ordenação pelo número de projetos
 		const ordem = filtros.ordenacaoProjetos === "asc" ? 1 : -1;
 		dados = dados.sort((a, b) => ordem * (a.numeroProjetos - b.numeroProjetos));
 
