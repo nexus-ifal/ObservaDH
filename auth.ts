@@ -105,8 +105,42 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 		strategy: "jwt",
 	},
 	callbacks: {
-		authorized: async ({ auth }) => {
-			return !!auth;
+		authorized: async ({ auth, request }) => {
+			const { nextUrl } = request;
+			const authenticated = !!auth;
+
+			const ROTAS_PUBLICAS = [
+				"/login",
+				"/desenvolvedores",
+				"/direitos",
+				"/parlamentares",
+				"/projetos",
+				"/sobre",
+			];
+
+			const rotaPublica =
+				ROTAS_PUBLICAS.some((route) => nextUrl.pathname.startsWith(route)) ||
+				nextUrl.pathname === "/" ||
+				nextUrl.pathname.startsWith("/email-routes/redefinir-senha") ||
+				nextUrl.pathname.startsWith("/email-routes/solicitar-redefinicao");
+
+			if (!authenticated && !rotaPublica) {
+				return false;
+			}
+
+			if (authenticated && nextUrl.pathname === "/login") {
+				const userRedirectTo = auth?.user?.redirectTo;
+				const callbackUrl = nextUrl.searchParams.get("callbackUrl");
+
+				if (callbackUrl) {
+					return Response.redirect(new URL(callbackUrl, nextUrl.origin));
+				} else if (userRedirectTo) {
+					return Response.redirect(new URL(userRedirectTo, nextUrl.origin));
+				} else {
+					return Response.redirect(new URL("/", nextUrl.origin));
+				}
+			}
+			return true;
 		},
 		async jwt({ token, user }) {
 			if (user) {
@@ -133,4 +167,16 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 			return session;
 		},
 	},
+	cookies: {
+		sessionToken: {
+			name: `next-auth.session-token`,
+			options: {
+				httpOnly: true,
+				sameSite: "lax",
+				path: "/",
+				secure: process.env.NODE_ENV === "production",
+			},
+		},
+	},
+	secret: process.env.AUTH_SECRET,
 });

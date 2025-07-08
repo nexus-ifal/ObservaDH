@@ -67,6 +67,12 @@ export default auth((req) => {
 		}
 	}
 
+	if (autenticado && (nextUrl.pathname === "/" || rotaPublica)) {
+		if (userRedirectTo && userRedirectTo !== nextUrl.pathname) {
+			return NextResponse.redirect(new URL(userRedirectTo, nextUrl.origin));
+		}
+	}
+
 	if (autenticado) {
 		if (rotaAdmin && userRole !== "ADMIN") {
 			console.log("Acesso negado");
