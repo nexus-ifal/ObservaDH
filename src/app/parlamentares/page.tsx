@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { Suspense, useMemo, useState } from "react";
 import { MdOutlineFilterAlt } from "react-icons/md";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
@@ -32,7 +32,15 @@ import { usePoliticoFiltrados } from "@/hooks/politico/use-politico-filtrados";
 import { useProfissao } from "@/hooks/profissao/use-profissao";
 import { partidosMock } from "@/mocks/mock-projetos";
 
-const Page: React.FC = () => {
+const Page = () => {
+	return (
+		<Suspense fallback={<Loading />}>
+			<PageContent />
+		</Suspense>
+	);
+};
+
+const PageContent: React.FC = () => {
 	const partidosOrdenados = useMemo(
 		() =>
 			[...partidosMock].sort(
