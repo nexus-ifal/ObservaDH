@@ -38,5 +38,5 @@ const cabecalhos: Cabecalho[] = [
 ];
 
 export function buscarCabecalhoPorLink(route: string): Cabecalho | undefined {
-  return cabecalhos.find((item) => item.link === route);
+	return cabecalhos.find((item) => item.link === route);
 }

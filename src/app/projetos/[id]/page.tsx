@@ -13,7 +13,7 @@ import { oswald } from "../../../fonts/fonts";
 import { useProjetoFetch } from "@/hooks/projeto/use-projeto-fetch";
 
 interface PageProps {
-	params: Promise<{ id: string }>;	
+	params: Promise<{ id: string }>;
 }
 
 const Page: React.FC<PageProps> = ({ params }) => {
