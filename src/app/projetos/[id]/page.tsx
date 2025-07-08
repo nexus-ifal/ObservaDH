@@ -1,95 +1,108 @@
 "use client";
 
-import { use } from "react";
+import { use, useMemo } from "react";
 
 import Card from "@/components/ui/cards";
 import MainLayout from "@/components/ui/layouts/main-layout";
+import Loading from "@/components/ui/loading";
 import Titulo from "@/components/ui/titulo-pages";
+import UserError from "@/components/ui/user-erro";
 
 import { oswald } from "../../../fonts/fonts";
 
-import { ProjetoLei } from "@/core/domain/types/projeto-lei";
-import { buscarProjetoPorId } from "@/mocks/web/mock-utils/busca";
+import { useProjetoFetch } from "@/hooks/projeto/use-projeto-fetch";
 
-const Page: React.FC<{ params: Promise<{ id: string }> }> = ({ params }) => {
+interface PageProps {
+	params: Promise<{ id: string }>;	
+}
+
+const Page: React.FC<PageProps> = ({ params }) => {
 	const { id } = use(params);
+	const { projeto, isLoadingProjeto, error } = useProjetoFetch(id);
 
-	const projeto = buscarProjetoPorId(
-		Array.isArray(id) ? (id[0] ?? "") : (id ?? "")
-	) as ProjetoLei;
+	const parlamentarNomes = useMemo(
+		() => projeto?.autores?.map((p) => p.nome).join(", ") || "Desconhecido",
+		[projeto?.autores]
+	);
 
-	const parlamentarNomes = projeto.parlamentares.map((p) => p.nome).join(", ");
-	const partidos = projeto.parlamentares.map((p) => p.partido).join(", ");
-	const esfera = projeto.parlamentares[0].esfera;
+	const partidos = useMemo(() => {
+		if (!projeto?.autores?.length) return "Desconhecido";
+		const partidosUnicos = projeto.autores
+			.map((p) =>
+				p.partido && p.partido.sigla && p.partido.nome
+					? `${p.partido.sigla} (${p.partido.nome})`
+					: null
+			)
+			.filter(Boolean);
 
-	const infos = [
-		{
-			titulo: "Número",
-			valor: projeto.numeroPl,
-		},
-		{ titulo: "Ano", valor: projeto.ano },
-		{
-			titulo: "Esfera",
-			valor: esfera,
-		},
-		{
-			titulo: "Pauta",
-			valor: projeto.pauta,
-		},
-		{
-			titulo: projeto.parlamentares.length > 1 ? "Proponentes" : "Proponente",
-			valor: parlamentarNomes,
-		},
-		{
-			titulo: projeto.parlamentares.length > 1 ? "Partidos" : "Partido",
-			valor: partidos,
-		},
-	];
+		return [...new Set(partidosUnicos)].join(", ") || "Desconhecido";
+	}, [projeto?.autores]);
 
-	//render
+	const esfera = projeto?.esfera?.nome || "Desconhecida";
+	const pluralAutores = (projeto?.autores?.length ?? 0) > 1;
+	const pluralDireitos = (projeto?.direitosViolados?.length ?? 0) > 1;
+	const pluralIdeologias = (projeto?.ideologias?.length ?? 0) > 1;
+
+	const infos = useMemo(
+		() => [
+			{ titulo: "Número", valor: projeto?.numeroPl },
+			{ titulo: "Ano", valor: projeto?.ano },
+			{ titulo: "Esfera", valor: esfera },
+			{ titulo: "Pauta", valor: projeto?.pauta?.nome },
+			{
+				titulo: pluralAutores ? "Proponentes" : "Proponente",
+				valor: parlamentarNomes,
+			},
+			{
+				titulo: pluralAutores ? "Partidos" : "Partido",
+				valor: partidos,
+			},
+		],
+		[projeto, esfera, partidos, parlamentarNomes, pluralAutores]
+	);
+
 	return (
 		<MainLayout>
-			<div
-				className={`h-full w-full flex flex-col items-center gap-24 border-[#87D9FF] px-11 ${oswald.className}`}
-			>
-				<section>
-					<Titulo pequeno={"Dados"} grande={"da Proposta"} />
-				</section>
-
-				<article className="flex flex-col bg-gradient-to-t from-[#2C52A4]/45 to-[#050B17]/45 w-11/12 min-h-[30rem] py-16 px-[4.5rem] gap-12 border-2 border-[#87D9FF] rounded-[10px]">
-					<section className="flex flex-row gap-16 flex-wrap">
-						{infos.map((info, index) => (
-							<Card.RenderizacaoItem
-								key={index}
-								titulo={info.titulo}
-								valor={info.valor}
-								className="text-4xl"
-								corTexto="text-[#87D9FF]"
-							/>
-						))}
+			{error && <UserError error={error} />}
+			{isLoadingProjeto ? (
+				<Loading />
+			) : (
+				<div
+					className={`h-full w-full flex flex-col items-center gap-24 border-[#87D9FF] px-11 ${oswald.className}`}
+				>
+					<section className="flex flex-row">
+						<Titulo pequeno="Dados" grande="da Proposta" />
 					</section>
-					<Topico titulo="Ementa">{projeto.ementa}</Topico>
-					<Topico titulo="Justificativa">{projeto.justificativa}</Topico>
-					<Topico
-						titulo={
-							projeto.violacoes.length > 1
-								? "Direitos Violados"
-								: "Direito Violado"
-						}
-					>
-						{projeto.violacoes.map((v, i) => (
-							<p key={i}>{v}</p>
-						))}
-					</Topico>
-					<Topico
-						titulo={projeto.ideologia.length > 1 ? "Ideologias" : "Ideologia"}
-					>
-						{projeto.ideologia.map((i, j) => (
-							<p key={j}>{i}</p>
-						))}
-					</Topico>
-				</article>
-			</div>
+
+					<article className="flex flex-col bg-gradient-to-t from-[#2C52A4]/45 to-[#050B17]/45 w-11/12 min-h-[30rem] py-16 px-[4.5rem] gap-12 border-2 border-[#87D9FF] rounded-[10px]">
+						<section className="flex flex-row gap-16 flex-wrap">
+							{infos.map((info, index) => (
+								<Card.RenderizacaoItem
+									key={index}
+									titulo={info.titulo}
+									valor={info.valor}
+									className="text-4xl"
+									corTexto="text-[#87D9FF]"
+								/>
+							))}
+						</section>
+						<Topico titulo="Ementa">{projeto?.ementa}</Topico>
+						<Topico titulo="Justificativa">{projeto?.justificativa}</Topico>
+						<Topico
+							titulo={pluralDireitos ? "Direitos Violados" : "Direito Violado"}
+						>
+							{projeto?.direitosViolados?.map((v, i) => (
+								<p key={i}>{v.nome}</p>
+							))}
+						</Topico>
+						<Topico titulo={pluralIdeologias ? "Ideologias" : "Ideologia"}>
+							{projeto?.ideologias?.map((i, j) => (
+								<p key={j}>{i.nome}</p>
+							))}
+						</Topico>
+					</article>
+				</div>
+			)}
 		</MainLayout>
 	);
 };
