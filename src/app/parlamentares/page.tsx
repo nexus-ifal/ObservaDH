@@ -1,7 +1,9 @@
 "use client";
 
 import { JSX, Suspense, useMemo, useState } from "react";
+import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
 import { MdOutlineFilterAlt } from "react-icons/md";
+import { ChevronsUpDown } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { Button } from "@/components/external/ui-shacnui/button";
@@ -14,6 +16,7 @@ import GraficoBarraMultiplas from "@/components/ui/graficos/barras-multiplas";
 import MainLayout from "@/components/ui/layouts/main-layout";
 import Loading from "@/components/ui/loading";
 import Titulo from "@/components/ui/titulo-pages";
+import UserError from "@/components/ui/user-erro";
 
 import { legendas } from "@/content/content-parlamentares";
 import {
@@ -31,9 +34,6 @@ import { usePartido } from "@/hooks/partido/use-partido";
 import { usePoliticoFiltrados } from "@/hooks/politico/use-politico-filtrados";
 import { useProfissao } from "@/hooks/profissao/use-profissao";
 import { partidosMock } from "@/mocks/mock-projetos";
-import UserError from "@/components/ui/user-erro";
-import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
-import { ChevronsUpDown } from "lucide-react";
 
 const Page = () => {
 	return (
@@ -126,7 +126,7 @@ const PageContent: React.FC = () => {
 		if (current === "asc") {
 			return <FaChevronDown className="w-5" />;
 		} else if (current === "desc") {
-			return <FaChevronUp  className="w-5" />;
+			return <FaChevronUp className="w-5" />;
 		} else {
 			return <ChevronsUpDown className="w-6 h-8" />;
 		}
@@ -244,6 +244,13 @@ const PageContent: React.FC = () => {
 
 	return (
 		<MainLayout>
+			{error && (
+				<UserError
+					error={
+						"Erro ao carregar os dados. Por favor, tente novamente mais tarde."
+					}
+				/>
+			)}
 			<div className="flex h-full w-full flex-col gap-24 items-center px-4 sm:px-11">
 				<Titulo pequeno={"Ranking"} grande={"dos Parlamentares"} />
 				<RankingParlamentares
@@ -376,6 +383,7 @@ const RankingParlamentares = ({
 				className="min-h-96 max-h-96 sm:min-h-[400px] sm:max-h-[800px] w-full rounded-md flex flex-col items-center gap-6 sm:gap-10 overflow-auto"
 				color="black"
 			>
+				{isLoadingDados && <Loading />}
 				{dadosParlamentares.map((parlamentar, i) => (
 					<Card.ComponenteParlamentar
 						key={`${i}`}
