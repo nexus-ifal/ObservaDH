@@ -57,11 +57,21 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 						);
 					}
 
+					let redirectTo: string;
+					if (user.role === "ADMIN") {
+						redirectTo = "/admin-routes/home";
+					} else if (user.role === "EDITOR") {
+						redirectTo = "/user-routes/home";
+					} else {
+						redirectTo = "/";
+					}
+
 					return {
 						id: user.id,
 						name: user.name,
 						email: user.email,
 						role: user.role,
+						redirectTo: redirectTo,
 					};
 				} catch (error) {
 					if (error instanceof z.ZodError) {
@@ -95,8 +105,42 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 		strategy: "jwt",
 	},
 	callbacks: {
-		authorized: async ({ auth }) => {
-			return !!auth;
+		authorized: async ({ auth, request }) => {
+			const { nextUrl } = request;
+			const authenticated = !!auth;
+
+			const ROTAS_PUBLICAS = [
+				"/login",
+				"/desenvolvedores",
+				"/direitos",
+				"/parlamentares",
+				"/projetos",
+				"/sobre",
+			];
+
+			const rotaPublica =
+				ROTAS_PUBLICAS.some((route) => nextUrl.pathname.startsWith(route)) ||
+				nextUrl.pathname === "/" ||
+				nextUrl.pathname.startsWith("/email-routes/redefinir-senha") ||
+				nextUrl.pathname.startsWith("/email-routes/solicitar-redefinicao");
+
+			if (!authenticated && !rotaPublica) {
+				return false;
+			}
+
+			if (authenticated && nextUrl.pathname === "/login") {
+				const userRedirectTo = auth?.user?.redirectTo;
+				const callbackUrl = nextUrl.searchParams.get("callbackUrl");
+
+				if (callbackUrl) {
+					return Response.redirect(new URL(callbackUrl, nextUrl.origin));
+				} else if (userRedirectTo) {
+					return Response.redirect(new URL(userRedirectTo, nextUrl.origin));
+				} else {
+					return Response.redirect(new URL("/", nextUrl.origin));
+				}
+			}
+			return true;
 		},
 		async jwt({ token, user }) {
 			if (user) {
@@ -104,6 +148,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 				token.email = user.email;
 				token.id = user.id;
 				token.role = user.role;
+				if ("redirectTo" in user) {
+					token.redirectTo = user.redirectTo;
+				}
 			}
 			return token;
 		},
@@ -113,8 +160,23 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 				session.user.name = token.name as string;
 				session.user.email = token.email as string;
 				session.user.role = token.role as Role;
+				if ("redirectTo" in token) {
+					session.user.redirectTo = token.redirectTo as string;
+				}
 			}
 			return session;
 		},
 	},
+	cookies: {
+		sessionToken: {
+			name: `next-auth.session-token`,
+			options: {
+				httpOnly: true,
+				sameSite: "lax",
+				path: "/",
+				secure: process.env.NODE_ENV === "production",
+			},
+		},
+	},
+	secret: process.env.AUTH_SECRET,
 });
