@@ -1,7 +1,9 @@
 "use client";
 
-import { Suspense, useMemo, useState } from "react";
+import { JSX, Suspense, useMemo, useState } from "react";
+import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
 import { MdOutlineFilterAlt } from "react-icons/md";
+import { ChevronsUpDown } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { Button } from "@/components/external/ui-shacnui/button";
@@ -14,6 +16,7 @@ import GraficoBarraMultiplas from "@/components/ui/graficos/barras-multiplas";
 import MainLayout from "@/components/ui/layouts/main-layout";
 import Loading from "@/components/ui/loading";
 import Titulo from "@/components/ui/titulo-pages";
+import UserError from "@/components/ui/user-erro";
 
 import { legendas } from "@/content/content-parlamentares";
 import {
@@ -49,8 +52,6 @@ const PageContent: React.FC = () => {
 		[]
 	);
 
-	const { estados, isLoadingEstados, error: errorEstado } = useEstado();
-	const { partidos, isLoadingPartidos, error: errorPartido } = usePartido();
 	const searchParams = useSearchParams();
 
 	const esferaURL = searchParams.get("esfera") || "";
@@ -59,6 +60,7 @@ const PageContent: React.FC = () => {
 	const partidoURL = searchParams.get("partido") || "";
 	const ideologiaURL = searchParams.get("ideologia") || "";
 	const profissaoURL = searchParams.get("profissao") || "";
+	const ordenacaoProjetosURL = searchParams.get("ordenacaoProjetos") || "";
 
 	const [filtros, setFiltros] = useState({
 		esfera: esferaURL,
@@ -67,6 +69,7 @@ const PageContent: React.FC = () => {
 		partido: partidoURL,
 		ideologia: ideologiaURL,
 		profissao: profissaoURL,
+		ordenacaoProjetos: ordenacaoProjetosURL,
 	});
 
 	const [filtrosAplicados, setFiltrosAplicados] = useState({
@@ -76,6 +79,7 @@ const PageContent: React.FC = () => {
 		partido: partidoURL,
 		ideologia: ideologiaURL,
 		profissao: profissaoURL,
+		ordenacaoProjetos: ordenacaoProjetosURL,
 	});
 
 	const router = useRouter();
@@ -88,10 +92,10 @@ const PageContent: React.FC = () => {
 		}));
 	}
 
-	function aplicarFiltros() {
-		setFiltrosAplicados(filtros);
+	function aplicarFiltros(filtrosNovos = filtros) {
+		setFiltrosAplicados(filtrosNovos);
 		const params = new URLSearchParams();
-		Object.entries(filtros).forEach(([key, value]) => {
+		Object.entries(filtrosNovos).forEach(([key, value]) => {
 			if (value && value !== "geral") {
 				params.set(key, value);
 			}
@@ -99,6 +103,36 @@ const PageContent: React.FC = () => {
 		router.replace(`${pathname}?${params.toString()}`, { scroll: false });
 	}
 
+	function handleClick() {
+		let nextOrd: string;
+		if (!filtros.ordenacaoProjetos) {
+			nextOrd = "asc";
+		} else if (filtros.ordenacaoProjetos === "asc") {
+			nextOrd = "desc";
+		} else {
+			nextOrd = "";
+		}
+
+		const novosFiltros = {
+			...filtros,
+			ordenacaoProjetos: nextOrd,
+		};
+		setFiltros(novosFiltros);
+		aplicarFiltros(novosFiltros);
+	}
+
+	function getSortIcon() {
+		const current = searchParams.get("ordenacaoProjetos");
+		if (current === "asc") {
+			return <FaChevronDown className="w-5" />;
+		} else if (current === "desc") {
+			return <FaChevronUp className="w-5" />;
+		} else {
+			return <ChevronsUpDown className="w-6 h-8" />;
+		}
+	}
+	const { estados, isLoadingEstados, error: errorEstado } = useEstado();
+	const { partidos, isLoadingPartidos, error: errorPartido } = usePartido();
 	const {
 		profissoes,
 		isLoadingProfissoes,
@@ -126,6 +160,7 @@ const PageContent: React.FC = () => {
 		partido: filtrosAplicados.partido,
 		ideologia: filtrosAplicados.ideologia,
 		profissao: filtrosAplicados.profissao,
+		ordenacaoProjetos: filtrosAplicados.ordenacaoProjetos,
 	} as DadosParaPesquisaParlamenta);
 
 	const esferas = useMemo(
@@ -178,7 +213,6 @@ const PageContent: React.FC = () => {
 				titulo: "Partidos",
 				param: "partido",
 			},
-
 			{
 				elementos:
 					profissoes?.map((profissao) => ({
@@ -192,18 +226,16 @@ const PageContent: React.FC = () => {
 		[esferas, estados, generos, partidos, profissoes]
 	);
 
-	const isLoading =
+	const isLoadingFiltros =
 		isLoadingEstados ||
 		isLoadingPartidos ||
 		isLoadingProfissoes ||
 		isLoadingReligiaoRaca ||
-		isLoadingIdeologiaGenero ||
-		isLoadingPoliticosFiltrados;
+		isLoadingIdeologiaGenero;
 
 	const error = [
 		errorEstado,
 		errorPartido,
-
 		errorProfissao,
 		errorReligiaoRaca,
 		errorIdeologiaGenero,
@@ -212,20 +244,32 @@ const PageContent: React.FC = () => {
 
 	return (
 		<MainLayout>
+			{error && (
+				<UserError
+					error={
+						"Erro ao carregar os dados. Por favor, tente novamente mais tarde."
+					}
+				/>
+			)}
 			<div className="flex h-full w-full flex-col gap-24 items-center px-4 sm:px-11">
 				<Titulo pequeno={"Ranking"} grande={"dos Parlamentares"} />
 				<RankingParlamentares
-					parlamentares={politicosFiltrados ?? []}
+					handleClick={handleClick}
+					dadosParlamentares={politicosFiltrados ?? []}
 					itemsFiltro={dropdownItems}
-					isLoading={isLoading}
+					isLoadingFiltros={isLoadingFiltros}
+					isLoadingDados={isLoadingPoliticosFiltrados}
 					filtros={filtros}
 					onFiltroChange={handleFiltroChange}
 					aplicarFiltros={aplicarFiltros}
+					getSortIcon={getSortIcon}
 				/>
 				<RankingPartidos partidosOrdenados={partidosOrdenados} />
 				<DadosEstatisticos
-					error={error}
-					isLoading={isLoading}
+					errorIdeologiaGenero={errorIdeologiaGenero}
+					errorReligiaoRaca={errorReligiaoRaca}
+					isLoadingIdeologiaGenero={isLoadingIdeologiaGenero}
+					isLoadingReligiaoRaca={isLoadingReligiaoRaca}
 					religiaoPorRaca={religiaoRaca ?? []}
 					legendas={legendas}
 					ideologiaPorGenero={(ideologiaGenero as DadosIdeologiaGenero[]) ?? []}
@@ -286,22 +330,28 @@ const Filtro = ({
 );
 
 interface RankingParlamentaresProps {
-	parlamentares: ResponsePoliticoDTO[];
+	dadosParlamentares: ResponsePoliticoDTO[];
+	isLoadingFiltros: boolean;
+	isLoadingDados: boolean;
+	filtros: Record<string, string>;
+	onFiltroChange: (param: string, value: string) => void;
+	aplicarFiltros: () => void;
+	getSortIcon: () => JSX.Element;
+	handleClick: () => void;
 	itemsFiltro: {
 		elementos: elemento[];
 		titulo: string;
 		param: string;
 	}[];
-	isLoading: boolean;
-	filtros: Record<string, string>;
-	onFiltroChange: (param: string, value: string) => void;
-	aplicarFiltros: () => void;
 }
 
 const RankingParlamentares = ({
-	parlamentares,
+	dadosParlamentares,
 	itemsFiltro,
-	isLoading,
+	isLoadingFiltros,
+	getSortIcon,
+	handleClick,
+	isLoadingDados,
 	filtros,
 	onFiltroChange,
 	aplicarFiltros,
@@ -309,7 +359,7 @@ const RankingParlamentares = ({
 	<article className="flex flex-col w-full gap-12 sm:gap-20">
 		<Filtro
 			items={itemsFiltro}
-			isLoading={isLoading}
+			isLoading={isLoadingFiltros}
 			filtros={filtros}
 			onFiltroChange={onFiltroChange}
 			aplicarFiltros={aplicarFiltros}
@@ -323,14 +373,18 @@ const RankingParlamentares = ({
 				<section className="w-1/2 h-full px-2 sm:px-12 grid grid-cols-3 gap-2 sm:gap-4 items-center">
 					<p>{"Partido"}</p>
 					<p>{"Estado"}</p>
-					<p>{"Propostas"}</p>
+					<FiltrarPropostas
+						handleClick={handleClick}
+						getSortIcon={getSortIcon}
+					/>
 				</section>
 			</div>
 			<div
 				className="min-h-96 max-h-96 sm:min-h-[400px] sm:max-h-[800px] w-full rounded-md flex flex-col items-center gap-6 sm:gap-10 overflow-auto"
 				color="black"
 			>
-				{parlamentares.map((parlamentar, i) => (
+				{isLoadingDados && <Loading />}
+				{dadosParlamentares.map((parlamentar, i) => (
 					<Card.ComponenteParlamentar
 						key={`${i}`}
 						parlamentar={parlamentar}
@@ -383,10 +437,12 @@ const RankingPartidos = ({ partidosOrdenados }: RankingPartidosProps) => (
 );
 
 interface DadosEstatisticosProps {
-	error: boolean;
+	errorIdeologiaGenero: Error | string | null;
+	errorReligiaoRaca: Error | string | null;
 	religiaoPorRaca: DadosReligiaoRaca[];
 	ideologiaPorGenero: DadosIdeologiaGenero[];
-	isLoading: boolean;
+	isLoadingReligiaoRaca: boolean;
+	isLoadingIdeologiaGenero: boolean;
 	legendas: {
 		texto: string;
 		corTexto: string;
@@ -395,8 +451,10 @@ interface DadosEstatisticosProps {
 }
 
 const DadosEstatisticos = ({
-	error,
-	isLoading,
+	errorIdeologiaGenero,
+	errorReligiaoRaca,
+	isLoadingIdeologiaGenero,
+	isLoadingReligiaoRaca,
 	religiaoPorRaca,
 	ideologiaPorGenero,
 	legendas,
@@ -405,56 +463,81 @@ const DadosEstatisticos = ({
 		<Texto.Raiz className="text-5xl sm:text-7xl text-shadow-xl text-white text-center">
 			<Texto.Pequeno.Oswald>Dados Estatísticos</Texto.Pequeno.Oswald>
 		</Texto.Raiz>
-		{error && (
-			<Texto.Raiz className="text-2xl text-red-500 text-center">
-				Ocorreu um erro ao carregar os dados.
-			</Texto.Raiz>
-		)}
-		{isLoading ? (
-			<Loading />
-		) : (
-			<div className="flex flex-col gap-12 sm:gap-20">
-				<section className="flex flex-col sm:flex-row justify-center gap-12 sm:gap-20">
-					<GraficoBarraMultiplas dados={ideologiaPorGenero ?? []} />
-					<Card.Legenda
-						texto={legendas[0].texto}
-						corTexto={legendas[0].corTexto}
-						resumo={legendas[0].resumo}
-					>
-						<Texto.Raiz className="text-3xl sm:text-5xl w-full">
-							<Texto.Linha>
-								<Texto.Forte.Oswald>{"Ideologia Política"}</Texto.Forte.Oswald>
-							</Texto.Linha>
-							<Texto.Linha>
-								<Texto.Pequeno.Titillium className="text-[#D974FD]">
-									{"x Gênero"}
-								</Texto.Pequeno.Titillium>
-							</Texto.Linha>
-						</Texto.Raiz>
-					</Card.Legenda>
-				</section>
-				<section className="flex flex-col sm:flex-row justify-center gap-12 sm:gap-20">
-					<CardLegenda
-						texto={legendas[1].texto}
-						corTexto={legendas[1].corTexto}
-						resumo={legendas[1].resumo}
-					>
-						<Texto.Raiz className="text-3xl sm:text-5xl w-full">
-							<Texto.Linha>
-								<Texto.Forte.Oswald>{"Religião"}</Texto.Forte.Oswald>
-							</Texto.Linha>
-							<Texto.Linha>
-								<Texto.Pequeno.Titillium className="text-[#FF977A]">
-									{"x Raça"}
-								</Texto.Pequeno.Titillium>
-							</Texto.Linha>
-						</Texto.Raiz>
-					</CardLegenda>
-					<GraficoBarraEmpilhadaVertical dados={religiaoPorRaca ?? []} />
-				</section>
-			</div>
-		)}
+		<div className="flex flex-col gap-12 sm:gap-20">
+			<section className="flex flex-col sm:flex-row justify-center gap-12 sm:gap-20">
+				{errorIdeologiaGenero && <UserError error={errorIdeologiaGenero} />}
+				{isLoadingIdeologiaGenero ? (
+					<Loading />
+				) : (
+					<>
+						<GraficoBarraMultiplas dados={ideologiaPorGenero ?? []} />
+						<Card.Legenda
+							texto={legendas[0].texto}
+							corTexto={legendas[0].corTexto}
+							resumo={legendas[0].resumo}
+						>
+							<Texto.Raiz className="text-3xl sm:text-5xl w-full">
+								<Texto.Linha>
+									<Texto.Forte.Oswald>
+										{"Ideologia Política"}
+									</Texto.Forte.Oswald>
+								</Texto.Linha>
+								<Texto.Linha>
+									<Texto.Pequeno.Titillium className="text-[#D974FD]">
+										{"x Gênero"}
+									</Texto.Pequeno.Titillium>
+								</Texto.Linha>
+							</Texto.Raiz>
+						</Card.Legenda>
+					</>
+				)}
+			</section>
+
+			<section className="flex flex-col sm:flex-row justify-center gap-12 sm:gap-20">
+				{errorReligiaoRaca && <UserError error={errorReligiaoRaca} />}
+				{isLoadingReligiaoRaca ? (
+					<Loading />
+				) : (
+					<>
+						<CardLegenda
+							texto={legendas[1].texto}
+							corTexto={legendas[1].corTexto}
+							resumo={legendas[1].resumo}
+						>
+							<Texto.Raiz className="text-3xl sm:text-5xl w-full">
+								<Texto.Linha>
+									<Texto.Forte.Oswald>{"Religião"}</Texto.Forte.Oswald>
+								</Texto.Linha>
+								<Texto.Linha>
+									<Texto.Pequeno.Titillium className="text-[#FF977A]">
+										{"x Raça"}
+									</Texto.Pequeno.Titillium>
+								</Texto.Linha>
+							</Texto.Raiz>
+						</CardLegenda>
+						<GraficoBarraEmpilhadaVertical dados={religiaoPorRaca ?? []} />
+					</>
+				)}
+			</section>
+		</div>
 	</article>
 );
 
 export default Page;
+
+interface FiltrarPropostasProps {
+	getSortIcon: () => JSX.Element;
+	handleClick: () => void;
+}
+
+const FiltrarPropostas: React.FC<FiltrarPropostasProps> = ({
+	getSortIcon,
+	handleClick,
+}) => (
+	<button onClick={() => handleClick()}>
+		<p className="text-center flex gap-2 items-center">
+			{"Propostas"}
+			{getSortIcon()}
+		</p>
+	</button>
+);
