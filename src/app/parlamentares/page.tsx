@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useMemo, useState } from "react";
+import { JSX, Suspense, useMemo, useState } from "react";
 import { MdOutlineFilterAlt } from "react-icons/md";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
@@ -32,6 +32,8 @@ import { usePoliticoFiltrados } from "@/hooks/politico/use-politico-filtrados";
 import { useProfissao } from "@/hooks/profissao/use-profissao";
 import { partidosMock } from "@/mocks/mock-projetos";
 import UserError from "@/components/ui/user-erro";
+import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
+import { ChevronsUpDown } from "lucide-react";
 
 const Page = () => {
 	return (
@@ -50,8 +52,6 @@ const PageContent: React.FC = () => {
 		[]
 	);
 
-	const { estados, isLoadingEstados, error: errorEstado } = useEstado();
-	const { partidos, isLoadingPartidos, error: errorPartido } = usePartido();
 	const searchParams = useSearchParams();
 
 	const esferaURL = searchParams.get("esfera") || "";
@@ -60,6 +60,7 @@ const PageContent: React.FC = () => {
 	const partidoURL = searchParams.get("partido") || "";
 	const ideologiaURL = searchParams.get("ideologia") || "";
 	const profissaoURL = searchParams.get("profissao") || "";
+	const ordenacaoProjetosURL = searchParams.get("ordenacaoProjetos") || "";
 
 	const [filtros, setFiltros] = useState({
 		esfera: esferaURL,
@@ -68,6 +69,7 @@ const PageContent: React.FC = () => {
 		partido: partidoURL,
 		ideologia: ideologiaURL,
 		profissao: profissaoURL,
+		ordenacaoProjetos: ordenacaoProjetosURL,
 	});
 
 	const [filtrosAplicados, setFiltrosAplicados] = useState({
@@ -77,6 +79,7 @@ const PageContent: React.FC = () => {
 		partido: partidoURL,
 		ideologia: ideologiaURL,
 		profissao: profissaoURL,
+		ordenacaoProjetos: ordenacaoProjetosURL,
 	});
 
 	const router = useRouter();
@@ -89,10 +92,10 @@ const PageContent: React.FC = () => {
 		}));
 	}
 
-	function aplicarFiltros() {
-		setFiltrosAplicados(filtros);
+	function aplicarFiltros(filtrosNovos = filtros) {
+		setFiltrosAplicados(filtrosNovos);
 		const params = new URLSearchParams();
-		Object.entries(filtros).forEach(([key, value]) => {
+		Object.entries(filtrosNovos).forEach(([key, value]) => {
 			if (value && value !== "geral") {
 				params.set(key, value);
 			}
@@ -100,6 +103,36 @@ const PageContent: React.FC = () => {
 		router.replace(`${pathname}?${params.toString()}`, { scroll: false });
 	}
 
+	function handleClick() {
+		let nextOrd: string;
+		if (!filtros.ordenacaoProjetos) {
+			nextOrd = "asc";
+		} else if (filtros.ordenacaoProjetos === "asc") {
+			nextOrd = "desc";
+		} else {
+			nextOrd = "";
+		}
+
+		const novosFiltros = {
+			...filtros,
+			ordenacaoProjetos: nextOrd,
+		};
+		setFiltros(novosFiltros);
+		aplicarFiltros(novosFiltros);
+	}
+
+	function getSortIcon() {
+		const current = searchParams.get("ordenacaoProjetos");
+		if (current === "asc") {
+			return <FaChevronDown className="w-5" />;
+		} else if (current === "desc") {
+			return <FaChevronUp  className="w-5" />;
+		} else {
+			return <ChevronsUpDown className="w-6 h-8" />;
+		}
+	}
+	const { estados, isLoadingEstados, error: errorEstado } = useEstado();
+	const { partidos, isLoadingPartidos, error: errorPartido } = usePartido();
 	const {
 		profissoes,
 		isLoadingProfissoes,
@@ -127,6 +160,7 @@ const PageContent: React.FC = () => {
 		partido: filtrosAplicados.partido,
 		ideologia: filtrosAplicados.ideologia,
 		profissao: filtrosAplicados.profissao,
+		ordenacaoProjetos: filtrosAplicados.ordenacaoProjetos,
 	} as DadosParaPesquisaParlamenta);
 
 	const esferas = useMemo(
@@ -179,7 +213,6 @@ const PageContent: React.FC = () => {
 				titulo: "Partidos",
 				param: "partido",
 			},
-
 			{
 				elementos:
 					profissoes?.map((profissao) => ({
@@ -203,7 +236,6 @@ const PageContent: React.FC = () => {
 	const error = [
 		errorEstado,
 		errorPartido,
-
 		errorProfissao,
 		errorReligiaoRaca,
 		errorIdeologiaGenero,
@@ -215,6 +247,7 @@ const PageContent: React.FC = () => {
 			<div className="flex h-full w-full flex-col gap-24 items-center px-4 sm:px-11">
 				<Titulo pequeno={"Ranking"} grande={"dos Parlamentares"} />
 				<RankingParlamentares
+					handleClick={handleClick}
 					dadosParlamentares={politicosFiltrados ?? []}
 					itemsFiltro={dropdownItems}
 					isLoadingFiltros={isLoadingFiltros}
@@ -222,6 +255,7 @@ const PageContent: React.FC = () => {
 					filtros={filtros}
 					onFiltroChange={handleFiltroChange}
 					aplicarFiltros={aplicarFiltros}
+					getSortIcon={getSortIcon}
 				/>
 				<RankingPartidos partidosOrdenados={partidosOrdenados} />
 				<DadosEstatisticos
@@ -295,6 +329,8 @@ interface RankingParlamentaresProps {
 	filtros: Record<string, string>;
 	onFiltroChange: (param: string, value: string) => void;
 	aplicarFiltros: () => void;
+	getSortIcon: () => JSX.Element;
+	handleClick: () => void;
 	itemsFiltro: {
 		elementos: elemento[];
 		titulo: string;
@@ -306,6 +342,8 @@ const RankingParlamentares = ({
 	dadosParlamentares,
 	itemsFiltro,
 	isLoadingFiltros,
+	getSortIcon,
+	handleClick,
 	isLoadingDados,
 	filtros,
 	onFiltroChange,
@@ -328,7 +366,10 @@ const RankingParlamentares = ({
 				<section className="w-1/2 h-full px-2 sm:px-12 grid grid-cols-3 gap-2 sm:gap-4 items-center">
 					<p>{"Partido"}</p>
 					<p>{"Estado"}</p>
-					<p>{"Propostas"}</p>
+					<FiltrarPropostas
+						handleClick={handleClick}
+						getSortIcon={getSortIcon}
+					/>
 				</section>
 			</div>
 			<div
@@ -475,3 +516,20 @@ const DadosEstatisticos = ({
 );
 
 export default Page;
+
+interface FiltrarPropostasProps {
+	getSortIcon: () => JSX.Element;
+	handleClick: () => void;
+}
+
+const FiltrarPropostas: React.FC<FiltrarPropostasProps> = ({
+	getSortIcon,
+	handleClick,
+}) => (
+	<button onClick={() => handleClick()}>
+		<p className="text-center flex gap-2 items-center">
+			{"Propostas"}
+			{getSortIcon()}
+		</p>
+	</button>
+);
