@@ -1,0 +1,75 @@
+"use client";
+
+import { LabelList, RadialBar, RadialBarChart } from "recharts";
+
+import {
+	ChartConfig,
+	ChartContainer,
+	ChartTooltip,
+	ChartTooltipContent,
+} from "@/components/external/ui-shacnui/chart";
+
+import { DadosRadial } from "@/core/domain/types/radial";
+
+export const description = "A radial chart with a label";
+
+const chartConfig = {
+	projetos: {
+		label: "projetos",
+	},
+	lieg: {
+		label: "LIEG",
+		color: "#87D9FF",
+	},
+	educacao: {
+		label: "Educação",
+		color: "#FDFF78",
+	},
+	saude: {
+		label: "Saúde",
+		color: "#FF977A",
+	},
+	lib: {
+		label: "LIB",
+		color: "#F693F9",
+	},
+} satisfies ChartConfig;
+
+interface DadosEstatisticosProps {
+	dados: DadosRadial[];
+}
+
+export const Radial: React.FC<DadosEstatisticosProps> = ({ dados }) => {
+	return (
+		<div className="flex flex-col items-center justify-center w-1/2 mx-auto py-6 max-w-1/2">
+			<ChartContainer config={chartConfig} className="w-full h-full">
+				<RadialBarChart
+					data={dados}
+					startAngle={-90}
+					endAngle={380}
+					innerRadius={60}
+					outerRadius={200}
+				>
+					<ChartTooltip
+						cursor={false}
+						content={
+							<ChartTooltipContent
+								hideLabel
+								nameKey="direito"
+								className="min-w-32"
+							/>
+						}
+					/>
+					<RadialBar dataKey="projetos" background>
+						<LabelList
+							position="insideStart"
+							dataKey="direito"
+							className="fill-black font-semibold	capitalize mix-blend-luminosity"
+							fontSize={16}
+						/>
+					</RadialBar>
+				</RadialBarChart>
+			</ChartContainer>
+		</div>
+	);
+};

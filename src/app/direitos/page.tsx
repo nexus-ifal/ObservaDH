@@ -11,7 +11,7 @@ import Card from "@/components/ui/cards";
 import Texto from "@/components/ui/componente-texto";
 import DropdownButton from "@/components/ui/dropdown/dropdown-button";
 import GraficoBarrasVertical from "@/components/ui/graficos/barras-vertical";
-import GraficoRosquinha from "@/components/ui/graficos/rosquinha";
+import { Radial } from "@/components/ui/graficos/radial";
 import MainLayout from "@/components/ui/layouts/main-layout";
 import Loading from "@/components/ui/loading";
 import Titulo from "@/components/ui/titulo-pages";
@@ -19,12 +19,9 @@ import Titulo from "@/components/ui/titulo-pages";
 import { legendas } from "@/content/content-parlamentares";
 import { DadosGraficoBarrasVertical } from "@/core/domain/types/barras-vertical";
 import { CarrosselPlsProps } from "@/core/domain/types/carrossel-interface";
-import { DadosGraficoRosquinha } from "@/core/domain/types/rosquinha";
+import { DadosRadial } from "@/core/domain/types/radial";
 import { usePauta } from "@/hooks/pauta/use-pauta";
-import {
-	graficoBarrasVerticalDadosMock,
-	graficoRosquinhaDadosMock,
-} from "@/mocks/mock-direitos";
+import { graficoBarrasVerticalDadosMock } from "@/mocks/mock-direitos";
 import { projetosMock } from "@/mocks/mock-projetos";
 
 const Direitos: React.FC = () => {
@@ -38,6 +35,14 @@ const Direitos: React.FC = () => {
 
 	const legendaPadrao = legendas[0];
 
+	const chartData: DadosRadial[] = [
+		{ direito: "lieg", projetos: 275, fill: "#FDFF78" },
+		{ direito: "educacao", projetos: 200, fill: "#87D9FF" },
+		{ direito: "saude", projetos: 187, fill: "#FF977A" },
+		{ direito: "lib", projetos: 173, fill: "#F693F9" },
+	];
+
+	const dadosRadial = chartData;
 	return (
 		<MainLayout>
 			<div className="flex flex-col h-full w-full gap-24 px-11 justify-center items-center">
@@ -52,7 +57,7 @@ const Direitos: React.FC = () => {
 				) : (
 					<DadosEstatisticos
 						dadosGraficoVertical={graficoBarrasVerticalDadosMock}
-						dadosRosquinha={graficoRosquinhaDadosMock}
+						dadosRadial={dadosRadial}
 						elementosDropdown={elementosDropdown}
 						legendaPadrao={legendaPadrao}
 					/>
@@ -65,14 +70,14 @@ const Direitos: React.FC = () => {
 
 interface DadosEstatisticosProps {
 	elementosDropdown: { titulo: string; value: string }[];
-	dadosRosquinha: DadosGraficoRosquinha[];
+	dadosRadial: DadosRadial[];
 	dadosGraficoVertical: DadosGraficoBarrasVertical[];
 	legendaPadrao: { resumo: string; texto: string };
 }
 
 const DadosEstatisticos = ({
 	elementosDropdown,
-	dadosRosquinha,
+	dadosRadial,
 	dadosGraficoVertical,
 	legendaPadrao,
 }: DadosEstatisticosProps) => (
@@ -86,15 +91,17 @@ const DadosEstatisticos = ({
 					elementos={elementosDropdown}
 				/>
 			</div>
-			<div className="flex flex-row w-full items-center justify-center gap-20">
-				<GraficoRosquinha dados={dadosRosquinha} />
-				<Card.Legenda
-					corTexto="text-[#D974FD]"
-					resumo={legendaPadrao.resumo}
-					texto={legendaPadrao.texto}
-				>
-					<Titulo pequeno="Projetos de" grande="Lei" />
-				</Card.Legenda>
+			<div className="flex flex-row w-full items-center  gap-2">
+				<Radial dados={dadosRadial} />
+				<div className="flex w-1/2 justify-center">
+					<Card.Legenda
+						corTexto="text-[#D974FD]"
+						resumo={legendaPadrao.resumo}
+						texto={legendaPadrao.texto}
+					>
+						<Titulo pequeno="Projetos de" grande="Lei" />
+					</Card.Legenda>
+				</div>
 			</div>
 		</section>
 		<section className="w-full flex flex-row gap-[4.5rem] justify-center ">
