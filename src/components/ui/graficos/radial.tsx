@@ -1,17 +1,17 @@
 "use client";
 
+import { LabelList, RadialBar, RadialBarChart } from "recharts";
+
 import {
 	ChartConfig,
 	ChartContainer,
 	ChartTooltip,
 	ChartTooltipContent,
 } from "@/components/external/ui-shacnui/chart";
+
 import { DadosRadial } from "@/core/domain/types/radial";
-import { LabelList, RadialBar, RadialBarChart } from "recharts";
 
 export const description = "A radial chart with a label";
-
-
 
 const chartConfig = {
 	projetos: {
@@ -35,7 +35,6 @@ const chartConfig = {
 	},
 } satisfies ChartConfig;
 
-
 interface DadosEstatisticosProps {
 	dados: DadosRadial[];
 }
@@ -53,7 +52,13 @@ export const Radial: React.FC<DadosEstatisticosProps> = ({ dados }) => {
 				>
 					<ChartTooltip
 						cursor={false}
-						content={<ChartTooltipContent hideLabel nameKey="direito" className="min-w-32"/>}
+						content={
+							<ChartTooltipContent
+								hideLabel
+								nameKey="direito"
+								className="min-w-32"
+							/>
+						}
 					/>
 					<RadialBar dataKey="projetos" background>
 						<LabelList
@@ -67,4 +72,4 @@ export const Radial: React.FC<DadosEstatisticosProps> = ({ dados }) => {
 			</ChartContainer>
 		</div>
 	);
-}
+};
