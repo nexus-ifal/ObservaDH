@@ -26,6 +26,7 @@ import {
 	graficoRosquinhaDadosMock,
 } from "@/mocks/mock-direitos";
 import { projetosMock } from "@/mocks/mock-projetos";
+import { Radial } from "@/components/ui/graficos/radial";
 
 const Direitos: React.FC = () => {
 	const { pautas, isLoadingPautas, error } = usePauta();
