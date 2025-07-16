@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
@@ -20,15 +20,22 @@ import { Radial } from "@/components/ui/graficos/radial";
 import MainLayout from "@/components/ui/layouts/main-layout";
 import Loading from "@/components/ui/loading";
 import Titulo from "@/components/ui/titulo-pages";
+import UserError from "@/components/ui/user-erro";
 
 import { legendas } from "@/content/content-parlamentares";
 import { ProjetoDTO } from "@/core/domain/dtos/dados.dto";
 import { DadosGraficoBarrasVertical } from "@/core/domain/types/barras-vertical";
 import { CarrosselPlsProps } from "@/core/domain/types/carrossel-interface";
-import { DadosRadial } from "@/core/domain/types/radial";
 import { useProjetosDireitosIdeologias } from "@/hooks/dados/use-projetos-direitos-ideologias";
 import { usePauta } from "@/hooks/pauta/use-pauta";
 
+function Page() {
+	return (
+		<Suspense fallback={<div>Carregando...</div>}>
+			<Direitos />
+		</Suspense>
+	);
+}
 const Direitos: React.FC = () => {
 	const { pautas, isLoadingPautas, error } = usePauta();
 
@@ -73,6 +80,9 @@ const Direitos: React.FC = () => {
 					<div className="text-red-500">
 						Erro ao carregar pautas: {error.toString()}
 					</div>
+				)}
+				{errorProjetosDireitosIdeologias && (
+					<UserError error={errorProjetosDireitosIdeologias} />
 				)}
 				{isLoading ? (
 					<Loading />
@@ -168,7 +178,11 @@ const Carrossel = ({ projetos }: CarrosselPlsProps) => (
 			<Carousel opts={{ align: "start" }} className="w-[82rem]">
 				<CarouselContent>
 					{projetos.map((item, i) => (
-						<Link key={i} href={`/projetos/${item.id}`} className="flex basis-1/2 justify-center">
+						<Link
+							key={i}
+							href={`/projetos/${item.id}`}
+							className="flex basis-1/2 justify-center"
+						>
 							<CarouselItem>
 								<Card.Projeto projeto={item} />
 							</CarouselItem>
@@ -182,4 +196,4 @@ const Carrossel = ({ projetos }: CarrosselPlsProps) => (
 	</section>
 );
 
-export default Direitos;
+export default Page;

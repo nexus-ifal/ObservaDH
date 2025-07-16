@@ -28,12 +28,12 @@ import {
 	projetosMock,
 } from "../../mocks/mock-projetos";
 
+import { ProjetoDTO } from "@/core/domain/dtos/dados.dto";
 import { ResponseEsferaDTO } from "@/core/domain/dtos/esfera.dto";
 import { DadosGraficoBarraEmpilhadaHorizontal } from "@/core/domain/types/barra-empilhada-horizontal";
 import { CarrosselPlsProps } from "@/core/domain/types/carrossel-interface";
 import { elemento } from "@/core/domain/types/elemento-dropdown";
 import { DadosGraficoLinhaPontos } from "@/core/domain/types/linha-pontos";
-import { ProjetoLei } from "@/core/domain/types/projeto-lei";
 import { useParlamentarProjeto } from "@/hooks/dados/use-parlamentar-projeto-esfera";
 import { usePautaEsfera } from "@/hooks/dados/use-pauta-esfera";
 import { usePautaPorAno } from "@/hooks/dados/use-pauta-por-ano";
@@ -178,7 +178,7 @@ const PageContent = () => {
 						<Suspense fallback={<div>Carregando filtros...</div>}>
 							<PropostasDados
 								items={dropdownItems}
-								projetos={projetosMock}
+								projetos={projetosMock as unknown as ProjetoDTO[]}
 								dadosPlAno={projetosPorAno ?? []}
 								dadosPautas={pautaPorAno ?? []}
 							/>
@@ -329,7 +329,7 @@ interface PropostasDadosProps {
 		titulo: string;
 		param: string;
 	}[];
-	projetos: ProjetoLei[];
+	projetos: ProjetoDTO[];
 	dadosPlAno: DadosGraficoLinhaPontos[];
 	dadosPautas: DadosGraficoBarraEmpilhadaHorizontal[];
 }

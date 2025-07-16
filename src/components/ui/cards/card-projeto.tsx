@@ -5,7 +5,6 @@ import { oswald, titilliumWeb } from "../../../fonts/fonts";
 import CardRenderizarTexto from "./card-renderizar-texto";
 
 import { ProjetoDTO } from "@/core/domain/dtos/dados.dto";
-
 interface CardProjetosProps {
 	projeto: ProjetoDTO;
 }
