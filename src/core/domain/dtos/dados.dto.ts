@@ -50,3 +50,23 @@ export interface DadosParaPesquisaParlamenta {
 	profissao?: string;
 	ordemProjetos?: "asc" | "desc";
 }
+
+export type DadosRadial = {
+	direito_nome: string;
+	direito_sigla: string;
+	projetos: number;
+};
+
+export type DadosGraficoBarrasVertical = {
+	pls: number;
+	pauta: string;
+};
+
+export type ProjetoDTO = {
+	ano: string;
+	numeroPl: string;
+	pauta: string;
+	estado: string[];
+	parlamentar: string[];
+	ementa: string;
+};
