@@ -1,9 +1,6 @@
 import { prismaClient } from "@/adapters/db/prisma";
-import {
-	DadosGraficoBarrasVertical,
-	DadosRadial,
-	ProjetoDTO,
-} from "@/core/domain/dtos/dados.dto";
+import { DadosRadial, ProjetoDTO } from "@/core/domain/dtos/dados.dto";
+import { DadosGraficoBarrasVertical } from "@/core/domain/types/barras-vertical";
 
 export interface ResponseProjetoDireitosDTO {
 	direitos_violados_valores: DadosRadial[];

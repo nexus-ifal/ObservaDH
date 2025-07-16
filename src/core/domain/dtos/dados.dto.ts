@@ -1,3 +1,5 @@
+import { DadosGraficoBarrasVertical } from "../types/barras-vertical";
+
 export interface DadosProjetoEstado {
 	nome: string;
 	uf: string;
@@ -57,11 +59,6 @@ export type DadosRadial = {
 	projetos: number;
 };
 
-export type DadosGraficoBarrasVertical = {
-	pls: number;
-	pauta: string;
-};
-
 export type ProjetoDTO = {
 	ano: string;
 	numeroPl: string;
@@ -69,4 +66,10 @@ export type ProjetoDTO = {
 	estado: string[];
 	parlamentar: string[];
 	ementa: string;
+};
+
+export type DadosProjetosDireitosIdeologias = {
+	direitos_violados_valores: DadosRadial[];
+	ideologias_valores: DadosGraficoBarrasVertical[];
+	projetos: ProjetoDTO[];
 };
