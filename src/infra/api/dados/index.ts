@@ -5,20 +5,29 @@ import {
 	DadosPautaPorAno,
 	DadosPlPorAno,
 	DadosProjetoEstado,
+	DadosProjetosDireitosIdeologias,
 	DadosReligiaoRaca,
 } from "@/core/domain/dtos/dados.dto";
 import { DadosRepository } from "@/core/repositories/dados.repository";
 import { conexaoBackend } from "@/infra/api/client";
 
 class DadosAPI implements DadosRepository {
-	private organizarUrl(basePath: string, esfera?: string): string {
-		return esfera
-			? `${basePath}?esfera=${encodeURIComponent(esfera)}`
+	private organizarUrl(
+		basePath: string,
+		param: string,
+		value?: string
+	): string {
+		return value
+			? `${basePath}?${param}=${encodeURIComponent(value)}`
 			: basePath;
 	}
 
 	async listarProjetosPorUF(esfera?: string): Promise<DadosProjetoEstado[]> {
-		const url = this.organizarUrl("/dados/projeto-por-estado", esfera);
+		const url = this.organizarUrl(
+			"/dados/projeto-por-estado",
+			"esfera",
+			esfera
+		);
 		const response = await conexaoBackend.get(url);
 		return response.data.dados;
 	}
@@ -44,7 +53,7 @@ class DadosAPI implements DadosRepository {
 	}
 
 	async listarPautaPorEsfera(esfera?: string): Promise<DadosPautaEsfera[]> {
-		const url = this.organizarUrl("/dados/pauta-por-esfera", esfera);
+		const url = this.organizarUrl("/dados/pauta-por-esfera", "esfera", esfera);
 		const response = await conexaoBackend.get(url);
 		return response.data.dados;
 	}
@@ -52,9 +61,25 @@ class DadosAPI implements DadosRepository {
 	async listarParlamentarEsfera(
 		esfera?: string
 	): Promise<DadosParlamentarProjetosEsfera> {
-		const url = this.organizarUrl("/dados/parlamentares-por-esfera", esfera);
+		const url = this.organizarUrl(
+			"/dados/parlamentares-por-esfera",
+			"esfera",
+			esfera
+		);
 		const response = await conexaoBackend.get(url);
 		return response.data.dados;
+	}
+	async listarProjetosDireitosIdeologias(
+		pauta?: string
+	): Promise<DadosProjetosDireitosIdeologias[]> {
+		const url = this.organizarUrl(
+			"/dados/projetos-direitos-ideologias",
+			"pauta",
+			pauta
+		);
+
+		const response = await conexaoBackend.get(url);
+		return response.data.resposta.dados;
 	}
 }
 

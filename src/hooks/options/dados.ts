@@ -38,3 +38,18 @@ export const listarParlamentarEsferaOptions = (esfera?: string) => ({
 	queryKey: [...getDadosBaseQueryKey(), "listarParlamentarEsfera", esfera],
 	queryFn: () => usecase.listarParlamentarEsfera(esfera),
 });
+
+interface ListarProjetosDireitosIdeologiasOptions {
+	pauta?: string;
+}
+
+export const listarProjetosDireitosIdeologiasOptions = (
+	payload: ListarProjetosDireitosIdeologiasOptions
+) => ({
+	queryKey: [
+		...getDadosBaseQueryKey(),
+		"listarProjetosDireitosIdeologias",
+		payload.pauta,
+	],
+	queryFn: () => usecase.listarProjetosDireitosIdeologias(payload.pauta),
+});
