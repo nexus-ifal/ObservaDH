@@ -71,7 +71,7 @@ class DadosAPI implements DadosRepository {
 	}
 	async listarProjetosDireitosIdeologias(
 		pauta?: string
-	): Promise<DadosProjetosDireitosIdeologias[]> {
+	): Promise<DadosProjetosDireitosIdeologias> {
 		const url = this.organizarUrl(
 			"/dados/projetos-direitos-ideologias",
 			"pauta",

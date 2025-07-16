@@ -1,11 +1,10 @@
 "use client";
 
-import { ProjetoDTO } from "@/core/domain/dtos/dados.dto";
 import { oswald, titilliumWeb } from "../../../fonts/fonts";
 
 import CardRenderizarTexto from "./card-renderizar-texto";
 
-import { ProjetoLei } from "@/core/domain/types/projeto-lei";
+import { ProjetoDTO } from "@/core/domain/dtos/dados.dto";
 
 interface CardProjetosProps {
 	projeto: ProjetoDTO;
@@ -41,9 +40,7 @@ const CardProjeto: React.FC<CardProjetosProps> = ({ projeto }) => {
 					<span
 						className={`${oswald.className} font-normal text-3xl text-[#AFC4F9]`}
 					>
-						{projeto.parlamentar.length > 1
-							? "Parlamentares:"
-							: "Parlamentar:"}
+						{projeto.parlamentar.length > 1 ? "Parlamentares:" : "Parlamentar:"}
 					</span>
 					{projeto.parlamentar.map((parlamentar, index) => (
 						<span

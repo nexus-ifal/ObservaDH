@@ -1,5 +1,11 @@
 import DIContainer from "../../config/dicontainer";
 
+import { DadosProjetosDireitosIdeologias } from "@/core/domain/dtos/dados.dto";
+import {
+	mapApiDataToChartData,
+	mapIdeologiasToChartData,
+} from "@/utils/mapApiDataToChartData/mapApiDataToChartData";
+
 const usecase = DIContainer.getDadosUseCase();
 
 export const getDadosBaseQueryKey = () => ["dados"];
@@ -52,4 +58,13 @@ export const listarProjetosDireitosIdeologiasOptions = (
 		payload.pauta,
 	],
 	queryFn: () => usecase.listarProjetosDireitosIdeologias(payload.pauta),
+	select: (data: DadosProjetosDireitosIdeologias) => ({
+		...data,
+		direitos_violados_valores: data?.direitos_violados_valores
+			? mapApiDataToChartData(data.direitos_violados_valores)
+			: [],
+		ideologias_valores: data?.ideologias_valores
+			? mapIdeologiasToChartData(data.ideologias_valores)
+			: [],
+	}),
 });

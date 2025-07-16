@@ -1,4 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
+
+import { useEffect, useState } from "react";
 
 import {
 	Carousel,
@@ -23,9 +26,6 @@ import { CarrosselPlsProps } from "@/core/domain/types/carrossel-interface";
 import { DadosRadial } from "@/core/domain/types/radial";
 import { useProjetosDireitosIdeologias } from "@/hooks/dados/use-projetos-direitos-ideologias";
 import { usePauta } from "@/hooks/pauta/use-pauta";
-import { graficoBarrasVerticalDadosMock } from "@/mocks/mock-direitos";
-import { projetosMock } from "@/mocks/mock-projetos";
-import { useEffect, useState } from "react";
 
 const Direitos: React.FC = () => {
 	const { pautas, isLoadingPautas, error } = usePauta();
@@ -38,14 +38,6 @@ const Direitos: React.FC = () => {
 
 	const legendaPadrao = legendas[0];
 
-	const chartData: DadosRadial[] = [
-		{ direito: "lieg", projetos: 275, fill: "#FDFF78" },
-		{ direito: "educacao", projetos: 200, fill: "#87D9FF" },
-		{ direito: "saude", projetos: 187, fill: "#FF977A" },
-		{ direito: "lib", projetos: 173, fill: "#F693F9" },
-	];
-
-	const dadosRadial = chartData;
 	const {
 		projetosDireitosIdeologias,
 		isLoadingProjetosDireitosIdeologias,
@@ -67,7 +59,6 @@ const Direitos: React.FC = () => {
 			);
 		}
 	}, [projetosDireitosIdeologias]);
-
 
 	return (
 		<MainLayout>
@@ -172,10 +163,7 @@ const Carrossel = ({ projetos }: CarrosselPlsProps) => (
 			<Carousel opts={{ align: "start" }} className="w-[82rem]">
 				<CarouselContent>
 					{projetos.map((item, i) => (
-						<CarouselItem
-							key={i}
-							className="basis-1/2 flex justify-center"
-						>
+						<CarouselItem key={i} className="basis-1/2 flex justify-center">
 							<Card.Projeto projeto={item} />
 						</CarouselItem>
 					))}

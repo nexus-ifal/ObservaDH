@@ -1,5 +1,4 @@
-import { DadosGraficoBarrasVertical } from "../types/barras-vertical";
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export interface DadosProjetoEstado {
 	nome: string;
 	uf: string;
@@ -70,7 +69,7 @@ export type ProjetoDTO = {
 };
 
 export type DadosProjetosDireitosIdeologias = {
-	direitos_violados_valores: DadosRadial[];
-	ideologias_valores: DadosGraficoBarrasVertical[];
-	projetos: ProjetoDTO[];
+	projetos: any[];
+	ideologias_valores: any[];
+	direitos_violados_valores: any[];
 };
