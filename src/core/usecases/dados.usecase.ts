@@ -21,6 +21,6 @@ interface DadosUseCase {
 	listarPautaPorEsfera(esfera?: string): Promise<DadosPautaEsfera[]>;
 	listarProjetosDireitosIdeologias(
 		pauta?: string
-	): Promise<DadosProjetosDireitosIdeologias[]>;
+	): Promise<DadosProjetosDireitosIdeologias>;
 }
 export default DadosUseCase;

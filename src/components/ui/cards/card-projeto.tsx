@@ -1,5 +1,6 @@
 "use client";
 
+import { ProjetoDTO } from "@/core/domain/dtos/dados.dto";
 import { oswald, titilliumWeb } from "../../../fonts/fonts";
 
 import CardRenderizarTexto from "./card-renderizar-texto";
@@ -7,7 +8,7 @@ import CardRenderizarTexto from "./card-renderizar-texto";
 import { ProjetoLei } from "@/core/domain/types/projeto-lei";
 
 interface CardProjetosProps {
-	projeto: ProjetoLei;
+	projeto: ProjetoDTO;
 }
 
 const CardProjeto: React.FC<CardProjetosProps> = ({ projeto }) => {
@@ -26,16 +27,13 @@ const CardProjeto: React.FC<CardProjetosProps> = ({ projeto }) => {
 					<span
 						className={`${oswald.className} font-normal text-3xl text-[#AFC4F9]`}
 					>
-						{projeto.parlamentares.length > 1 ? "Estados:" : "Estado:"}
+						{projeto.parlamentar.length > 1 ? "Estados:" : "Estado:"}
 					</span>
-					{projeto.parlamentares.map((parlamentar, index) => (
-						<span
-							key={index}
-							className={`${titilliumWeb.className} font-normal text-xl text-white`}
-						>
-							{parlamentar.estado}
-						</span>
-					))}
+					<span
+						className={`${titilliumWeb.className} font-normal text-xl text-white`}
+					>
+						{projeto.estado.join(", ")}
+					</span>
 				</h3>
 			</section>
 			<section>
@@ -43,16 +41,16 @@ const CardProjeto: React.FC<CardProjetosProps> = ({ projeto }) => {
 					<span
 						className={`${oswald.className} font-normal text-3xl text-[#AFC4F9]`}
 					>
-						{projeto.parlamentares.length > 1
+						{projeto.parlamentar.length > 1
 							? "Parlamentares:"
 							: "Parlamentar:"}
 					</span>
-					{projeto.parlamentares.map((parlamentar, index) => (
+					{projeto.parlamentar.map((parlamentar, index) => (
 						<span
 							key={index}
 							className={`${titilliumWeb.className} font-normal text-xl text-white`}
 						>
-							{parlamentar.nome} - {parlamentar.partido}
+							{parlamentar}
 						</span>
 					))}
 				</h3>
@@ -65,7 +63,7 @@ const CardProjeto: React.FC<CardProjetosProps> = ({ projeto }) => {
 						Ementa:
 					</span>
 					<p
-						className={`${titilliumWeb.className} font-normal text-xl text-white text-justify`}
+						className={`${titilliumWeb.className} h-24 overflow-auto no-scrollbar font-normal text-xl text-white text-justify`}
 					>
 						{projeto.ementa}
 					</p>

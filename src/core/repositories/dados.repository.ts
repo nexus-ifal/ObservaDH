@@ -21,5 +21,5 @@ export interface DadosRepository {
 	listarPautaPorEsfera(esfera?: string): Promise<DadosPautaEsfera[]>;
 	listarProjetosDireitosIdeologias(
 		pauta?: string
-	): Promise<DadosProjetosDireitosIdeologias[]>;
+	): Promise<DadosProjetosDireitosIdeologias>;
 }

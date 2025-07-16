@@ -17,12 +17,15 @@ import Loading from "@/components/ui/loading";
 import Titulo from "@/components/ui/titulo-pages";
 
 import { legendas } from "@/content/content-parlamentares";
+import { ProjetoDTO } from "@/core/domain/dtos/dados.dto";
 import { DadosGraficoBarrasVertical } from "@/core/domain/types/barras-vertical";
 import { CarrosselPlsProps } from "@/core/domain/types/carrossel-interface";
 import { DadosRadial } from "@/core/domain/types/radial";
+import { useProjetosDireitosIdeologias } from "@/hooks/dados/use-projetos-direitos-ideologias";
 import { usePauta } from "@/hooks/pauta/use-pauta";
 import { graficoBarrasVerticalDadosMock } from "@/mocks/mock-direitos";
 import { projetosMock } from "@/mocks/mock-projetos";
+import { useEffect, useState } from "react";
 
 const Direitos: React.FC = () => {
 	const { pautas, isLoadingPautas, error } = usePauta();
@@ -43,6 +46,29 @@ const Direitos: React.FC = () => {
 	];
 
 	const dadosRadial = chartData;
+	const {
+		projetosDireitosIdeologias,
+		isLoadingProjetosDireitosIdeologias,
+		error: errorProjetosDireitosIdeologias,
+	} = useProjetosDireitosIdeologias();
+
+	const [projetos, setProjetos] = useState<ProjetoDTO[]>([]);
+	const [ideologias, setIdeologias] = useState<any[]>([]);
+	const [direitosViolados, setDireitosViolados] = useState<any[]>([]);
+
+	const isLoading = isLoadingPautas || isLoadingProjetosDireitosIdeologias;
+
+	useEffect(() => {
+		if (projetosDireitosIdeologias) {
+			setProjetos(projetosDireitosIdeologias.projetos || []);
+			setIdeologias(projetosDireitosIdeologias.ideologias_valores || []);
+			setDireitosViolados(
+				projetosDireitosIdeologias.direitos_violados_valores || []
+			);
+		}
+	}, [projetosDireitosIdeologias]);
+
+
 	return (
 		<MainLayout>
 			<div className="flex flex-col h-full w-full gap-24 px-10 justify-center items-center">
@@ -52,17 +78,17 @@ const Direitos: React.FC = () => {
 						Erro ao carregar pautas: {error.toString()}
 					</div>
 				)}
-				{isLoadingPautas ? (
+				{isLoading ? (
 					<Loading />
 				) : (
 					<DadosEstatisticos
-						dadosGraficoVertical={graficoBarrasVerticalDadosMock}
-						dadosRadial={dadosRadial}
+						dadosGraficoVertical={ideologias}
+						dadosRadial={direitosViolados}
 						elementosDropdown={elementosDropdown}
 						legendaPadrao={legendaPadrao}
 					/>
 				)}
-				<Carrossel projetos={projetosMock} />
+				<Carrossel projetos={projetos} />
 			</div>
 		</MainLayout>
 	);
@@ -145,9 +171,9 @@ const Carrossel = ({ projetos }: CarrosselPlsProps) => (
 		<section>
 			<Carousel opts={{ align: "start" }} className="w-[82rem]">
 				<CarouselContent>
-					{projetos.map((item) => (
+					{projetos.map((item, i) => (
 						<CarouselItem
-							key={item.id}
+							key={i}
 							className="basis-1/2 flex justify-center"
 						>
 							<Card.Projeto projeto={item} />

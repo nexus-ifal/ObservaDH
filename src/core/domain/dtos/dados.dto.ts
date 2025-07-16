@@ -60,6 +60,7 @@ export type DadosRadial = {
 };
 
 export type ProjetoDTO = {
+	id: string;
 	ano: string;
 	numeroPl: string;
 	pauta: string;
