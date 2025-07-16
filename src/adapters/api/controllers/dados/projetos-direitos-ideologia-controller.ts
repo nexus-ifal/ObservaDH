@@ -1,7 +1,7 @@
 import {
 	IListarProjetoDireitosService,
 	ListarProjetoDireitosService,
-} from "../../service/projeto/projeto-direitos-service";
+} from "../../service/dados/projetos-direitos-ideologias-service";
 
 import { RespostaApi } from "@/core/domain/models/resposta-api";
 

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { ListarProjetoDireitosController } from "@/adapters/api/controllers/projeto/projeto-direitos-controller";
+import { ListarProjetoDireitosController } from "@/adapters/api/controllers/dados/projetos-direitos-ideologia-controller";
 export async function GET(request: Request) {
 	try {
 		const { searchParams } = new URL(request.url);
