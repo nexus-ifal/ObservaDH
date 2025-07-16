@@ -65,14 +65,6 @@ export function mapIdeologiasToChartData(apiData: any[]) {
 
 	return apiData.map((item) => {
 		const chartKey = pautaToChartKey[item.pauta];
-		console.log(
-			"pauta:",
-			item.pauta,
-			"chartKey:",
-			chartKey,
-			"config:",
-			chartConfig[chartKey]
-		);
 		return {
 			...item,
 			label: chartConfig[chartKey]?.label ?? item.pauta,

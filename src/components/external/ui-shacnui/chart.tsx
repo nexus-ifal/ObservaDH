@@ -273,7 +273,6 @@ const ChartLegendContent = React.forwardRef<
 		ref
 	) => {
 		const { config } = useChart();
-
 		if (!payload?.length) {
 			return null;
 		}
@@ -290,7 +289,6 @@ const ChartLegendContent = React.forwardRef<
 				{payload.map((item, index) => {
 					const key = `${nameKey || item.dataKey || "value"}`;
 					const itemConfig = getPayloadConfigFromPayload(config, item, key);
-
 					return (
 						<div
 							key={index}
@@ -308,7 +306,7 @@ const ChartLegendContent = React.forwardRef<
 									}}
 								/>
 							)}
-							{itemConfig?.label}
+							{itemConfig?.label || (item.payload as any)?.direito}
 						</div>
 					);
 				})}

@@ -2,6 +2,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 import {
 	Carousel,
@@ -26,8 +28,6 @@ import { CarrosselPlsProps } from "@/core/domain/types/carrossel-interface";
 import { DadosRadial } from "@/core/domain/types/radial";
 import { useProjetosDireitosIdeologias } from "@/hooks/dados/use-projetos-direitos-ideologias";
 import { usePauta } from "@/hooks/pauta/use-pauta";
-import { useSearchParams } from "next/navigation";
-import Link from "next/link";
 
 const Direitos: React.FC = () => {
 	const { pautas, isLoadingPautas, error } = usePauta();
@@ -92,7 +92,7 @@ const Direitos: React.FC = () => {
 
 interface DadosEstatisticosProps {
 	elementosDropdown: { titulo: string; value: string }[];
-	dadosRadial: DadosRadial[];
+	dadosRadial: any[];
 	dadosGraficoVertical: DadosGraficoBarrasVertical[];
 	legendaPadrao: { resumo: string; texto: string };
 }
@@ -168,8 +168,8 @@ const Carrossel = ({ projetos }: CarrosselPlsProps) => (
 			<Carousel opts={{ align: "start" }} className="w-[82rem]">
 				<CarouselContent>
 					{projetos.map((item, i) => (
-						<Link key={i} href={`/projetos/${item.id}`}>
-							<CarouselItem className="basis-1/2 flex justify-center">
+						<Link key={i} href={`/projetos/${item.id}`} className="flex basis-1/2 justify-center">
+							<CarouselItem>
 								<Card.Projeto projeto={item} />
 							</CarouselItem>
 						</Link>

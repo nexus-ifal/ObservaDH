@@ -53,7 +53,6 @@ interface graficoBarrasVerticalprops {
 const GraficoBarrasVertical: React.FC<graficoBarrasVerticalprops> = ({
 	dados,
 }) => {
-	console.log("Dados do gráfico de barras vertical:", dados);
 	return (
 		<Card className="w-[850px] h-[450px] bg-[#122144] shadow-lg shadow-[#4568BE]">
 			<CardContent className="h-full w-full">

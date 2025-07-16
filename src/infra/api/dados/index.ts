@@ -12,26 +12,6 @@ import { DadosRepository } from "@/core/repositories/dados.repository";
 import { conexaoBackend } from "@/infra/api/client";
 
 class DadosAPI implements DadosRepository {
-	private organizarUrl(
-		basePath: string,
-		param: string,
-		value?: string
-	): string {
-		return value
-			? `${basePath}?${param}=${encodeURIComponent(value)}`
-			: basePath;
-	}
-
-	async listarProjetosPorUF(esfera?: string): Promise<DadosProjetoEstado[]> {
-		const url = this.organizarUrl(
-			"/dados/projeto-por-estado",
-			"esfera",
-			esfera
-		);
-		const response = await conexaoBackend.get(url);
-		return response.data.dados;
-	}
-
 	async listarProjetosPorAno(): Promise<DadosPlPorAno[]> {
 		const response = await conexaoBackend.get("/dados/projeto-por-ano");
 		return response.data.dados;
@@ -52,33 +32,33 @@ class DadosAPI implements DadosRepository {
 		return response.data.dados;
 	}
 
+	async listarProjetosPorUF(esfera?: string): Promise<DadosProjetoEstado[]> {
+		const URL = "/dados/projeto-por-estado";
+		const response = await conexaoBackend.get(URL, { params: { esfera } });
+		return response.data.dados;
+	}
+
 	async listarPautaPorEsfera(esfera?: string): Promise<DadosPautaEsfera[]> {
-		const url = this.organizarUrl("/dados/pauta-por-esfera", "esfera", esfera);
-		const response = await conexaoBackend.get(url);
+		const URL = "/dados/pauta-por-esfera";
+		const response = await conexaoBackend.get(URL, { params: { esfera } });
 		return response.data.dados;
 	}
 
 	async listarParlamentarEsfera(
 		esfera?: string
 	): Promise<DadosParlamentarProjetosEsfera> {
-		const url = this.organizarUrl(
-			"/dados/parlamentares-por-esfera",
-			"esfera",
-			esfera
-		);
-		const response = await conexaoBackend.get(url);
+		const URL = "/dados/parlamentares-por-esfera";
+		const response = await conexaoBackend.get(URL, { params: { esfera } });
 		return response.data.dados;
 	}
+
 	async listarProjetosDireitosIdeologias(
 		pauta?: string
 	): Promise<DadosProjetosDireitosIdeologias> {
-		const url = this.organizarUrl(
-			"/dados/projetos-direitos-ideologias",
-			"pauta",
-			pauta
-		);
-
-		const response = await conexaoBackend.get(url);
+		const URL = "/dados/projetos-direitos-ideologias";
+		const response = await conexaoBackend.get(URL, {
+			params: { pautaId: pauta },
+		});
 		return response.data.resposta.dados;
 	}
 }
