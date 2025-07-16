@@ -1,8 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import {
-	listarProjetosDireitosIdeologiasOptions,
-} from "../options/dados";
+import { listarProjetosDireitosIdeologiasOptions } from "../options/dados";
 
 export const useProjetosDireitosIdeologias = (pauta?: string) => {
 	const {
