@@ -74,6 +74,7 @@ export class ListarProjetoDireitosService
 				})
 			),
 			projetos: projetos.map((projeto) => ({
+				id: projeto.id,
 				ano: projeto.ano,
 				numeroPl: projeto.numeroPl,
 				pauta: projeto.pauta.nome,
