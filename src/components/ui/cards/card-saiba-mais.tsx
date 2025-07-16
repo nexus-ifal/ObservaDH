@@ -32,7 +32,7 @@ const CardSaibaMais: React.FC<saibaMaisProps> = ({
 					<FaPlus size={18} /> Saiba mais
 				</button>
 			</AlertDialogTrigger>
-			<AlertDialogContent className="flex flex-col h-[90%] p-12 gap-6 w-[75%]  bg-[#121A2B] border-[#4568BE] shadow-lg shadow-[#4568BE] rounded-lg">
+			<AlertDialogContent className="flex flex-col h-[90%] p-12 gap-6 w-[75%] bg-[#121A2B] border-[#4568BE] shadow-lg shadow-[#4568BE] rounded-lg">
 				<AlertDialogTitle className="flex justify-between">
 					<Texto.Raiz className="text-5xl w-full">
 						<Texto.Linha>

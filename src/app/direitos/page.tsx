@@ -45,7 +45,7 @@ const Direitos: React.FC = () => {
 	const dadosRadial = chartData;
 	return (
 		<MainLayout>
-			<div className="flex flex-col h-full w-full gap-24 px-11 justify-center items-center">
+			<div className="flex flex-col h-full w-full gap-24 px-10 justify-center items-center">
 				<Titulo pequeno="Violações e Ideologias" grande="dos Projetos de Lei" />
 				{error && (
 					<div className="text-red-500">
@@ -82,7 +82,7 @@ const DadosEstatisticos = ({
 	legendaPadrao,
 }: DadosEstatisticosProps) => (
 	<>
-		<section className="w-full flex flex-col justify-center">
+		<section className="w-full h-full flex flex-col justify-center">
 			<div className="w-full">
 				<DropdownButton
 					className="w-32"
@@ -91,20 +91,31 @@ const DadosEstatisticos = ({
 					elementos={elementosDropdown}
 				/>
 			</div>
-			<div className="flex flex-row w-full items-center  gap-2">
-				<Radial dados={dadosRadial} />
-				<div className="flex w-1/2 justify-center">
-					<Card.Legenda
-						corTexto="text-[#D974FD]"
-						resumo={legendaPadrao.resumo}
-						texto={legendaPadrao.texto}
-					>
-						<Titulo pequeno="Projetos de" grande="Lei" />
-					</Card.Legenda>
+			<div className="flex flex-row w-full items-center justify-center gap-2 h-full">
+				<div className="flex gap-[4.5rem] justify-center">
+					<div className="flex w-1/2 h-full justify-end ">
+						<Radial dados={dadosRadial} />
+					</div>
+					<div className="flex  justify-end b items-end">
+						<Card.Legenda
+							corTexto="text-[#D974FD]"
+							resumo={legendaPadrao.resumo}
+							texto={legendaPadrao.texto}
+						>
+							<Texto.Raiz shadow className="text-6xl">
+								<Texto.Linha>
+									<Texto.Forte.Oswald>Direitos</Texto.Forte.Oswald>
+								</Texto.Linha>
+								<Texto.Linha className="text-[#D974FD]">
+									<Texto.Pequeno.Titillium>Violados</Texto.Pequeno.Titillium>
+								</Texto.Linha>
+							</Texto.Raiz>
+						</Card.Legenda>
+					</div>
 				</div>
 			</div>
 		</section>
-		<section className="w-full flex flex-row gap-[4.5rem] justify-center ">
+		<section className="w-full flex flex-row gap-[4.5rem] justify-center">
 			<Card.Legenda
 				corTexto="text-[#FDFF78]"
 				resumo={legendaPadrao.resumo}

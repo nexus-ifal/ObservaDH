@@ -20,7 +20,6 @@ const CardProjeto: React.FC<CardProjetosProps> = ({ projeto }) => {
 					titulo="Número do PL"
 				/>
 			</section>
-
 			<section className="flex gap-6">
 				<CardRenderizarTexto conteudo={projeto.pauta} titulo="Pauta" />
 				<h3 className="text-white flex flex-row items-center gap-4">
@@ -39,7 +38,6 @@ const CardProjeto: React.FC<CardProjetosProps> = ({ projeto }) => {
 					))}
 				</h3>
 			</section>
-
 			<section>
 				<h3 className="flex flex-row items-center gap-4">
 					<span
@@ -59,7 +57,6 @@ const CardProjeto: React.FC<CardProjetosProps> = ({ projeto }) => {
 					))}
 				</h3>
 			</section>
-
 			<section>
 				<h3 className={`flex flex-col gap-4 items-start`}>
 					<span
@@ -68,7 +65,7 @@ const CardProjeto: React.FC<CardProjetosProps> = ({ projeto }) => {
 						Ementa:
 					</span>
 					<p
-						className={`${titilliumWeb.className} font-normal text-xl text-white`}
+						className={`${titilliumWeb.className} font-normal text-xl text-white text-justify`}
 					>
 						{projeto.ementa}
 					</p>
