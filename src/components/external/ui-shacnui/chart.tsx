@@ -307,7 +307,7 @@ const ChartLegendContent = React.forwardRef<
 									}}
 								/>
 							)}
-							{itemConfig?.label || (item.payload as any)?.direito}
+							{itemConfig?.label || (isPayloadWithDireito(item.payload) ? item.payload.direito : null)}
 						</div>
 					);
 				})}
