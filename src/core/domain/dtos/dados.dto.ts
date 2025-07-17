@@ -69,7 +69,7 @@ export type ProjetoDTO = {
 };
 
 export type DadosProjetosDireitosIdeologias = {
-	projetos: any[];
+	projetos: ProjetoDTO[];
 	ideologias_valores: any[];
 	direitos_violados_valores: any[];
 };
