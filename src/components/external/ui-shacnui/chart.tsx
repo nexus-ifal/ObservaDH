@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import * as React from "react";
@@ -273,7 +274,6 @@ const ChartLegendContent = React.forwardRef<
 		ref
 	) => {
 		const { config } = useChart();
-
 		if (!payload?.length) {
 			return null;
 		}
@@ -287,13 +287,30 @@ const ChartLegendContent = React.forwardRef<
 					className
 				)}
 			>
-				{payload.map((item) => {
+				{payload.map((item, index) => {
 					const key = `${nameKey || item.dataKey || "value"}`;
 					const itemConfig = getPayloadConfigFromPayload(config, item, key);
+					function isPayloadWithDireito(
+						payload:
+							| {
+									strokeDasharray: string | number;
+									value?: any;
+									direito?: string;
+							  }
+							| undefined
+					): payload is {
+						strokeDasharray: string | number;
+						value?: any;
+						direito: string;
+					} {
+						return (
+							payload !== undefined && payload !== null && "direito" in payload
+						);
+					}
 
 					return (
 						<div
-							key={item.value}
+							key={index}
 							className={cn(
 								"flex items-center gap-1.5 [&>svg]:h-3 [&>svg]:w-3 [&>svg]:text-muted-foreground"
 							)}
@@ -308,7 +325,10 @@ const ChartLegendContent = React.forwardRef<
 									}}
 								/>
 							)}
-							{itemConfig?.label}
+							{itemConfig?.label ||
+								(isPayloadWithDireito(item.payload)
+									? item.payload?.direito
+									: null)}
 						</div>
 					);
 				})}

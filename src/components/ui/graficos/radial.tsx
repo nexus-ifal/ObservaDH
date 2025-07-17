@@ -5,6 +5,8 @@ import { LabelList, RadialBar, RadialBarChart } from "recharts";
 import {
 	ChartConfig,
 	ChartContainer,
+	ChartLegend,
+	ChartLegendContent,
 	ChartTooltip,
 	ChartTooltipContent,
 } from "@/components/external/ui-shacnui/chart";
@@ -41,7 +43,7 @@ interface DadosEstatisticosProps {
 
 export const Radial: React.FC<DadosEstatisticosProps> = ({ dados }) => {
 	return (
-		<div className="flex flex-col items-center justify-center w-1/2 mx-auto py-6 max-w-1/2">
+		<div className="flex items-center justify-between h-[31rem] py-6 w-[29rem]">
 			<ChartContainer config={chartConfig} className="w-full h-full">
 				<RadialBarChart
 					data={dados}
@@ -49,25 +51,37 @@ export const Radial: React.FC<DadosEstatisticosProps> = ({ dados }) => {
 					endAngle={380}
 					innerRadius={60}
 					outerRadius={200}
+					className=""
 				>
 					<ChartTooltip
 						cursor={false}
 						content={
 							<ChartTooltipContent
 								hideLabel
-								nameKey="direito"
+								nameKey="direito_sigla"
 								className="min-w-32"
 							/>
 						}
 					/>
+
 					<RadialBar dataKey="projetos" background>
 						<LabelList
 							position="insideStart"
-							dataKey="direito"
+							dataKey="direito_sigla"
 							className="fill-black font-semibold	capitalize mix-blend-luminosity"
 							fontSize={16}
 						/>
 					</RadialBar>
+
+					<ChartLegend
+						content={
+							<ChartLegendContent
+								className="text-white text-xl justify-around mt-[100px]"
+								nameKey="direito_sigla"
+								key="direito_sigla"
+							/>
+						}
+					/>
 				</RadialBarChart>
 			</ChartContainer>
 		</div>

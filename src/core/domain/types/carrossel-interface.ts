@@ -1,7 +1,7 @@
-import { ProjetoLei } from "./projeto-lei";
+import { ProjetoDTO } from "../dtos/dados.dto";
 
 interface CarrosselPlsProps {
-	projetos: ProjetoLei[];
+	projetos: ProjetoDTO[];
 }
 
 export type { CarrosselPlsProps };

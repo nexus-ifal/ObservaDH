@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export interface DadosProjetoEstado {
 	nome: string;
 	uf: string;
@@ -50,3 +51,25 @@ export interface DadosParaPesquisaParlamenta {
 	profissao?: string;
 	ordemProjetos?: "asc" | "desc";
 }
+
+export type DadosRadial = {
+	direito_nome: string;
+	direito_sigla: string;
+	projetos: number;
+};
+
+export type ProjetoDTO = {
+	id: string;
+	ano: string;
+	numeroPl: string;
+	pauta: string;
+	estado: string[];
+	parlamentar: string[];
+	ementa: string;
+};
+
+export type DadosProjetosDireitosIdeologias = {
+	projetos: ProjetoDTO[];
+	ideologias_valores: any[];
+	direitos_violados_valores: DadosRadial[];
+};

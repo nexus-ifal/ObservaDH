@@ -5,6 +5,7 @@ import {
 	DadosPautaPorAno,
 	DadosPlPorAno,
 	DadosProjetoEstado,
+	DadosProjetosDireitosIdeologias,
 	DadosReligiaoRaca,
 } from "../domain/dtos/dados.dto";
 import { DadosRepository } from "../repositories/dados.repository";
@@ -40,6 +41,11 @@ class DadosService implements DadosUseCase {
 	}
 	listarPautaPorEsfera(esfera?: string): Promise<DadosPautaEsfera[]> {
 		return this.adapter.listarPautaPorEsfera(esfera);
+	}
+	listarProjetosDireitosIdeologias(
+		pauta?: string
+	): Promise<DadosProjetosDireitosIdeologias> {
+		return this.adapter.listarProjetosDireitosIdeologias(pauta);
 	}
 }
 

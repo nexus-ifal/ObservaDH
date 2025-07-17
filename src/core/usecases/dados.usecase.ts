@@ -5,6 +5,7 @@ import {
 	DadosPautaPorAno,
 	DadosPlPorAno,
 	DadosProjetoEstado,
+	DadosProjetosDireitosIdeologias,
 	DadosReligiaoRaca,
 } from "@/core/domain/dtos/dados.dto";
 
@@ -18,5 +19,8 @@ interface DadosUseCase {
 		esfera?: string
 	): Promise<DadosParlamentarProjetosEsfera>;
 	listarPautaPorEsfera(esfera?: string): Promise<DadosPautaEsfera[]>;
+	listarProjetosDireitosIdeologias(
+		pauta?: string
+	): Promise<DadosProjetosDireitosIdeologias>;
 }
 export default DadosUseCase;
