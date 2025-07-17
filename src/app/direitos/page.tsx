@@ -32,13 +32,17 @@ import { usePauta } from "@/hooks/pauta/use-pauta";
 
 interface DadosEstatisticosProps {
 	elementosDropdown: { titulo: string; value: string }[];
-	dadosRadial: any[];
+	dadosRadial: DadosRadial[];
 	dadosGraficoVertical: DadosGraficoBarrasVertical[];
 	legendaPadrao: { resumo: string; texto: string };
 	isPautaSelecionada: boolean;
 	limparSearchParams: () => void;
 }
 
+interface DadosRadial {
+	label: string; // Example property, replace with actual structure
+	value: number; // Example property, replace with actual structure
+}
 interface CarrosselProps {
 	projetos: ProjetoDTO[];
 	isProjetosLoading: boolean;
