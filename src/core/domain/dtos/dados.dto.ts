@@ -71,5 +71,5 @@ export type ProjetoDTO = {
 export type DadosProjetosDireitosIdeologias = {
 	projetos: ProjetoDTO[];
 	ideologias_valores: any[];
-	direitos_violados_valores: any[];
+	direitos_violados_valores: DadosRadial[];
 };
