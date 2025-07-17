@@ -1,8 +1,8 @@
 "use client";
 
 import { Suspense, useEffect, useState } from "react";
-import { MdOutlineFilterAlt } from "react-icons/md";
 import { FaTrash } from "react-icons/fa6";
+import { MdOutlineFilterAlt } from "react-icons/md";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { Button } from "@/components/external/ui-shacnui/button";
@@ -23,11 +23,7 @@ import MainLayout from "@/components/ui/layouts/main-layout";
 import Loading from "@/components/ui/loading";
 import UserError from "@/components/ui/user-erro";
 
-import {
-	apresentacao,
-	legendas,
-	projetosMock,
-} from "../../mocks/mock-projetos";
+import { apresentacao, legendas } from "../../mocks/mock-projetos";
 
 import { ProjetoDTO } from "@/core/domain/dtos/dados.dto";
 import { ResponseEsferaDTO } from "@/core/domain/dtos/esfera.dto";
@@ -114,7 +110,6 @@ const Filtro = ({ items, limparSearchParams }: FiltroElementosProps) => (
 				variant="outline"
 				className="h-12 w-12 border-[#4568BE] rounded-se-xl rounded-es-xl hover:bg-red-600 duration-200 text-[#4568BE] hover:text-white"
 				onClick={limparSearchParams}
-
 			>
 				<FaTrash color="" />
 			</Button>
