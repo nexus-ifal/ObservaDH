@@ -48,7 +48,12 @@ export function mapApiDataToChartData(apiData: ApiDataItem[]) {
 	});
 }
 
-export function mapIdeologiasToChartData(apiData: any[]) {
+interface IdeologiaData {
+    pauta: string;
+    [key: string]: any; // Allow additional properties if needed
+}
+
+export function mapIdeologiasToChartData(apiData: IdeologiaData[]) {
 	const chartConfig = {
 		anti_mino: { label: "Anti_Mino", color: "#F693F9" },
 		coam: { label: "COAM", color: "#FDFF78" },
