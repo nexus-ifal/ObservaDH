@@ -290,6 +290,24 @@ const ChartLegendContent = React.forwardRef<
 				{payload.map((item, index) => {
 					const key = `${nameKey || item.dataKey || "value"}`;
 					const itemConfig = getPayloadConfigFromPayload(config, item, key);
+					function isPayloadWithDireito(
+						payload:
+							| {
+									strokeDasharray: string | number;
+									value?: any;
+									direito?: string;
+							  }
+							| undefined
+					): payload is {
+						strokeDasharray: string | number;
+						value?: any;
+						direito: string;
+					} {
+						return (
+							payload !== undefined && payload !== null && "direito" in payload
+						);
+					}
+
 					return (
 						<div
 							key={index}
@@ -307,7 +325,10 @@ const ChartLegendContent = React.forwardRef<
 									}}
 								/>
 							)}
-							{itemConfig?.label || (isPayloadWithDireito(item.payload) ? item.payload.direito : null)}
+							{itemConfig?.label ||
+								(isPayloadWithDireito(item.payload)
+									? item.payload?.direito
+									: null)}
 						</div>
 					);
 				})}

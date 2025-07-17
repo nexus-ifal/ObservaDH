@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 interface ApiDataItem {
-    direito_sigla: string;
-    direito_nome: string;
-    projetos: number;
+	direito_sigla: string;
+	direito_nome: string;
+	projetos: number;
 }
 
 export function mapApiDataToChartData(apiData: ApiDataItem[]) {
@@ -49,8 +49,8 @@ export function mapApiDataToChartData(apiData: ApiDataItem[]) {
 }
 
 interface IdeologiaData {
-    pauta: string;
-    [key: string]: any; // Allow additional properties if needed
+	pauta: string;
+	[key: string]: any; // Allow additional properties if needed
 }
 
 export function mapIdeologiasToChartData(apiData: IdeologiaData[]) {

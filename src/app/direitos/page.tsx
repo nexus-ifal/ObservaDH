@@ -235,7 +235,10 @@ const Direitos: React.FC = () => {
 			setProjetos(projetosDireitosIdeologias.projetos || []);
 			setIdeologias(projetosDireitosIdeologias.ideologias_valores || []);
 			setDireitosViolados(
-				projetosDireitosIdeologias.direitos_violados_valores || []
+				projetosDireitosIdeologias.direitos_violados_valores?.map((item) => ({
+					label: item.direito,
+					value: item.projetos,
+				})) || []
 			);
 		}
 	}, [projetosDireitosIdeologias]);
