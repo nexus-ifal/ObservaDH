@@ -1,5 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export function mapApiDataToChartData(apiData: any[]) {
+interface ApiDataItem {
+    direito_sigla: string;
+    direito_nome: string;
+    projetos: number;
+}
+
+export function mapApiDataToChartData(apiData: ApiDataItem[]) {
 	const chartConfig = {
 		projetos: {
 			label: "projetos",
