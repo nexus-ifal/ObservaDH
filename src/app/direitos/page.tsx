@@ -219,7 +219,7 @@ const Direitos: React.FC = () => {
 
 	const [projetos, setProjetos] = useState<ProjetoDTO[]>([]);
 	const [ideologias, setIdeologias] = useState<any[]>([]);
-	const [direitosViolados, setDireitosViolados] = useState<any[]>([]);
+	const [direitosViolados, setDireitosViolados] = useState<DadosRadial[]>([]);
 
 	const elementosDropdown =
 		pautas?.map((pauta) => ({
