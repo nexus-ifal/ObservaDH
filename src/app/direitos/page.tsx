@@ -3,7 +3,7 @@
 
 import { Suspense, useEffect, useState } from "react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import {
 	Carousel,
@@ -28,6 +28,8 @@ import { DadosGraficoBarrasVertical } from "@/core/domain/types/barras-vertical"
 import { CarrosselPlsProps } from "@/core/domain/types/carrossel-interface";
 import { useProjetosDireitosIdeologias } from "@/hooks/dados/use-projetos-direitos-ideologias";
 import { usePauta } from "@/hooks/pauta/use-pauta";
+import { Button } from "@/components/external/ui-shacnui/button";
+import { FaTrash } from "react-icons/fa6";
 
 function Page() {
 	return (
@@ -49,7 +51,7 @@ const Direitos: React.FC = () => {
 
 	const searchParams = useSearchParams();
 	const pautaId = searchParams.get("pauta") || undefined;
-
+	const isPautaSelecionada = !!pautaId;
 	const {
 		projetosDireitosIdeologias,
 		isLoadingProjetosDireitosIdeologias,
@@ -72,6 +74,16 @@ const Direitos: React.FC = () => {
 		}
 	}, [projetosDireitosIdeologias]);
 
+	const { replace } = useRouter();
+
+	const pathName = usePathname();
+
+	const limparSearchParams = () => {
+		const params = new URLSearchParams(searchParams.toString());
+		params.delete("pauta");
+		replace(`${pathName}?${params.toString()}`, { scroll: false });
+	};
+
 	return (
 		<MainLayout>
 			<div className="flex flex-col h-full w-full gap-24 px-10 justify-center items-center">
@@ -88,6 +100,8 @@ const Direitos: React.FC = () => {
 					<Loading />
 				) : (
 					<DadosEstatisticos
+						limparSearchParams={limparSearchParams}
+						isPautaSelecionada={isPautaSelecionada}
 						dadosGraficoVertical={ideologias}
 						dadosRadial={direitosViolados}
 						elementosDropdown={elementosDropdown}
@@ -105,6 +119,8 @@ interface DadosEstatisticosProps {
 	dadosRadial: any[];
 	dadosGraficoVertical: DadosGraficoBarrasVertical[];
 	legendaPadrao: { resumo: string; texto: string };
+	isPautaSelecionada: boolean;
+	limparSearchParams: () => void;
 }
 
 const DadosEstatisticos = ({
@@ -112,16 +128,29 @@ const DadosEstatisticos = ({
 	dadosRadial,
 	dadosGraficoVertical,
 	legendaPadrao,
+	isPautaSelecionada,
+	limparSearchParams,
 }: DadosEstatisticosProps) => (
 	<>
 		<section className="w-full h-full flex flex-col justify-center">
 			<div className="w-full">
-				<DropdownButton
-					className="w-32"
-					titulo="Pauta"
-					param="pauta"
-					elementos={elementosDropdown}
-				/>
+				<div className="flex flex-row items-center gap-2">
+					<DropdownButton
+						className="w-32"
+						titulo="Pauta"
+						param="pauta"
+						elementos={elementosDropdown}
+					/>
+					{isPautaSelecionada && (
+						<Button
+							variant="outline"
+							className="h-12 w-12 rounded-se-xl rounded-es-xl hover:bg-red-600 duration-200 bg-white"
+							onClick={limparSearchParams}
+						>
+							<FaTrash />
+						</Button>
+					)}
+				</div>
 			</div>
 			<div className="flex flex-row w-full items-center justify-center gap-2 h-full">
 				<div className="flex gap-[4.5rem] justify-center">
