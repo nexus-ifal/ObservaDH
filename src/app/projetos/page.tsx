@@ -2,7 +2,8 @@
 
 import { Suspense, useEffect, useState } from "react";
 import { MdOutlineFilterAlt } from "react-icons/md";
-import { useSearchParams } from "next/navigation";
+import { FaTrash } from "react-icons/fa6";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { Button } from "@/components/external/ui-shacnui/button";
 import {
@@ -42,155 +43,7 @@ import { useProjetoPorAno } from "@/hooks/dados/use-projeto-por-ano";
 import { useEstado } from "@/hooks/estado/use-estado";
 import { usePauta } from "@/hooks/pauta/use-pauta";
 import { buscarEsferas } from "@/infra/api/esfera";
-
-const Page: React.FC = () => (
-	<Suspense fallback={<div>Carregando página...</div>}>
-		<PageContent />
-	</Suspense>
-);
-
-export default Page;
-
-const PageContent = () => {
-	const [esferas, setEsferas] = useState<ResponseEsferaDTO[]>([]);
-	const [anos, setAnos] = useState<string[]>([]);
-
-	const { estados, isLoadingEstados, error: errorEstado } = useEstado();
-
-	const { pautas, isLoadingPautas, error: errorPauta } = usePauta();
-	const searchParams = useSearchParams();
-	const esfera = searchParams.get("esfera");
-
-	const {
-		projetosPorAno,
-		isLoadingProjetosPorAno,
-		error: projetoPorAnoError,
-	} = useProjetoPorAno();
-
-	const {
-		pautaPorAno,
-		isLoadingPautaPorAno,
-		error: pautaPorAnoError,
-	} = usePautaPorAno();
-
-	const {
-		projetosPorUF,
-		isLoadingProjetosPorUF,
-		error: projetoPorEstadoError,
-	} = useProjetoEstado(esfera ?? undefined);
-
-	const {
-		parlamentarProjetoEsfera,
-		isLoadingParlamentarProjetoEsfera,
-		error: errorParlamentarProjeto,
-	} = useParlamentarProjeto(esfera ?? undefined);
-
-	const {
-		pautaEsfera,
-		isLoadingPautaEsfera,
-		error: errorPautaEsfera,
-	} = usePautaEsfera(esfera ?? undefined);
-	const isLoading =
-		isLoadingProjetosPorUF &&
-		isLoadingProjetosPorAno &&
-		isLoadingPautaPorAno &&
-		isLoadingPautas &&
-		isLoadingEstados &&
-		isLoadingParlamentarProjetoEsfera &&
-		isLoadingPautaEsfera;
-
-	const error =
-		projetoPorEstadoError ||
-		projetoPorAnoError ||
-		pautaPorAnoError ||
-		errorEstado ||
-		errorPauta ||
-		errorPautaEsfera ||
-		errorParlamentarProjeto;
-
-	useEffect(() => {
-		const buscarDados = async () => {
-			const esferasData = await buscarEsferas();
-
-			//! mock
-			const anosMock = ["2021", "2022", "2023", "2024"];
-
-			setAnos(anosMock);
-			setEsferas(esferasData);
-		};
-
-		buscarDados();
-	}, []);
-
-	const esferasElementos = esferas.map((esfera) => ({
-		titulo: esfera.nome ?? "",
-		value: esfera.id ?? "",
-	}));
-	const anosElementos = anos.map((ano) => ({
-		titulo: ano ?? "",
-		value: ano ?? "",
-	}));
-	const estadosElementos = estados?.map((estado) => ({
-		titulo: estado.nome ?? "",
-		value: estado.id ?? "",
-	}));
-	const pautasElementos = pautas?.map((pauta) => ({
-		titulo: pauta.nome ?? "",
-		value: pauta.id ?? "",
-	}));
-
-	const dropdownItems = [
-		{ titulo: "Esfera", elementos: esferasElementos, param: "esfera" },
-		{ titulo: "Ano", elementos: anosElementos, param: "ano" },
-		{ titulo: "Estado", elementos: estadosElementos ?? [], param: "estado" },
-		{ titulo: "Pauta", elementos: pautasElementos ?? [], param: "pauta" },
-	];
-
-	return (
-		<MainLayout>
-			<div className="flex h-full w-full flex-col gap-24 items-center px-11">
-				<Apresentacao apresentacao={apresentacao} />
-				{error && <UserError error={error} />}
-				{isLoading ? (
-					<Loading />
-				) : (
-					<>
-						<GraficoMapa
-							dadosMapa={projetosPorUF ?? []}
-							dadosStatus={{
-								dadosProjetoPoliticoPorEsfera: parlamentarProjetoEsfera ?? {
-									esfera: "",
-									parlamentares: 0,
-									projetosLei: 0,
-								},
-								dadosPautaEsfera: pautaEsfera ?? [],
-							}}
-							isLoadingDadosMapa={isLoadingProjetosPorUF}
-							isLoadingDadosStatus={
-								isLoadingParlamentarProjetoEsfera || isLoadingPautaEsfera
-							}
-							errorMapa={projetoPorEstadoError?.message}
-							errorStatus={
-								errorParlamentarProjeto?.message || errorPautaEsfera?.message
-							}
-						/>
-						<Divisor />
-						<Suspense fallback={<div>Carregando filtros...</div>}>
-							<PropostasDados
-								items={dropdownItems}
-								projetos={projetosMock as unknown as ProjetoDTO[]}
-								dadosPlAno={projetosPorAno ?? []}
-								dadosPautas={pautaPorAno ?? []}
-							/>
-						</Suspense>
-					</>
-				)}
-			</div>
-		</MainLayout>
-	);
-};
-
-interface apresentacaoProps {
+interface ApresentacaoProps {
 	apresentacao: {
 		subtitulo: string;
 		titulo: string;
@@ -199,7 +52,36 @@ interface apresentacaoProps {
 	};
 }
 
-const Apresentacao = ({ apresentacao }: apresentacaoProps) => (
+interface FiltroElementosProps {
+	items: {
+		elementos: elemento[];
+		titulo: string;
+		param: string;
+	}[];
+	limparSearchParams: () => void;
+}
+
+interface NumeroPlsProps {
+	dados: DadosGraficoLinhaPontos[];
+}
+
+interface NumeroPautasProps {
+	dados: DadosGraficoBarraEmpilhadaHorizontal[];
+}
+
+interface PropostasDadosProps {
+	items: {
+		elementos: elemento[];
+		titulo: string;
+		param: string;
+	}[];
+	projetos: ProjetoDTO[];
+	dadosPlAno: DadosGraficoLinhaPontos[];
+	dadosPautas: DadosGraficoBarraEmpilhadaHorizontal[];
+	limparSearchParams: () => void;
+}
+
+const Apresentacao = ({ apresentacao }: ApresentacaoProps) => (
 	<section>
 		<Card.Apresentacao
 			subtitulo={apresentacao.subtitulo}
@@ -211,15 +93,7 @@ const Apresentacao = ({ apresentacao }: apresentacaoProps) => (
 	</section>
 );
 
-interface FiltroElementosProps {
-	items: {
-		elementos: elemento[];
-		titulo: string;
-		param: string;
-	}[];
-}
-
-const Filtro = ({ items }: FiltroElementosProps) => (
+const Filtro = ({ items, limparSearchParams }: FiltroElementosProps) => (
 	<section className="w-full flex items-center justify-start gap-24">
 		<section className="flex gap-12 px-10">
 			{items.map((item, index) => (
@@ -232,9 +106,19 @@ const Filtro = ({ items }: FiltroElementosProps) => (
 				/>
 			))}
 		</section>
-		<Button className="flex flex-row justify-center border-[#D974FD] text-[#D974FD] bg-transparent border-[1px] rounded-[3px] w-32 h-12 hover:bg-inherit active:text-white active:bg-[#D974FD] transition-colors duration-75">
-			Filtrar <MdOutlineFilterAlt />
-		</Button>
+		<div className="flex flex-row items-center gap-2">
+			<Button className="flex flex-row justify-center border-[#D974FD] text-[#D974FD] bg-transparent border-[1px] rounded-[3px] w-32 h-12 hover:bg-inherit active:text-white active:bg-[#D974FD] transition-colors duration-75">
+				Filtrar <MdOutlineFilterAlt />
+			</Button>
+			<Button
+				variant="outline"
+				className="h-12 w-12 border-[#4568BE] rounded-se-xl rounded-es-xl hover:bg-red-600 duration-200 text-[#4568BE] hover:text-white"
+				onClick={limparSearchParams}
+
+			>
+				<FaTrash color="" />
+			</Button>
+		</div>
 	</section>
 );
 
@@ -266,10 +150,7 @@ const SubTitulo = () => (
 	</Texto.Raiz>
 );
 
-interface numeroPlsProps {
-	dados: DadosGraficoLinhaPontos[];
-}
-const NumeroPls = ({ dados }: numeroPlsProps) => (
+const NumeroPls = ({ dados }: NumeroPlsProps) => (
 	<section className="w-full flex justify-center gap-[4.5rem]">
 		<Card.Legenda
 			corTexto={legendas.find((item) => item.titulo === "PL's")?.cor}
@@ -293,11 +174,7 @@ const NumeroPls = ({ dados }: numeroPlsProps) => (
 	</section>
 );
 
-interface numeroPautasProps {
-	dados: DadosGraficoBarraEmpilhadaHorizontal[];
-}
-
-const NumeroPautas = ({ dados }: numeroPautasProps) => (
+const NumeroPautas = ({ dados }: NumeroPautasProps) => (
 	<section className="w-full flex justify-center gap-[4.5rem]">
 		<GraficoBarraEmpilhadaHorizontal dados={dados} />
 		<Card.Legenda
@@ -323,28 +200,225 @@ const NumeroPautas = ({ dados }: numeroPautasProps) => (
 	</section>
 );
 
-interface PropostasDadosProps {
-	items: {
-		elementos: elemento[];
-		titulo: string;
-		param: string;
-	}[];
-	projetos: ProjetoDTO[];
-	dadosPlAno: DadosGraficoLinhaPontos[];
-	dadosPautas: DadosGraficoBarraEmpilhadaHorizontal[];
-}
-
 const PropostasDados = ({
 	items,
 	projetos,
 	dadosPlAno,
 	dadosPautas,
+	limparSearchParams,
 }: PropostasDadosProps) => (
 	<>
 		<SubTitulo />
-		<Filtro items={items} />
+		<Filtro items={items} limparSearchParams={limparSearchParams} />
 		<CarrosselPls projetos={projetos} />
 		<NumeroPls dados={dadosPlAno} />
 		<NumeroPautas dados={dadosPautas} />
 	</>
 );
+
+const usePageData = () => {
+	const [esferas, setEsferas] = useState<ResponseEsferaDTO[]>([]);
+	const [anos, setAnos] = useState<string[]>([]);
+
+	const searchParams = useSearchParams();
+	const esfera = searchParams.get("esfera");
+
+	const { estados, isLoadingEstados, error: errorEstado } = useEstado();
+	const { pautas, isLoadingPautas, error: errorPauta } = usePauta();
+
+	const {
+		projetosPorAno,
+		isLoadingProjetosPorAno,
+		error: projetoPorAnoError,
+	} = useProjetoPorAno();
+
+	const {
+		pautaPorAno,
+		isLoadingPautaPorAno,
+		error: pautaPorAnoError,
+	} = usePautaPorAno();
+
+	const {
+		projetosPorUF,
+		isLoadingProjetosPorUF,
+		error: projetoPorEstadoError,
+	} = useProjetoEstado(esfera ?? undefined);
+
+	const {
+		parlamentarProjetoEsfera,
+		isLoadingParlamentarProjetoEsfera,
+		error: errorParlamentarProjeto,
+	} = useParlamentarProjeto(esfera ?? undefined);
+
+	const {
+		pautaEsfera,
+		isLoadingPautaEsfera,
+		error: errorPautaEsfera,
+	} = usePautaEsfera(esfera ?? undefined);
+
+	const isLoading =
+		isLoadingProjetosPorUF ||
+		isLoadingProjetosPorAno ||
+		isLoadingPautaPorAno ||
+		isLoadingPautas ||
+		isLoadingEstados ||
+		isLoadingParlamentarProjetoEsfera ||
+		isLoadingPautaEsfera;
+
+	const error =
+		projetoPorEstadoError ||
+		projetoPorAnoError ||
+		pautaPorAnoError ||
+		errorEstado ||
+		errorPauta ||
+		errorPautaEsfera ||
+		errorParlamentarProjeto;
+
+	//TODO: trazer dados do backend
+	useEffect(() => {
+		const buscarDados = async () => {
+			const esferasData = await buscarEsferas();
+			const anosMock = ["2021", "2022", "2023", "2024"];
+
+			setAnos(anosMock);
+			setEsferas(esferasData);
+		};
+
+		buscarDados();
+	}, []);
+
+	return {
+		esferas,
+		anos,
+		estados,
+		pautas,
+		projetosPorAno,
+		pautaPorAno,
+		projetosPorUF,
+		parlamentarProjetoEsfera,
+		pautaEsfera,
+		isLoading,
+		error,
+	};
+};
+
+const PageContent = () => {
+	const {
+		esferas,
+		anos,
+		estados,
+		pautas,
+		projetosPorAno,
+		pautaPorAno,
+		projetosPorUF,
+		parlamentarProjetoEsfera,
+		pautaEsfera,
+		isLoading,
+		error,
+	} = usePageData();
+
+	const { replace } = useRouter();
+	const pathName = usePathname();
+	const searchParams = useSearchParams();
+
+	//? Transformar dados para dropdowns
+	const esferasElementos = esferas.map((esfera) => ({
+		titulo: esfera.nome ?? "",
+		value: esfera.id ?? "",
+	}));
+
+	const anosElementos = anos.map((ano) => ({
+		titulo: ano ?? "",
+		value: ano ?? "",
+	}));
+
+	const estadosElementos = estados?.map((estado) => ({
+		titulo: estado.nome ?? "",
+		value: estado.id ?? "",
+	}));
+
+	const pautasElementos = pautas?.map((pauta) => ({
+		titulo: pauta.nome ?? "",
+		value: pauta.id ?? "",
+	}));
+
+	const dropdownItems = [
+		{ titulo: "Esfera", elementos: esferasElementos, param: "esfera" },
+		{ titulo: "Ano", elementos: anosElementos, param: "ano" },
+		{ titulo: "Estado", elementos: estadosElementos ?? [], param: "estado" },
+		{ titulo: "Pauta", elementos: pautasElementos ?? [], param: "pauta" },
+	];
+
+	const limparSearchParams = () => {
+		const params = new URLSearchParams(searchParams.toString());
+		params.delete("pauta");
+		replace(`${pathName}?${params.toString()}`, { scroll: false });
+	};
+
+	//? Renderizações condicionais
+	if (error) {
+		return (
+			<MainLayout>
+				<div className="flex h-full w-full flex-col gap-24 items-center px-11">
+					<Apresentacao apresentacao={apresentacao} />
+					<UserError error={error} />
+				</div>
+			</MainLayout>
+		);
+	}
+
+	if (isLoading) {
+		return (
+			<MainLayout>
+				<div className="flex h-full w-full flex-col gap-24 items-center px-11">
+					<Apresentacao apresentacao={apresentacao} />
+					<Loading />
+				</div>
+			</MainLayout>
+		);
+	}
+
+	return (
+		<MainLayout>
+			<div className="flex h-full w-full flex-col gap-24 items-center px-11">
+				<Apresentacao apresentacao={apresentacao} />
+
+				<GraficoMapa
+					dadosMapa={projetosPorUF ?? []}
+					dadosStatus={{
+						dadosProjetoPoliticoPorEsfera: parlamentarProjetoEsfera ?? {
+							esfera: "",
+							parlamentares: 0,
+							projetosLei: 0,
+						},
+						dadosPautaEsfera: pautaEsfera ?? [],
+					}}
+					isLoadingDadosMapa={false}
+					isLoadingDadosStatus={false}
+					errorMapa={undefined}
+					errorStatus={undefined}
+				/>
+
+				<Divisor />
+
+				<Suspense fallback={<div>Carregando filtros...</div>}>
+					<PropostasDados
+						limparSearchParams={limparSearchParams}
+						items={dropdownItems}
+						projetos={[]}
+						dadosPlAno={projetosPorAno ?? []}
+						dadosPautas={pautaPorAno ?? []}
+					/>
+				</Suspense>
+			</div>
+		</MainLayout>
+	);
+};
+
+const Page: React.FC = () => (
+	<Suspense fallback={<div>Carregando página...</div>}>
+		<PageContent />
+	</Suspense>
+);
+
+export default Page;
