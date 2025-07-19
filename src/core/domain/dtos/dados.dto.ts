@@ -73,3 +73,7 @@ export type DadosProjetosDireitosIdeologias = {
 	ideologias_valores: any[];
 	direitos_violados_valores: DadosRadial[];
 };
+
+export type AnoDTO = {
+	ano: string;
+};
