@@ -1,3 +1,4 @@
+import { FiltrosProjetos, ProjetoDTO } from "../domain/dtos/dados.dto";
 import {
 	CreateProjetoDTO,
 	ResponseProjetoDTO,
@@ -34,6 +35,10 @@ class ProjetoService implements ProjetoUseCase {
 
 	buscar(id: string): Promise<ResponseProjetoDTO | null> {
 		return this.adapter.buscar(id);
+	}
+
+	filtrar(filtros?: FiltrosProjetos): Promise<ProjetoDTO[]> {
+		return this.adapter.filtrar(filtros);
 	}
 }
 

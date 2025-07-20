@@ -1,3 +1,5 @@
+import { FiltrosProjetos, ProjetoDTO } from "../domain/dtos/dados.dto";
+
 import {
 	CreateProjetoDTO,
 	ResponseProjetoDTO,
@@ -10,6 +12,7 @@ interface ProjetoUseCase {
 	atualizar(id: string, projeto: UpdateProjetoDTO): Promise<ResponseProjetoDTO>;
 	excluir(id: string): Promise<ResponseProjetoDTO>;
 	buscar(id: string): Promise<ResponseProjetoDTO | null>;
+	filtrar(filtros?: FiltrosProjetos): Promise<ProjetoDTO[]>;
 }
 
 export default ProjetoUseCase;

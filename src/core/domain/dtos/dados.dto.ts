@@ -77,3 +77,10 @@ export type DadosProjetosDireitosIdeologias = {
 export type AnoDTO = {
 	ano: string;
 };
+
+export type FiltrosProjetos = {
+	esferaId?: string;
+	ano?: string;
+	estadoId?: string;
+	pautaId?: string;
+};

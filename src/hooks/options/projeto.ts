@@ -4,6 +4,7 @@ import DIContainer from "../../config/dicontainer";
 import { mutationOptions } from "../../utils/mutation/utils";
 import { MutationVariables } from "../../utils/mutation/utils";
 
+import { FiltrosProjetos } from "@/core/domain/dtos/dados.dto";
 import {
 	CreateProjetoDTO,
 	UpdateProjetoDTO,
@@ -63,4 +64,10 @@ export const BuscarProjetoOptions = (id: string) =>
 	queryOptions({
 		queryKey: [...getProjetoBaseQueryKey(), "buscarProjeto"],
 		queryFn: () => usecase.buscar(id),
+	});
+
+export const FiltrarProjetosOptions = (filtros?: FiltrosProjetos) =>
+	queryOptions({
+		queryKey: [...getProjetoBaseQueryKey(), "filtrarProjetos", filtros],
+		queryFn: () => usecase.filtrar(filtros),
 	});
