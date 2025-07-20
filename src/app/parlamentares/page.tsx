@@ -100,7 +100,6 @@ const PageContent: React.FC = () => {
 				params.set(key, value);
 			}
 		});
-		console.log("Filtros aplicados:", filtrosNovos);
 		router.replace(`${pathname}?${params.toString()}`, { scroll: false });
 	}
 
@@ -322,7 +321,7 @@ const Filtro = ({
 				</section>
 				<Button
 					className="flex flex-row justify-center border-[#D974FD] text-[#D974FD] bg-transparent border-[1px] rounded-[3px] w-32 h-12 hover:bg-inherit active:text-white active:bg-[#D974FD] transition-colors duration-75 mt-4 sm:mt-0"
-					onClick={aplicarFiltros}
+					onClick={() => aplicarFiltros()}
 				>
 					Filtrar <MdOutlineFilterAlt />
 				</Button>
