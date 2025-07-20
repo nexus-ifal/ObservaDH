@@ -23,8 +23,9 @@ import MainLayout from "@/components/ui/layouts/main-layout";
 import Loading from "@/components/ui/loading";
 import UserError from "@/components/ui/user-erro";
 
-import { apresentacao, legendas } from "../../mocks/mock-projetos";
+import { apresentacao } from "../../mocks/mock-projetos";
 
+import { legendasGraficosProjetos } from "@/content/content-projetos";
 import { ProjetoDTO } from "@/core/domain/dtos/dados.dto";
 import { ResponseEsferaDTO } from "@/core/domain/dtos/esfera.dto";
 import { DadosGraficoBarraEmpilhadaHorizontal } from "@/core/domain/types/barra-empilhada-horizontal";
@@ -147,11 +148,7 @@ const SubTitulo = () => (
 
 const NumeroPls = ({ dados }: NumeroPlsProps) => (
 	<section className="w-full flex justify-center gap-[4.5rem]">
-		<Card.Legenda
-			corTexto={legendas.find((item) => item.titulo === "PL's")?.cor}
-			texto={legendas.find((item) => item.titulo === "PL's")?.texto}
-			resumo={legendas.find((item) => item.titulo === "PL's")?.resumo}
-		>
+		<Card.Legenda legenda={legendasGraficosProjetos[0]}>
 			<Texto.Raiz className="text-6xl">
 				<Texto.Linha>
 					<Texto.Forte.Oswald>{"Número"}</Texto.Forte.Oswald>
@@ -172,11 +169,7 @@ const NumeroPls = ({ dados }: NumeroPlsProps) => (
 const NumeroPautas = ({ dados }: NumeroPautasProps) => (
 	<section className="w-full flex justify-center gap-[4.5rem]">
 		<GraficoBarraEmpilhadaHorizontal dados={dados} />
-		<Card.Legenda
-			corTexto={legendas.find((item) => item.titulo === "Pautas")?.cor}
-			texto={legendas.find((item) => item.titulo === "Pautas")?.texto}
-			resumo={legendas.find((item) => item.titulo === "Pautas")?.resumo}
-		>
+		<Card.Legenda legenda={legendasGraficosProjetos[1]}>
 			<div>
 				<Texto.Raiz className="text-6xl w-[374px]">
 					<Texto.Linha className="w-full">
