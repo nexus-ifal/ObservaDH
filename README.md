@@ -26,8 +26,7 @@ Desenvolver o **Observatório Digital de Discurso e Direitos Humanos**, uma plat
 - **Linguagem**: TypeScript
 - **Banco de Dados**: Prisma e Postgre
 - **Frontend**: React e Next
-- **Backend**: Next
-- **Visualização de Dados**: a definir...
+- **Backend**: Node e TypeScript
 
 ## Metodologia
 
