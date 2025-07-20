@@ -17,7 +17,7 @@ export async function GET(request: Request) {
 			estadoId || undefined,
 			pautaId || undefined
 		);
-		
+
 		return NextResponse.json(resposta, {
 			status: resposta.sucesso ? 200 : 404,
 		});

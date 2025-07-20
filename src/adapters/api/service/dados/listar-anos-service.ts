@@ -14,14 +14,14 @@ export class ListarAnosService implements IListarAnosService {
 				select: {
 					ano: true,
 				},
-				distinct: ['ano'],
+				distinct: ["ano"],
 				orderBy: {
-					ano: 'desc',
+					ano: "desc",
 				},
 			});
 
-			return anos.map(projeto => ({
-				ano: projeto.ano
+			return anos.map((projeto) => ({
+				ano: projeto.ano,
 			}));
 		} finally {
 			await prisma.$disconnect();

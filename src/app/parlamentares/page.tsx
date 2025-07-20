@@ -100,6 +100,7 @@ const PageContent: React.FC = () => {
 				params.set(key, value);
 			}
 		});
+		console.log("Filtros aplicados:", filtrosNovos);
 		router.replace(`${pathname}?${params.toString()}`, { scroll: false });
 	}
 
@@ -117,6 +118,7 @@ const PageContent: React.FC = () => {
 			...filtros,
 			ordenacaoProjetos: nextOrd,
 		};
+
 		setFiltros(novosFiltros);
 		aplicarFiltros(novosFiltros);
 	}

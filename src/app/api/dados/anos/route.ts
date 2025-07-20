@@ -6,7 +6,7 @@ export async function GET() {
 	try {
 		const controller = new ListarAnosController();
 		const resposta = await controller.executar();
-		
+
 		return NextResponse.json(resposta, {
 			status: resposta.sucesso ? 200 : 404,
 		});
@@ -21,3 +21,5 @@ export async function GET() {
 		);
 	}
 }
+
+

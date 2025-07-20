@@ -1,6 +1,6 @@
 import {
-	IFiltrarProjetosService,
 	FiltrarProjetosService,
+	IFiltrarProjetosService,
 } from "../../service/dados/filtrar-projetos-service";
 
 import { RespostaApi } from "@/core/domain/models/resposta-api";
@@ -32,16 +32,17 @@ export class FiltrarProjetosController implements IFiltrarProjetosController {
 				estadoId,
 				pautaId
 			);
-			
+
 			const filtrosAplicados = [];
 			if (esferaId) filtrosAplicados.push(`esfera: ${esferaId}`);
 			if (ano) filtrosAplicados.push(`ano: ${ano}`);
 			if (estadoId) filtrosAplicados.push(`estado: ${estadoId}`);
 			if (pautaId) filtrosAplicados.push(`pauta: ${pautaId}`);
 
-			const mensagem = filtrosAplicados.length > 0 
-				? `Projetos filtrados por ${filtrosAplicados.join(", ")}`
-				: "Todos os projetos";
+			const mensagem =
+				filtrosAplicados.length > 0
+					? `Projetos filtrados por ${filtrosAplicados.join(", ")}`
+					: "Todos os projetos";
 
 			return new RespostaApi({
 				sucesso: true,
