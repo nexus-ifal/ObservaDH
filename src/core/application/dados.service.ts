@@ -47,6 +47,9 @@ class DadosService implements DadosUseCase {
 	): Promise<DadosProjetosDireitosIdeologias> {
 		return this.adapter.listarProjetosDireitosIdeologias(pauta);
 	}
+	listarAnos(): Promise<{ ano: string }[]> {
+		return this.adapter.listarAnos();
+	}
 }
 
 export default DadosService;

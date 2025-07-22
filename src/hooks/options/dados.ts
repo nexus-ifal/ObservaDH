@@ -68,3 +68,8 @@ export const listarProjetosDireitosIdeologiasOptions = (
 			: [],
 	}),
 });
+
+export const listarAnosOptions = () => ({
+	queryKey: [...getDadosBaseQueryKey(), "listarAnos"],
+	queryFn: () => usecase.listarAnos(),
+});

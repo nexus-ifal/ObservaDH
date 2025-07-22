@@ -22,5 +22,6 @@ interface DadosUseCase {
 	listarProjetosDireitosIdeologias(
 		pauta?: string
 	): Promise<DadosProjetosDireitosIdeologias>;
+	listarAnos(): Promise<{ ano: string }[]>;
 }
 export default DadosUseCase;
