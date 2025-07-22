@@ -31,6 +31,7 @@ import { DadosGraficoBarraEmpilhadaHorizontal } from "@/core/domain/types/barra-
 import { CarrosselPlsProps } from "@/core/domain/types/carrossel-interface";
 import { elemento } from "@/core/domain/types/elemento-dropdown";
 import { DadosGraficoLinhaPontos } from "@/core/domain/types/linha-pontos";
+import { useAnos } from "@/hooks/dados/use-anos";
 import { useParlamentarProjeto } from "@/hooks/dados/use-parlamentar-projeto-esfera";
 import { usePautaEsfera } from "@/hooks/dados/use-pauta-esfera";
 import { usePautaPorAno } from "@/hooks/dados/use-pauta-por-ano";
@@ -213,13 +214,15 @@ const PropostasDados = ({
 
 const usePageData = () => {
 	const [esferas, setEsferas] = useState<ResponseEsferaDTO[]>([]);
-	const [anos, setAnos] = useState<string[]>([]);
 
 	const searchParams = useSearchParams();
 	const esfera = searchParams.get("esfera");
 
 	const { estados, isLoadingEstados, error: errorEstado } = useEstado();
 	const { pautas, isLoadingPautas, error: errorPauta } = usePauta();
+	const { anos, isLoading: isLoadingAnos, error: errorAnos } = useAnos();
+
+	console.log("ANOS: ", anos);
 
 	const {
 		projetosPorAno,
@@ -258,7 +261,8 @@ const usePageData = () => {
 		isLoadingPautas ||
 		isLoadingEstados ||
 		isLoadingParlamentarProjetoEsfera ||
-		isLoadingPautaEsfera;
+		isLoadingPautaEsfera ||
+		isLoadingAnos;
 
 	const error =
 		projetoPorEstadoError ||
@@ -267,15 +271,14 @@ const usePageData = () => {
 		errorEstado ||
 		errorPauta ||
 		errorPautaEsfera ||
-		errorParlamentarProjeto;
+		errorParlamentarProjeto ||
+		errorAnos;
 
 	//TODO: trazer dados do backend
 	useEffect(() => {
 		const buscarDados = async () => {
+			//GAMBIARRA: buscar esferas e anos apenas uma vez
 			const esferasData = await buscarEsferas();
-			const anosMock = ["2021", "2022", "2023", "2024"];
-
-			setAnos(anosMock);
 			setEsferas(esferasData);
 		};
 
@@ -322,9 +325,9 @@ const PageContent = () => {
 		value: esfera.id ?? "",
 	}));
 
-	const anosElementos = anos.map((ano) => ({
-		titulo: ano ?? "",
-		value: ano ?? "",
+	const anosElementos = anos?.map((ano: { ano: string }) => ({
+		titulo: ano.ano ?? "",
+		value: ano.ano ?? "",
 	}));
 
 	const estadosElementos = estados?.map((estado) => ({
@@ -338,10 +341,10 @@ const PageContent = () => {
 	}));
 
 	const dropdownItems = [
-		{ titulo: "Esfera", elementos: esferasElementos, param: "esfera" },
-		{ titulo: "Ano", elementos: anosElementos, param: "ano" },
-		{ titulo: "Estado", elementos: estadosElementos ?? [], param: "estado" },
-		{ titulo: "Pauta", elementos: pautasElementos ?? [], param: "pauta" },
+		{ titulo: "Esfera", elementos: esferasElementos ?? [], param: "esferaId" },
+		{ titulo: "Ano", elementos: anosElementos ?? [], param: "anoId" },
+		{ titulo: "Estado", elementos: estadosElementos ?? [], param: "estadoId" },
+		{ titulo: "Pauta", elementos: pautasElementos ?? [], param: "pautaId" },
 	];
 
 	const limparSearchParams = () => {
@@ -402,7 +405,7 @@ const PageContent = () => {
 				<Suspense fallback={<div>Carregando filtros...</div>}>
 					<PropostasDados
 						limparSearchParams={limparSearchParams}
-						items={dropdownItems}
+						items={dropdownItems ?? []}
 						projetos={[]}
 						dadosPlAno={projetosPorAno ?? []}
 						dadosPautas={pautaPorAno ?? []}
