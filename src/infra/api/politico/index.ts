@@ -35,7 +35,6 @@ class PoliticoAPI implements PoliticoRepository {
 	async listarFiltrados(
 		filtros: DadosParaPesquisaParlamenta
 	): Promise<ResponsePoliticoDTO[]> {
-		console.log("Filtros recebidos:", filtros);
 		const response = await conexaoBackend.get("/politico/dados", {
 			params: filtros,
 		});

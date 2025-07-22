@@ -222,8 +222,6 @@ const usePageData = () => {
 	const { pautas, isLoadingPautas, error: errorPauta } = usePauta();
 	const { anos, isLoading: isLoadingAnos, error: errorAnos } = useAnos();
 
-	console.log("ANOS: ", anos);
-
 	const {
 		projetosPorAno,
 		isLoadingProjetosPorAno,

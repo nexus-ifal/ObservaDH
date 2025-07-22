@@ -63,9 +63,7 @@ class DadosAPI implements DadosRepository {
 	}
 	async listarAnos(): Promise<{ ano: string }[]> {
 		const URL = "/dados/anos";
-		console.log("Fetching anos from API:", URL);
 		const response = await conexaoBackend.get(URL);
-		console.log("Response data:", response.data);
 		return response.data.dados;
 	}
 }
