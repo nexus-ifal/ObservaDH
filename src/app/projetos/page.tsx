@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 "use client";
 
-import { Suspense, useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { FaTrash } from "react-icons/fa6";
 import { MdOutlineFilterAlt } from "react-icons/md";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -25,10 +27,11 @@ import UserError from "@/components/ui/user-erro";
 
 import { apresentacao, legendas } from "../../mocks/mock-projetos";
 
+import TextoRaiz from "./../../components/ui/componente-texto/texto-raiz";
+
 import { ProjetoDTO } from "@/core/domain/dtos/dados.dto";
 import { ResponseEsferaDTO } from "@/core/domain/dtos/esfera.dto";
 import { DadosGraficoBarraEmpilhadaHorizontal } from "@/core/domain/types/barra-empilhada-horizontal";
-import { CarrosselPlsProps } from "@/core/domain/types/carrossel-interface";
 import { elemento } from "@/core/domain/types/elemento-dropdown";
 import { DadosGraficoLinhaPontos } from "@/core/domain/types/linha-pontos";
 import { useAnos } from "@/hooks/dados/use-anos";
@@ -39,10 +42,8 @@ import { useProjetoEstado } from "@/hooks/dados/use-projeto-estado";
 import { useProjetoPorAno } from "@/hooks/dados/use-projeto-por-ano";
 import { useEstado } from "@/hooks/estado/use-estado";
 import { usePauta } from "@/hooks/pauta/use-pauta";
-import { buscarEsferas } from "@/infra/api/esfera";
 import { useProjetosFiltrados } from "@/hooks/projeto/use-projetos-filtrados";
-import TextoRaiz from "./../../components/ui/componente-texto/texto-raiz";
-import TextoForte from "./../../components/ui/componente-texto/texto-forte";
+import { buscarEsferas } from "@/infra/api/esfera";
 
 interface ApresentacaoProps {
 	apresentacao: {
@@ -198,8 +199,8 @@ const CarrosselPls = ({
 								Não há projetos disponíveis
 							</Texto.Pequeno.Titillium>
 							<Texto.Espaco />
-							<Texto.Forte.Oswald>para exibição.</Texto.Forte.Oswald>
-						-</Texto.Linha>
+							<Texto.Forte.Oswald>para exibição.</Texto.Forte.Oswald>-
+						</Texto.Linha>
 					</TextoRaiz>
 				)}
 			</>
