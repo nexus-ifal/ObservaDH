@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import { FaTrash } from "react-icons/fa6";
 import { MdOutlineFilterAlt } from "react-icons/md";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -40,97 +40,170 @@ import { useProjetoPorAno } from "@/hooks/dados/use-projeto-por-ano";
 import { useEstado } from "@/hooks/estado/use-estado";
 import { usePauta } from "@/hooks/pauta/use-pauta";
 import { buscarEsferas } from "@/infra/api/esfera";
+import { useProjetosFiltrados } from "@/hooks/projeto/use-projetos-filtrados";
+import TextoRaiz from "./../../components/ui/componente-texto/texto-raiz";
+import TextoForte from "./../../components/ui/componente-texto/texto-forte";
+
 interface ApresentacaoProps {
 	apresentacao: {
-		subtitulo: string;
+		texto: string;
 		titulo: string;
 		corTexto: string;
-		texto: string;
+		subtitulo: string;
 	};
 }
-
 interface FiltroElementosProps {
 	items: {
 		elementos: elemento[];
 		titulo: string;
 		param: string;
 	}[];
+	errorFiltros: any;
+	isLoadingFiltros: boolean;
+	aplicarFiltros: () => void;
 	limparSearchParams: () => void;
+	filtros: Record<string, string>;
+	onFiltroChange: (param: string, value: string) => void;
 }
-
 interface NumeroPlsProps {
+	error?: any;
+	isLoading: boolean;
 	dados: DadosGraficoLinhaPontos[];
 }
-
 interface NumeroPautasProps {
+	error?: any;
+	isLoading: boolean;
 	dados: DadosGraficoBarraEmpilhadaHorizontal[];
 }
-
 interface PropostasDadosProps {
+	errorPlAno?: any;
+	errorFiltros: any;
+	errorPautas?: any;
+	errorProjetos?: any;
+	projetos: ProjetoDTO[];
+	isLoadingPlAno: boolean;
+	isLoadingPautas: boolean;
 	items: {
 		elementos: elemento[];
 		titulo: string;
 		param: string;
 	}[];
-	projetos: ProjetoDTO[];
+	isLoadingProjetos: boolean;
+	aplicarFiltros: () => void;
+	isLoadingFiltros: boolean;
+	limparSearchParams: () => void;
+	filtros: Record<string, string>;
 	dadosPlAno: DadosGraficoLinhaPontos[];
 	dadosPautas: DadosGraficoBarraEmpilhadaHorizontal[];
-	limparSearchParams: () => void;
+	onFiltroChange: (param: string, value: string) => void;
 }
 
 const Apresentacao = ({ apresentacao }: ApresentacaoProps) => (
 	<section>
 		<Card.Apresentacao
-			subtitulo={apresentacao.subtitulo}
-			titulo={apresentacao.titulo}
 			cor={apresentacao.corTexto}
+			titulo={apresentacao.titulo}
+			subtitulo={apresentacao.subtitulo}
 		>
 			{apresentacao.texto}
 		</Card.Apresentacao>
 	</section>
 );
 
-const Filtro = ({ items, limparSearchParams }: FiltroElementosProps) => (
+const Filtro = ({
+	items,
+	filtros,
+	errorFiltros,
+	onFiltroChange,
+	aplicarFiltros,
+	isLoadingFiltros,
+	limparSearchParams,
+}: FiltroElementosProps) => (
 	<section className="w-full flex items-center justify-start gap-24">
-		<section className="flex gap-12 px-10">
-			{items.map((item, index) => (
-				<DropdownButton
-					param={item.param}
-					key={index}
-					elementos={item.elementos}
-					titulo={item.titulo}
-					className="w-32"
-				/>
-			))}
-		</section>
-		<div className="flex flex-row items-center gap-2">
-			<Button className="flex flex-row justify-center border-[#D974FD] text-[#D974FD] bg-transparent border-[1px] rounded-[3px] w-32 h-12 hover:bg-inherit active:text-white active:bg-[#D974FD] transition-colors duration-75">
-				Filtrar <MdOutlineFilterAlt />
-			</Button>
-			<Button
-				variant="outline"
-				className="h-12 w-12 border-[#4568BE] rounded-se-xl rounded-es-xl hover:bg-red-600 duration-200 text-[#4568BE] hover:text-white"
-				onClick={limparSearchParams}
-			>
-				<FaTrash color="" />
-			</Button>
-		</div>
+		{isLoadingFiltros ? (
+			<Loading />
+		) : errorFiltros ? (
+			<UserError error={errorFiltros} />
+		) : (
+			<>
+				<section className="flex gap-12 px-10">
+					{items.map((item, index) => (
+						<DropdownButton
+							key={index}
+							className="w-32"
+							autoApply={false}
+							param={item.param}
+							titulo={item.titulo}
+							elementos={item.elementos}
+							value={filtros[item.param] || ""}
+							onChange={(v) => onFiltroChange(item.param, v)}
+						/>
+					))}
+				</section>
+				<div className="flex flex-row items-center gap-2">
+					<Button
+						className="flex flex-row justify-center border-[#D974FD] text-[#D974FD] bg-transparent border-[1px] rounded-[3px] w-32 h-12 hover:bg-inherit active:text-white active:bg-[#D974FD] transition-colors duration-75"
+						onClick={() => aplicarFiltros()}
+					>
+						Filtrar <MdOutlineFilterAlt />
+					</Button>
+					<Button
+						variant="outline"
+						className="h-12 w-12 border-[#4568BE] rounded-se-xl rounded-es-xl hover:bg-red-600 duration-200 text-[#4568BE] hover:text-white"
+						onClick={() => limparSearchParams()}
+					>
+						<FaTrash color="" />
+					</Button>
+				</div>
+			</>
+		)}
 	</section>
 );
 
-const CarrosselPls = ({ projetos }: CarrosselPlsProps) => (
+const CarrosselPls = ({
+	error,
+	projetos,
+	isLoading,
+}: {
+	projetos: ProjetoDTO[];
+	isLoading: boolean;
+	error?: any;
+}) => (
 	<section>
-		<Carousel opts={{ align: "start" }} className="w-[82rem]">
-			<CarouselContent>
-				{projetos.map((item, index) => (
-					<CarouselItem key={index} className="basis-1/2 flex justify-center">
-						<Card.Projeto projeto={item} />
-					</CarouselItem>
-				))}
-			</CarouselContent>
-			<CarouselPrevious />
-			<CarouselNext />
-		</Carousel>
+		{isLoading ? (
+			<Loading />
+		) : error ? (
+			<UserError error={error} />
+		) : (
+			<>
+				{projetos.length > 0 ? (
+					<Carousel opts={{ align: "start" }} className="w-[82rem]">
+						<CarouselContent>
+							{projetos.map((item, index) => (
+								<CarouselItem
+									key={index}
+									className="basis-1/2 flex justify-center"
+								>
+									<Card.Projeto projeto={item} />
+								</CarouselItem>
+							))}
+						</CarouselContent>
+						<CarouselPrevious />
+						<CarouselNext />
+					</Carousel>
+				) : (
+					<TextoRaiz className="text-center text-6xl text-shadow-xl">
+						<Texto.Linha>
+							<Texto.Pequeno.Titillium>
+								Não há projetos disponíveis
+							</Texto.Pequeno.Titillium>
+							<Texto.Espaco />
+							<Texto.Forte.Oswald>para exibição.</Texto.Forte.Oswald>
+						-</Texto.Linha>
+					</TextoRaiz>
+				)}
+			</>
+		)}
 	</section>
 );
 
@@ -146,11 +219,11 @@ const SubTitulo = () => (
 	</Texto.Raiz>
 );
 
-const NumeroPls = ({ dados }: NumeroPlsProps) => (
+const NumeroPls = ({ dados, isLoading, error }: NumeroPlsProps) => (
 	<section className="w-full flex justify-center gap-[4.5rem]">
 		<Card.Legenda
-			corTexto={legendas.find((item) => item.titulo === "PL's")?.cor}
 			texto={legendas.find((item) => item.titulo === "PL's")?.texto}
+			corTexto={legendas.find((item) => item.titulo === "PL's")?.cor}
 			resumo={legendas.find((item) => item.titulo === "PL's")?.resumo}
 		>
 			<Texto.Raiz className="text-6xl">
@@ -166,16 +239,28 @@ const NumeroPls = ({ dados }: NumeroPlsProps) => (
 				</Texto.Linha>
 			</Texto.Raiz>
 		</Card.Legenda>
-		<GraficoLinhaPontos dados={dados} />
+		{isLoading ? (
+			<Loading />
+		) : error ? (
+			<UserError error={error} />
+		) : (
+			<GraficoLinhaPontos dados={dados} />
+		)}
 	</section>
 );
 
-const NumeroPautas = ({ dados }: NumeroPautasProps) => (
+const NumeroPautas = ({ dados, isLoading, error }: NumeroPautasProps) => (
 	<section className="w-full flex justify-center gap-[4.5rem]">
-		<GraficoBarraEmpilhadaHorizontal dados={dados} />
+		{isLoading ? (
+			<Loading />
+		) : error ? (
+			<UserError error={error} />
+		) : (
+			<GraficoBarraEmpilhadaHorizontal dados={dados} />
+		)}
 		<Card.Legenda
-			corTexto={legendas.find((item) => item.titulo === "Pautas")?.cor}
 			texto={legendas.find((item) => item.titulo === "Pautas")?.texto}
+			corTexto={legendas.find((item) => item.titulo === "Pautas")?.cor}
 			resumo={legendas.find((item) => item.titulo === "Pautas")?.resumo}
 		>
 			<div>
@@ -198,46 +283,80 @@ const NumeroPautas = ({ dados }: NumeroPautasProps) => (
 
 const PropostasDados = ({
 	items,
+	filtros,
 	projetos,
 	dadosPlAno,
+	errorPlAno,
+	errorPautas,
 	dadosPautas,
+	errorFiltros,
+	errorProjetos,
+	isLoadingPlAno,
+	onFiltroChange,
+	aplicarFiltros,
+	isLoadingPautas,
+	isLoadingFiltros,
+	isLoadingProjetos,
 	limparSearchParams,
 }: PropostasDadosProps) => (
 	<>
 		<SubTitulo />
-		<Filtro items={items} limparSearchParams={limparSearchParams} />
-		<CarrosselPls projetos={projetos} />
-		<NumeroPls dados={dadosPlAno} />
-		<NumeroPautas dados={dadosPautas} />
+		<Filtro
+			items={items}
+			filtros={filtros}
+			errorFiltros={errorFiltros}
+			onFiltroChange={onFiltroChange}
+			aplicarFiltros={aplicarFiltros}
+			isLoadingFiltros={isLoadingFiltros}
+			limparSearchParams={limparSearchParams}
+		/>
+		<CarrosselPls
+			projetos={projetos}
+			error={errorProjetos}
+			isLoading={isLoadingProjetos}
+		/>
+		<NumeroPls
+			dados={dadosPlAno}
+			error={errorPlAno}
+			isLoading={isLoadingPlAno}
+		/>
+		<NumeroPautas
+			dados={dadosPautas}
+			error={errorPautas}
+			isLoading={isLoadingPautas}
+		/>
 	</>
 );
 
-const usePageData = () => {
-	const [esferas, setEsferas] = useState<ResponseEsferaDTO[]>([]);
-
+const usePageData = ({
+	filtrosAplicados,
+}: {
+	filtrosAplicados: Record<string, string>;
+}) => {
 	const searchParams = useSearchParams();
 	const esfera = searchParams.get("esfera");
+	const [esferas, setEsferas] = useState<ResponseEsferaDTO[]>([]);
 
-	const { estados, isLoadingEstados, error: errorEstado } = useEstado();
 	const { pautas, isLoadingPautas, error: errorPauta } = usePauta();
+	const { estados, isLoadingEstados, error: errorEstado } = useEstado();
 	const { anos, isLoading: isLoadingAnos, error: errorAnos } = useAnos();
 
 	const {
 		projetosPorAno,
 		isLoadingProjetosPorAno,
-		error: projetoPorAnoError,
+		error: errorProjetoPorAno,
 	} = useProjetoPorAno();
 
 	const {
 		pautaPorAno,
 		isLoadingPautaPorAno,
-		error: pautaPorAnoError,
+		error: errorPautaPorAno,
 	} = usePautaPorAno();
 
 	const {
 		projetosPorUF,
 		isLoadingProjetosPorUF,
-		error: projetoPorEstadoError,
+		error: errorProjetosEsfera,
 	} = useProjetoEstado(esfera ?? undefined);
 
 	const {
@@ -252,161 +371,227 @@ const usePageData = () => {
 		error: errorPautaEsfera,
 	} = usePautaEsfera(esfera ?? undefined);
 
-	const isLoading =
-		isLoadingProjetosPorUF ||
-		isLoadingProjetosPorAno ||
-		isLoadingPautaPorAno ||
-		isLoadingPautas ||
-		isLoadingEstados ||
-		isLoadingParlamentarProjetoEsfera ||
-		isLoadingPautaEsfera ||
-		isLoadingAnos;
+	const {
+		projetos,
+		isLoadingProjetos,
+		error: errorProjetosFiltrados,
+	} = useProjetosFiltrados({
+		ano: filtrosAplicados.ano,
+		pautaId: filtrosAplicados.pautaId,
+		esferaId: filtrosAplicados.esferaId,
+		estadoId: filtrosAplicados.estadoId,
+	});
 
-	const error =
-		projetoPorEstadoError ||
-		projetoPorAnoError ||
-		pautaPorAnoError ||
-		errorEstado ||
-		errorPauta ||
-		errorPautaEsfera ||
-		errorParlamentarProjeto ||
-		errorAnos;
-
-	//TODO: trazer dados do backend
 	useEffect(() => {
 		const buscarDados = async () => {
-			//GAMBIARRA: buscar esferas e anos apenas uma vez
 			const esferasData = await buscarEsferas();
 			setEsferas(esferasData);
 		};
-
 		buscarDados();
 	}, []);
 
 	return {
-		esferas,
 		anos,
-		estados,
 		pautas,
-		projetosPorAno,
+		estados,
+		esferas,
+		projetos,
+		errorAnos,
+		errorPauta,
+		errorEstado,
+		pautaEsfera,
 		pautaPorAno,
 		projetosPorUF,
+		isLoadingAnos,
+		projetosPorAno,
+		isLoadingPautas,
+		isLoadingEstados,
+		isLoadingProjetos,
+		isLoadingPautaPorAno,
+		isLoadingPautaEsfera,
+		isLoadingProjetosPorAno,
 		parlamentarProjetoEsfera,
-		pautaEsfera,
-		isLoading,
-		error,
+		errorMapa: errorProjetosEsfera,
+		isLoadingParlamentarProjetoEsfera,
+		errorPautaPorAno: errorPautaPorAno,
+		isLoadingMapa: isLoadingProjetosPorUF,
+		errorProjetos: errorProjetosFiltrados,
+		errorProjetosPorAno: errorProjetoPorAno,
+		errorStatus: errorParlamentarProjeto || errorPautaEsfera,
 	};
 };
 
 const PageContent = () => {
-	const {
-		esferas,
-		anos,
-		estados,
-		pautas,
-		projetosPorAno,
-		pautaPorAno,
-		projetosPorUF,
-		parlamentarProjetoEsfera,
-		pautaEsfera,
-		isLoading,
-		error,
-	} = usePageData();
-
-	const { replace } = useRouter();
 	const pathName = usePathname();
+	const { replace } = useRouter();
 	const searchParams = useSearchParams();
 
-	//? Transformar dados para dropdowns
-	const esferasElementos = esferas.map((esfera) => ({
-		titulo: esfera.nome ?? "",
-		value: esfera.id ?? "",
-	}));
+	const anoURL = searchParams.get("ano") || "";
+	const pautaURL = searchParams.get("pautaId") || "";
+	const estadoURL = searchParams.get("estadoId") || "";
+	const esferaURL = searchParams.get("esferaId") || "";
 
-	const anosElementos = anos?.map((ano: { ano: string }) => ({
-		titulo: ano.ano ?? "",
-		value: ano.ano ?? "",
-	}));
+	const [filtros, setFiltros] = useState({
+		anoId: anoURL,
+		pautaId: pautaURL,
+		estadoId: estadoURL,
+		esferaId: esferaURL,
+	});
+	const [filtrosAplicados, setFiltrosAplicados] = useState({
+		anoId: anoURL,
+		pautaId: pautaURL,
+		estadoId: estadoURL,
+		esferaId: esferaURL,
+	});
 
-	const estadosElementos = estados?.map((estado) => ({
-		titulo: estado.nome ?? "",
-		value: estado.id ?? "",
-	}));
+	function handleFiltroChange(param: string, value: string) {
+		setFiltros((prev) => ({
+			...prev,
+			[param]: value,
+		}));
+	}
 
-	const pautasElementos = pautas?.map((pauta) => ({
-		titulo: pauta.nome ?? "",
-		value: pauta.id ?? "",
-	}));
-
-	const dropdownItems = [
-		{ titulo: "Esfera", elementos: esferasElementos ?? [], param: "esferaId" },
-		{ titulo: "Ano", elementos: anosElementos ?? [], param: "anoId" },
-		{ titulo: "Estado", elementos: estadosElementos ?? [], param: "estadoId" },
-		{ titulo: "Pauta", elementos: pautasElementos ?? [], param: "pautaId" },
-	];
+	function aplicarFiltros(filtrosNovos = filtros) {
+		setFiltrosAplicados(filtrosNovos);
+		const params = new URLSearchParams();
+		Object.entries(filtrosNovos).forEach(([key, value]) => {
+			if (value && value !== "geral") {
+				params.set(key, value);
+			}
+		});
+		replace(`${pathName}?${params.toString()}`, { scroll: false });
+	}
 
 	const limparSearchParams = () => {
 		const params = new URLSearchParams(searchParams.toString());
-		params.delete("pautaId");
-		params.delete("estadoId");
 		params.delete("anoId");
+		params.delete("pautaId");
 		params.delete("esferaId");
+		params.delete("estadoId");
 		replace(`${pathName}?${params.toString()}`, { scroll: false });
+		setFiltros({
+			anoId: "",
+			pautaId: "",
+			estadoId: "",
+			esferaId: "",
+		});
+		setFiltrosAplicados({
+			anoId: "",
+			pautaId: "",
+			estadoId: "",
+			esferaId: "",
+		});
 	};
 
-	//? Renderizações condicionais
-	if (error) {
-		return (
-			<MainLayout>
-				<div className="flex h-full w-full flex-col gap-24 items-center px-11">
-					<Apresentacao apresentacao={apresentacao} />
-					<UserError error={error} />
-				</div>
-			</MainLayout>
-		);
-	}
+	const {
+		anos,
+		pautas,
+		esferas,
+		estados,
+		projetos,
+		errorMapa,
+		errorAnos,
+		errorPauta,
+		errorEstado,
+		pautaPorAno,
+		errorStatus,
+		pautaEsfera,
+		isLoadingMapa,
+		projetosPorUF,
+		errorProjetos,
+		isLoadingAnos,
+		projetosPorAno,
+		isLoadingPautas,
+		isLoadingEstados,
+		errorPautaPorAno,
+		isLoadingProjetos,
+		errorProjetosPorAno,
+		isLoadingPautaPorAno,
+		isLoadingPautaEsfera,
+		isLoadingProjetosPorAno,
+		parlamentarProjetoEsfera,
+		isLoadingParlamentarProjetoEsfera,
+	} = usePageData({ filtrosAplicados });
 
-	if (isLoading) {
-		return (
-			<MainLayout>
-				<div className="flex h-full w-full flex-col gap-24 items-center px-11">
-					<Apresentacao apresentacao={apresentacao} />
-					<Loading />
-				</div>
-			</MainLayout>
-		);
-	}
+	const esferasElementos = esferas.map((esfera) => ({
+		value: esfera.id ?? "",
+		titulo: esfera.nome ?? "",
+	}));
+
+	const anosElementos = anos?.map((ano: { ano: string }) => ({
+		value: ano.ano ?? "",
+		titulo: ano.ano ?? "",
+	}));
+
+	const estadosElementos = estados?.map((estado) => ({
+		value: estado.id ?? "",
+		titulo: estado.nome ?? "",
+	}));
+
+	const pautasElementos = pautas?.map((pauta) => ({
+		value: pauta.id ?? "",
+		titulo: pauta.nome ?? "",
+	}));
+
+	const dropdownItems = [
+		{ titulo: "Ano", elementos: anosElementos ?? [], param: "ano" },
+		{ titulo: "Pauta", elementos: pautasElementos ?? [], param: "pautaId" },
+		{ titulo: "Estado", elementos: estadosElementos ?? [], param: "estadoId" },
+		{ titulo: "Esfera", elementos: esferasElementos ?? [], param: "esferaId" },
+	];
 
 	return (
 		<MainLayout>
 			<div className="flex h-full w-full flex-col gap-24 items-center px-11">
 				<Apresentacao apresentacao={apresentacao} />
 
-				<GraficoMapa
-					dadosMapa={projetosPorUF ?? []}
-					dadosStatus={{
-						dadosProjetoPoliticoPorEsfera: parlamentarProjetoEsfera ?? {
-							esfera: "",
-							parlamentares: 0,
-							projetosLei: 0,
-						},
-						dadosPautaEsfera: pautaEsfera ?? [],
-					}}
-					isLoadingDadosMapa={false}
-					isLoadingDadosStatus={false}
-					errorMapa={undefined}
-					errorStatus={undefined}
-				/>
+				{/* Gráfico Mapa */}
+				{isLoadingMapa ||
+				isLoadingParlamentarProjetoEsfera ||
+				isLoadingPautaEsfera ? (
+					<Loading />
+				) : errorMapa || errorStatus ? (
+					<UserError error={errorMapa || errorStatus} />
+				) : (
+					<GraficoMapa
+						errorMapa={errorMapa ?? ""}
+						errorStatus={errorStatus ?? ""}
+						isLoadingDadosMapa={false}
+						isLoadingDadosStatus={false}
+						dadosMapa={projetosPorUF ?? []}
+						dadosStatus={{
+							dadosPautaEsfera: pautaEsfera ?? [],
+							dadosProjetoPoliticoPorEsfera: parlamentarProjetoEsfera ?? {
+								esfera: "",
+								projetosLei: 0,
+								parlamentares: 0,
+							},
+						}}
+					/>
+				)}
 
 				<Divisor />
 
 				<Suspense fallback={<div>Carregando filtros...</div>}>
 					<PropostasDados
-						limparSearchParams={limparSearchParams}
+						filtros={filtros}
+						projetos={projetos ?? []}
 						items={dropdownItems ?? []}
-						projetos={[]}
-						dadosPlAno={projetosPorAno ?? []}
+						errorProjetos={errorProjetos}
+						errorPautas={errorPautaPorAno}
 						dadosPautas={pautaPorAno ?? []}
+						aplicarFiltros={aplicarFiltros}
+						errorPlAno={errorProjetosPorAno}
+						dadosPlAno={projetosPorAno ?? []}
+						onFiltroChange={handleFiltroChange}
+						isLoadingProjetos={isLoadingProjetos}
+						isLoadingPautas={isLoadingPautaPorAno}
+						limparSearchParams={limparSearchParams}
+						isLoadingPlAno={isLoadingProjetosPorAno}
+						errorFiltros={errorEstado || errorPauta || errorAnos}
+						isLoadingFiltros={
+							isLoadingAnos || isLoadingPautas || isLoadingEstados
+						}
 					/>
 				</Suspense>
 			</div>
