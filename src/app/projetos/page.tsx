@@ -346,7 +346,10 @@ const PageContent = () => {
 
 	const limparSearchParams = () => {
 		const params = new URLSearchParams(searchParams.toString());
-		params.delete("pauta");
+		params.delete("pautaId");
+		params.delete("estadoId");
+		params.delete("anoId");
+		params.delete("esferaId");
 		replace(`${pathName}?${params.toString()}`, { scroll: false });
 	};
 
