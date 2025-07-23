@@ -2,26 +2,24 @@ import { titilliumWeb } from "../../../fonts/fonts";
 
 import CardSaibaMais from "./card-saiba-mais";
 
+import { LegendaGrafico } from "@/content/models";
+
 interface legendaProps {
-	corTexto?: string;
+	legenda: LegendaGrafico;
 	children?: React.ReactNode;
-	resumo?: string;
-	texto?: string;
 }
 
-const CardLegenda: React.FC<legendaProps> = ({
-	corTexto,
-	texto,
-	children,
-	resumo,
-}) => {
+const CardLegenda: React.FC<legendaProps> = ({ children, legenda }) => {
 	return (
 		<div className="w-[21.5rem] flex flex-col gap-6">
 			{children}
 			<p className={`${titilliumWeb} text-white text-xl text-justify `}>
-				{resumo ? resumo : ""}
+				{legenda.conteudo ? legenda.conteudo : ""}
 			</p>
-			<CardSaibaMais corTexto={corTexto} texto={texto ? texto : ""} />
+			<CardSaibaMais
+				corTexto={legenda.cor}
+				texto={legenda.aprofundamento ? legenda.aprofundamento : ""}
+			/>
 		</div>
 	);
 };

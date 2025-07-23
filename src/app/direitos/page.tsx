@@ -24,7 +24,8 @@ import Loading from "@/components/ui/loading";
 import Titulo from "@/components/ui/titulo-pages";
 import UserError from "@/components/ui/user-erro";
 
-import { legendas } from "@/content/content-parlamentares";
+import { legendasGraficosDireitos } from "@/content/legenda-direitos";
+import { LegendaGrafico } from "@/content/models";
 import { ProjetoDTO } from "@/core/domain/dtos/dados.dto";
 import { DadosGraficoBarrasVertical } from "@/core/domain/types/barras-vertical";
 import { useProjetosDireitosIdeologias } from "@/hooks/dados/use-projetos-direitos-ideologias";
@@ -34,14 +35,14 @@ interface DadosEstatisticosProps {
 	elementosDropdown: { titulo: string; value: string }[];
 	dadosRadial: DadosRadial[];
 	dadosGraficoVertical: DadosGraficoBarrasVertical[];
-	legendaPadrao: { resumo: string; texto: string };
+	legenda: LegendaGrafico[];
 	isPautaSelecionada: boolean;
 	limparSearchParams: () => void;
 }
 
 interface DadosRadial {
-	label: string; // Example property, replace with actual structure
-	value: number; // Example property, replace with actual structure
+	label: string;
+	value: number;
 }
 interface CarrosselProps {
 	projetos: ProjetoDTO[];
@@ -56,13 +57,9 @@ interface FiltroPautaProps {
 
 interface SecaoDireitosVioladosProps {
 	dadosRadial: any[];
-	legendaPadrao: LegendaPadrao;
+	legenda: LegendaGrafico;
 }
 
-interface LegendaPadrao {
-	resumo: string;
-	texto: string;
-}
 const FiltroPauta: React.FC<FiltroPautaProps> = ({
 	elementosDropdown,
 	isPautaSelecionada,
@@ -89,18 +86,14 @@ const FiltroPauta: React.FC<FiltroPautaProps> = ({
 
 const SecaoDireitosViolados: React.FC<SecaoDireitosVioladosProps> = ({
 	dadosRadial,
-	legendaPadrao,
+	legenda,
 }) => (
 	<div className="flex gap-[4.5rem] justify-center">
 		<div className="flex w-1/2 h-full justify-end">
 			<Radial dados={dadosRadial} />
 		</div>
 		<div className="flex justify-end items-end">
-			<Card.Legenda
-				corTexto="text-[#D974FD]"
-				resumo={legendaPadrao.resumo}
-				texto={legendaPadrao.texto}
-			>
+			<Card.Legenda legenda={legenda}>
 				<Texto.Raiz shadow className="text-6xl">
 					<Texto.Linha>
 						<Texto.Forte.Oswald>Direitos</Texto.Forte.Oswald>
@@ -114,16 +107,17 @@ const SecaoDireitosViolados: React.FC<SecaoDireitosVioladosProps> = ({
 	</div>
 );
 
-const SecaoIdeologias: React.FC<{
+interface SecaoIdeologiasProps {
 	dadosGraficoVertical: DadosGraficoBarrasVertical[];
-	legendaPadrao: { resumo: string; texto: string };
-}> = ({ dadosGraficoVertical, legendaPadrao }) => (
+	legenda: LegendaGrafico;
+}
+
+const SecaoIdeologias: React.FC<SecaoIdeologiasProps> = ({
+	dadosGraficoVertical,
+	legenda,
+}) => (
 	<section className="w-full flex flex-row gap-[4.5rem] justify-center">
-		<Card.Legenda
-			corTexto="text-[#FDFF78]"
-			resumo={legendaPadrao.resumo}
-			texto={legendaPadrao.texto}
-		>
+		<Card.Legenda legenda={legenda}>
 			<Texto.Raiz shadow className="text-5xl">
 				<Texto.Linha>
 					<Texto.Forte.Oswald>Ideologia dos</Texto.Forte.Oswald>
@@ -141,7 +135,7 @@ const DadosEstatisticos: React.FC<DadosEstatisticosProps> = ({
 	elementosDropdown,
 	dadosRadial,
 	dadosGraficoVertical,
-	legendaPadrao,
+	legenda,
 	isPautaSelecionada,
 	limparSearchParams,
 }) => (
@@ -155,15 +149,12 @@ const DadosEstatisticos: React.FC<DadosEstatisticosProps> = ({
 				/>
 			</div>
 			<div className="flex flex-row w-full items-center justify-center gap-2 h-full">
-				<SecaoDireitosViolados
-					dadosRadial={dadosRadial}
-					legendaPadrao={legendaPadrao}
-				/>
+				<SecaoDireitosViolados dadosRadial={dadosRadial} legenda={legenda[0]} />
 			</div>
 		</section>
 		<SecaoIdeologias
 			dadosGraficoVertical={dadosGraficoVertical}
-			legendaPadrao={legendaPadrao}
+			legenda={legenda[1]}
 		/>
 	</>
 );
@@ -227,7 +218,6 @@ const Direitos: React.FC = () => {
 			value: pauta.id.toString(),
 		})) || [];
 
-	const legendaPadrao = legendas[0];
 	const isLoading = isLoadingPautas || isLoadingProjetosDireitosIdeologias;
 
 	useEffect(() => {
@@ -274,7 +264,7 @@ const Direitos: React.FC = () => {
 					dadosGraficoVertical={ideologias}
 					dadosRadial={direitosViolados}
 					elementosDropdown={elementosDropdown}
-					legendaPadrao={legendaPadrao}
+					legenda={legendasGraficosDireitos}
 				/>
 				<Carrossel
 					projetos={projetos}

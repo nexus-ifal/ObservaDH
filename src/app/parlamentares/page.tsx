@@ -18,7 +18,8 @@ import Loading from "@/components/ui/loading";
 import Titulo from "@/components/ui/titulo-pages";
 import UserError from "@/components/ui/user-erro";
 
-import { legendas } from "@/content/content-parlamentares";
+import { legendasGraficosParlamentares } from "@/content/content-parlamentares";
+import { LegendaGrafico } from "@/content/models";
 import {
 	DadosIdeologiaGenero,
 	DadosParaPesquisaParlamenta,
@@ -290,7 +291,7 @@ const PageContent: React.FC = () => {
 					isLoadingIdeologiaGenero={isLoadingIdeologiaGenero}
 					isLoadingReligiaoRaca={isLoadingReligiaoRaca}
 					religiaoPorRaca={religiaoRaca ?? []}
-					legendas={legendas}
+					legendas={legendasGraficosParlamentares}
 					ideologiaPorGenero={(ideologiaGenero as DadosIdeologiaGenero[]) ?? []}
 				/>
 			</div>
@@ -474,11 +475,7 @@ interface DadosEstatisticosProps {
 	ideologiaPorGenero: DadosIdeologiaGenero[];
 	isLoadingReligiaoRaca: boolean;
 	isLoadingIdeologiaGenero: boolean;
-	legendas: {
-		texto: string;
-		corTexto: string;
-		resumo: string;
-	}[];
+	legendas: LegendaGrafico[];
 }
 
 const DadosEstatisticos = ({
@@ -502,11 +499,7 @@ const DadosEstatisticos = ({
 				) : (
 					<>
 						<GraficoBarraMultiplas dados={ideologiaPorGenero ?? []} />
-						<Card.Legenda
-							texto={legendas[0].texto}
-							corTexto={legendas[0].corTexto}
-							resumo={legendas[0].resumo}
-						>
+						<Card.Legenda legenda={legendas[0]}>
 							<Texto.Raiz className="text-3xl sm:text-5xl w-full">
 								<Texto.Linha>
 									<Texto.Forte.Oswald>
@@ -530,11 +523,7 @@ const DadosEstatisticos = ({
 					<Loading />
 				) : (
 					<>
-						<CardLegenda
-							texto={legendas[1].texto}
-							corTexto={legendas[1].corTexto}
-							resumo={legendas[1].resumo}
-						>
+						<CardLegenda legenda={legendas[1]}>
 							<Texto.Raiz className="text-3xl sm:text-5xl w-full">
 								<Texto.Linha>
 									<Texto.Forte.Oswald>{"Religião"}</Texto.Forte.Oswald>
