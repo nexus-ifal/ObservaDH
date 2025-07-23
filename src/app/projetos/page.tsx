@@ -465,7 +465,7 @@ const PageContent = () => {
 
 	const limparSearchParams = () => {
 		const params = new URLSearchParams(searchParams.toString());
-		params.delete("anoId");
+		params.delete("ano");
 		params.delete("pautaId");
 		params.delete("esferaId");
 		params.delete("estadoId");
