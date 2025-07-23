@@ -25,10 +25,12 @@ import MainLayout from "@/components/ui/layouts/main-layout";
 import Loading from "@/components/ui/loading";
 import UserError from "@/components/ui/user-erro";
 
-import { apresentacao, legendas } from "../../mocks/mock-projetos";
+import { apresentacao } from "../../mocks/mock-projetos";
 
 import TextoRaiz from "./../../components/ui/componente-texto/texto-raiz";
 
+import { legendasGraficosProjetos } from "@/content/content-projetos";
+import { LegendaGrafico } from "@/content/models";
 import { ProjetoDTO } from "@/core/domain/dtos/dados.dto";
 import { ResponseEsferaDTO } from "@/core/domain/dtos/esfera.dto";
 import { DadosGraficoBarraEmpilhadaHorizontal } from "@/core/domain/types/barra-empilhada-horizontal";
@@ -44,7 +46,6 @@ import { useEstado } from "@/hooks/estado/use-estado";
 import { usePauta } from "@/hooks/pauta/use-pauta";
 import { useProjetosFiltrados } from "@/hooks/projeto/use-projetos-filtrados";
 import { buscarEsferas } from "@/infra/api/esfera";
-
 interface ApresentacaoProps {
 	apresentacao: {
 		texto: string;
@@ -69,11 +70,13 @@ interface FiltroElementosProps {
 interface NumeroPlsProps {
 	error?: any;
 	isLoading: boolean;
+	legenda: LegendaGrafico;
 	dados: DadosGraficoLinhaPontos[];
 }
 interface NumeroPautasProps {
 	error?: any;
 	isLoading: boolean;
+	legenda: LegendaGrafico;
 	dados: DadosGraficoBarraEmpilhadaHorizontal[];
 }
 interface PropostasDadosProps {
@@ -220,13 +223,9 @@ const SubTitulo = () => (
 	</Texto.Raiz>
 );
 
-const NumeroPls = ({ dados, isLoading, error }: NumeroPlsProps) => (
+const NumeroPls = ({ dados, isLoading, error, legenda }: NumeroPlsProps) => (
 	<section className="w-full flex justify-center gap-[4.5rem]">
-		<Card.Legenda
-			texto={legendas.find((item) => item.titulo === "PL's")?.texto}
-			corTexto={legendas.find((item) => item.titulo === "PL's")?.cor}
-			resumo={legendas.find((item) => item.titulo === "PL's")?.resumo}
-		>
+		<Card.Legenda legenda={legenda}>
 			<Texto.Raiz className="text-6xl">
 				<Texto.Linha>
 					<Texto.Forte.Oswald>{"Número"}</Texto.Forte.Oswald>
@@ -250,7 +249,12 @@ const NumeroPls = ({ dados, isLoading, error }: NumeroPlsProps) => (
 	</section>
 );
 
-const NumeroPautas = ({ dados, isLoading, error }: NumeroPautasProps) => (
+const NumeroPautas = ({
+	dados,
+	isLoading,
+	error,
+	legenda,
+}: NumeroPautasProps) => (
 	<section className="w-full flex justify-center gap-[4.5rem]">
 		{isLoading ? (
 			<Loading />
@@ -259,11 +263,7 @@ const NumeroPautas = ({ dados, isLoading, error }: NumeroPautasProps) => (
 		) : (
 			<GraficoBarraEmpilhadaHorizontal dados={dados} />
 		)}
-		<Card.Legenda
-			texto={legendas.find((item) => item.titulo === "Pautas")?.texto}
-			corTexto={legendas.find((item) => item.titulo === "Pautas")?.cor}
-			resumo={legendas.find((item) => item.titulo === "Pautas")?.resumo}
-		>
+		<Card.Legenda legenda={legenda}>
 			<div>
 				<Texto.Raiz className="text-6xl w-[374px]">
 					<Texto.Linha className="w-full">
@@ -320,11 +320,13 @@ const PropostasDados = ({
 			dados={dadosPlAno}
 			error={errorPlAno}
 			isLoading={isLoadingPlAno}
+			legenda={legendasGraficosProjetos[0]}
 		/>
 		<NumeroPautas
 			dados={dadosPautas}
 			error={errorPautas}
 			isLoading={isLoadingPautas}
+			legenda={legendasGraficosProjetos[1]}
 		/>
 	</>
 );
