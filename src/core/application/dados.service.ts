@@ -7,6 +7,7 @@ import {
 	DadosProjetoEstado,
 	DadosProjetosDireitosIdeologias,
 	DadosReligiaoRaca,
+	PartidoRankingDTO,
 } from "../domain/dtos/dados.dto";
 import { DadosRepository } from "../repositories/dados.repository";
 import DadosUseCase from "../usecases/dados.usecase";
@@ -49,6 +50,9 @@ class DadosService implements DadosUseCase {
 	}
 	listarAnos(): Promise<{ ano: string }[]> {
 		return this.adapter.listarAnos();
+	}
+	listarRankingPartidos(): Promise<PartidoRankingDTO[]> {
+		return this.adapter.listarRankingPartidos();
 	}
 }
 

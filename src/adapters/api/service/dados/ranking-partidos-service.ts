@@ -33,12 +33,12 @@ export class RankingPartidosService implements IRankingPartidosService {
 				orderBy: [
 					{
 						projetos: {
-							_count: 'desc',
+							_count: "desc",
 						},
 					},
 					{
 						politicos: {
-							_count: 'desc',
+							_count: "desc",
 						},
 					},
 				],

@@ -7,6 +7,7 @@ import {
 	DadosProjetoEstado,
 	DadosProjetosDireitosIdeologias,
 	DadosReligiaoRaca,
+	PartidoRankingDTO,
 } from "@/core/domain/dtos/dados.dto";
 
 export interface DadosRepository {
@@ -23,4 +24,5 @@ export interface DadosRepository {
 		pauta?: string
 	): Promise<DadosProjetosDireitosIdeologias>;
 	listarAnos(): Promise<{ ano: string }[]>;
+	listarRankingPartidos(): Promise<PartidoRankingDTO[]>;
 }

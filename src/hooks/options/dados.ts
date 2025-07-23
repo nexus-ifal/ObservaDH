@@ -73,3 +73,8 @@ export const listarAnosOptions = () => ({
 	queryKey: [...getDadosBaseQueryKey(), "listarAnos"],
 	queryFn: () => usecase.listarAnos(),
 });
+
+export const listarRankingPartidosOptions = () => ({
+	queryKey: [...getDadosBaseQueryKey(), "listarRankingPartidos"],
+	queryFn: () => usecase.listarRankingPartidos(),
+});

@@ -7,6 +7,7 @@ import {
 	DadosProjetoEstado,
 	DadosProjetosDireitosIdeologias,
 	DadosReligiaoRaca,
+	PartidoRankingDTO,
 } from "@/core/domain/dtos/dados.dto";
 import { DadosRepository } from "@/core/repositories/dados.repository";
 import { conexaoBackend } from "@/infra/api/client";
@@ -61,8 +62,15 @@ class DadosAPI implements DadosRepository {
 		});
 		return response.data.resposta.dados;
 	}
+
 	async listarAnos(): Promise<{ ano: string }[]> {
 		const URL = "/dados/anos";
+		const response = await conexaoBackend.get(URL);
+		return response.data.dados;
+	}
+
+	async listarRankingPartidos(): Promise<PartidoRankingDTO[]> {
+		const URL = "/dados/ranking-partidos";
 		const response = await conexaoBackend.get(URL);
 		return response.data.dados;
 	}

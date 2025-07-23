@@ -9,9 +9,7 @@ export interface IRankingPartidosController {
 	executar(): Promise<RespostaApi>;
 }
 
-export class RankingPartidosController
-	implements IRankingPartidosController
-{
+export class RankingPartidosController implements IRankingPartidosController {
 	constructor(
 		private readonly rankingPartidosService: IRankingPartidosService = new RankingPartidosService()
 	) {}
