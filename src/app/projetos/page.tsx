@@ -199,7 +199,7 @@ const CarrosselPls = ({
 								Não há projetos disponíveis
 							</Texto.Pequeno.Titillium>
 							<Texto.Espaco />
-							<Texto.Forte.Oswald>para exibição.</Texto.Forte.Oswald>-
+							<Texto.Forte.Oswald>para exibição.</Texto.Forte.Oswald>
 						</Texto.Linha>
 					</TextoRaiz>
 				)}
@@ -465,7 +465,7 @@ const PageContent = () => {
 
 	const limparSearchParams = () => {
 		const params = new URLSearchParams(searchParams.toString());
-		params.delete("anoId");
+		params.delete("ano");
 		params.delete("pautaId");
 		params.delete("esferaId");
 		params.delete("estadoId");
