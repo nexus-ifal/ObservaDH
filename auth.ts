@@ -8,6 +8,8 @@ import { z } from "zod";
 import { userLoginSchema } from "./src/schemas/user-zod-schema";
 import { prismaClient } from "@/adapters/db/prisma";
 
+const isVercelProduction = process.env.VERCEL_ENV === "production";
+
 export const { handlers, signIn, signOut, auth } = NextAuth({
 	adapter: PrismaAdapter(prismaClient),
 	providers: [
@@ -99,7 +101,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 	],
 	pages: {
 		signIn: "/login",
-		error: "/404",
 	},
 	session: {
 		strategy: "jwt",
@@ -134,11 +135,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
 				if (callbackUrl) {
 					return Response.redirect(new URL(callbackUrl, nextUrl.origin));
-				} else if (userRedirectTo) {
-					return Response.redirect(new URL(userRedirectTo, nextUrl.origin));
-				} else {
-					return Response.redirect(new URL("/", nextUrl.origin));
 				}
+				if (userRedirectTo) {
+					return Response.redirect(new URL(userRedirectTo, nextUrl.origin));
+				}
+				return true;
 			}
 			return true;
 		},
@@ -169,12 +170,18 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 	},
 	cookies: {
 		sessionToken: {
-			name: `next-auth.session-token`,
+			name:
+				process.env.NODE_ENV === "production" && isVercelProduction
+					? "__Secure-next-auth.session-token"
+					: "next-auth.session-token",
 			options: {
 				httpOnly: true,
 				sameSite: "lax",
 				path: "/",
-				secure: process.env.NODE_ENV === "production",
+				secure:
+					isVercelProduction ||
+					(process.env.NODE_ENV === "production" &&
+						process.env.AUTH_FORCE_SECURE_COOKIES === "false"),
 			},
 		},
 	},
