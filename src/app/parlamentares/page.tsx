@@ -33,8 +33,8 @@ import { useIdeologiaGenero } from "@/hooks/dados/use-ideologia-genero";
 import { useRankingPartidos } from "@/hooks/dados/use-ranking-partidos";
 import { useReligiaoRaca } from "@/hooks/dados/use-religiao-raca";
 import { useEstado } from "@/hooks/estado/use-estado";
-import { usePartido } from "@/hooks/partido/use-partido";
-import { usePoliticoFiltrados } from "@/hooks/politico/use-politico-filtrados";
+import { useParty } from "@/hooks/partido/use-partido";
+import { useFilteredPoliticians } from "@/hooks/politico/use-politico-filtrados";
 import { useProfissao } from "@/hooks/profissao/use-profissao";
 
 const Page = () => {
@@ -128,7 +128,7 @@ const PageContent: React.FC = () => {
 	}
 	const { estados, isLoadingEstados, error: errorEstado } = useEstado();
 
-	const { partidos, isLoadingPartidos, error: errorPartido } = usePartido();
+	const { parties, isLoadingParties, error: errorPartido } = useParty();
 
 	const {
 		profissoes,
@@ -147,10 +147,10 @@ const PageContent: React.FC = () => {
 	} = useReligiaoRaca();
 
 	const {
-		politicosFiltrados,
-		isLoadingPoliticosFiltrados,
+		filteredPoliticians,
+		isLoadingFilteredPoliticians,
 		error: errorPoliticoFiltrados,
-	} = usePoliticoFiltrados({
+	} = useFilteredPoliticians({
 		esfera: filtrosAplicados.esferaId,
 		estado: filtrosAplicados.estadoId,
 		genero: filtrosAplicados.generoId,
@@ -207,7 +207,7 @@ const PageContent: React.FC = () => {
 			},
 			{
 				elementos:
-					partidos?.map((partido) => ({
+					parties?.map((partido) => ({
 						titulo: partido.nome,
 						value: partido.id,
 					})) ?? [],
@@ -224,18 +224,18 @@ const PageContent: React.FC = () => {
 				param: "profissaoId",
 			},
 		],
-		[esferas, estados, generos, partidos, profissoes]
+		[esferas, estados, generos, parties, profissoes]
 	);
 
 	const isLoadingFiltros =
 		isLoadingEstados ||
-		isLoadingPartidos ||
+		isLoadingParties ||
 		isLoadingProfissoes ||
 		isLoadingReligiaoRaca ||
 		isLoadingIdeologiaGenero;
 
 	const {
-		partidos: partidosOrdenados,
+		parties: partidosOrdenados,
 		isLoading: isLoadingPartidosFiltrados,
 		error: errorRankingPartidos,
 	} = useRankingPartidos();
@@ -282,8 +282,8 @@ const PageContent: React.FC = () => {
 					onFiltroChange={handleFiltroChange}
 					isLoadingFiltros={isLoadingFiltros}
 					limparSearchParams={limparSearchParams}
-					isLoadingDados={isLoadingPoliticosFiltrados}
-					dadosParlamentares={politicosFiltrados ?? []}
+					isLoadingDados={isLoadingFilteredPoliticians}
+					dadosParlamentares={filteredPoliticians ?? []}
 				/>
 				<RankingPartidos
 					isLoadingPartidos={isLoadingPartidosFiltrados}
@@ -434,14 +434,14 @@ const RankingParlamentares = ({
 );
 
 interface RankingPartidosProps {
-	isLoadingPartidos: boolean;
+	isLoadingParties: boolean;
 	error: Error | string | null;
 	partidosOrdenados: PartidoRankingDTO[];
 }
 
 const RankingPartidos = ({
 	partidosOrdenados,
-	isLoadingPartidos,
+	isLoadingParties,
 	error,
 }: RankingPartidosProps) => (
 	<article className="flex flex-col w-full gap-12 sm:gap-20">
@@ -470,7 +470,7 @@ const RankingPartidos = ({
 				className="h-96 sm:h-[800px] w-full rounded-md flex flex-col items-center gap-6 sm:gap-10 overflow-auto"
 				color="black"
 			>
-				{isLoadingPartidos ? (
+				{isLoadingParties ? (
 					<Loading />
 				) : (
 					<>

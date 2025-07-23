@@ -40,9 +40,9 @@ import { APIAtualizarPoliticoPayload } from "../../../../../hooks/options/politi
 import { ResponsePoliticoDTO } from "@/core/domain/dtos/politico.dto";
 import { ResponseProjetoDTO } from "@/core/domain/dtos/projeto.dto";
 import { useEstado } from "@/hooks/estado/use-estado";
-import { usePartido } from "@/hooks/partido/use-partido";
-import { usePolitico } from "@/hooks/politico/use-politico";
-import { usePoliticoAtualizar } from "@/hooks/politico/use-politico-update";
+import { useParty } from "@/hooks/partido/use-partido";
+import { usePolitician } from "@/hooks/politico/use-politico";
+import { usePoliticianUpdate } from "@/hooks/politico/use-politico-update";
 import { useProfissao } from "@/hooks/profissao/use-profissao";
 import { useProjeto } from "@/hooks/projeto/use-projeto";
 
@@ -76,17 +76,17 @@ const esferas = [
 
 const Page: React.FC = () => {
 	const { profissoes, isLoadingProfissoes } = useProfissao();
-	const { partidos, isLoadingPartidos } = usePartido();
+	const { parties, isLoadingParties } = useParty();
 	const { projetos, isLoadingProjetos } = useProjeto();
 	const { estados, isLoadingEstados } = useEstado();
-	const { politicos, isLoadingPoliticos } = usePolitico();
+	const { politicians, isLoadingPoliticians } = usePolitician();
 
 	const {
-		atualizarPolitico,
+		updatePolitician,
 		isUpdatingPolitico,
 		hasAtualizarPoliticoSucess,
 		hasAtualizarPoliticoError,
-	} = usePoliticoAtualizar();
+	} = usePoliticianUpdate();
 
 	const [selectedPolitico, setSelectedPolitico] =
 		useState<ResponsePoliticoDTO>();
@@ -97,10 +97,10 @@ const Page: React.FC = () => {
 
 	const isLoadingSelects =
 		isLoadingProfissoes ||
-		isLoadingPartidos ||
+		isLoadingParties ||
 		isLoadingProjetos ||
 		isLoadingEstados ||
-		isLoadingPoliticos;
+		isLoadingPoliticians;
 
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
@@ -162,12 +162,12 @@ const Page: React.FC = () => {
 	}, [hasAtualizarPoliticoError]);
 
 	const filteredPoliticos = useMemo(() => {
-		if (!politicos) return [];
-		if (!searchTerm) return politicos;
-		return politicos.filter((p: ResponsePoliticoDTO) =>
+		if (!politicians) return [];
+		if (!searchTerm) return politicians;
+		return politicians.filter((p: ResponsePoliticoDTO) =>
 			p.nome.toLowerCase().includes(searchTerm.toLowerCase())
 		);
-	}, [politicos, searchTerm]);
+	}, [politicians, searchTerm]);
 
 	function onSubmit(values: z.infer<typeof formSchema>) {
 		if (!selectedPolitico) return;
@@ -197,7 +197,7 @@ const Page: React.FC = () => {
 			},
 		};
 
-		atualizarPolitico({
+		updatePolitician({
 			payload,
 		});
 	}
@@ -484,7 +484,7 @@ const Page: React.FC = () => {
 												</SelectTrigger>
 											</FormControl>
 											<SelectContent className="max-h-60 overflow-y-auto bg-white">
-												{partidos?.map((p) => (
+												{parties?.map((p) => (
 													<SelectItem key={p.id} value={p.id}>
 														{p.nome}
 													</SelectItem>
