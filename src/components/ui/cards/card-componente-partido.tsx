@@ -5,9 +5,10 @@ import { oswald } from "../../../fonts/fonts";
 import CardDivider from "./card-divider";
 
 import { PartidoModel } from "@/core/domain/types/partido";
+import { PartidoRankingDTO } from "@/adapters/api/service/dados/ranking-partidos-service";
 
 interface cardComponentePartidoProps {
-	partido: PartidoModel;
+	partido: PartidoRankingDTO;
 }
 
 const CardComponentePartido: React.FC<cardComponentePartidoProps> = ({
@@ -21,8 +22,11 @@ const CardComponentePartido: React.FC<cardComponentePartidoProps> = ({
 						<div className="w-1/2">
 							<div className="relative h-24 w-24">
 								<Image
-									src={partido.urlImagem}
-									alt={`${partido.nome} – ${partido.sigla}`}
+									src={
+										partido.imagem ||
+										"https://www.svgrepo.com/show/508699/landscape-placeholder.svg"
+									}
+									alt={`${partido.nome} _	${partido.sigla}`}
 									fill
 									className="rounded-full object-cover select-none"
 								/>
@@ -37,8 +41,8 @@ const CardComponentePartido: React.FC<cardComponentePartidoProps> = ({
 				</section>
 				<div className="grid grid-cols-3 h-full w-1/2 px-16 justify-between items-center text-3xl text-white">
 					<p className="text-center">{partido.sigla}</p>
-					<p className="text-center">{partido.parlamentares}</p>
-					<p className="text-center">{partido.propostas}</p>
+					<p className="text-center">{partido.numeroParlamentares}</p>
+					<p className="text-center">{partido.numeroPropostas}</p>
 				</div>
 			</div>
 			<CardDivider />

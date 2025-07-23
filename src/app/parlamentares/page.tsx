@@ -24,17 +24,18 @@ import {
 	DadosIdeologiaGenero,
 	DadosParaPesquisaParlamenta,
 	DadosReligiaoRaca,
+	PartidoRankingDTO,
 } from "@/core/domain/dtos/dados.dto";
 import { ResponsePoliticoDTO } from "@/core/domain/dtos/politico.dto";
 import { elemento } from "@/core/domain/types/elemento-dropdown";
-import { PartidoModel } from "@/core/domain/types/partido";
+// import { PartidoModel } from "@/core/domain/types/partido";
 import { useIdeologiaGenero } from "@/hooks/dados/use-ideologia-genero";
 import { useReligiaoRaca } from "@/hooks/dados/use-religiao-raca";
 import { useEstado } from "@/hooks/estado/use-estado";
 import { usePartido } from "@/hooks/partido/use-partido";
 import { usePoliticoFiltrados } from "@/hooks/politico/use-politico-filtrados";
 import { useProfissao } from "@/hooks/profissao/use-profissao";
-import { partidosMock } from "@/mocks/mock-projetos";
+import { useRankingPartidos } from "@/hooks/dados/use-ranking-partidos";
 
 const Page = () => {
 	return (
@@ -45,13 +46,7 @@ const Page = () => {
 };
 
 const PageContent: React.FC = () => {
-	const partidosOrdenados = useMemo(
-		() =>
-			[...partidosMock].sort(
-				(a, b) => parseInt(b.propostas) - parseInt(a.propostas)
-			),
-		[]
-	);
+
 
 	const searchParams = useSearchParams();
 
@@ -64,23 +59,23 @@ const PageContent: React.FC = () => {
 	const ordenacaoProjetosURL = searchParams.get("ordenacaoProjetosId") || "";
 
 	const [filtros, setFiltros] = useState({
-		esferaId: esferaURL, // ← Adicionar "Id"
-		estadoId: estadoURL, // ← Adicionar "Id"
-		generoId: generoURL, // ← Adicionar "Id"
-		partidoId: partidoURL, // ← Adicionar "Id"
-		ideologiaId: ideologiaURL, // ← Adicionar "Id"
-		profissaoId: profissaoURL, // ← Adicionar "Id"
-		ordenacaoProjetosId: ordenacaoProjetosURL, // ← Adicionar "Id"
+		esferaId: esferaURL,
+		estadoId: estadoURL,
+		generoId: generoURL,
+		partidoId: partidoURL,
+		ideologiaId: ideologiaURL,
+		profissaoId: profissaoURL,
+		ordenacaoProjetosId: ordenacaoProjetosURL,
 	});
 
 	const [filtrosAplicados, setFiltrosAplicados] = useState({
-		esferaId: esferaURL, // ← Adicionar "Id"
-		estadoId: estadoURL, // ← Adicionar "Id"
-		generoId: generoURL, // ← Adicionar "Id"
-		partidoId: partidoURL, // ← Adicionar "Id"
-		ideologiaId: ideologiaURL, // ← Adicionar "Id"
-		profissaoId: profissaoURL, // ← Adicionar "Id"
-		ordenacaoProjetosId: ordenacaoProjetosURL, // ← Adicionar "Id"
+		esferaId: esferaURL,
+		estadoId: estadoURL,
+		generoId: generoURL,
+		partidoId: partidoURL,
+		ideologiaId: ideologiaURL,
+		profissaoId: profissaoURL,
+		ordenacaoProjetosId: ordenacaoProjetosURL,
 	});
 
 	const router = useRouter();
@@ -134,7 +129,9 @@ const PageContent: React.FC = () => {
 		}
 	}
 	const { estados, isLoadingEstados, error: errorEstado } = useEstado();
+
 	const { partidos, isLoadingPartidos, error: errorPartido } = usePartido();
+
 	const {
 		profissoes,
 		isLoadingProfissoes,
@@ -238,6 +235,10 @@ const PageContent: React.FC = () => {
 		isLoadingProfissoes ||
 		isLoadingReligiaoRaca ||
 		isLoadingIdeologiaGenero;
+		
+	const { partidos: partidosOrdenados, isLoading, error: errorRankingPartidos } = useRankingPartidos();
+
+	console.log("Partidos Ordenados:", partidosOrdenados);
 
 	const error = [
 		errorEstado,
@@ -284,7 +285,7 @@ const PageContent: React.FC = () => {
 					aplicarFiltros={aplicarFiltros}
 					getSortIcon={getSortIcon}
 				/>
-				<RankingPartidos partidosOrdenados={partidosOrdenados} />
+				<RankingPartidos partidosOrdenados={partidosOrdenados ?? []} />
 				<DadosEstatisticos
 					errorIdeologiaGenero={errorIdeologiaGenero}
 					errorReligiaoRaca={errorReligiaoRaca}
@@ -429,7 +430,7 @@ const RankingParlamentares = ({
 );
 
 interface RankingPartidosProps {
-	partidosOrdenados: PartidoModel[];
+	partidosOrdenados: PartidoRankingDTO[];
 }
 
 const RankingPartidos = ({ partidosOrdenados }: RankingPartidosProps) => (
