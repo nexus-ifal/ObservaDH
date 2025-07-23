@@ -4,7 +4,6 @@ import { oswald } from "../../../fonts/fonts";
 
 import CardDivider from "./card-divider";
 
-import { PartidoModel } from "@/core/domain/types/partido";
 import { PartidoRankingDTO } from "@/adapters/api/service/dados/ranking-partidos-service";
 
 interface cardComponentePartidoProps {
