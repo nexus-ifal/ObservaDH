@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { BotaoAdmin } from "@/components/ui/botao/botao";
+import { LogoutButton } from "@/components/ui/sair/logout";
 
 import { oswald } from "@/fonts/fonts";
 
@@ -19,6 +20,7 @@ const page: React.FC = () => {
 						<BotaoAdmin texto="Modificações para dados" />
 					</Link>
 				</div>
+				<LogoutButton />
 			</div>
 		</div>
 	);
