@@ -1,11 +1,15 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { AtualizarPartidoOptions } from "@/hooks/options/partido";
+import { updatePartyOptions } from "@/hooks/options/partido";
 
-export const usePartidoAtualizar = () => {
+/**
+ * Hook for updating political parties
+ * Handles party updates with cache invalidation
+ */
+export const usePartyUpdate = () => {
 	const queryClient = useQueryClient();
 	const { mutateAsync, isPending, isSuccess, isError } = useMutation({
-		...AtualizarPartidoOptions(),
+		...updatePartyOptions(),
 		onSuccess: () => {
 			queryClient.invalidateQueries({
 				queryKey: ["partido"],
@@ -13,9 +17,9 @@ export const usePartidoAtualizar = () => {
 		},
 	});
 	return {
-		atualizarPartido: mutateAsync,
-		isUpdatingPartido: isPending,
-		hasAtualizarPartidoError: isError,
-		hasAtualizarPartidoSucess: isSuccess,
+		updateParty: mutateAsync,
+		isUpdatingParty: isPending,
+		hasUpdatePartyError: isError,
+		hasUpdatePartySuccess: isSuccess,
 	};
 };

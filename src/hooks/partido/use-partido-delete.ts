@@ -1,21 +1,25 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { ExcluirPartidoOptions } from "@/hooks/options/partido";
+import { deletePartyOptions } from "@/hooks/options/partido";
 
-export const usePartidoExcluir = () => {
+/**
+ * Hook for deleting political parties
+ * Handles party deletion with cache invalidation
+ */
+export const usePartyDelete = () => {
 	const queryClient = useQueryClient();
 
 	const { mutateAsync, isPending, isError, isSuccess } = useMutation({
-		...ExcluirPartidoOptions(),
+		...deletePartyOptions(),
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: ["partido"] });
 		},
 	});
 
 	return {
-		excluirPartido: mutateAsync,
-		isDeletingPartido: isPending,
-		hasExcluirPartidoError: isError,
-		hasExcluirPartidoSuccess: isSuccess,
+		deleteParty: mutateAsync,
+		isDeletingParty: isPending,
+		hasDeletePartyError: isError,
+		hasDeletePartySuccess: isSuccess,
 	};
 };

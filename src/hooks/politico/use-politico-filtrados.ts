@@ -1,22 +1,30 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { FiltrarPoliticosOptions } from "../options/politico";
+import { filterPoliticiansOptions } from "../options/politico";
 
 import { DadosParaPesquisaParlamenta } from "@/core/domain/dtos/dados.dto";
 
-function limparFiltros(filtros: DadosParaPesquisaParlamenta) {
+/**
+ * Utility function to clean filter object by removing empty values
+ * Filters out null, undefined, empty strings, and "geral" values
+ */
+function cleanFilters(filters: DadosParaPesquisaParlamenta) {
 	return Object.fromEntries(
-		Object.entries(filtros).filter(([value]) => value && value !== "geral")
+		Object.entries(filters).filter(([value]) => value && value !== "geral")
 	) as DadosParaPesquisaParlamenta;
 }
 
-export const usePoliticoFiltrados = (filtros: DadosParaPesquisaParlamenta) => {
-	const filtrosLimpos = limparFiltros(filtros);
+/**
+ * Hook for fetching filtered politicians
+ * Applies filters and returns matching politicians with loading states
+ */
+export const useFilteredPoliticians = (filters: DadosParaPesquisaParlamenta) => {
+	const cleanedFilters = cleanFilters(filters);
 	const {
-		data: politicosFiltrados,
-		isLoading: isLoadingPoliticosFiltrados,
+		data: filteredPoliticians,
+		isLoading: isLoadingFilteredPoliticians,
 		error,
-	} = useQuery(FiltrarPoliticosOptions(filtrosLimpos));
+	} = useQuery(filterPoliticiansOptions(cleanedFilters));
 
-	return { politicosFiltrados, isLoadingPoliticosFiltrados, error };
+	return { filteredPoliticians, isLoadingFilteredPoliticians, error };
 };

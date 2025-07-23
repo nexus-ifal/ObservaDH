@@ -2,15 +2,19 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { CreatePartidoDTO } from "@/core/domain/dtos/partido.dto";
 import {
-	CriarPartidoOptions,
+	createPartyOptions,
 	getPartidoBaseQueryKey,
 } from "@/hooks/options/partido";
 
-export function usePartidoCreate() {
+/**
+ * Hook for creating political parties
+ * Handles party creation with cache invalidation
+ */
+export function usePartyCreate() {
 	const queryClient = useQueryClient();
-	const mutation = useMutation(CriarPartidoOptions());
+	const mutation = useMutation(createPartyOptions());
 
-	const createPartido = (partidoData: CreatePartidoDTO) =>
+	const createParty = (partidoData: CreatePartidoDTO) =>
 		mutation.mutate(
 			{
 				payload: { partido: partidoData },
@@ -18,16 +22,16 @@ export function usePartidoCreate() {
 			{
 				onSuccess: () => {
 					queryClient.invalidateQueries({
-						queryKey: [...getPartidoBaseQueryKey(), "listarPartido"],
+						queryKey: [...getPartidoBaseQueryKey(), "listParties"],
 					});
 				},
 				onError: () => {},
 			}
 		);
 	return {
-		createPartido,
+		createParty,
 		isLoading: mutation.isPending,
 		error: mutation.error,
-		isSucess: mutation.isSuccess,
+		isSuccess: mutation.isSuccess,
 	};
 }

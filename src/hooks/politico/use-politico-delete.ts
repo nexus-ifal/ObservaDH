@@ -1,21 +1,25 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { ExcluirPoliticoOptions } from "@/hooks/options/politico";
+import { deletePoliticianOptions } from "@/hooks/options/politico";
 
-export const usePoliticoExcluir = () => {
+/**
+ * Hook for deleting politicians
+ * Handles politician deletion with cache invalidation
+ */
+export const usePoliticianDelete = () => {
 	const queryClient = useQueryClient();
 
 	const { mutateAsync, isPending, isError, isSuccess } = useMutation({
-		...ExcluirPoliticoOptions(),
+		...deletePoliticianOptions(),
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: ["politico"] });
 		},
 	});
 
 	return {
-		excluirPolitico: mutateAsync,
-		isDeletingPolitico: isPending,
-		hasExcluirPoliticoError: isError,
-		hasExcluirPoliticoSuccess: isSuccess,
+		deletePolitician: mutateAsync,
+		isDeletingPolitician: isPending,
+		hasDeletePoliticianError: isError,
+		hasDeletePoliticianSuccess: isSuccess,
 	};
 };

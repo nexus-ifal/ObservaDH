@@ -1,12 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { listarPartidoOptions } from "@/hooks/options/partido";
+import { listPartiesOptions } from "@/hooks/options/partido";
 
-export const usePartido = () => {
+/**
+ * Hook for fetching all political parties
+ * Returns parties list with loading and error states
+ */
+export const useParty = () => {
 	const {
-		data: partidos,
-		isLoading: isLoadingPartidos,
+		data: parties,
+		isLoading: isLoadingParties,
 		error: error,
-	} = useQuery(listarPartidoOptions());
-	return { partidos, isLoadingPartidos, error };
+	} = useQuery(listPartiesOptions());
+	return { parties, isLoadingParties, error };
 };

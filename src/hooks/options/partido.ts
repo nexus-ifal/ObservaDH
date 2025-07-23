@@ -11,25 +11,30 @@ import {
 
 const usecase = DIContainer.getPartidoUseCase();
 
+/**
+ * Query and mutation options for Partido (Political Party) operations
+ * Provides React Query configurations for party data management
+ */
+
 export const getPartidoBaseQueryKey = () => ["partido"];
 
-export const listarPartidoOptions = () =>
+export const listPartiesOptions = () =>
 	queryOptions({
-		queryKey: [...getPartidoBaseQueryKey(), "listarPartido"],
-		queryFn: () => usecase.listar(),
+		queryKey: [...getPartidoBaseQueryKey(), "listParties"],
+		queryFn: () => usecase.list(),
 	});
 
 export interface APICreatePartidoPayload {
 	partido: CreatePartidoDTO;
 }
 
-export const CriarPartidoOptions = () =>
+export const createPartyOptions = () =>
 	mutationOptions({
-		mutationKey: [...getPartidoBaseQueryKey(), "criarPartido"],
+		mutationKey: [...getPartidoBaseQueryKey(), "createParty"],
 		mutationFn: ({
 			payload,
 		}: MutationVariables<void, APICreatePartidoPayload>) =>
-			usecase.criar(payload.partido),
+			usecase.create(payload.partido),
 	});
 
 export interface APIAtualizarPartidoPayload {
@@ -37,23 +42,23 @@ export interface APIAtualizarPartidoPayload {
 	data: UpdatePartidoDTO;
 }
 
-export const AtualizarPartidoOptions = () =>
+export const updatePartyOptions = () =>
 	mutationOptions({
-		mutationKey: [...getPartidoBaseQueryKey(), "atualizarPartido"],
+		mutationKey: [...getPartidoBaseQueryKey(), "updateParty"],
 		mutationFn: ({
 			payload,
 		}: MutationVariables<void, APIAtualizarPartidoPayload>) =>
-			usecase.atualizar(payload.id, payload.data),
+			usecase.update(payload.id, payload.data),
 	});
 
 export interface APIExcluirPartidoPayload {
 	id: string;
 }
-export const ExcluirPartidoOptions = () =>
+export const deletePartyOptions = () =>
 	mutationOptions({
-		mutationKey: [...getPartidoBaseQueryKey(), "excluirPartido"],
+		mutationKey: [...getPartidoBaseQueryKey(), "deleteParty"],
 		mutationFn: ({
 			payload,
 		}: MutationVariables<void, APIExcluirPartidoPayload>) =>
-			usecase.excluir(payload.id),
+			usecase.delete(payload.id),
 	});
