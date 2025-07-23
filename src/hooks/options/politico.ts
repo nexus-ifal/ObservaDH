@@ -12,25 +12,30 @@ import {
 
 const usecase = DIContainer.getPoliticoUseCase();
 
+/**
+ * Query and mutation options for Politico (Politician) operations
+ * Provides React Query configurations for politician data management
+ */
+
 export const getPoliticoBaseQueryKey = () => ["politico"];
 
-export const listarPoliticosOptions = () =>
+export const listPoliticiansOptions = () =>
 	queryOptions({
-		queryKey: [...getPoliticoBaseQueryKey(), "listarPoliticos"],
-		queryFn: () => usecase.listar(),
+		queryKey: [...getPoliticoBaseQueryKey(), "listPoliticians"],
+		queryFn: () => usecase.list(),
 	});
 
 export interface APICreatePoliticoPayload {
 	politico: CreatePoliticoDTO;
 }
 
-export const CriarPoliticoOptions = () =>
+export const createPoliticianOptions = () =>
 	mutationOptions({
-		mutationKey: [...getPoliticoBaseQueryKey(), "criarPolitico"],
+		mutationKey: [...getPoliticoBaseQueryKey(), "createPolitician"],
 		mutationFn: ({
 			payload,
 		}: MutationVariables<void, APICreatePoliticoPayload>) =>
-			usecase.criar(payload.politico),
+			usecase.create(payload.politico),
 	});
 
 export interface APIAtualizarPoliticoPayload {
@@ -38,33 +43,33 @@ export interface APIAtualizarPoliticoPayload {
 	data: UpdatePoliticoDTO;
 }
 
-export const AtualizarPoliticoOptions = () =>
+export const updatePoliticianOptions = () =>
 	mutationOptions({
-		mutationKey: [...getPoliticoBaseQueryKey(), "atualizarPolitico"],
+		mutationKey: [...getPoliticoBaseQueryKey(), "updatePolitician"],
 		mutationFn: ({
 			payload,
 		}: MutationVariables<void, APIAtualizarPoliticoPayload>) =>
-			usecase.atualizar(payload.id, payload.data),
+			usecase.update(payload.id, payload.data),
 	});
 
 export interface APIExcluirPoliticoPayload {
 	id: string;
 }
-export const ExcluirPoliticoOptions = () =>
+export const deletePoliticianOptions = () =>
 	mutationOptions({
-		mutationKey: [...getPoliticoBaseQueryKey(), "excluirPolitico"],
+		mutationKey: [...getPoliticoBaseQueryKey(), "deletePolitician"],
 		mutationFn: ({
 			payload,
 		}: MutationVariables<void, APIExcluirPoliticoPayload>) =>
-			usecase.excluir(payload.id),
+			usecase.delete(payload.id),
 	});
 
 export interface APIFiltrarPoliticosPayload {
 	filtros: DadosParaPesquisaParlamenta;
 }
 
-export const FiltrarPoliticosOptions = (filtros: DadosParaPesquisaParlamenta) =>
+export const filterPoliticiansOptions = (filtros: DadosParaPesquisaParlamenta) =>
 	queryOptions({
-		queryKey: [...getPoliticoBaseQueryKey(), "filtrarPoliticos", filtros],
-		queryFn: () => usecase.listarFiltrados(filtros),
+		queryKey: [...getPoliticoBaseQueryKey(), "filterPoliticians", filtros],
+		queryFn: () => usecase.listFiltered(filtros),
 	});

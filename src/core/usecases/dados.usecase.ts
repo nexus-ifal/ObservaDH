@@ -10,21 +10,26 @@ import {
 	PartidoRankingDTO,
 } from "@/core/domain/dtos/dados.dto";
 
+/**
+ * Use case interface for data analytics and reporting operations
+ * Handles complex data queries for charts, statistics and reports
+ * Source: Custom analytics aggregations for dashboard visualizations
+ */
 interface DadosUseCase {
-	listarProjetosPorUF(esfera?: string): Promise<DadosProjetoEstado[]>;
-	listarIdeologiaGenero(): Promise<DadosIdeologiaGenero[]>;
-	listarReligiaoRaca(): Promise<DadosReligiaoRaca[]>;
-	listarProjetosPorAno(): Promise<DadosPlPorAno[]>;
-	listarPautaPorAno(): Promise<DadosPautaPorAno[]>;
-	listarParlamentarEsfera(
-		esfera?: string
+	listProjectsByState(sphere?: string): Promise<DadosProjetoEstado[]>;
+	listIdeologyByGender(): Promise<DadosIdeologiaGenero[]>;
+	listReligionByRace(): Promise<DadosReligiaoRaca[]>;
+	listProjectsByYear(): Promise<DadosPlPorAno[]>;
+	listAgendaByYear(): Promise<DadosPautaPorAno[]>;
+	listParliamentariansBySphere(
+		sphere?: string
 	): Promise<DadosParlamentarProjetosEsfera>;
-	listarPautaPorEsfera(esfera?: string): Promise<DadosPautaEsfera[]>;
-	listarProjetosDireitosIdeologias(
-		pauta?: string
+	listAgendaBySphere(sphere?: string): Promise<DadosPautaEsfera[]>;
+	listProjectsRightsIdeologies(
+		agenda?: string
 	): Promise<DadosProjetosDireitosIdeologias>;
-	listarAnos(): Promise<{ ano: string }[]>;
-	listarRankingPartidos(): Promise<PartidoRankingDTO[]>;
+	listYears(): Promise<{ ano: string }[]>;
+	listPartyRankings(): Promise<PartidoRankingDTO[]>;
 }
 
 export default DadosUseCase;

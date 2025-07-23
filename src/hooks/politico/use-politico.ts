@@ -1,13 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { listarPoliticosOptions } from "@/hooks/options/politico";
+import { listPoliticiansOptions } from "@/hooks/options/politico";
 
-export const usePolitico = () => {
+/**
+ * Hook for fetching all politicians
+ * Returns politicians list with loading and error states
+ */
+export const usePolitician = () => {
 	const {
-		data: politicos,
-		isLoading: isLoadingPoliticos,
+		data: politicians,
+		isLoading: isLoadingPoliticians,
 		error,
-	} = useQuery(listarPoliticosOptions());
+	} = useQuery(listPoliticiansOptions());
 
-	return { politicos, isLoadingPoliticos, error };
+	return { politicians, isLoadingPoliticians, error };
 };

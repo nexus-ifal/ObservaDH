@@ -4,11 +4,15 @@ import {
 	UpdatePautaDTO,
 } from "@/core/domain/dtos/pauta.dto";
 
+/**
+ * Use case interface for Pauta (Agenda/Issue) operations
+ * Handles CRUD operations for legislative agendas while maintaining Portuguese database model names
+ */
 interface PautaUseCase {
-	listar(): Promise<ResponsePautaDTO[]>;
-	criar(pauta: CreatePautaDTO): Promise<ResponsePautaDTO>;
-	atualizar(id: string, pauta: UpdatePautaDTO): Promise<ResponsePautaDTO>;
-	excluir(id: string): Promise<ResponsePautaDTO>;
+	list(): Promise<ResponsePautaDTO[]>;
+	create(pauta: CreatePautaDTO): Promise<ResponsePautaDTO>;
+	update(id: string, pauta: UpdatePautaDTO): Promise<ResponsePautaDTO>;
+	delete(id: string): Promise<ResponsePautaDTO>;
 }
 
 export default PautaUseCase;

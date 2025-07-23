@@ -4,14 +4,18 @@ import {
 	UpdateIdeologiaDTO,
 } from "@/core/domain/dtos/ideologia.dto";
 
+/**
+ * Use case interface for Ideologia (Ideology) operations  
+ * Handles CRUD operations for political ideologies while maintaining Portuguese database model names
+ */
 interface IdeologiaUseCase {
-	listar(): Promise<ResponseIdeologiaDTO[]>;
-	criar(ideologia: CreateIdeologiaDTO): Promise<ResponseIdeologiaDTO>;
-	atualizar(
+	list(): Promise<ResponseIdeologiaDTO[]>;
+	create(ideologia: CreateIdeologiaDTO): Promise<ResponseIdeologiaDTO>;
+	update(
 		id: string,
 		ideologia: UpdateIdeologiaDTO
 	): Promise<ResponseIdeologiaDTO>;
-	excluir(id: string): Promise<ResponseIdeologiaDTO>;
+	delete(id: string): Promise<ResponseIdeologiaDTO>;
 }
 
 export default IdeologiaUseCase;

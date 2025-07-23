@@ -6,13 +6,17 @@ import {
 	UpdateProjetoDTO,
 } from "@/core/domain/dtos/projeto.dto";
 
+/**
+ * Use case interface for Projeto (Project) operations
+ * Handles CRUD operations and filtering for legislative projects while maintaining Portuguese database model names
+ */
 interface ProjetoUseCase {
-	listar(): Promise<ResponseProjetoDTO[]>;
-	criar(projeto: CreateProjetoDTO): Promise<ResponseProjetoDTO>;
-	atualizar(id: string, projeto: UpdateProjetoDTO): Promise<ResponseProjetoDTO>;
-	excluir(id: string): Promise<ResponseProjetoDTO>;
-	buscar(id: string): Promise<ResponseProjetoDTO | null>;
-	filtrar(filtros?: FiltrosProjetos): Promise<ProjetoDTO[]>;
+	list(): Promise<ResponseProjetoDTO[]>;
+	create(projeto: CreateProjetoDTO): Promise<ResponseProjetoDTO>;
+	update(id: string, projeto: UpdateProjetoDTO): Promise<ResponseProjetoDTO>;
+	delete(id: string): Promise<ResponseProjetoDTO>;
+	findById(id: string): Promise<ResponseProjetoDTO | null>;
+	filter(filters?: FiltrosProjetos): Promise<ProjetoDTO[]>;
 }
 
 export default ProjetoUseCase;
