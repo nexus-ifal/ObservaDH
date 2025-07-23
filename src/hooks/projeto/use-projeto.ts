@@ -1,12 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { listarProjetosOptions } from "./../options/projeto";
+import { listProjectsOptions } from "./../options/projeto";
 
-export const useProjeto = () => {
+/**
+ * Hook for fetching all legislative projects
+ * Returns projects list with loading and error states
+ */
+export const useProject = () => {
 	const {
-		data: projetos,
-		isLoading: isLoadingProjetos,
+		data: projects,
+		isLoading: isLoadingProjects,
 		error,
-	} = useQuery(listarProjetosOptions());
-	return { projetos, isLoadingProjetos, error };
+	} = useQuery(listProjectsOptions());
+	return { projects, isLoadingProjects, error };
 };

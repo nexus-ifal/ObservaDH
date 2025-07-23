@@ -12,25 +12,30 @@ import {
 
 const usecase = DIContainer.getProjetoUseCase();
 
+/**
+ * Query and mutation options for Projeto (Legislative Project) operations
+ * Provides React Query configurations for project data management
+ */
+
 export const getProjetoBaseQueryKey = () => ["projeto"];
 
-export const listarProjetosOptions = () =>
+export const listProjectsOptions = () =>
 	queryOptions({
-		queryKey: [...getProjetoBaseQueryKey(), "listarProjetos"],
-		queryFn: () => usecase.listar(),
+		queryKey: [...getProjetoBaseQueryKey(), "listProjects"],
+		queryFn: () => usecase.list(),
 	});
 
 export interface APICreateProjetoPayload {
 	projeto: CreateProjetoDTO;
 }
 
-export const CriarProjetoOptions = () =>
+export const createProjectOptions = () =>
 	mutationOptions({
-		mutationKey: [...getProjetoBaseQueryKey(), "criarProjeto"],
+		mutationKey: [...getProjetoBaseQueryKey(), "createProject"],
 		mutationFn: ({
 			payload,
 		}: MutationVariables<void, APICreateProjetoPayload>) =>
-			usecase.criar(payload.projeto),
+			usecase.create(payload.projeto),
 	});
 
 export interface APIAtualizarProjetoPayload {
@@ -38,36 +43,36 @@ export interface APIAtualizarProjetoPayload {
 	data: UpdateProjetoDTO;
 }
 
-export const AtualizarProjetoOptions = () =>
+export const updateProjectOptions = () =>
 	mutationOptions({
-		mutationKey: [...getProjetoBaseQueryKey(), "atualizarProjeto"],
+		mutationKey: [...getProjetoBaseQueryKey(), "updateProject"],
 		mutationFn: ({
 			payload,
 		}: MutationVariables<void, APIAtualizarProjetoPayload>) =>
-			usecase.atualizar(payload.id, payload.data),
+			usecase.update(payload.id, payload.data),
 	});
 
 export interface APIExcluirProjetoPayload {
 	id: string;
 }
 
-export const ExcluirProjetoOptions = () =>
+export const deleteProjectOptions = () =>
 	mutationOptions({
-		mutationKey: [...getProjetoBaseQueryKey(), "excluirProjeto"],
+		mutationKey: [...getProjetoBaseQueryKey(), "deleteProject"],
 		mutationFn: ({
 			payload,
 		}: MutationVariables<void, APIExcluirProjetoPayload>) =>
-			usecase.excluir(payload.id),
+			usecase.delete(payload.id),
 	});
 
-export const BuscarProjetoOptions = (id: string) =>
+export const findProjectByIdOptions = (id: string) =>
 	queryOptions({
-		queryKey: [...getProjetoBaseQueryKey(), "buscarProjeto"],
-		queryFn: () => usecase.buscar(id),
+		queryKey: [...getProjetoBaseQueryKey(), "findProjectById"],
+		queryFn: () => usecase.findById(id),
 	});
 
-export const FiltrarProjetosOptions = (filtros?: FiltrosProjetos) =>
+export const filterProjectsOptions = (filters?: FiltrosProjetos) =>
 	queryOptions({
-		queryKey: [...getProjetoBaseQueryKey(), "filtrarProjetos", filtros],
-		queryFn: () => usecase.filtrar(filtros),
+		queryKey: [...getProjetoBaseQueryKey(), "filterProjects", filters],
+		queryFn: () => usecase.filter(filters),
 	});

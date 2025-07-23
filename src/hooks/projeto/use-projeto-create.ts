@@ -2,15 +2,19 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { CreateProjetoDTO } from "@/core/domain/dtos/projeto.dto";
 import {
-	CriarProjetoOptions,
+	createProjectOptions,
 	getProjetoBaseQueryKey,
 } from "@/hooks/options/projeto";
 
-export function useProjetoCreate() {
+/**
+ * Hook for creating legislative projects
+ * Handles project creation with cache invalidation
+ */
+export function useProjectCreate() {
 	const queryClient = useQueryClient();
-	const mutation = useMutation(CriarProjetoOptions());
+	const mutation = useMutation(createProjectOptions());
 
-	const createProjeto = (projetoData: CreateProjetoDTO) =>
+	const createProject = (projetoData: CreateProjetoDTO) =>
 		mutation.mutate(
 			{
 				payload: { projeto: projetoData },
@@ -18,16 +22,16 @@ export function useProjetoCreate() {
 			{
 				onSuccess: () => {
 					queryClient.invalidateQueries({
-						queryKey: [...getProjetoBaseQueryKey(), "listarProjetos"],
+						queryKey: [...getProjetoBaseQueryKey(), "listProjects"],
 					});
 				},
 				onError: () => {},
 			}
 		);
 	return {
-		createProjeto,
+		createProject,
 		isLoading: mutation.isPending,
 		error: mutation.error,
-		isSucess: mutation.isSuccess,
+		isSuccess: mutation.isSuccess,
 	};
 }

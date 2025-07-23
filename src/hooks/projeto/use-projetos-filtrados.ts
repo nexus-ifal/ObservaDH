@@ -1,15 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { FiltrarProjetosOptions } from "../options/projeto";
+import { filterProjectsOptions } from "../options/projeto";
 
 import { FiltrosProjetos } from "@/core/domain/dtos/dados.dto";
 
-export const useProjetosFiltrados = (filtros?: FiltrosProjetos) => {
+/**
+ * Hook for fetching filtered legislative projects
+ * Applies filters and returns matching projects with loading states
+ */
+export const useFilteredProjects = (filters?: FiltrosProjetos) => {
 	const {
-		data: projetos,
-		isLoading: isLoadingProjetos,
+		data: projects,
+		isLoading: isLoadingProjects,
 		error,
-	} = useQuery(FiltrarProjetosOptions(filtros));
+	} = useQuery(filterProjectsOptions(filters));
 
-	return { projetos, isLoadingProjetos, error };
+	return { projects, isLoadingProjects, error };
 };
