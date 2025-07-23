@@ -17,25 +17,14 @@ export class ListarPoliticosFiltradosService
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		const where: any = {};
 
-		if (filtros.esfera)
-			where.esfera = {
-				is: { nome: { equals: filtros.esfera, mode: "insensitive" } },
-			};
-		if (filtros.estado)
-			where.estado = { sigla: { equals: filtros.estado, mode: "insensitive" } };
+		if (filtros.esfera) where.esferaId = filtros.esfera;
+		if (filtros.estado) where.estadoId = filtros.estado;
 		if (filtros.genero)
 			where.genero = { equals: filtros.genero, mode: "insensitive" };
-		if (filtros.partido)
-			where.partido = {
-				is: { sigla: { equals: filtros.partido, mode: "insensitive" } },
-			};
-
+		if (filtros.partido) where.partidoId = filtros.partido;
 		if (filtros.ideologia)
 			where.ideologia = { equals: filtros.ideologia, mode: "insensitive" };
-		if (filtros.profissao)
-			where.profissao = {
-				is: { nome: { equals: filtros.profissao, mode: "insensitive" } },
-			};
+		if (filtros.profissao) where.profissaoId = filtros.profissao;
 
 		const politicos = await prismaClient.politico.findMany({
 			where,

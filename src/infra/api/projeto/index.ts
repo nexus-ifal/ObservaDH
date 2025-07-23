@@ -1,3 +1,4 @@
+import { FiltrosProjetos, ProjetoDTO } from "@/core/domain/dtos/dados.dto";
 import {
 	CreateProjetoDTO,
 	ResponseProjetoDTO,
@@ -35,6 +36,13 @@ class ProjetoAPI implements ProjetoRepository {
 	}
 	async buscar(id: string): Promise<ResponseProjetoDTO | null> {
 		const response = await conexaoBackend.get(`/projeto/${id}`);
+		const dados = response.data.dados;
+		return dados;
+	}
+	async filtrar(filtros?: FiltrosProjetos): Promise<ProjetoDTO[]> {
+		const response = await conexaoBackend.get("/dados/projetos-filtrados", {
+			params: filtros,
+		});
 		const dados = response.data.dados;
 		return dados;
 	}
