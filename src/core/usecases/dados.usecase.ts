@@ -7,6 +7,7 @@ import {
 	DadosProjetoEstado,
 	DadosProjetosDireitosIdeologias,
 	DadosReligiaoRaca,
+	PartidoRankingDTO,
 } from "@/core/domain/dtos/dados.dto";
 
 interface DadosUseCase {
@@ -23,5 +24,7 @@ interface DadosUseCase {
 		pauta?: string
 	): Promise<DadosProjetosDireitosIdeologias>;
 	listarAnos(): Promise<{ ano: string }[]>;
+	listarRankingPartidos(): Promise<PartidoRankingDTO[]>;
 }
+
 export default DadosUseCase;

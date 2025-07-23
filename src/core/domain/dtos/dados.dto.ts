@@ -84,3 +84,12 @@ export type FiltrosProjetos = {
 	estadoId?: string;
 	pautaId?: string;
 };
+
+export type PartidoRankingDTO = {
+	id: string;
+	nome: string;
+	sigla: string;
+	imagem: string | null;
+	numeroParlamentares: number;
+	numeroPropostas: number;
+};
