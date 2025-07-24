@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { CriarEstadoController } from "@/adapters/api/controllers/estado/criar-estado-controller";
 import { ListarEstadoController } from "@/adapters/api/controllers/estado/listar-estado-controller";
+import { userRoleSession } from "@/app/actions/login-actions";
 import { CreateEstadoDTO } from "@/core/domain/dtos/estado.dto";
 import { RespostaApi } from "@/core/domain/models/resposta-api";
 
@@ -9,6 +10,23 @@ import { RespostaApi } from "@/core/domain/models/resposta-api";
 export async function POST(request: NextRequest) {
 	try {
 		const body = await request.json().catch(() => null);
+		const userRole = await userRoleSession();
+
+		if (!userRole || userRole == null) {
+			const respostaNoBody = new RespostaApi({
+				sucesso: false,
+				mensagem: "Usuário não autenticado",
+			});
+			return NextResponse.json(respostaNoBody, { status: 400 });
+		}
+
+		if (userRole !== "ADMIN" && userRole !== "EDITOR") {
+			const respostaNoBody = new RespostaApi({
+				sucesso: false,
+				mensagem: "Usuário não autorizado",
+			});
+			return NextResponse.json(respostaNoBody, { status: 400 });
+		}
 
 		if (!body) {
 			const respostaNoBody = new RespostaApi({

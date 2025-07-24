@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { AtualizarEstadoController } from "@/adapters/api/controllers/estado/atualizar-estado-controller";
 import { BuscarEstadoController } from "@/adapters/api/controllers/estado/buscar-estado-controller";
 import { DeletarEstadoController } from "@/adapters/api/controllers/estado/deletar-estado-controller";
+import { userRoleSession } from "@/app/actions/login-actions";
 import { UpdateEstadoDTO } from "@/core/domain/dtos/estado.dto";
 import { RespostaApi } from "@/core/domain/models/resposta-api";
 
@@ -25,10 +26,27 @@ export async function PATCH(
 	try {
 		const params = await context.params;
 		const idError = validateId(params.id);
+		const userRole = await userRoleSession();
 		if (idError) return idError;
 
 		const body = await request.json().catch(() => ({}));
 		const { nome, sigla } = body as UpdateEstadoDTO;
+
+		if (!userRole || userRole == null) {
+			const respostaNoBody = new RespostaApi({
+				sucesso: false,
+				mensagem: "Usuário não autenticado",
+			});
+			return NextResponse.json(respostaNoBody, { status: 400 });
+		}
+
+		if (userRole !== "ADMIN" && userRole !== "EDITOR") {
+			const respostaNoBody = new RespostaApi({
+				sucesso: false,
+				mensagem: "Usuário não autorizado",
+			});
+			return NextResponse.json(respostaNoBody, { status: 400 });
+		}
 
 		const controller = new AtualizarEstadoController();
 		const resposta = (await controller.executar({
@@ -64,7 +82,24 @@ export async function DELETE(
 	try {
 		const params = await context.params;
 		const idError = validateId(params.id);
+		const userRole = await userRoleSession();
 		if (idError) return idError;
+
+		if (!userRole || userRole == null) {
+			const respostaNoBody = new RespostaApi({
+				sucesso: false,
+				mensagem: "Usuário não autenticado",
+			});
+			return NextResponse.json(respostaNoBody, { status: 400 });
+		}
+
+		if (userRole !== "ADMIN" && userRole !== "EDITOR") {
+			const respostaNoBody = new RespostaApi({
+				sucesso: false,
+				mensagem: "Usuário não autorizado",
+			});
+			return NextResponse.json(respostaNoBody, { status: 400 });
+		}
 
 		const controller = new DeletarEstadoController();
 		const resposta = (await controller.executar({

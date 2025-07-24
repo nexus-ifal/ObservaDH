@@ -3,9 +3,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { AtualizarEsferaController } from "@/adapters/api/controllers/esfera/atualizar-esfera-controller";
 import { BuscarEsferaController } from "@/adapters/api/controllers/esfera/buscar-esfera-controller";
 import { DeletarEsferaController } from "@/adapters/api/controllers/esfera/deletar-esfera-controller";
+import { userRoleSession } from "@/app/actions/login-actions";
 import { UpdateEsferaDTO } from "@/core/domain/dtos/esfera.dto";
 import { RespostaApi } from "@/core/domain/models/resposta-api";
-import { userRoleSession } from "@/app/actions/login-actions";
 
 function validateId(id?: string): NextResponse | undefined {
 	if (!id || id.trim() === "") {
@@ -41,6 +41,7 @@ export async function PATCH(
 		if (idError) return idError;
 
 		const body = await request.json().catch(() => ({}));
+		const updateData = { id: params.id as string, ...body } as UpdateEsferaDTO;
 
 		if (!userRole || userRole == null) {
 			const respostaNoBody = new RespostaApi({
@@ -57,7 +58,6 @@ export async function PATCH(
 			});
 			return NextResponse.json(respostaNoBody, { status: 400 });
 		}
-		const updateData = { id: params.id as string, ...body } as UpdateEsferaDTO;
 
 		const controller = new AtualizarEsferaController();
 		const resposta = (await controller.executar(updateData)) as RespostaApi;
