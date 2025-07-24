@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { AtualizarPautaController } from "@/adapters/api/controllers/pauta/atualizar-pauta-controller";
 import { BuscarPautaController } from "@/adapters/api/controllers/pauta/buscar-pauta-controller";
 import { DeletarPautaController } from "@/adapters/api/controllers/pauta/deletar-pauta-controller";
+import { userRoleSession } from "@/app/actions/login-actions";
 import { UpdatePautaDTO } from "@/core/domain/dtos/pauta.dto";
 import { RespostaApi } from "@/core/domain/models/resposta-api";
 
@@ -36,10 +37,27 @@ export async function PATCH(
 	try {
 		const params = await context.params;
 		const idError = validateId(params.id);
+		const userRole = await userRoleSession();
 		if (idError) return idError;
 
 		const body = await request.json().catch(() => ({}));
 		const updateData = { id: params.id as string, ...body } as UpdatePautaDTO;
+
+		if (!userRole || userRole == null) {
+			const respostaNoBody = new RespostaApi({
+				sucesso: false,
+				mensagem: "Usuário não autenticado",
+			});
+			return NextResponse.json(respostaNoBody, { status: 400 });
+		}
+
+		if (userRole !== "ADMIN" && userRole !== "EDITOR") {
+			const respostaNoBody = new RespostaApi({
+				sucesso: false,
+				mensagem: "Usuário não autorizado",
+			});
+			return NextResponse.json(respostaNoBody, { status: 400 });
+		}
 
 		const controller = new AtualizarPautaController();
 		const resposta = (await controller.executar(updateData)) as RespostaApi;
@@ -69,7 +87,24 @@ export async function DELETE(
 	try {
 		const params = await context.params;
 		const idError = validateId(params.id);
+		const userRole = await userRoleSession();
 		if (idError) return idError;
+
+		if (!userRole || userRole == null) {
+			const respostaNoBody = new RespostaApi({
+				sucesso: false,
+				mensagem: "Usuário não autenticado",
+			});
+			return NextResponse.json(respostaNoBody, { status: 400 });
+		}
+
+		if (userRole !== "ADMIN" && userRole !== "EDITOR") {
+			const respostaNoBody = new RespostaApi({
+				sucesso: false,
+				mensagem: "Usuário não autorizado",
+			});
+			return NextResponse.json(respostaNoBody, { status: 400 });
+		}
 
 		const controller = new DeletarPautaController();
 		const resposta = (await controller.executar({
