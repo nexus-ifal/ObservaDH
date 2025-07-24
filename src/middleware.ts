@@ -17,19 +17,39 @@ const ROTAS_PUBLICAS = [
 ];
 
 const ROTAS_ADMIN = [
-	"/admin-routes/cadastro-usuario",
-	"/admin-routes/home",
 	"/admin-routes/acoes-usuario",
-	"/admin-routes/exclusao-usuario",
 	"/admin-routes/atualizar-usuario",
+	"/admin-routes/cadastro-usuario",
+	"/admin-routes/exclusao-usuario",
+	"/admin-routes/home",
 	"/admin-routes/listar-usuarios",
 ];
 const ROTAS_USER = [
-	//TODO: adicionar TODAS as rotas de user
 	"/user-routes/home",
+	"/user-routes/dados/atualizar/direito-violado",
+	"/user-routes/dados/cadastrar/direito-violado",
+	"/user-routes/dados/excluir/direito-violado",
 	"/user-routes/dados/atualizar/estado",
 	"/user-routes/dados/cadastrar/estado",
 	"/user-routes/dados/excluir/estado",
+	"/user-routes/dados/atualizar/ideologia",
+	"/user-routes/dados/cadastrar/ideologia",
+	"/user-routes/dados/excluir/ideologia",
+	"/user-routes/dados/atualizar/partido",
+	"/user-routes/dados/cadastrar/partido",
+	"/user-routes/dados/excluir/partido",
+	"/user-routes/dados/atualizar/pauta",
+	"/user-routes/dados/cadastrar/pauta",
+	"/user-routes/dados/excluir/pauta",
+	"/user-routes/dados/atualizar/politico",
+	"/user-routes/dados/cadastrar/politico",
+	"/user-routes/dados/excluir/politico",
+	"/user-routes/dados/atualizar/profissao",
+	"/user-routes/dados/cadastrar/profissao",
+	"/user-routes/dados/excluir/profissao",
+	"/user-routes/dados/atualizar/projeto",
+	"/user-routes/dados/cadastrar/projeto",
+	"/user-routes/dados/excluir/projeto",
 ];
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
 
+import Loading from "@/components/ui/loading";
+
 import { oswald } from "@/fonts/fonts";
 
 export interface User {
@@ -49,9 +51,7 @@ export default function ListagemUsuarios() {
 	if (loading) {
 		return (
 			<div className="fundo-login flex items-center justify-center min-w-screen min-h-screen">
-				<p className={`${oswald.className} text-white text-[25px]`}>
-					Carregando usuários...
-				</p>
+				<Loading />
 			</div>
 		);
 	}
