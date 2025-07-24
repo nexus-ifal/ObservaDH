@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { AtualizarDireitoVioladoController } from "@/adapters/api/controllers/direito-violado/atualizar-direito_violado-controller";
 import { BuscarDireitoVioladoController } from "@/adapters/api/controllers/direito-violado/buscar-direito_violado-controller";
 import { DeletarDireitoVioladoController } from "@/adapters/api/controllers/direito-violado/deletar-direito_violado-controller";
+import { userRoleSession } from "@/app/actions/login-actions";
 import { UpdateDireitoVioladoDTO } from "@/core/domain/dtos/direito-violado.dto";
 import { RespostaApi } from "@/core/domain/models/resposta-api";
 
@@ -36,6 +37,7 @@ export async function PATCH(
 	try {
 		const params = await context.params;
 		const idError = validateId(params.id);
+		const userRole = await userRoleSession();
 		if (idError) return idError;
 
 		const body = await request.json().catch(() => ({}));
@@ -43,6 +45,22 @@ export async function PATCH(
 			id: params.id,
 			...body,
 		} as UpdateDireitoVioladoDTO;
+
+		if (!userRole || userRole == null) {
+			const respostaNoBody = new RespostaApi({
+				sucesso: false,
+				mensagem: "Usuário não autenticado",
+			});
+			return NextResponse.json(respostaNoBody, { status: 400 });
+		}
+
+		if (userRole !== "ADMIN" && userRole !== "EDITOR") {
+			const respostaNoBody = new RespostaApi({
+				sucesso: false,
+				mensagem: "Usuário não autorizado",
+			});
+			return NextResponse.json(respostaNoBody, { status: 400 });
+		}
 
 		const controller = new AtualizarDireitoVioladoController();
 		const resposta = (await controller.executar(updateData)) as RespostaApi;
@@ -72,7 +90,24 @@ export async function DELETE(
 	try {
 		const params = await context.params;
 		const idError = validateId(params.id);
+		const userRole = await userRoleSession();
 		if (idError) return idError;
+
+		if (!userRole || userRole == null) {
+			const respostaNoBody = new RespostaApi({
+				sucesso: false,
+				mensagem: "Usuário não autenticado",
+			});
+			return NextResponse.json(respostaNoBody, { status: 400 });
+		}
+
+		if (userRole !== "ADMIN" && userRole !== "EDITOR") {
+			const respostaNoBody = new RespostaApi({
+				sucesso: false,
+				mensagem: "Usuário não autorizado",
+			});
+			return NextResponse.json(respostaNoBody, { status: 400 });
+		}
 
 		const controller = new DeletarDireitoVioladoController();
 		const resposta = (await controller.executar({
