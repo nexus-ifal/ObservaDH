@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { AtualizarProjetoController } from "@/adapters/api/controllers/projeto/atualizar-projeto-controller";
 import { BuscarProjetoController } from "@/adapters/api/controllers/projeto/buscar-projeto-controller";
 import { DeletarProjetoController } from "@/adapters/api/controllers/projeto/deletar-projeto-controller";
+import { userRoleSession } from "@/app/actions/login-actions";
 import { UpdateProjetoDTO } from "@/core/domain/dtos/projeto.dto";
 import { RespostaApi } from "@/core/domain/models/resposta-api";
 
@@ -35,10 +36,27 @@ export async function PATCH(
 	try {
 		const params = await context.params;
 		const idError = validateId(params.id);
+		const userRole = await userRoleSession();
 		if (idError) return idError;
 
 		const body = await request.json().catch(() => ({}));
 		const updateData = { id: params.id as string, ...body } as UpdateProjetoDTO;
+
+		if (!userRole || userRole == null) {
+			const respostaNoBody = new RespostaApi({
+				sucesso: false,
+				mensagem: "Usuário não autenticado",
+			});
+			return NextResponse.json(respostaNoBody, { status: 400 });
+		}
+
+		if (userRole !== "ADMIN" && userRole !== "EDITOR") {
+			const respostaNoBody = new RespostaApi({
+				sucesso: false,
+				mensagem: "Usuário não autorizado",
+			});
+			return NextResponse.json(respostaNoBody, { status: 400 });
+		}
 
 		const controller = new AtualizarProjetoController();
 		const resposta = (await controller.executar(updateData)) as RespostaApi;
@@ -71,7 +89,24 @@ export async function DELETE(
 	try {
 		const params = await context.params;
 		const idError = validateId(params.id);
+		const userRole = await userRoleSession();
 		if (idError) return idError;
+
+		if (!userRole || userRole == null) {
+			const respostaNoBody = new RespostaApi({
+				sucesso: false,
+				mensagem: "Usuário não autenticado",
+			});
+			return NextResponse.json(respostaNoBody, { status: 400 });
+		}
+
+		if (userRole !== "ADMIN" && userRole !== "EDITOR") {
+			const respostaNoBody = new RespostaApi({
+				sucesso: false,
+				mensagem: "Usuário não autorizado",
+			});
+			return NextResponse.json(respostaNoBody, { status: 400 });
+		}
 
 		const controller = new DeletarProjetoController();
 		const resposta = (await controller.executar({

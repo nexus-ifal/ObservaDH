@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { CriarProjetoController } from "@/adapters/api/controllers/projeto/criar-projeto-controller";
 import { ListarProjetoController } from "@/adapters/api/controllers/projeto/listar-projeto-controller";
+import { userRoleSession } from "@/app/actions/login-actions";
 import { CreateProjetoDTO } from "@/core/domain/dtos/projeto.dto";
 import { RespostaApi } from "@/core/domain/models/resposta-api";
 
@@ -19,6 +20,23 @@ function handleError(error: any, message: string) {
 export async function POST(request: NextRequest) {
 	try {
 		const body = await request.json().catch(() => null);
+		const userRole = await userRoleSession();
+
+		if (!userRole || userRole == null) {
+			const respostaNoBody = new RespostaApi({
+				sucesso: false,
+				mensagem: "Usuário não autenticado",
+			});
+			return NextResponse.json(respostaNoBody, { status: 400 });
+		}
+
+		if (userRole !== "ADMIN" && userRole !== "EDITOR") {
+			const respostaNoBody = new RespostaApi({
+				sucesso: false,
+				mensagem: "Usuário não autorizado",
+			});
+			return NextResponse.json(respostaNoBody, { status: 400 });
+		}
 
 		if (!body) {
 			const respostaNoBody = new RespostaApi({
