@@ -8,6 +8,12 @@ import { auth, signIn } from "../../../auth";
 
 import { userLoginSchema } from "@/schemas/user-zod-schema";
 
+export async function userRoleSession() {
+	const session = await auth();
+	const userRoleSession = session?.user?.role;
+	return userRoleSession;
+}
+
 export async function authenticate(
 	prevState: string | undefined,
 	formData: FormData

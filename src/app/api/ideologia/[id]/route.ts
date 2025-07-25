@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { AtualizarIdeologiaController } from "@/adapters/api/controllers/ideologia/atualizar-ideologia-controller";
 import { BuscarIdeologiaController } from "@/adapters/api/controllers/ideologia/buscar-ideologia-controller";
 import { DeletarIdeologiaController } from "@/adapters/api/controllers/ideologia/deletar-ideologia-controller";
+import { userRoleSession } from "@/app/actions/login-actions";
 import { UpdateIdeologiaDTO } from "@/core/domain/dtos/ideologia.dto";
 import { RespostaApi } from "@/core/domain/models/resposta-api";
 
@@ -35,6 +36,7 @@ export async function PATCH(
 	try {
 		const params = await context.params;
 		const idError = validateId(params.id);
+		const userRole = await userRoleSession();
 		if (idError) return idError;
 
 		const body = await request.json().catch(() => ({}));
@@ -42,6 +44,22 @@ export async function PATCH(
 			id: params.id as string,
 			...body,
 		} as UpdateIdeologiaDTO;
+
+		if (!userRole || userRole == null) {
+			const respostaNoBody = new RespostaApi({
+				sucesso: false,
+				mensagem: "Usuário não autenticado",
+			});
+			return NextResponse.json(respostaNoBody, { status: 400 });
+		}
+
+		if (userRole !== "ADMIN" && userRole !== "EDITOR") {
+			const respostaNoBody = new RespostaApi({
+				sucesso: false,
+				mensagem: "Usuário não autorizado",
+			});
+			return NextResponse.json(respostaNoBody, { status: 400 });
+		}
 
 		const controller = new AtualizarIdeologiaController();
 		const resposta = (await controller.executar(updateData)) as RespostaApi;
@@ -68,7 +86,24 @@ export async function DELETE(
 	try {
 		const params = await context.params;
 		const idError = validateId(params.id);
+		const userRole = await userRoleSession();
 		if (idError) return idError;
+
+		if (!userRole || userRole == null) {
+			const respostaNoBody = new RespostaApi({
+				sucesso: false,
+				mensagem: "Usuário não autenticado",
+			});
+			return NextResponse.json(respostaNoBody, { status: 400 });
+		}
+
+		if (userRole !== "ADMIN" && userRole !== "EDITOR") {
+			const respostaNoBody = new RespostaApi({
+				sucesso: false,
+				mensagem: "Usuário não autorizado",
+			});
+			return NextResponse.json(respostaNoBody, { status: 400 });
+		}
 
 		const controller = new DeletarIdeologiaController();
 		const resposta = (await controller.executar({

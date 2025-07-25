@@ -2,6 +2,8 @@
 import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 
+import Loading from "@/components/ui/loading";
+
 import { oswald } from "@/fonts/fonts";
 
 function ErroConteudo() {
@@ -30,7 +32,7 @@ export default function PaginaDeErro() {
 			<Suspense
 				fallback={
 					<div className={`${oswald.className} text-lg text-white text-center`}>
-						Carregando mensagem de erro...
+						<Loading />
 					</div>
 				}
 			>

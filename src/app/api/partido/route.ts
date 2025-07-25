@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 import { CriarPartidoController } from "@/adapters/api/controllers/partido/criar-partido-controller";
 import { ListarPartidoController } from "@/adapters/api/controllers/partido/listar-partido-controller";
+import { userRoleSession } from "@/app/actions/login-actions";
 import { CreatePartidoDTO } from "@/core/domain/dtos/partido.dto";
 import { RespostaApi } from "@/core/domain/models/resposta-api";
 
@@ -21,6 +22,23 @@ function handleError(error: any, message: string) {
 export async function POST(request: NextRequest) {
 	try {
 		const body = await request.json().catch(() => null);
+		const userRole = await userRoleSession();
+
+		if (!userRole || userRole == null) {
+			const respostaNoBody = new RespostaApi({
+				sucesso: false,
+				mensagem: "Usuário não autenticado",
+			});
+			return NextResponse.json(respostaNoBody, { status: 400 });
+		}
+
+		if (userRole !== "ADMIN" && userRole !== "EDITOR") {
+			const respostaNoBody = new RespostaApi({
+				sucesso: false,
+				mensagem: "Usuário não autorizado",
+			});
+			return NextResponse.json(respostaNoBody, { status: 400 });
+		}
 
 		if (!body) {
 			const respostaNoBody = new RespostaApi({

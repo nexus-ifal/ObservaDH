@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { AtualizarPartidoController } from "@/adapters/api/controllers/partido/atualizar-partido-controller";
 import { BuscarPartidoController } from "@/adapters/api/controllers/partido/buscar-partido-controller";
 import { DeletarPartidoController } from "@/adapters/api/controllers/partido/deletar-partido-controller";
+import { userRoleSession } from "@/app/actions/login-actions";
 import { UpdatePartidoDTO } from "@/core/domain/dtos/partido.dto";
 import { RespostaApi } from "@/core/domain/models/resposta-api";
 
@@ -35,10 +36,27 @@ export async function PATCH(
 	try {
 		const params = await context.params;
 		const idError = validateId(params.id);
+		const userRole = await userRoleSession();
 		if (idError) return idError;
 
 		const body = await request.json().catch(() => ({}));
 		const { nome, sigla, imagem } = body as UpdatePartidoDTO;
+
+		if (!userRole || userRole == null) {
+			const respostaNoBody = new RespostaApi({
+				sucesso: false,
+				mensagem: "Usuário não autenticado",
+			});
+			return NextResponse.json(respostaNoBody, { status: 400 });
+		}
+
+		if (userRole !== "ADMIN" && userRole !== "EDITOR") {
+			const respostaNoBody = new RespostaApi({
+				sucesso: false,
+				mensagem: "Usuário não autorizado",
+			});
+			return NextResponse.json(respostaNoBody, { status: 400 });
+		}
 
 		const controller = new AtualizarPartidoController();
 		const resposta = (await controller.executar({
@@ -67,7 +85,24 @@ export async function DELETE(
 	try {
 		const params = await context.params;
 		const idError = validateId(params.id);
+		const userRole = await userRoleSession();
 		if (idError) return idError;
+
+		if (!userRole || userRole == null) {
+			const respostaNoBody = new RespostaApi({
+				sucesso: false,
+				mensagem: "Usuário não autenticado",
+			});
+			return NextResponse.json(respostaNoBody, { status: 400 });
+		}
+
+		if (userRole !== "ADMIN" && userRole !== "EDITOR") {
+			const respostaNoBody = new RespostaApi({
+				sucesso: false,
+				mensagem: "Usuário não autorizado",
+			});
+			return NextResponse.json(respostaNoBody, { status: 400 });
+		}
 
 		const controller = new DeletarPartidoController();
 		const resposta = (await controller.executar({
@@ -102,7 +137,7 @@ export async function GET(
 		if (!id) {
 			const respostaApi = new RespostaApi({
 				sucesso: false,
-				mensagem: "falta informação para atualizar o partido",
+				mensagem: "faltam informações para buscar o partido",
 			});
 
 			return NextResponse.json(respostaApi, { status: 400 });
