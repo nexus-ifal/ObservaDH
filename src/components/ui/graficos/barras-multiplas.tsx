@@ -51,7 +51,9 @@ const GraficoBarraMultiplas: React.FC<GraficoBarraMultiplasProps> = ({
 							content={<ChartTooltipContent className="min-w-56" />}
 						/>
 						<ChartLegend
-							content={<ChartLegendContent className="text-white text-base" />}
+							content={
+								<ChartLegendContent className="text-white text-base flex justify-evenly" />
+							}
 						/>
 						<Bar dataKey="homens" fill="#F693F9" radius={4} />
 						<Bar dataKey="mulheres" fill="#93F996" radius={4} />
