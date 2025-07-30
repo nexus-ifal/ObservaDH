@@ -48,7 +48,7 @@ export default function RedefinirSenhaForm() {
 								<input
 									className="bg-white w-[400px] h-[40px] rounded-[5px] border-[2px] border-[#3E3E3E] py-[8px] pl-[4px] text-sm placeholder:text-gray-500"
 									id="password"
-									type="password"
+									type="text"
 									name="password"
 									placeholder="Sua nova senha"
 									required

@@ -100,7 +100,7 @@ export default function DeleteForm() {
 				>
 					<input type="hidden" name="idUserDelete" value={foundUser.id} />
 					<p className={`${oswald.className} text-[#122144] text-[15px] mb-2`}>
-						Usuário encontrado
+						Usuário encontrado: {foundUser.name}
 					</p>
 					<div className="flex flex-col gap-2">
 						<label

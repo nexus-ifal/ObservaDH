@@ -29,7 +29,6 @@ export class EnviarEmailService {
 				subject,
 				html,
 			});
-			console.log(`Email de verificação enviado para ${to}`);
 			return true;
 		} catch (error) {
 			console.error("Erro ao enviar email de verificação:", error);
