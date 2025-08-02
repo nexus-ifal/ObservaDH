@@ -1,6 +1,7 @@
 "use client";
 
 import { use, useMemo } from "react";
+import { LuMousePointerClick } from "react-icons/lu";
 
 import Card from "@/components/ui/cards";
 import MainLayout from "@/components/ui/layouts/main-layout";
@@ -11,7 +12,6 @@ import UserError from "@/components/ui/user-erro";
 import { oswald } from "../../../fonts/fonts";
 
 import { useProjetoFetch } from "@/hooks/projeto/use-projeto-fetch";
-import { LuMousePointerClick } from "react-icons/lu";
 
 interface PageProps {
 	params: Promise<{ id: string }>;

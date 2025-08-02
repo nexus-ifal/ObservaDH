@@ -223,12 +223,17 @@ const Direitos: React.FC = () => {
 	const isLoading = isLoadingPautas || isLoadingProjetosDireitosIdeologias;
 
 	useEffect(() => {
-		if (! isLoadingProjetosDireitosIdeologias) {
+		if (!isLoadingProjetosDireitosIdeologias) {
 			setProjetos(projetos_carrosel || []);
 			setIdeologias(ideologias_valores || []);
 			setDireitosViolados(direitos_violados_valores || []);
 		}
-	}, [projetos_carrosel,  , ]);
+	}, [
+		isLoadingProjetosDireitosIdeologias,
+		projetos_carrosel,
+		ideologias_valores,
+		direitos_violados_valores,
+	]);
 
 	const limparSearchParams = () => {
 		const params = new URLSearchParams(searchParams.toString());

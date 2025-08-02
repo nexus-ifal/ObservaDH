@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
+
 import { listarProjetosDireitosIdeologiasOptions } from "../options/dados";
+
 import { mapApiDataToChartData } from "@/utils/mapApiDataToChartData/mapApiDataToChartData";
-import { useEffect, useState } from "react";
 
 export const useProjetosDireitosIdeologias = (pauta?: string) => {
 	const {
