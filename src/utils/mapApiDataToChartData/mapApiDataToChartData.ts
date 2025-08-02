@@ -1,11 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-interface ApiDataItem {
-	direito_sigla: string;
-	direito_nome: string;
-	projetos: number;
-}
 
-export function mapApiDataToChartData(apiData: ApiDataItem[]) {
+export function mapApiDataToChartData(apiData: any[]) {
 	const chartConfig = {
 		projetos: {
 			label: "projetos",
@@ -22,6 +17,10 @@ export function mapApiDataToChartData(apiData: ApiDataItem[]) {
 			label: "Saúde",
 			color: "#FF977A",
 		},
+		dsr: {
+			label: "DSR",
+			color: "#F693F9",
+		},
 		lib: {
 			label: "LIB",
 			color: "#F693F9",
@@ -30,6 +29,7 @@ export function mapApiDataToChartData(apiData: ApiDataItem[]) {
 
 	const siglaToChartKey: Record<string, keyof typeof chartConfig> = {
 		DIREITO_LIB: "lib",
+		DIREITO_DSR: "dsr",
 		DIREITO_LIEG: "lieg",
 		DIREITO_EDUCACAO: "educacao",
 		DIREITO_SAUDE: "saude",
