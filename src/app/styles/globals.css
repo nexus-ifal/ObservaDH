@@ -2,7 +2,7 @@
 @import "tailwindcss";
 
 :root {
-	--color-layout-admin: #050b17;
+	--color-layout-admin: #050B17;
 }
 
 .logo::before {
