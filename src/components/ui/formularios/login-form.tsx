@@ -1,6 +1,7 @@
 "use client";
 
-import { useActionState, useEffect } from "react";
+import { useActionState, useEffect, useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useSession } from "next-auth/react";
@@ -14,6 +15,7 @@ export default function LoginForm() {
 	const router = useRouter();
 	const { status } = useSession();
 	const callbackUrl = searchParams.get("callbackUrl");
+	const [showPassword, setShowPassword] = useState(false);
 	const [errorMessage, formAction, isPending] = useActionState(
 		authenticate,
 		undefined
@@ -23,6 +25,10 @@ export default function LoginForm() {
 		if (status === "authenticated") {
 		}
 	}, [status, callbackUrl, router]);
+
+	const handleShowPassword = () => {
+		setShowPassword(!showPassword);
+	};
 
 	return (
 		<form
@@ -64,9 +70,9 @@ export default function LoginForm() {
 							</label>
 							<div className="relative">
 								<input
-									className="bg-white w-[400px] h-[40px] rounded-[5px] border-[2px] border-[#3E3E3E] py-[8px] pl-[4px] text-sm placeholder:text-gray-500 flex justify-start"
+									className="bg-white w-[400px] h-[40px] rounded-[5px] border-[2px] border-[#3E3E3E] py-[8px] pl-[4px] pr-10 text-sm placeholder:text-gray-500"
 									id="password"
-									type="password"
+									type={showPassword ? "text" : "password"}
 									name="password"
 									placeholder="Sua senha"
 									required
@@ -74,6 +80,17 @@ export default function LoginForm() {
 									onChange={(e) => e.target.value}
 									autoComplete="current-password"
 								/>
+								<button
+									type="button"
+									onClick={handleShowPassword}
+									className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
+								>
+									{showPassword ? (
+										<FaEyeSlash className="text-gray-500" />
+									) : (
+										<FaEye className="text-gray-500" />
+									)}
+								</button>
 							</div>
 						</div>
 						<div className="flex justify-end">

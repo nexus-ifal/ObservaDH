@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState, useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import axios from "axios";
 import { useSearchParams } from "next/navigation";
 
@@ -20,6 +21,7 @@ export default function DeleteForm() {
 	const [procurarNome, setprocurarNome] = useState("");
 	const [foundUser, setFoundUser] = useState<FoundUser | null>(null);
 	const [erroProcura, seterroProcura] = useState<string | null>(null);
+	const [showPassword, setShowPassword] = useState(false);
 	const [isProcurando, setIsProcurando] = useState(false);
 
 	const [deleteMessage, formAction, isDeleting] = useActionState(
@@ -54,6 +56,10 @@ export default function DeleteForm() {
 		} finally {
 			setIsProcurando(false);
 		}
+	};
+
+	const handleShowPassword = () => {
+		setShowPassword(!showPassword);
 	};
 
 	return (
@@ -109,15 +115,28 @@ export default function DeleteForm() {
 						>
 							Sua Senha (Admin)
 						</label>
-						<input
-							className="w-[400px] h-[40px] bg-white rounded-[5px] border-[2px] border-[#3E3E3E] py-[8px] pl-[4px] text-sm placeholder:text-gray-500"
-							id="senha"
-							type="password"
-							name="senha"
-							placeholder="Confirme sua senha para deletar"
-							required
-							minLength={8}
-						/>
+						<div className="relative">
+							<input
+								className="bg-white w-[400px] h-[40px] rounded-[5px] border-[2px] border-[#3E3E3E] py-[8px] pl-[4px] pr-10 text-sm placeholder:text-gray-500"
+								id="senha"
+								type={showPassword ? "text" : "password"}
+								name="senha"
+								placeholder="Sua senha de admin"
+								required
+								minLength={6}
+							/>
+							<button
+								type="button"
+								onClick={handleShowPassword}
+								className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
+							>
+								{showPassword ? (
+									<FaEyeSlash className="text-gray-500" />
+								) : (
+									<FaEye className="text-gray-500" />
+								)}
+							</button>
+						</div>
 					</div>
 					<input type="hidden" name="redirectTo" value={callbackUrl} />
 					<button

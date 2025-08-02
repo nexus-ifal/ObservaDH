@@ -2,6 +2,7 @@
 
 import { useActionState } from "react";
 import { useEffect, useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useSearchParams } from "next/navigation";
 
 import { oswald } from "../../../fonts/fonts";
@@ -18,6 +19,7 @@ export default function RedefinirSenhaForm() {
 	);
 
 	const [resetToken, setResetToken] = useState<string | null>(null);
+	const [showPassword, setShowPassword] = useState(false);
 
 	useEffect(() => {
 		if (token) {
@@ -25,6 +27,10 @@ export default function RedefinirSenhaForm() {
 		} else {
 		}
 	}, [token]);
+
+	const handleShowPassword = () => {
+		setShowPassword(!showPassword);
+	};
 
 	return (
 		<form
@@ -46,14 +52,25 @@ export default function RedefinirSenhaForm() {
 							</label>
 							<div className="relative">
 								<input
-									className="bg-white w-[400px] h-[40px] rounded-[5px] border-[2px] border-[#3E3E3E] py-[8px] pl-[4px] text-sm placeholder:text-gray-500"
+									className="bg-white w-[400px] h-[40px] rounded-[5px] border-[2px] border-[#3E3E3E] py-[8px] pl-[4px] pr-10 text-sm placeholder:text-gray-500"
 									id="password"
-									type="text"
+									type={showPassword ? "text" : "password"}
 									name="password"
 									placeholder="Sua nova senha"
 									required
 									minLength={6}
 								/>
+								<button
+									type="button"
+									onClick={handleShowPassword}
+									className="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
+								>
+									{showPassword ? (
+										<FaEyeSlash className="text-gray-500" />
+									) : (
+										<FaEye className="text-gray-500" />
+									)}
+								</button>
 							</div>
 						</div>
 						<input type="hidden" name="token" value={resetToken} />
