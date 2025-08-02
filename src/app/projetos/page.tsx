@@ -46,6 +46,7 @@ import { useEstado } from "@/hooks/estado/use-estado";
 import { usePauta } from "@/hooks/pauta/use-pauta";
 import { useProjetosFiltrados } from "@/hooks/projeto/use-projetos-filtrados";
 import { buscarEsferas } from "@/infra/api/esfera";
+import Link from "next/link";
 interface ApresentacaoProps {
 	apresentacao: {
 		texto: string;
@@ -173,7 +174,7 @@ const CarrosselPls = ({
 	isLoading: boolean;
 	error?: any;
 }) => (
-	<section>
+	<section className="flex flex-col gap-14 justify-center text-center">
 		{isLoading ? (
 			<Loading />
 		) : error ? (
@@ -183,13 +184,16 @@ const CarrosselPls = ({
 				{projetos.length > 0 ? (
 					<Carousel opts={{ align: "start" }} className="w-[82rem]">
 						<CarouselContent>
-							{projetos.map((item, index) => (
-								<CarouselItem
-									key={index}
-									className="basis-1/2 flex justify-center"
+							{projetos.map((item, i) => (
+								<Link
+									key={`${item.id} - ${i}`}
+									href={`/projetos/${item.id}`}
+									className="flex basis-1/2 justify-center"
 								>
-									<Card.Projeto projeto={item} />
-								</CarouselItem>
+									<CarouselItem>
+										<Card.Projeto projeto={item} />
+									</CarouselItem>
+								</Link>
 							))}
 						</CarouselContent>
 						<CarouselPrevious />
@@ -316,6 +320,7 @@ const PropostasDados = ({
 			error={errorProjetos}
 			isLoading={isLoadingProjetos}
 		/>
+		<Divisor />
 		<NumeroPls
 			dados={dadosPlAno}
 			error={errorPlAno}

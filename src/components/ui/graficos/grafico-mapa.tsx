@@ -3,7 +3,7 @@ import DropdownButton from "../dropdown/dropdown-button";
 import MapaBrasil from "../icons/mapa-brasil";
 import Loading from "../loading";
 import UserError from "../user-erro";
-
+import { LuMousePointerClick } from "react-icons/lu";
 import {
 	DadosParlamentarProjetosEsfera,
 	DadosPautaEsfera,
@@ -54,7 +54,12 @@ const GraficoMapa: React.FC<MapaBrasilProps> = ({
 						<Loading />
 					</div>
 				) : (
-					<MapaBrasil dados={dadosMapa} />
+					<div className="w-full h-full text-xl items-center">
+						<MapaBrasil dados={dadosMapa} />
+						<p className="flex text-white">
+							*Passe o cursor sobre o mapa <LuMousePointerClick />
+						</p>
+					</div>
 				)}
 			</section>
 			<section className="w-full h-full flex items-end justify-between">
@@ -62,14 +67,16 @@ const GraficoMapa: React.FC<MapaBrasilProps> = ({
 				{isLoadingDadosStatus ? (
 					<Loading />
 				) : (
-					<div className="w-[25rem] h-full flex items-end">
-						<CardStatus
-							dadosParlamentarProjetosEsfera={
-								dadosStatus.dadosProjetoPoliticoPorEsfera
-							}
-							dadosPautaEsfera={dadosStatus.dadosPautaEsfera}
-						/>
-					</div>
+					<>
+						<div className="w-[25rem] h-full flex items-end">
+							<CardStatus
+								dadosParlamentarProjetosEsfera={
+									dadosStatus.dadosProjetoPoliticoPorEsfera
+								}
+								dadosPautaEsfera={dadosStatus.dadosPautaEsfera}
+							/>
+						</div>
+					</>
 				)}
 				<div className="bg- w-32 h-full">
 					<DropdownButton
