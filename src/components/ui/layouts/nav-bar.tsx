@@ -30,22 +30,24 @@ const NavBar: React.FC = () => {
 
 	return (
 		<div className="w-full h-full flex flex-col items-center bg-senado bg-cover bg-center border-b-2 border-[#001745]">
-			<nav className="p-8 w-full items-center flex flex-col gap-40">
+			<nav className="p-4 tab:p-6 des:p-8 w-full items-center flex flex-col gap-40 des:gap-40 tab:gap-54">
 				<Header />
-				<div className="w-full flex flex-col px-14">
+				<div className="w-full flex flex-col px-6 tab:px-10 des:px-12">
 					{currentPath === "/" ? (
-						<div className="gap-8 flex flex-col">
-							<span className="logo text-8xl text-white text-shadow-xl"></span>
-							<p className="text-white text-3xl font-normal text-shadow-xl">
+						<div className="gap-4 tab:gap-6 des:gap-6 flex flex-col">
+							<span className="logo text-6xl tab:text-7xl des:text-8xl text-white text-shadow-xl"></span>
+							<p className="text-white text-[20px] tab:text-2xl des:text-3xl font-normal text-shadow-xl">
 								{title.text}
 							</p>
 						</div>
 					) : (
-						<div className="gap-8 flex flex-col">
-							<h1 className="text-8xl text-white text-shadow-xl">
+						<div className="gap-4 tab:gap-6 des:gap-8 flex flex-col">
+							<h1 className="text-6xl tab:text-7xl des:text-8xl text-white text-shadow-xl">
 								{title.titulo}
 							</h1>
-							<p className="text-white text-3xl font-normal">{title.text}</p>
+							<p className="text-white text-[20px] tab:text-2xl des:text-3xl font-normal">
+								{title.text}
+							</p>
 						</div>
 					)}
 				</div>

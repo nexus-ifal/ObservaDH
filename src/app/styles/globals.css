@@ -1,6 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap");
 @import "tailwindcss";
 
+@theme {
+	--breakpoint-*: initial;
+	/*--breakpoint-des1: 120rem;
+	--breakpoint-des2: 96rem;*/
+	--breakpoint-des: 85.375rem;
+	/*--breakpoint-pho1: 22.5rem;
+	--breakpoint-pho2: 24.375rem;*/
+	--breakpoint-pho: 24.563rem;
+	--breakpoint-tab: 48rem;
+	/*--breakpoint-tab2: 50.625rem;
+	--breakpoint-tab3: 51.25rem;*/
+}
+
 :root {
 	--color-layout-admin: #050b17;
 }
@@ -46,12 +59,15 @@
 	.text-shadow {
 		text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 	}
+
 	.text-shadow-sm {
 		text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 	}
+
 	.text-shadow-lg {
 		text-shadow: 3px 3px 6px rgba(69, 104, 190, 1);
 	}
+
 	.text-shadow-xl {
 		text-shadow: 4px 4px 8px rgba(69, 104, 190, 1);
 	}
@@ -97,11 +113,12 @@
 
 .bg-brasil {
 	background-image: url("/assets/images/background_brasil.png");
-	background-size: auto;
+	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
 	position: relative;
-	overflow: hidden; /* Garante que o pseudo-elemento não extrapole */
+	overflow: hidden;
+	/* Garante que o pseudo-elemento não extrapole */
 }
 
 .bg-brasil::before {
@@ -141,6 +158,7 @@
 .bg-[--color-bg] {
 	background-color: var(--color-bg);
 }
+
 .border-[--color-border] {
 	border-color: var(--color-border);
 }
