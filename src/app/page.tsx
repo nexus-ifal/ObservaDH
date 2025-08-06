@@ -44,7 +44,7 @@ const page: React.FC = () => {
 					))}
 				</article>
 
-				<article className="flex w-full flex-col items-center mx-16 tab:mx-24 px-10 tab:px-34 des:px-28 gap-4 tab:gap-12 des:gap-24 tab:flex-col tab:justify-evenly des:flex-row des:justify-evenly">
+				<article className="flex w-full flex-col items-center mx-16 tab:mx-24 px-10 tab:px-34 des:px-28 gap-6 tab:gap-12 des:gap-24 tab:flex-col tab:justify-evenly des:flex-row des:justify-evenly">
 					{cardsInformativos.map((item) => (
 						<Card.Informativo
 							key={item.titulo}

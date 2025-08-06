@@ -23,13 +23,13 @@ const CardInformativo: React.FC<CardInformativoProps> = ({
 	corTexto,
 }) => {
 	return (
-		<div className="flex flex-col justify-between w-fit h-fit pho:w-fit pho:h-fit tab:w-fit tab:h-fit des:w-[22.5rem] des:h-[35rem] p-10 gap-4 tab:p-12 tab:gap-8 des:p-12 des:gap-10 bg-gradient-to-b from-[#050B17] to-[#122144] border-[3px] border-[#2C52A4] rounded-[5px] shadow-lg shadow-[#87D9FF]">
+		<div className="flex flex-col justify-between w-fit h-[27rem] tab:w-fit tab:h-fit des:w-[22.5rem] des:h-[35rem] p-8 gap-2 tab:p-12 tab:gap-8 des:p-12 des:gap-10 bg-gradient-to-b from-[#050B17] to-[#122144] border-[3px] border-[#2C52A4] rounded-[5px] shadow-lg shadow-[#87D9FF]">
 			<h1
-				className={`${corTexto} ${oswald.className} text-[30px] tab:text-[35px] des:text-[2.5rem] text-shadow-lg font-normal`}
+				className={`${corTexto} ${oswald.className} text-[25px] tab:text-[35px] des:text-[2.5rem] text-shadow-lg font-normal`}
 			>
 				{titulo}{" "}
 				<span
-					className={`${titilliumWeb.className} text-[30px] tab:text-[35px] des:text-[2.5rem] font-light`}
+					className={`${titilliumWeb.className} text-[25px] tab:text-[35px] des:text-[2.5rem] font-light`}
 				>
 					{isSubtitleHTML ? (
 						<span dangerouslySetInnerHTML={{ __html: subtitulo }} />
@@ -43,7 +43,7 @@ const CardInformativo: React.FC<CardInformativoProps> = ({
 			</section>
 			<div className="w-full flex justify-end">
 				<Link href={rota}>
-					<div className="text-white text-[28px] tab:text-[34px] des:text-[32px]">
+					<div className="text-white text-[30px] tab:text-[34px] des:text-[32px]">
 						<BsArrowRight />
 					</div>
 				</Link>

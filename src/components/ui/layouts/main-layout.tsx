@@ -9,7 +9,7 @@ const MainLayout: React.FC<mainLayoutProps> = ({ children }) => {
 	return (
 		<>
 			<div className="bg-layout-principal antialiased no-scrollbar flex flex-col overflow-hidden">
-				<header className="h-[28rem] tab:h-[34rem] des:h-[34rem] w-full">
+				<header className="h-[25rem] tab:h-[34rem] des:h-[34rem] w-full">
 					<NavBar />
 				</header>
 				<main className="h-full w-full bg-grid">

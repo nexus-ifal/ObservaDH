@@ -35,14 +35,14 @@ const NavBar: React.FC = () => {
 				<div className="w-full flex flex-col px-6 tab:px-10 des:px-12">
 					{currentPath === "/" ? (
 						<div className="gap-4 tab:gap-6 des:gap-6 flex flex-col">
-							<span className="logo text-6xl tab:text-7xl des:text-8xl text-white text-shadow-xl"></span>
+							<span className="logo text-5xl tab:text-7xl des:text-8xl text-white text-shadow-xl"></span>
 							<p className="text-white text-[20px] tab:text-2xl des:text-3xl font-normal text-shadow-xl">
 								{title.text}
 							</p>
 						</div>
 					) : (
 						<div className="gap-4 tab:gap-6 des:gap-8 flex flex-col">
-							<h1 className="text-6xl tab:text-7xl des:text-8xl text-white text-shadow-xl">
+							<h1 className="text-5xl tab:text-7xl des:text-8xl text-white text-shadow-xl">
 								{title.titulo}
 							</h1>
 							<p className="text-white text-[20px] tab:text-2xl des:text-3xl font-normal">
