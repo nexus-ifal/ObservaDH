@@ -545,7 +545,7 @@ const PageContent = () => {
 
 	return (
 		<MainLayout>
-			<div className="flex h-full w-full flex-col gap-24 items-center px-11">
+			<div className="flex h-full w-full flex-col gap-24 items-center justify-center">
 				<Apresentacao apresentacao={apresentacao} />
 
 				{/* Gráfico Mapa */}

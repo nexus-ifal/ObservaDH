@@ -46,23 +46,31 @@ const GraficoMapa: React.FC<MapaBrasilProps> = ({
 	errorStatus,
 }) => {
 	return (
-		<article className="w-[80rem] h-[45.625rem] flex gap-2 ">
-			<section className="h-[45.625rem] w-[43.75rem] min-w-1/2">
-				{errorMapa && <UserError error={errorMapa} />}
-				{isLoadingDadosMapa ? (
-					<div className="h-full w-full flex items-center justify-center">
-						<Loading />
-					</div>
-				) : (
-					<MapaBrasil dados={dadosMapa} />
-				)}
-			</section>
-			<section className="w-full h-full flex items-end justify-between">
+		<article className="border-[2px] border-pink-500 w-fit h-fit flex flex-col">
+			<div className="border-[2px] border-red-500 flex justify-end w-full des:w-full tab:mb-4 des:-mb-14">
+				<DropdownButton
+					elementos={dadosDropDown}
+					titulo="Esfera"
+					param="esfera"
+					className="border-[2px] border-white w-40"
+				/>
+			</div>
+			<section className="border-[2px] border-blue-500 flex flex-col des:flex-row tab:gap-6 des:gap-6 w-fit des:mr-62">
+				<section className="border-[2px] border-yellow-500 h-fit w-fit">
+					{errorMapa && <UserError error={errorMapa} />}
+					{isLoadingDadosMapa ? (
+						<div className="h-full w-full flex items-center justify-center">
+							<Loading />
+						</div>
+					) : (
+						<MapaBrasil dados={dadosMapa} />
+					)}
+				</section>
 				{errorStatus && <UserError error={errorStatus} />}
 				{isLoadingDadosStatus ? (
 					<Loading />
 				) : (
-					<div className="w-[25rem] h-full flex items-end">
+					<div className="border-[2px] border-green-500 flex items-end des:mt-100">
 						<CardStatus
 							dadosParlamentarProjetosEsfera={
 								dadosStatus.dadosProjetoPoliticoPorEsfera
@@ -71,14 +79,6 @@ const GraficoMapa: React.FC<MapaBrasilProps> = ({
 						/>
 					</div>
 				)}
-				<div className="bg- w-32 h-full">
-					<DropdownButton
-						elementos={dadosDropDown}
-						titulo="Esfera"
-						param="esfera"
-						className="w-40"
-					/>
-				</div>
 			</section>
 		</article>
 	);
