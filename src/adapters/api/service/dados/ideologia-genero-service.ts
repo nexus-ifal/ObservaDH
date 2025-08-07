@@ -68,10 +68,13 @@ export class ListarIdeologiaGeneroService
 					agrupamento[ideologiaFinal].mulheres += 1;
 				}
 			}
-			const dados = Object.values(agrupamento).map((item) => ({
-				...item,
-				ideologia: item.ideologia.replace(/-/g, " "),
-			}));
+			const dados = Object.values(agrupamento)
+				.map((item) => ({
+					...item,
+					ideologia: item.ideologia.replace(/-/g, " "),
+				}))
+				.filter((item) => item.homens > 0 || item.mulheres > 0); // só retorna quem tem dado
+
 			const total = dados.length;
 
 			return { dados, total };

@@ -1,6 +1,7 @@
 "use client";
 
 import { use, useMemo } from "react";
+import { LuMousePointerClick } from "react-icons/lu";
 
 import Card from "@/components/ui/cards";
 import MainLayout from "@/components/ui/layouts/main-layout";
@@ -87,17 +88,29 @@ const Page: React.FC<PageProps> = ({ params }) => {
 							))}
 						</section>
 						<Topico titulo="Ementa">{projeto?.ementa}</Topico>
-						<Topico titulo="Justificativa">{projeto?.justificativa}</Topico>
+						<Topico titulo="Justificativa" className="flex flex-row gap-4">
+							<a
+								href={projeto?.justificativa}
+								className="text-sky-500 underline transition-colors duration-200 hover:text-[#93F996] flex gap-1"
+							>
+								{"Justificativa"}
+								<LuMousePointerClick />
+							</a>
+						</Topico>
 						<Topico
 							titulo={pluralDireitos ? "Direitos Violados" : "Direito Violado"}
 						>
 							{projeto?.direitosViolados?.map((v, i) => (
-								<p key={i}>{v.nome}</p>
+								<p className="after:content-['+'] after:text-[#93F996]" key={i}>
+									{v.nome}{" "}
+								</p>
 							))}
 						</Topico>
 						<Topico titulo={pluralIdeologias ? "Ideologias" : "Ideologia"}>
 							{projeto?.ideologias?.map((i, j) => (
-								<p key={j}>{i.nome}</p>
+								<p key={j} className="after:content-['+'] after:text-[#93F996]">
+									{i.nome}{" "}
+								</p>
 							))}
 						</Topico>
 					</article>
@@ -110,10 +123,11 @@ const Page: React.FC<PageProps> = ({ params }) => {
 interface TopicoProps {
 	titulo: string;
 	children?: React.ReactNode;
+	className?: string;
 }
 
-const Topico: React.FC<TopicoProps> = ({ titulo, children }) => (
-	<section className="flex flex-col gap-4">
+const Topico: React.FC<TopicoProps> = ({ titulo, children, className }) => (
+	<section className={`flex flex-col gap-4 ${className}`}>
 		<h3 className="text-4xl text-[#87D9FF]">{titulo}:</h3>
 		<div className="text-[#CDDBFF] text-3xl text-justify">{children}</div>
 	</section>

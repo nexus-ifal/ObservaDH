@@ -286,7 +286,7 @@ const Page: React.FC = () => {
 													{...field}
 													rows={8}
 													className="bg-white text-black w-full text-xl font-normal rounded-[5px] border-2 border-[#91ADF4] resize-y h-full min-h-[140px] max-h-80 overflow-auto"
-													placeholder="Digite uma descrição para o direito violado (opcional)"
+													placeholder="Digite uma descrição para o direito violado"
 												/>
 											</FormControl>
 											{fieldState.error && (

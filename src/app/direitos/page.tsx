@@ -203,14 +203,16 @@ const Direitos: React.FC = () => {
 	const isPautaSelecionada = !!pautaId;
 
 	const {
-		projetosDireitosIdeologias,
-		isLoadingProjetosDireitosIdeologias,
+		isLoading: isLoadingProjetosDireitosIdeologias,
+		direitos_violados_valores,
+		ideologias_valores,
+		projetos_carrosel,
 		error: errorProjetosDireitosIdeologias,
 	} = useProjetosDireitosIdeologias(pautaId);
 
-	const [projetos, setProjetos] = useState<ProjetoDTO[]>([]);
+	const [projetos, setProjetos] = useState<any[]>([]);
 	const [ideologias, setIdeologias] = useState<any[]>([]);
-	const [direitosViolados, setDireitosViolados] = useState<DadosRadial[]>([]);
+	const [direitosViolados, setDireitosViolados] = useState<any[]>([]);
 
 	const elementosDropdown =
 		pautas?.map((pauta) => ({
@@ -221,17 +223,17 @@ const Direitos: React.FC = () => {
 	const isLoading = isLoadingPautas || isLoadingProjetosDireitosIdeologias;
 
 	useEffect(() => {
-		if (projetosDireitosIdeologias) {
-			setProjetos(projetosDireitosIdeologias.projetos || []);
-			setIdeologias(projetosDireitosIdeologias.ideologias_valores || []);
-			setDireitosViolados(
-				projetosDireitosIdeologias.direitos_violados_valores?.map((item) => ({
-					label: item.direito,
-					value: item.projetos,
-				})) || []
-			);
+		if (!isLoadingProjetosDireitosIdeologias) {
+			setProjetos(projetos_carrosel || []);
+			setIdeologias(ideologias_valores || []);
+			setDireitosViolados(direitos_violados_valores || []);
 		}
-	}, [projetosDireitosIdeologias]);
+	}, [
+		isLoadingProjetosDireitosIdeologias,
+		projetos_carrosel,
+		ideologias_valores,
+		direitos_violados_valores,
+	]);
 
 	const limparSearchParams = () => {
 		const params = new URLSearchParams(searchParams.toString());
@@ -285,7 +287,7 @@ const Direitos: React.FC = () => {
 };
 
 const Page: React.FC = () => (
-	<Suspense fallback={<div>Carregando...</div>}>
+	<Suspense fallback={<Loading />}>
 		<Direitos />
 	</Suspense>
 );
