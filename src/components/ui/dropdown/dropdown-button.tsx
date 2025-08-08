@@ -70,7 +70,7 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({
 			value={value !== undefined ? value : internalValue}
 		>
 			<SelectTrigger
-				className={`w-full h-12 border-[#4568BE] rounded-[3px] text-[#4568BE] ${className}`}
+				className={`w-full h-10 tab:h-12 des:h-12 border-[#4568BE] rounded-[3px] text-[#4568BE] ${className}`}
 			>
 				<SelectValue placeholder={titulo} />
 			</SelectTrigger>
@@ -81,7 +81,7 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({
 					<SelectItem
 						value={item.value}
 						key={item.value}
-						className={`text-[#4568BE] focus:bg-[#1A326E] focus:text-[#91ADF4] flex text-start justify-start items-center min-h-12 ${className}`}
+						className={`text-[#4568BE] focus:bg-[#1A326E] focus:text-[#91ADF4] flex text-start justify-start items-center min-h-10 ${className}`}
 					>
 						{item.titulo}
 					</SelectItem>

@@ -4,9 +4,9 @@ import Image from "next/image";
 
 const FooterBar: React.FC = () => {
 	return (
-		<footer className="flex flex-col tab:flex-row des:flex-row gap-6 tab:gap-10 tab2:gap-12 p-6 tab:p-8 des:p-12 des:gap-32 w-full h-full bg-gradient-to-r items-start tab:items-center des:items-center justify-center tab:justify-start des:justify-start from-[#050B17] to-[#122144] text-white">
+		<footer className="flex flex-col tab:flex-row des:flex-row gap-6 tab:gap-10 p-6 tab:p-8 des:p-12 des:gap-32 w-full h-full bg-gradient-to-r items-start tab:items-center des:items-center justify-center tab:justify-start des:justify-start from-[#050B17] to-[#122144] text-white">
 			<div className="flex flex-col gap-1 tab:gap-2 des:gap-6">
-				<span className="text-xl tab:text-5xl des:text-6xl logo"></span>
+				<span className="text-3xl tab:text-5xl des:text-6xl logo"></span>
 				<p className="max-w-full text-lg tab:text-base des:text-xl">
 					Observatório Digital de Discurso e Direitos Humanos LGBTI+
 				</p>

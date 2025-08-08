@@ -123,18 +123,18 @@ const Filtro = ({
 	isLoadingFiltros,
 	limparSearchParams,
 }: FiltroElementosProps) => (
-	<section className="w-full flex items-center justify-start gap-24">
+	<section className="w-full flex items-center justify-start gap-10 tab:gap-16 des:gap-24">
 		{isLoadingFiltros ? (
 			<Loading />
 		) : errorFiltros ? (
 			<UserError error={errorFiltros} />
 		) : (
 			<>
-				<section className="flex gap-12 px-10">
+				<section className="flex gap-4 tab:gap-6 des:gap-12 px-4 tab:px-8 des:px-10">
 					{items.map((item, index) => (
 						<DropdownButton
 							key={index}
-							className="w-32"
+							className="w-10 text-[12px] tab:text-[15px] des:text-[18px] tab:w-24 des:w-32"
 							autoApply={false}
 							param={item.param}
 							titulo={item.titulo}
@@ -146,7 +146,7 @@ const Filtro = ({
 				</section>
 				<div className="flex flex-row items-center gap-2">
 					<Button
-						className="flex flex-row justify-center border-[#D974FD] text-[#D974FD] bg-transparent border-[1px] rounded-[3px] w-32 h-12 hover:bg-inherit active:text-white active:bg-[#D974FD] transition-colors duration-75"
+						className="flex flex-row justify-center border-[#D974FD] text-[12px] tab:text-[15px] des:text-[18px] text-[#D974FD] bg-transparent border-[1px] rounded-[3px] w-10 h-12 tab:w-24 des:w-32 hover:bg-inherit active:text-white active:bg-[#D974FD] transition-colors duration-75"
 						onClick={() => aplicarFiltros()}
 					>
 						Filtrar <MdOutlineFilterAlt />
@@ -181,12 +181,15 @@ const CarrosselPls = ({
 		) : (
 			<>
 				{projetos.length > 0 ? (
-					<Carousel opts={{ align: "start" }} className="w-[82rem]">
+					<Carousel
+						opts={{ align: "start" }}
+						className="tab:w-[41rem] des:w-[82rem]"
+					>
 						<CarouselContent>
 							{projetos.map((item, index) => (
 								<CarouselItem
 									key={index}
-									className="basis-1/2 flex justify-center"
+									className="tab:basis-[100%] des:basis-1/2 flex justify-center"
 								>
 									<Card.Projeto projeto={item} />
 								</CarouselItem>
@@ -216,7 +219,7 @@ const Divisor = () => (
 );
 
 const SubTitulo = () => (
-	<Texto.Raiz className="text-7xl text-shadow-xl">
+	<Texto.Raiz className="text-2xl tab:text-6xl des:text-7xl text-shadow-xl">
 		<Texto.Pequeno.Titillium>Propostas</Texto.Pequeno.Titillium>
 		<Texto.Espaco />
 		<Texto.Forte.Oswald>e Dados Estatísticos</Texto.Forte.Oswald>
@@ -224,21 +227,23 @@ const SubTitulo = () => (
 );
 
 const NumeroPls = ({ dados, isLoading, error, legenda }: NumeroPlsProps) => (
-	<section className="w-full flex justify-center gap-[4.5rem]">
-		<Card.Legenda legenda={legenda}>
-			<Texto.Raiz className="text-6xl">
-				<Texto.Linha>
-					<Texto.Forte.Oswald>{"Número"}</Texto.Forte.Oswald>
-					<Texto.Espaco />
-					<Texto.Pequeno.Titillium>{"de"}</Texto.Pequeno.Titillium>
-				</Texto.Linha>
-				<Texto.Linha className="text-[#93F996]">
-					<Texto.Pequeno.Titillium>{"PL's"}</Texto.Pequeno.Titillium>
-					<Texto.Espaco />
-					<Texto.Forte.Oswald>{"por ano"}</Texto.Forte.Oswald>
-				</Texto.Linha>
-			</Texto.Raiz>
-		</Card.Legenda>
+	<section className="w-full flex flex-col-reverse des:flex-row justify-center tab:items-center gap-8 tab:gap-12 des:gap-[4.5rem]">
+		<div className="flex des:flex-col">
+			<Card.Legenda legenda={legenda}>
+				<Texto.Raiz className="text-6xl">
+					<Texto.Linha>
+						<Texto.Forte.Oswald>{"Número"}</Texto.Forte.Oswald>
+						<Texto.Espaco />
+						<Texto.Pequeno.Titillium>{"de"}</Texto.Pequeno.Titillium>
+					</Texto.Linha>
+					<Texto.Linha className="text-[#93F996]">
+						<Texto.Pequeno.Titillium>{"PL's"}</Texto.Pequeno.Titillium>
+						<Texto.Espaco />
+						<Texto.Forte.Oswald>{"por ano"}</Texto.Forte.Oswald>
+					</Texto.Linha>
+				</Texto.Raiz>
+			</Card.Legenda>
+		</div>
 		{isLoading ? (
 			<Loading />
 		) : error ? (
@@ -255,7 +260,7 @@ const NumeroPautas = ({
 	error,
 	legenda,
 }: NumeroPautasProps) => (
-	<section className="w-full flex justify-center gap-[4.5rem]">
+	<section className="w-full flex flex-col des:flex-row justify-center tab:items-center gap-8 tab:gap-12 des:gap-[4.5rem]">
 		{isLoading ? (
 			<Loading />
 		) : error ? (
@@ -545,7 +550,7 @@ const PageContent = () => {
 
 	return (
 		<MainLayout>
-			<div className="flex h-full w-full flex-col gap-24 items-center justify-center">
+			<div className="flex h-full w-full flex-col gap-12 tab:gap-24 des:gap-24 items-center justify-center">
 				<Apresentacao apresentacao={apresentacao} />
 
 				{/* Gráfico Mapa */}
