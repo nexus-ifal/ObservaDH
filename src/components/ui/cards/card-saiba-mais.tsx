@@ -27,9 +27,12 @@ const CardSaibaMais: React.FC<saibaMaisProps> = ({
 		<AlertDialog>
 			<AlertDialogTrigger asChild>
 				<button
-					className={`flex flex-row text-xl items-center gap-4 ${className} text-[${corTexto}]`}
+					className={`flex flex-row text-sm tab:text-xl items-center gap-2 tab:gap-4 ${className} text-[${corTexto}]`}
 				>
-					<FaPlus size={18} /> Saiba mais
+					<div className="text-[16px] tab:text-[18px] ">
+						<FaPlus size={18} />
+					</div>
+					Saiba mais
 				</button>
 			</AlertDialogTrigger>
 			<AlertDialogContent className="flex flex-col h-[90%] p-12 gap-6 w-[75%] bg-[#121A2B] border-[#4568BE] shadow-lg shadow-[#4568BE] rounded-lg">

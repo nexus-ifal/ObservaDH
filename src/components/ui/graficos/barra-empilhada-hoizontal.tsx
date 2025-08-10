@@ -41,11 +41,11 @@ const GraficoBarraEmpilhadaHorizontal: React.FC<GraficoBarraEmpilhadaProps> = ({
 	dados,
 }) => {
 	return (
-		<Card className="flex flex-col py-12 px-8 w-[53.125rem] h-[30.75rem] bg-[#121A2B] ">
-			<CardContent>
+		<Card className="flex flex-col w-[21.875rem] h-[16.25rem] tab:w-[45rem] tab:h-[25rem] des:w-[52rem] des:h-[29rem] bg-[#121A2B] ">
+			<CardContent className="flex flex-col justify-center w-full h-full p-2 tab:p-6">
 				<ChartContainer
 					config={chartConfig}
-					className="flex justify-center items-center w-full h-full"
+					className="flex justify-center items-center w-full h-full p-0"
 				>
 					<BarChart
 						className="flex justify-center"
@@ -69,7 +69,7 @@ const GraficoBarraEmpilhadaHorizontal: React.FC<GraficoBarraEmpilhadaProps> = ({
 						/>
 						<ChartLegend
 							content={
-								<ChartLegendContent className="text-white text-sm justify-around" />
+								<ChartLegendContent className="text-white text-[9px] tab:text-sm justify-around" />
 							}
 						/>
 						<Bar

@@ -14,12 +14,12 @@ const CardRenderizarTexto: React.FC<RenderizarTextoProps> = ({
 	return (
 		<h3 className={`flex flex-row items-center gap-4 ${className}`}>
 			<span
-				className={`${oswald.className} font-normal text-3xl text-[#AFC4F9]`}
+				className={`${oswald.className} font-normal text-sm tab:text-3xl text-[#AFC4F9]`}
 			>
 				{titulo}:
 			</span>
 			<span
-				className={`${titilliumWeb.className} font-normal text-xl text-white`}
+				className={`${titilliumWeb.className} font-normal text-[12px] tab:text-xl text-white`}
 			>
 				{conteudo}
 			</span>
