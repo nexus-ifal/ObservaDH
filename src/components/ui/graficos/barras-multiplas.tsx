@@ -33,9 +33,9 @@ const GraficoBarraMultiplas: React.FC<GraficoBarraMultiplasProps> = ({
 	dados,
 }) => {
 	return (
-		<Card className="bg-[#121A2B] p-12">
-			<CardContent className="w-full h-full">
-				<ChartContainer config={chartConfig} className="w-[58rem] h-[28.25rem]">
+		<Card className="w-[21.875rem] h-[16.25rem] tab:w-[45rem] tab:h-[25rem] des:w-[52rem] des:h-[29rem] bg-[#121A2B] flex items-center justify-center">
+			<CardContent className="flex flex-col justify-center w-full h-full p-1 tab:p-6">
+				<ChartContainer config={chartConfig} className="w-full h-full p-0">
 					<BarChart accessibilityLayer data={dados}>
 						<CartesianGrid vertical={false} />
 						<XAxis
@@ -43,9 +43,14 @@ const GraficoBarraMultiplas: React.FC<GraficoBarraMultiplasProps> = ({
 							tickLine={false}
 							tickMargin={10}
 							axisLine={false}
-							className="text-xl"
+							className="text-sm des:text-lg"
 						/>
-						<YAxis AxisComp tickLine className="text-xl" tickMargin={8} />
+						<YAxis
+							AxisComp
+							tickLine
+							className="text-sm des:text-lg"
+							tickMargin={8}
+						/>
 						<ChartTooltip
 							cursor={false}
 							content={<ChartTooltipContent className="min-w-56" />}

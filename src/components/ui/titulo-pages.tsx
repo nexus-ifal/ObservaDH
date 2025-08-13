@@ -7,7 +7,7 @@ interface TituloProps {
 
 const Titulo = ({ pequeno, grande }: TituloProps) => {
 	return (
-		<section className="w-full text-shadow-xl text-7xl text-white text-center">
+		<section className="w-full text-shadow-xl text-3xl tab:text-7xl text-white text-center">
 			<Texto.Raiz>
 				<Texto.Pequeno.Titillium>{pequeno}</Texto.Pequeno.Titillium>
 				<Texto.Espaco />
