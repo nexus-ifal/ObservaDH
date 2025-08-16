@@ -102,7 +102,7 @@ const Page: React.FC = () => {
 		<div className="flex h-full w-full flex-col gap-14 pb-6">
 			<AdminNavBar model={model as string} />
 			<div className="overflow-auto no-scrollbar h-full">
-				<p className="text-[40px]">{model} existentes:</p>
+				<p className="text-[40px]">{"Dados existentes:"}</p>
 				{isLoading ? (
 					<div className="flex h-full w-full items-center justify-center">
 						<ScaleLoader color="white" height={128} radius={8} width={16} />

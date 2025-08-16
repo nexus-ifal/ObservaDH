@@ -76,7 +76,7 @@ export const Radial: React.FC<DadosEstatisticosProps> = ({ dados }) => {
 					<ChartLegend
 						content={
 							<ChartLegendContent
-								className="text-white text-xl justify-around mt-[100px]"
+								className="text-white text-xl justify-around "
 								nameKey="direito_sigla"
 								key="direito_sigla"
 							/>

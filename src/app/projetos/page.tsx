@@ -5,6 +5,7 @@
 import { Suspense, useEffect, useState } from "react";
 import { FaTrash } from "react-icons/fa6";
 import { MdOutlineFilterAlt } from "react-icons/md";
+import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { Button } from "@/components/external/ui-shacnui/button";
@@ -173,7 +174,7 @@ const CarrosselPls = ({
 	isLoading: boolean;
 	error?: any;
 }) => (
-	<section>
+	<section className="flex flex-col gap-14 justify-center text-center">
 		{isLoading ? (
 			<Loading />
 		) : error ? (
@@ -191,8 +192,10 @@ const CarrosselPls = ({
 									key={index}
 									className="basis-[100%] des:basis-1/2 flex justify-center"
 								>
-									<Card.Projeto projeto={item} />
-								</CarouselItem>
+									<CarouselItem>
+										<Card.Projeto projeto={item} />
+									</CarouselItem>
+								</Link>
 							))}
 						</CarouselContent>
 						<CarouselPrevious />
@@ -321,6 +324,7 @@ const PropostasDados = ({
 			error={errorProjetos}
 			isLoading={isLoadingProjetos}
 		/>
+		<Divisor />
 		<NumeroPls
 			dados={dadosPlAno}
 			error={errorPlAno}

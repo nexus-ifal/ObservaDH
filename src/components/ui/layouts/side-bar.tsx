@@ -24,7 +24,7 @@ const SideBar: React.FC = () => {
 	const pathname = usePathname();
 
 	return (
-		<aside className="w-full h-full border-r-2 border-[#AFC4F9] text-white">
+		<aside className="w-full h-full border-r-2 border-[#AFC4F9] text-white bg-[#050B17]">
 			<div className="flex flex-col items-center h-full p-4 overflow-auto no-scrollbar gap-4">
 				<Link
 					href={"/admin/home"}

@@ -28,7 +28,6 @@ import {
 } from "@/core/domain/dtos/dados.dto";
 import { ResponsePoliticoDTO } from "@/core/domain/dtos/politico.dto";
 import { elemento } from "@/core/domain/types/elemento-dropdown";
-// import { PartidoModel } from "@/core/domain/types/partido";
 import { useIdeologiaGenero } from "@/hooks/dados/use-ideologia-genero";
 import { useRankingPartidos } from "@/hooks/dados/use-ranking-partidos";
 import { useReligiaoRaca } from "@/hooks/dados/use-religiao-raca";
@@ -423,6 +422,9 @@ const RankingParlamentares = ({
 				color="black"
 			>
 				{isLoadingDados && <Loading />}
+				{!isLoadingDados && dadosParlamentares.length === 0 && (
+					<p className="text-white text-lg sm:text-2xl">{"sem resultados."}</p>
+				)}
 				{dadosParlamentares.map((parlamentar, i) => (
 					<Card.ComponenteParlamentar
 						key={`${i}`}
@@ -479,6 +481,11 @@ const RankingPartidos = ({
 					<Loading />
 				) : (
 					<>
+						{partidosOrdenados?.length === 0 && (
+							<p className="text-white text-lg sm:text-2xl">
+								{"Nenhum partido encontrado."}
+							</p>
+						)}
 						{partidosOrdenados.map((item) => (
 							<Card.ComponentePartido
 								key={`${item.nome}-${item.sigla}`}
