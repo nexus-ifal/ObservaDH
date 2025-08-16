@@ -43,14 +43,14 @@ interface DadosEstatisticosProps {
 
 export const Radial: React.FC<DadosEstatisticosProps> = ({ dados }) => {
 	return (
-		<div className="flex items-center justify-between h-[31rem] py-6 w-[29rem]">
+		<div className="flex items-center justify-between w-[20rem] h-[25rem] tab:h-[29rem] des:h-[31rem] py-2 tab:w-[29rem]">
 			<ChartContainer config={chartConfig} className="w-full h-full">
 				<RadialBarChart
 					data={dados}
 					startAngle={-90}
 					endAngle={380}
-					innerRadius={60}
-					outerRadius={200}
+					innerRadius={"40%"}
+					outerRadius={"145%"}
 					className=""
 				>
 					<ChartTooltip

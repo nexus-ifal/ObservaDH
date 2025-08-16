@@ -65,7 +65,7 @@ const FiltroPauta: React.FC<FiltroPautaProps> = ({
 	isPautaSelecionada,
 	limparSearchParams,
 }) => (
-	<div className="flex flex-row items-center gap-2">
+	<div className="flex flex-row items-center ml-6 mb-4 gap-2">
 		<DropdownButton
 			className="w-32"
 			titulo="Pauta"
@@ -88,13 +88,13 @@ const SecaoDireitosViolados: React.FC<SecaoDireitosVioladosProps> = ({
 	dadosRadial,
 	legenda,
 }) => (
-	<div className="flex gap-[4.5rem] justify-center">
-		<div className="flex w-1/2 h-full justify-end">
+	<div className="flex flex-col des:flex-row gap-4 tab:gap-10 des:gap-[4.5rem] justify-center items-center">
+		<div className="flex w-1/2 h-full justify-center des:justify-end">
 			<Radial dados={dadosRadial} />
 		</div>
 		<div className="flex justify-end items-end">
 			<Card.Legenda legenda={legenda}>
-				<Texto.Raiz shadow className="text-6xl">
+				<Texto.Raiz shadow className="text-3xl des:text-6xl">
 					<Texto.Linha>
 						<Texto.Forte.Oswald>Direitos</Texto.Forte.Oswald>
 					</Texto.Linha>
@@ -116,9 +116,9 @@ const SecaoIdeologias: React.FC<SecaoIdeologiasProps> = ({
 	dadosGraficoVertical,
 	legenda,
 }) => (
-	<section className="w-full flex flex-row gap-[4.5rem] justify-center">
+	<section className="w-full flex flex-col-reverse des:flex-row gap-6 des:gap-[4.5rem] justify-center items-center">
 		<Card.Legenda legenda={legenda}>
-			<Texto.Raiz shadow className="text-5xl">
+			<Texto.Raiz shadow className="text-3xl des:text-5xl">
 				<Texto.Linha>
 					<Texto.Forte.Oswald>Ideologia dos</Texto.Forte.Oswald>
 				</Texto.Linha>
@@ -163,8 +163,8 @@ const Carrossel: React.FC<CarrosselProps> = ({
 	projetos,
 	isProjetosLoading,
 }) => (
-	<section className="flex flex-col gap-14 justify-center text-center">
-		<Texto.Raiz className="text-6xl" shadow>
+	<section className="flex flex-col gap-4 tab:gap-8 des:gap-14 justify-center text-center">
+		<Texto.Raiz className="text-3xl tab:text-5xl des:text-6xl" shadow>
 			<Texto.Pequeno.Titillium>Projetos</Texto.Pequeno.Titillium>
 			<Texto.Espaco />
 			<Texto.Forte.Oswald className="text-[#87D9FF]">de Lei</Texto.Forte.Oswald>
@@ -172,18 +172,17 @@ const Carrossel: React.FC<CarrosselProps> = ({
 		{isProjetosLoading ? (
 			<Loading />
 		) : (
-			<Carousel opts={{ align: "start" }} className="w-[82rem]">
+			<Carousel opts={{ align: "start" }} className="w-[20rem] tab:w-[39rem] des:w-[82rem]">
 				<CarouselContent>
 					{projetos.map((item, i) => (
-						<Link
-							key={`${item.id} - ${i}`}
-							href={`/projetos/${item.id}`}
-							className="flex basis-1/2 justify-center"
-						>
-							<CarouselItem>
+						<>
+							<CarouselItem
+								key={i}
+								className="flex basis-[100%] des:basis-1/2 justify-center"
+							>
 								<Card.Projeto projeto={item} />
 							</CarouselItem>
-						</Link>
+						</>
 					))}
 				</CarouselContent>
 				<CarouselPrevious />
@@ -276,7 +275,7 @@ const Direitos: React.FC = () => {
 
 	return (
 		<MainLayout>
-			<div className="flex flex-col h-full w-full gap-24 px-10 justify-center items-center">
+			<div className="flex flex-col h-full w-full gap-8 tab:gap-10 des:gap-24 justify-center items-center">
 				<Titulo pequeno="Violações e Ideologias" grande="dos Projetos de Lei" />
 				{renderContent()}
 			</div>

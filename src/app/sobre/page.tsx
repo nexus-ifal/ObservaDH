@@ -8,7 +8,7 @@ const page: React.FC = () => {
 	//render
 	return (
 		<MainLayout>
-			<div className="flex h-full w-full flex-col gap-[4.25rem] items-center px-36 text-white text-3xl text-justify">
+			<div className="flex h-full w-full flex-col gap-6 tab:gap-10 des:gap-[4.25rem] items-center px-6 tab:px-8 des:px-36 text-white text-lg tab:text-xl des:text-3xl text-justify">
 				{sobre.map((item, index) => {
 					return (
 						<Sobre
@@ -39,15 +39,15 @@ const Sobre: React.FC<sobreProps> = ({
 	isReverse,
 }) => {
 	return (
-		<div className="flex flex-col gap-[4.5rem]">
+		<div className="flex flex-col gap-6 tab:gap-10 des:gap-[4.5rem]">
 			<article>
 				<p>{textoLongo}</p>
 			</article>
 			<article
-				className={`flex h-auto gap-10 ${isReverse ? "flex-row-reverse" : ""}`}
+				className={`flex flex-col tab:flex-row h-auto gap-4 tab:gap-6 des:gap-10 ${isReverse ? "flex-col-reverse tab:flex-row-reverse" : ""}`}
 			>
 				<section className="">
-					<div className="relative min-w-[32.5rem] min-h-[30rem] w-[32.5rem] h-[30rem] rounded-[10px] border-2 border-[#87D9FF] overflow-hidden">
+					<div className="relative w-[19rem] h-[21rem] tab:h-[23rem] des:w-[32.5rem] des:h-[30rem] rounded-[10px] border-2 border-[#87D9FF] overflow-hidden">
 						<Image
 							src={urlImagem}
 							alt="imagem de apresentação"

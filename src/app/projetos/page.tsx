@@ -183,7 +183,7 @@ const CarrosselPls = ({
 				{projetos.length > 0 ? (
 					<Carousel
 						opts={{ align: "start" }}
-						className="w-[21.25] tab:w-[41rem] des:w-[82rem]"
+						className="w-[20rem] tab:w-[39rem] des:w-[82rem]"
 					>
 						<CarouselContent>
 							{projetos.map((item, index) => (
@@ -227,7 +227,7 @@ const SubTitulo = () => (
 );
 
 const NumeroPls = ({ dados, isLoading, error, legenda }: NumeroPlsProps) => (
-	<section className="w-full flex flex-col-reverse des:flex-row justify-center items-center gap-6 tab:gap-12 des:gap-[4.5rem]">
+	<section className="w-full flex flex-col-reverse des:flex-row justify-center items-center gap-4 tab:gap-10 des:gap-[4.5rem]">
 		<div className="flex des:flex-col">
 			<Card.Legenda legenda={legenda}>
 				<Texto.Raiz className="text-3xl tab:text-6xl">
@@ -260,7 +260,7 @@ const NumeroPautas = ({
 	error,
 	legenda,
 }: NumeroPautasProps) => (
-	<section className="w-full flex flex-col des:flex-row justify-center items-center gap-6 tab:gap-12 des:gap-[4.5rem]">
+	<section className="w-full flex flex-col des:flex-row justify-center items-center gap-4 tab:gap-10 des:gap-[4.5rem]">
 		{isLoading ? (
 			<Loading />
 		) : error ? (

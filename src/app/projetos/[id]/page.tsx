@@ -68,20 +68,20 @@ const Page: React.FC<PageProps> = ({ params }) => {
 				<Loading />
 			) : (
 				<div
-					className={`h-full w-full flex flex-col items-center gap-24 border-[#87D9FF] px-11 ${oswald.className}`}
+					className={`h-fit w-fit flex flex-col justify-center items-center gap-8 tab:gap-16 des:gap-24 border-[#87D9FF] mx-2 tab:mx-8 des:mx-14 ${oswald.className}`}
 				>
-					<section className="flex flex-row">
+					<section className="flex flex-row text-center">
 						<Titulo pequeno="Dados" grande="da Proposta" />
 					</section>
 
-					<article className="flex flex-col bg-gradient-to-t from-[#2C52A4]/45 to-[#050B17]/45 w-11/12 min-h-[30rem] py-16 px-[4.5rem] gap-12 border-2 border-[#87D9FF] rounded-[10px]">
-						<section className="flex flex-row gap-16 flex-wrap">
+					<article className="flex flex-col bg-gradient-to-t from-[#2C52A4]/45 to-[#050B17]/45 w-full min-h-[30rem] p-4 tab:p-12 des:py-16 des:px-[4.5rem] gap-4 tab:gap-8 des:gap-12 border-2 border-[#87D9FF] rounded-[10px]">
+						<section className="grid grid-cols-2 des:grid-cols-1 gap-4 tab:gap-8 des:gap-16 flex-wrap">
 							{infos.map((info, index) => (
 								<Card.RenderizacaoItem
 									key={index}
 									titulo={info.titulo}
 									valor={info.valor}
-									className="text-4xl"
+									className="text-sm tab:text-xl des:text-4xl"
 									corTexto="text-[#87D9FF]"
 								/>
 							))}
@@ -113,9 +113,9 @@ interface TopicoProps {
 }
 
 const Topico: React.FC<TopicoProps> = ({ titulo, children }) => (
-	<section className="flex flex-col gap-4">
-		<h3 className="text-4xl text-[#87D9FF]">{titulo}:</h3>
-		<div className="text-[#CDDBFF] text-3xl text-justify">{children}</div>
+	<section className="flex flex-col gap-1 tab:gap-2 des:gap-4">
+		<h3 className="text-sm tab:text-xl des:text-4xl text-[#87D9FF]">{titulo}:</h3>
+		<div className="text-[#CDDBFF] text-sm tab:text-lg des:text-3xl text-justify w-[300px] tab:w-[600px]">{children}</div>
 	</section>
 );
 
