@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { oswald, titilliumWeb } from "../../../fonts/fonts";
 
 import { DadosProjetoEstado } from "@/core/domain/dtos/dados.dto";
+import { useIsTouchDevice } from "@/utils/useIsTouchDevice";
 
 interface mapaBrasilProps {
 	className?: string;
@@ -40,6 +41,10 @@ const MapaBrasil: React.FC<mapaBrasilProps> = ({ className, dados }) => {
 		x: number;
 		y: number;
 	}>({ x: 0, y: 0 });
+
+	const isTouchDevice = useIsTouchDevice();
+	const mapRef = useRef<HTMLDivElement>(null);
+
 	function color(uf: string) {
 		const valor = dados.find((item) => item.uf === uf)?.valor || 0;
 		const faixa = getFaixa(valor, maximo);
@@ -47,15 +52,32 @@ const MapaBrasil: React.FC<mapaBrasilProps> = ({ className, dados }) => {
 		return color;
 	}
 
+	useEffect(() => {
+		function handleClickOutside(event: MouseEvent) {
+			if (mapRef.current && !mapRef.current.contains(event.target as Node)) {
+				setClickedUF(null);
+			}
+		}
+
+		document.addEventListener("mousedown", handleClickOutside);
+
+		return () => {
+			document.removeEventListener("mousedown", handleClickOutside);
+		};
+	}, [mapRef]);
+
 	function handleMouseMove(e: React.MouseEvent<SVGPathElement, MouseEvent>) {
+		if (isTouchDevice) return;
 		setMouse({ x: e.clientX, y: e.clientY });
 	}
 
 	function handleMouseEnter(uf: string) {
+		if (isTouchDevice) return;
 		setHoveredUF(uf);
 	}
 
 	function handleMouseLeave() {
+		if (isTouchDevice) return;
 		setHoveredUF(null);
 	}
 
@@ -68,7 +90,9 @@ const MapaBrasil: React.FC<mapaBrasilProps> = ({ className, dados }) => {
 			setClickedUF(null);
 		} else {
 			setClickedUF(uf);
-			setClickedPosition({ x: event.clientX, y: event.clientY });
+			if (!isTouchDevice) {
+				setClickedPosition({ x: event.clientX, y: event.clientY });
+			}
 		}
 	}
 
@@ -77,7 +101,7 @@ const MapaBrasil: React.FC<mapaBrasilProps> = ({ className, dados }) => {
 	}
 
 	return (
-		<div style={{ position: "relative" }} onClick={handleMapClick}>
+		<div ref={mapRef} style={{ position: "relative" }} onClick={handleMapClick}>
 			<svg
 				className={className}
 				xmlns="http://www.w3.org/2000/svg"
@@ -359,7 +383,7 @@ const MapaBrasil: React.FC<mapaBrasilProps> = ({ className, dados }) => {
 
 			{hoveredUF && (
 				<div
-					className="fixed text-white z-[1000] pointer-events-none h-14 w-32 max-w-32 max-h-14 bg-[#4568BE] border-2 border-[#91ADF4] rounded-[3px] shadow-lg flex flex-col justify-center items-center gap-1"
+					className="fixed text-white z-[1000] p-4 pointer-events-none h-14 w-fit max-h-14 bg-[#4568BE] border-2 border-[#91ADF4] rounded-[3px] shadow-lg flex flex-col justify-center items-center gap-1"
 					style={{
 						left: mouse.x + 16,
 						top: mouse.y + 16,
@@ -377,18 +401,25 @@ const MapaBrasil: React.FC<mapaBrasilProps> = ({ className, dados }) => {
 			)}
 			{clickedUF && (
 				<div
-					className="fixed text-white z-[1000] pointer-events-none h-14 w-32 max-w-32 max-h-14 bg-[#4568BE] border-2 border-[#91ADF4] rounded-[3px] shadow-lg flex flex-col justify-center items-center gap-1"
-					style={{
-						left: clickedPosition.x,
-						top: clickedPosition.y,
-						position: "fixed",
-						pointerEvents: "none",
-					}}
+					className={
+						isTouchDevice
+							? "fixed inset-0 m-auto text-white z-[1000] p-4 pointer-events-none h-14 w-fit  max-h-14 bg-[#4568BE] border-2 border-[#91ADF4] rounded-[3px] shadow-lg flex flex-col justify-center items-center gap-1"
+							: "fixed text-white z-[1000] p-4 pointer-events-none h-14 w-fit max-h-14 bg-[#4568BE] border-2 border-[#91ADF4] rounded-[3px] shadow-lg flex flex-col justify-center items-center gap-1"
+					}
+					style={
+						!isTouchDevice
+							? {
+									left: clickedPosition.x,
+									top: clickedPosition.y,
+									pointerEvents: "none",
+								}
+							: {}
+					}
 				>
-					<h1 className={`${oswald.className} font-normal text-base`}>
+					<h1 className={`${oswald.className} font-normal text-lg`}>
 						{dados.find((e) => e.uf === clickedUF)?.nome}
 					</h1>
-					<p className={`${titilliumWeb.className} font-normal text-xs`}>
+					<p className={`${titilliumWeb.className} font-normal text-sm`}>
 						Quantidade: {dados.find((e) => e.uf === clickedUF)?.valor}
 					</p>
 				</div>

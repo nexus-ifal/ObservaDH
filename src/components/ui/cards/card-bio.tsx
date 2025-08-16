@@ -74,7 +74,6 @@ const Redirecionamento: React.FC<redirecionamentoProps> = ({ link }) => {
 				<div className="w-6 h-6 tab:w-9 tab:h-9 ">
 					<IconLattes />
 				</div>
-				
 			)}
 		</a>
 	);

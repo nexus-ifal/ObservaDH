@@ -15,7 +15,9 @@ const CardComponentePartido: React.FC<cardComponentePartidoProps> = ({
 }) => {
 	return (
 		<div className="flex flex-col w-full h-full gap-4 tab: tab:mt-2 des:gap-10 px-2 des:px-5">
-			<div className={` ${oswald.className} flex flex-row w-full h-full gap-6 tab:gap-12 des:gap-40 items-center`}>
+			<div
+				className={` ${oswald.className} flex flex-row w-full h-full gap-6 tab:gap-12 des:gap-40 items-center`}
+			>
 				<section className="flex flex-row h-full w-1/2 ">
 					<section className="flex w-full h-full items-center text-white gap-2 pl-4 tab:gap-24 tab:pl-6 des:gap-40 des:pl-26 ">
 						<div className="w-fit">

@@ -51,7 +51,7 @@ const GraficoBarraEmpilhadaVertical: React.FC<
 > = ({ dados }) => {
 	return (
 		<Card className="flex flex-col items-center justify-center w-[21.875rem] h-[16.25rem] tab:w-[45rem] tab:h-[25rem] des:w-[52rem] des:h-[29rem] bg-[#121A2B] ">
-			<CardContent className="flex flex-col justify-center w-full h-full p-1 tab:p-6">
+			<CardContent className="flex flex-col justify-center items-center w-full h-full p-1 tab:p-6">
 				<ChartContainer config={chartConfig} className="w-full h-full p-0">
 					<BarChart
 						accessibilityLayer
@@ -64,11 +64,12 @@ const GraficoBarraEmpilhadaVertical: React.FC<
 							tickLine={false}
 							tickMargin={10}
 							axisLine={false}
+							className="text-[9px] tab:text-sm des:text-lg"
 						/>
 						<YAxis
 							axisLine={true}
 							tickLine={true}
-							className="text-sm des:text-lg"
+							className="text-[9px] tab:text-sm des:text-lg"
 							tickMargin={8}
 						/>
 						<ChartTooltip
@@ -77,7 +78,7 @@ const GraficoBarraEmpilhadaVertical: React.FC<
 						/>
 						<ChartLegend
 							content={
-								<ChartLegendContent className="text-white text-base flex justify-between" />
+								<ChartLegendContent className="text-white text-[10px] tab:text-base flex justify-between" />
 							}
 						/>
 						<Bar

@@ -114,8 +114,12 @@ interface TopicoProps {
 
 const Topico: React.FC<TopicoProps> = ({ titulo, children }) => (
 	<section className="flex flex-col gap-1 tab:gap-2 des:gap-4">
-		<h3 className="text-sm tab:text-xl des:text-4xl text-[#87D9FF]">{titulo}:</h3>
-		<div className="text-[#CDDBFF] text-sm tab:text-lg des:text-3xl text-justify w-[300px] tab:w-[600px]">{children}</div>
+		<h3 className="text-sm tab:text-xl des:text-4xl text-[#87D9FF]">
+			{titulo}:
+		</h3>
+		<div className="text-[#CDDBFF] text-sm tab:text-lg des:text-3xl text-justify w-[300px] tab:w-[600px]">
+			{children}
+		</div>
 	</section>
 );
 

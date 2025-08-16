@@ -3,7 +3,6 @@
 
 import { Suspense, useEffect, useState } from "react";
 import { FaTrash } from "react-icons/fa6";
-import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { Button } from "@/components/external/ui-shacnui/button";
@@ -172,7 +171,10 @@ const Carrossel: React.FC<CarrosselProps> = ({
 		{isProjetosLoading ? (
 			<Loading />
 		) : (
-			<Carousel opts={{ align: "start" }} className="w-[20rem] tab:w-[39rem] des:w-[82rem]">
+			<Carousel
+				opts={{ align: "start" }}
+				className="w-[20rem] tab:w-[39rem] des:w-[82rem]"
+			>
 				<CarouselContent>
 					{projetos.map((item, i) => (
 						<>

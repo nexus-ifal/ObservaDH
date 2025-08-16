@@ -51,7 +51,9 @@ const CardSaibaMais: React.FC<saibaMaisProps> = ({
 					</AlertDialogCancel>
 				</AlertDialogTitle>
 				<AlertDialogDescription>
-					<p className="text-[#AFC4F9] text-sm tab:text-xl des:text-3xl text-justify">{texto}</p>
+					<p className="text-[#AFC4F9] text-sm tab:text-xl des:text-3xl text-justify">
+						{texto}
+					</p>
 				</AlertDialogDescription>
 			</AlertDialogContent>
 		</AlertDialog>

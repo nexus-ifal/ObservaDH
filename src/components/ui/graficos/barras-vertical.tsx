@@ -54,23 +54,26 @@ const GraficoBarrasVertical: React.FC<graficoBarrasVerticalprops> = ({
 	dados,
 }) => {
 	return (
-		<Card className="w-[850px] h-[450px] bg-[#122144] shadow-lg shadow-[#4568BE]">
-			<CardContent className="h-full w-full">
-				<ChartContainer config={chartConfig} className="py-12 px-10">
+		<Card className="flex items-center justify-center w-[21.875rem] h-[16.25rem] tab:w-[45rem] tab:h-[25rem] des:w-[52rem] des:h-[29rem] bg-[#122144] shadow-lg shadow-[#4568BE]">
+			<CardContent className="flex justify-center items-center w-full h-full p-1 tab:p-6 text-sm">
+				<ChartContainer
+					config={chartConfig}
+					className="flex justify-center items-center w-full h-full p-0 text-sm"
+				>
 					<BarChart accessibilityLayer data={dados}>
 						<CartesianGrid vertical={false} />
 						<XAxis
 							dataKey="pauta"
 							tickLine={false}
-							tickMargin={10}
 							axisLine={false}
+							className="text-[7px] tab:text-sm"
 						/>
-						<YAxis allowDataOverflow />
+						<YAxis allowDataOverflow className="text-[9px] tab:text-sm" />
 						<ChartTooltip
 							cursor={false}
-							content={<ChartTooltipContent hideLabel className="min-w-36" />}
+							content={<ChartTooltipContent className="min-w-1" />}
 						/>
-						<Bar dataKey="pls" activeIndex={2} barSize={35} />
+						<Bar dataKey="pls" activeIndex={2} />
 					</BarChart>
 				</ChartContainer>
 			</CardContent>

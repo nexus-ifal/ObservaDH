@@ -271,7 +271,7 @@ const PageContent: React.FC = () => {
 					}
 				/>
 			)}
-			<div className="flex h-full w-full flex-col gap-24 items-center px-4 des:px-11">
+			<div className="flex h-full w-full flex-col gap-6 tab:gap-12 des:gap-24 items-center px-4 des:px-11">
 				<Titulo pequeno={"Ranking"} grande={"dos Parlamentares"} />
 				<RankingParlamentares
 					filtros={filtros}
@@ -446,25 +446,28 @@ const RankingPartidos = ({
 	isLoadingPartidos,
 	error,
 }: RankingPartidosProps) => (
-	<article className="flex flex-col w-full gap-12 des:gap-20">
+	<article className="flex flex-col w-full gap-6 tab:gap-12 des:gap-20">
 		{error && <UserError error={error} />}
 
-		<div className="w-full text-shadow-xl text-5xl des:text-7xl text-white text-center">
+		<div className="w-full text-shadow-xl text-3xl tab:text-5xl des:text-7xl text-white text-center">
 			<Texto.Raiz>
 				<Texto.Pequeno.Titillium>Ranking</Texto.Pequeno.Titillium>
 				<Texto.Espaco />
 				<Texto.Forte.Oswald>dos Partidos</Texto.Forte.Oswald>
 			</Texto.Raiz>
 		</div>
-		<div className="flex flex-col gap-6 des:gap-10 justify-center">
-			<div className="flex flex-row w-full px-2 des:px-16 h-14 des:h-[4.25rem] bg-[#122144] border border-b-0 border-[#87D9FF] rounded-t-[5px] font-semibold text-lg des:text-2xl text-[#87D9FF]">
-				<section className="w-1/2 h-full px-2 des:px-16 grid grid-cols-2 gap-2 des:gap-4 items-center">
+		<div className="flex flex-col gap-2 tab:gap-6 des:gap-10 justify-center">
+			<div className="flex flex-row w-full px-2 des:px-16 h-14 des:h-[4.25rem] bg-[#122144] border border-b-0 border-[#87D9FF] rounded-t-[5px] font-semibold text-[9.8px] tab:text-lg des:text-2xl text-[#87D9FF]">
+				<section className="w-1/2 h-full tab:px-2 des:px-16 grid grid-cols-2 gap-2 des:gap-4 items-center">
 					<p>{"Partido"}</p>
 					<p>{"Nome"}</p>
 				</section>
-				<section className="w-1/2 h-full px-2 des:px-12 grid grid-cols-3 gap-2 des:gap-4 items-center">
+				<section className="w-1/2 h-full tab:px-2 des:px-12 grid grid-cols-3 justify-between tab:gap-4 items-center text-[9px] tab:text-lg des:text-2xl">
 					<p className="text-center">{"Sigla"}</p>
-					<p>{"Parlamentares"}</p>
+					<p>
+						<span className="hidden des:inline">Parlamentares</span>
+						<span className="des:hidden">Parl.</span>
+					</p>
 					<p>{"Propostas"}</p>
 				</section>
 			</div>
@@ -508,12 +511,12 @@ const DadosEstatisticos = ({
 	isLoadingReligiaoRaca,
 	isLoadingIdeologiaGenero,
 }: DadosEstatisticosProps) => (
-	<article className="flex flex-col justify-center gap-12 des:gap-20">
-		<Texto.Raiz className="text-5xl des:text-7xl text-shadow-xl text-white text-center">
+	<article className="flex flex-col justify-center gap-6 tab:gap-12 des:gap-20">
+		<Texto.Raiz className="text-2xl tab:text-5xl des:text-7xl text-shadow-xl text-white text-center">
 			<Texto.Pequeno.Oswald>Dados Estatísticos</Texto.Pequeno.Oswald>
 		</Texto.Raiz>
-		<div className="flex flex-col gap-12 des:gap-20">
-			<section className="flex flex-col des:flex-row justify-center gap-12 des:gap-20">
+		<div className="flex flex-col gap-6 tab:gap-12 des:gap-20">
+			<section className="flex flex-col des:flex-row justify-center gap-4 tab:gap-10 des:gap-20">
 				{errorIdeologiaGenero && <UserError error={errorIdeologiaGenero} />}
 				{isLoadingIdeologiaGenero ? (
 					<Loading />
@@ -538,7 +541,7 @@ const DadosEstatisticos = ({
 				)}
 			</section>
 
-			<section className="flex flex-col-reverse des:flex-row justify-center gap-12 des:gap-20">
+			<section className="flex flex-col-reverse des:flex-row justify-center gap-4 tab:gap-10 des:gap-20">
 				{errorReligiaoRaca && <UserError error={errorReligiaoRaca} />}
 				{isLoadingReligiaoRaca ? (
 					<Loading />
