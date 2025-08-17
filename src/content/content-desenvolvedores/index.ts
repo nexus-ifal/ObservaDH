@@ -15,7 +15,7 @@ const infoDevs: DevInfo[] = [
 	{
 		nome: "Júlio César",
 		foto: "https://github.com/follijulio.png",
-		funcao: "Dev Frontend",
+		funcao: "Dev Frontend e Backend",
 		links: [
 			{
 				site: "lattes",
@@ -33,7 +33,7 @@ const infoDevs: DevInfo[] = [
 	{
 		nome: "Rita de Cassia",
 		foto: "https://github.com/ritadecassiabl.png",
-		funcao: "Design",
+		funcao: "Design e Dev Backend",
 		links: [
 			{
 				site: "lattes",
@@ -46,7 +46,7 @@ const infoDevs: DevInfo[] = [
 				link: "https://github.com/ritadecassiabl",
 			},
 		],
-		bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin accumsan nulla justo, sed molestie nisi scelerisque vulputate. Integer nibh risus, pretium et neque sed, efficitur vehicula tortor. Integer ut ullamcorper ex. Aenean porta, nisi sed gravida pellentesque, mi turpis porta leo, in euismod massa mauris eget augue. Aenean urna tortor, scelerisque vitae vulputate a, lobortis et metus.    ",
+		bio: "Rita de Cassia Bento Lopes, técnica em Informática pelo instituto federal de Alagoas - IFAL, graduanda em Sistemas de Informação - IFAL. Designer e desenvolvedora backend do projeto ObservaDH.    ",
 	},
 ];
 export { infoDevs };
