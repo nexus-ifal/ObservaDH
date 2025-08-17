@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { Suspense, useEffect, useState } from "react";
-import { FaTrash } from "react-icons/fa6";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { Suspense } from "react";
+import { FaTrash } from "react-icons/fa6";
 
 import { Button } from "@/components/external/ui-shacnui/button";
 import {
@@ -32,8 +32,8 @@ import { usePauta } from "@/hooks/pauta/use-pauta";
 
 interface DadosEstatisticosProps {
 	elementosDropdown: { titulo: string; value: string }[];
-	dadosRadial: DadosRadial[];
-	dadosGraficoVertical: DadosGraficoBarrasVertical[];
+	dadosRadial: any[];
+	dadosGraficoVertical: any[];
 	legenda: LegendaGrafico[];
 	isPautaSelecionada: boolean;
 	limparSearchParams: () => void;
@@ -176,15 +176,12 @@ const Carrossel: React.FC<CarrosselProps> = ({
 				className="w-[20rem] tab:w-[39rem] des:w-[82rem]"
 			>
 				<CarouselContent>
-					{projetos.map((item, i) => (
-						<>
-							<CarouselItem
-								key={item.id || i}
-								className="flex basis-[100%] des:basis-1/2 justify-center"
-							>
+					{(projetos || []).map((item, i) => (
+						<div key={item.id || i}>
+							<CarouselItem className="flex basis-[100%] des:basis-1/2 justify-center">
 								<Card.Projeto projeto={item} />
 							</CarouselItem>
-						</>
+						</div>
 					))}
 				</CarouselContent>
 				<CarouselPrevious />
@@ -195,7 +192,7 @@ const Carrossel: React.FC<CarrosselProps> = ({
 );
 
 const Direitos: React.FC = () => {
-	const { pautas, isLoadingPautas, error } = usePauta();
+	const { pautas, isLoadingPautas, error: errorPautas } = usePauta();
 	const searchParams = useSearchParams();
 	const { replace } = useRouter();
 	const pathName = usePathname();
@@ -204,16 +201,12 @@ const Direitos: React.FC = () => {
 	const isPautaSelecionada = !!pautaId;
 
 	const {
-		isLoading: isLoadingProjetosDireitosIdeologias,
+		isLoading: isLoadingProjetos,
 		direitos_violados_valores,
 		ideologias_valores,
 		projetos_carrosel,
-		error: errorProjetosDireitosIdeologias,
+		error: errorProjetos,
 	} = useProjetosDireitosIdeologias(pautaId);
-
-	const [projetos, setProjetos] = useState<any[]>([]);
-	const [ideologias, setIdeologias] = useState<any[]>([]);
-	const [direitosViolados, setDireitosViolados] = useState<any[]>([]);
 
 	const elementosDropdown =
 		pautas?.map((pauta) => ({
@@ -221,20 +214,7 @@ const Direitos: React.FC = () => {
 			value: pauta.id.toString(),
 		})) || [];
 
-	const isLoading = isLoadingPautas || isLoadingProjetosDireitosIdeologias;
-
-	useEffect(() => {
-		if (!isLoadingProjetosDireitosIdeologias) {
-			setProjetos(projetos_carrosel || []);
-			setIdeologias(ideologias_valores || []);
-			setDireitosViolados(direitos_violados_valores || []);
-		}
-	}, [
-		isLoadingProjetosDireitosIdeologias,
-		projetos_carrosel,
-		ideologias_valores,
-		direitos_violados_valores,
-	]);
+	const isLoading = isLoadingPautas || isLoadingProjetos;
 
 	const limparSearchParams = () => {
 		const params = new URLSearchParams(searchParams.toString());
@@ -243,16 +223,16 @@ const Direitos: React.FC = () => {
 	};
 
 	const renderContent = () => {
-		if (error) {
+		if (errorPautas) {
 			return (
 				<div className="text-red-500">
-					Erro ao carregar pautas: {error.toString()}
+					Erro ao carregar pautas: {errorPautas.toString()}
 				</div>
 			);
 		}
 
-		if (errorProjetosDireitosIdeologias) {
-			return <UserError error={errorProjetosDireitosIdeologias} />;
+		if (errorProjetos) {
+			return <UserError error={errorProjetos} />;
 		}
 
 		if (isLoading) {
@@ -264,14 +244,14 @@ const Direitos: React.FC = () => {
 				<DadosEstatisticos
 					limparSearchParams={limparSearchParams}
 					isPautaSelecionada={isPautaSelecionada}
-					dadosGraficoVertical={ideologias}
-					dadosRadial={direitosViolados}
+					dadosRadial={direitos_violados_valores}
+					dadosGraficoVertical={ideologias_valores}
 					elementosDropdown={elementosDropdown}
 					legenda={legendasGraficosDireitos}
 				/>
 				<Carrossel
-					projetos={projetos}
-					isProjetosLoading={isLoadingProjetosDireitosIdeologias}
+					projetos={projetos_carrosel || []}
+					isProjetosLoading={isLoadingProjetos}
 				/>
 			</>
 		);

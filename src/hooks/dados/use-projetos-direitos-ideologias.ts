@@ -2,7 +2,11 @@ import { useQuery } from "@tanstack/react-query";
 
 import { listarProjetosDireitosIdeologiasOptions } from "../options/dados";
 
-import { mapApiDataToChartData } from "@/utils/mapApiDataToChartData/mapApiDataToChartData";
+// Importe AMBAS as funções de mapeamento
+import {
+	mapApiDataToChartData,
+	mapIdeologiasToChartData,
+} from "@/utils/mapApiDataToChartData/mapApiDataToChartData";
 
 export const useProjetosDireitosIdeologias = (pauta?: string) => {
 	const {
@@ -11,17 +15,23 @@ export const useProjetosDireitosIdeologias = (pauta?: string) => {
 		error,
 	} = useQuery(listarProjetosDireitosIdeologiasOptions({ pauta }));
 
-	const ideologias_valores =
-		projetosDireitosIdeologias?.ideologias_valores || [];
-	const projetos_carrosel = projetosDireitosIdeologias?.projetos || [];
+	// Mapeie os dados de ideologias aqui
+	const ideologias_valores = mapIdeologiasToChartData(
+		projetosDireitosIdeologias?.ideologias_valores || []
+	);
+
+	// Mapeie os dados de direitos violados (como já estava)
 	const direitos_violados_valores = mapApiDataToChartData(
 		projetosDireitosIdeologias?.direitos_violados_valores || []
 	);
 
+	// Dados do carrossel não precisam de mapeamento
+	const projetos_carrosel = projetosDireitosIdeologias?.projetos || [];
+
 	return {
-		ideologias_valores,
+		ideologias_valores, // Retorna os dados já mapeados
 		projetos_carrosel,
-		direitos_violados_valores,
+		direitos_violados_valores, // Retorna os dados já mapeados
 		isLoading: isLoadingProjetosDireitosIdeologias,
 		error,
 	};
