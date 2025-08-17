@@ -76,7 +76,7 @@ const Page: React.FC<PageProps> = ({ params }) => {
 					</section>
 
 					<article className="flex flex-col bg-gradient-to-t from-[#2C52A4]/45 to-[#050B17]/45 w-full min-h-[30rem] p-4 tab:p-12 des:py-16 des:px-[4.5rem] gap-4 tab:gap-8 des:gap-12 border-2 border-[#87D9FF] rounded-[10px]">
-						<section className="grid grid-cols-2 des:grid-cols-1 gap-4 tab:gap-8 des:gap-16 flex-wrap">
+						<section className="grid grid-cols-2 des:grid-cols-6 gap-4 tab:gap-8 des:gap-16 flex-wrap">
 							{infos.map((info, index) => (
 								<Card.RenderizacaoItem
 									key={index}
