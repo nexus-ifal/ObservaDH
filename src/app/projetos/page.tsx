@@ -5,7 +5,6 @@
 import { Suspense, useEffect, useState } from "react";
 import { FaTrash } from "react-icons/fa6";
 import { MdOutlineFilterAlt } from "react-icons/md";
-import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { Button } from "@/components/external/ui-shacnui/button";
@@ -195,7 +194,7 @@ const CarrosselPls = ({
 									<CarouselItem>
 										<Card.Projeto projeto={item} />
 									</CarouselItem>
-								</Link>
+								</CarouselItem>
 							))}
 						</CarouselContent>
 						<CarouselPrevious />

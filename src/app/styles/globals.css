@@ -3,19 +3,14 @@
 
 @theme {
 	--breakpoint-*: initial;
-	/*--breakpoint-des1: 120rem;
-	--breakpoint-des2: 96rem;*/
 	--breakpoint-des: 85.375rem;
-	/*--breakpoint-pho1: 22.5rem;
-	--breakpoint-pho2: 24.375rem;*/
 	--breakpoint-pho: 24.563rem;
 	--breakpoint-tab: 38.125rem;
 	--breakpoint-tab2: 47.5rem;
-	/*--breakpoint-tab3: 51.25rem;*/
 }
 
 :root {
-	--color-layout-admin: #050B17;
+	--color-layout-admin: #050b17;
 }
 
 .logo::before {

@@ -179,7 +179,7 @@ const Carrossel: React.FC<CarrosselProps> = ({
 					{projetos.map((item, i) => (
 						<>
 							<CarouselItem
-								key={i}
+								key={item.id || i}
 								className="flex basis-[100%] des:basis-1/2 justify-center"
 							>
 								<Card.Projeto projeto={item} />

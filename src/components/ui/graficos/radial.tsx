@@ -49,9 +49,9 @@ export const Radial: React.FC<DadosEstatisticosProps> = ({ dados }) => {
 					data={dados}
 					startAngle={-90}
 					endAngle={380}
-					innerRadius={"40%"}
-					outerRadius={"145%"}
-					className=""
+					innerRadius={"30%"}
+					outerRadius={"95%"}
+					className="text-white"
 				>
 					<ChartTooltip
 						cursor={false}
@@ -68,15 +68,15 @@ export const Radial: React.FC<DadosEstatisticosProps> = ({ dados }) => {
 						<LabelList
 							position="insideStart"
 							dataKey="direito_sigla"
-							className="fill-black font-semibold	capitalize mix-blend-luminosity"
-							fontSize={16}
+							className="font-semibold fill-gray-600 capitalize mix-blend-luminosity"
+							fontSize={12}
 						/>
 					</RadialBar>
 
 					<ChartLegend
 						content={
 							<ChartLegendContent
-								className="text-white text-xl justify-around "
+								className="text-white text-lg justify-around "
 								nameKey="direito_sigla"
 								key="direito_sigla"
 							/>

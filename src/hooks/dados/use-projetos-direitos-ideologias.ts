@@ -11,12 +11,17 @@ export const useProjetosDireitosIdeologias = (pauta?: string) => {
 		error,
 	} = useQuery(listarProjetosDireitosIdeologiasOptions({ pauta }));
 
+	const ideologias_valores =
+		projetosDireitosIdeologias?.ideologias_valores || [];
+	const projetos_carrosel = projetosDireitosIdeologias?.projetos || [];
+	const direitos_violados_valores = mapApiDataToChartData(
+		projetosDireitosIdeologias?.direitos_violados_valores || []
+	);
+
 	return {
-		ideologias_valores: projetosDireitosIdeologias?.ideologias_valores,
-		projetos_carrosel: projetosDireitosIdeologias?.projetos,
-		direitos_violados_valores: mapApiDataToChartData(
-			projetosDireitosIdeologias?.direitos_violados_valores || []
-		),
+		ideologias_valores,
+		projetos_carrosel,
+		direitos_violados_valores,
 		isLoading: isLoadingProjetosDireitosIdeologias,
 		error,
 	};
