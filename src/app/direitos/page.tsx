@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 import { FaTrash } from "react-icons/fa6";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { Button } from "@/components/external/ui-shacnui/button";
 import {
@@ -39,10 +39,6 @@ interface DadosEstatisticosProps {
 	limparSearchParams: () => void;
 }
 
-interface DadosRadial {
-	label: string;
-	value: number;
-}
 interface CarrosselProps {
 	projetos: ProjetoDTO[];
 	isProjetosLoading: boolean;
