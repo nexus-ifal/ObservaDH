@@ -11,7 +11,7 @@ const page: React.FC = () => {
 	//render
 	return (
 		<MainLayout>
-			<div className="flex h-full w-full flex-col gap-24 items-center">
+			<div className="flex h-full w-full flex-col gap-12 tab:gap-20 des:gap-24 items-center">
 				<article className="w-full h-auto flex justify-center">
 					<Card.Apresentacao
 						titulo={apresentacao.titulo}
@@ -23,7 +23,7 @@ const page: React.FC = () => {
 				</article>
 
 				<article
-					className="w-9/12 h-auto flex flex-col gap-16"
+					className="w-9/12 h-auto flex flex-col gap-10 tab:gap-12 des:gap-16"
 					id=" CARDS DE REDIRECIONAMENTO - PLS "
 				>
 					{cardsEsfera.map((card, index) => (
@@ -44,7 +44,7 @@ const page: React.FC = () => {
 					))}
 				</article>
 
-				<article className="flex w-full flex-col items-center px-[5rem] gap-24 xl:flex-row xl:justify-evenly">
+				<article className="flex w-full flex-col items-center mx-16 tab:mx-24 px-10 tab:px-34 des:px-28 gap-6 tab:gap-12 des:gap-24 tab:flex-col tab:justify-evenly des:flex-row des:justify-evenly">
 					{cardsInformativos.map((item) => (
 						<Card.Informativo
 							key={item.titulo}

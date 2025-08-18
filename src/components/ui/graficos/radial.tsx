@@ -43,15 +43,15 @@ interface DadosEstatisticosProps {
 
 export const Radial: React.FC<DadosEstatisticosProps> = ({ dados }) => {
 	return (
-		<div className="flex items-center justify-between h-[31rem] py-6 w-[29rem]">
+		<div className="flex items-center justify-between w-[20rem] h-[25rem] tab:h-[29rem] des:h-[31rem] py-2 tab:w-[29rem]">
 			<ChartContainer config={chartConfig} className="w-full h-full">
 				<RadialBarChart
 					data={dados}
 					startAngle={-90}
 					endAngle={380}
-					innerRadius={60}
-					outerRadius={200}
-					className=""
+					innerRadius={"30%"}
+					outerRadius={"95%"}
+					className="text-white"
 				>
 					<ChartTooltip
 						cursor={false}
@@ -68,15 +68,15 @@ export const Radial: React.FC<DadosEstatisticosProps> = ({ dados }) => {
 						<LabelList
 							position="insideStart"
 							dataKey="direito_sigla"
-							className="fill-black font-semibold	capitalize mix-blend-luminosity"
-							fontSize={16}
+							className="font-semibold fill-gray-600 capitalize mix-blend-luminosity"
+							fontSize={12}
 						/>
 					</RadialBar>
 
 					<ChartLegend
 						content={
 							<ChartLegendContent
-								className="text-white text-xl justify-around "
+								className="text-white text-lg justify-around "
 								nameKey="direito_sigla"
 								key="direito_sigla"
 							/>

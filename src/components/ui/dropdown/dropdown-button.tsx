@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import {
@@ -34,22 +33,16 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({
 	onChange,
 	autoApply = true,
 }) => {
-	const [internalValue, setInternalValue] = useState<string>("");
-
 	const searchParams = useSearchParams();
 	const pathName = usePathname();
 	const { replace } = useRouter();
 
-	useEffect(() => {
-		if (value !== undefined) setInternalValue(value);
-	}, [value]);
-
 	function handleChange(valueSelected: string) {
 		if (onChange) {
 			onChange(valueSelected);
-			setInternalValue(valueSelected);
 			return;
 		}
+
 		if (autoApply) {
 			const params = new URLSearchParams(searchParams.toString());
 			if (!valueSelected || valueSelected === "geral") {
@@ -58,19 +51,13 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({
 				params.set(param, valueSelected);
 			}
 			replace(`${pathName}?${params.toString()}`, { scroll: false });
-			setInternalValue(valueSelected);
-		} else {
-			setInternalValue(valueSelected);
 		}
 	}
 
 	return (
-		<Select
-			onValueChange={handleChange}
-			value={value !== undefined ? value : internalValue}
-		>
+		<Select onValueChange={handleChange} value={value || ""}>
 			<SelectTrigger
-				className={`w-full h-12 border-[#4568BE] rounded-[3px] text-[#4568BE] ${className}`}
+				className={`w-full h-10 tab:h-12 des:h-12 border-[#4568BE] rounded-[3px] text-[#4568BE] ${className}`}
 			>
 				<SelectValue placeholder={titulo} />
 			</SelectTrigger>
@@ -81,7 +68,7 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({
 					<SelectItem
 						value={item.value}
 						key={item.value}
-						className={`text-[#4568BE] focus:bg-[#1A326E] focus:text-[#91ADF4] flex text-start justify-start items-center min-h-12 ${className}`}
+						className={`text-[#4568BE] focus:bg-[#1A326E] focus:text-[#91ADF4] flex text-start justify-start items-center min-h-10 ${className}`}
 					>
 						{item.titulo}
 					</SelectItem>

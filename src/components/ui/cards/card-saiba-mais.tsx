@@ -27,14 +27,17 @@ const CardSaibaMais: React.FC<saibaMaisProps> = ({
 		<AlertDialog>
 			<AlertDialogTrigger asChild>
 				<button
-					className={`flex flex-row text-xl items-center gap-4 ${className} text-[${corTexto}]`}
+					className={`flex flex-row text-sm tab:text-xl items-center gap-2 tab:gap-4 ${className} text-[${corTexto}]`}
 				>
-					<FaPlus size={18} /> Saiba mais
+					<div className="text-[16px] tab:text-[18px] ">
+						<FaPlus size={18} />
+					</div>
+					Saiba mais
 				</button>
 			</AlertDialogTrigger>
-			<AlertDialogContent className="flex flex-col h-[90%] p-12 gap-6 w-[75%] bg-[#121A2B] border-[#4568BE] shadow-lg shadow-[#4568BE] rounded-lg">
+			<AlertDialogContent className="flex flex-col h-[60%] des:h-[70%] p-6 tab:p-10 des:p-12 gap-2 tab:gap-6 w-[80%] des:w-[70%] bg-[#121A2B] border-[#4568BE] shadow-lg shadow-[#4568BE] rounded-lg">
 				<AlertDialogTitle className="flex justify-between">
-					<Texto.Raiz className="text-5xl w-full">
+					<Texto.Raiz className="tab:text-3xl des:text-5xl w-full">
 						<Texto.Linha>
 							<Texto.Forte.Oswald>{"Aprofundamento"}</Texto.Forte.Oswald>
 							<Texto.Espaco />
@@ -48,7 +51,9 @@ const CardSaibaMais: React.FC<saibaMaisProps> = ({
 					</AlertDialogCancel>
 				</AlertDialogTitle>
 				<AlertDialogDescription>
-					<p className="text-[#AFC4F9] text-3xl text-justify">{texto}</p>
+					<p className="text-[#AFC4F9] text-sm tab:text-xl des:text-3xl text-justify">
+						{texto}
+					</p>
 				</AlertDialogDescription>
 			</AlertDialogContent>
 		</AlertDialog>

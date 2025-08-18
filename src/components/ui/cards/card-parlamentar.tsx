@@ -40,12 +40,12 @@ const CardParlamentar: React.FC<saibaMaisProps> = ({
 					{children}
 				</button>
 			</AlertDialogTrigger>
-			<AlertDialogContent className="flex-col max-h-[90vh] max-w-[50vw] h-full w-full p-12 flex bg-gradient-to-t from-[#050B17] to-[#121A2B] border-[#4568BE] shadow-lg shadow-[#4568BE] rounded-lg">
-				<AlertDialogDescription className="flex flex-col w-full h-full gap-6">
-					<article className="flex flex-col gap-8">
+			<AlertDialogContent className="flex-col h-fit w-fit p-6 tab:p-10 des:p-12 flex bg-gradient-to-t from-[#050B17] to-[#121A2B] border-[#4568BE] shadow-lg shadow-[#4568BE] rounded-lg">
+				<AlertDialogDescription className="flex flex-col w-full h-full gap-4 tab:gap-6">
+					<article className="flex flex-col gap-4 tab:gap-8">
 						<section className="flex flex-row w-full justify-between items-start">
-							<div className="flex flex-row items-center gap-10">
-								<div className="relative h-44 w-44">
+							<div className="flex flex-col tab:flex-row items-start tab:items-center gap-2 tab:gap-10">
+								<div className="relative h-24 w-24 tab:h-44 tab:w-44">
 									<Image
 										src={
 											parlamentar.foto ||
@@ -57,7 +57,7 @@ const CardParlamentar: React.FC<saibaMaisProps> = ({
 										className="rounded-full border-2 border-white object-cover"
 									/>
 								</div>
-								<p className="text-5xl text-shadow-xl font-normal text-white truncate">
+								<p className="text-2xl tab:text-5xl text-shadow-xl font-normal text-white truncate">
 									{parlamentar.nome}
 								</p>
 							</div>
@@ -65,7 +65,7 @@ const CardParlamentar: React.FC<saibaMaisProps> = ({
 								<IoMdClose size={26} color="white" />
 							</AlertDialogCancel>
 						</section>
-						<section className="text-white grid grid-cols-3 gap-4">
+						<section className="text-white text-sm tab:text-xl grid grid-cols-2 tab:grid-cols-3 gap-1 tab:gap-4">
 							{[
 								["Gênero", parlamentar.genero],
 								["Religião", parlamentar.religiao],
@@ -85,9 +85,9 @@ const CardParlamentar: React.FC<saibaMaisProps> = ({
 						</section>
 						<div className="w-full bg-white/50 h-[2px]" />
 					</article>
-					<section className="flex flex-col w-full items-center gap-8">
+					<section className="flex flex-col w-full items-center gap-4 tab:gap-8">
 						<div>
-							<Texto.Linha className="text-4xl text-white text-shadow-xl text-center ">
+							<Texto.Linha className="text-lg tab:text-4xl text-white text-shadow-xl text-center ">
 								<Texto.Forte.Oswald>{"Projetos"}</Texto.Forte.Oswald>
 								<Texto.Espaco />
 								<Texto.Pequeno.Titillium className={`text-[#F693F9]`}>
@@ -100,7 +100,7 @@ const CardParlamentar: React.FC<saibaMaisProps> = ({
 								opts={{
 									align: "start",
 								}}
-								className="w-[40rem]"
+								className="w-[16rem] tab:w-[40rem]"
 							>
 								<CarouselContent className="">
 									{parlamentar?.projetos?.map((item, index) => (

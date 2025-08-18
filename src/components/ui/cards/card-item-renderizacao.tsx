@@ -16,8 +16,12 @@ const CardItemRenderizacao: React.FC<itemRenderProps> = ({
 	corSegundoTexto,
 }) => {
 	return (
-		<p className={`text-2xl  ${className} ${oswald.className}`}>
-			<span className={`mr-2  ${corTexto ? corTexto : "text-[#AFC4F9]"}`}>
+		<p
+			className={`flex flex-col tab:flex-row text-lg tab:text-2xl  ${className} ${oswald.className}`}
+		>
+			<span
+				className={`mr-1 tab:mr-2  ${corTexto ? corTexto : "text-[#AFC4F9]"}`}
+			>
 				{titulo}
 				{":"}
 			</span>

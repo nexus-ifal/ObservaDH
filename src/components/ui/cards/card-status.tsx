@@ -25,10 +25,10 @@ const CardStatus: React.FC<StatusCardProps> = ({
 				? "Federais"
 				: "Estaduais";
 	return (
-		<article className="flex flex-col gap-4 border-l-[1px] border-white rounded-lg h-[20.75rem] p-8">
-			<section className="flex items-center justify-center gap-4">
+		<article className="flex flex-col gap-2 tab:gap-3 des:gap-4 border-l-[1px] border-white rounded-lg h-fit p-4 tab:p-6 des:p-8">
+			<section className="flex items-center gap-4">
 				<h1
-					className={`${titilliumWeb.className} text-4xl font-semibold text-white`}
+					className={`${titilliumWeb.className} text-xl tab:text-2xl des:text-4xl font-semibold text-white`}
 				>
 					Dados {ambito}
 				</h1>
@@ -46,7 +46,7 @@ const CardStatus: React.FC<StatusCardProps> = ({
 			</section>
 			<section className="flex items-center gap-4">
 				<h1
-					className={`${titilliumWeb.className} text-4xl font-semibold text-white`}
+					className={`${titilliumWeb.className} text-xl tab:text-2xl des:text-4xl font-semibold text-white`}
 				>
 					Pautas
 				</h1>

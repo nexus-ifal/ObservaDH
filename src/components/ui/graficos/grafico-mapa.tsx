@@ -1,5 +1,3 @@
-import { LuMousePointerClick } from "react-icons/lu";
-
 import CardStatus from "../cards/card-status";
 import DropdownButton from "../dropdown/dropdown-button";
 import MapaBrasil from "../icons/mapa-brasil";
@@ -48,46 +46,39 @@ const GraficoMapa: React.FC<MapaBrasilProps> = ({
 	errorStatus,
 }) => {
 	return (
-		<article className="w-[80rem] h-[45.625rem] flex gap-2 ">
-			<section className="h-[45.625rem] w-[43.75rem] min-w-1/2">
-				{errorMapa && <UserError error={errorMapa} />}
-				{isLoadingDadosMapa ? (
-					<div className="h-full w-full flex items-center justify-center">
-						<Loading />
-					</div>
-				) : (
-					<div className="w-full h-full text-xl items-center">
+		<article className="w-fit h-fit flex flex-col">
+			<div className="flex justify-end w-full des:w-full mb-4 des:-mb-14">
+				<DropdownButton
+					elementos={dadosDropDown}
+					titulo="Esfera"
+					param="esfera"
+					className="text-[12px] tab:text-[16px] des:text-[16px] w-24 tab:w-38 des:w-38"
+				/>
+			</div>
+			<section className="flex flex-col des:flex-row gap-6 tab:gap-6 des:gap-6 w-fit des:mr-62">
+				<section className="w-[340px] h-[360px] tab:h-[639.04297px] tab:w-[612.51611px] des:h-[639.04297px] des:w-[612.51611px]">
+					{errorMapa && <UserError error={errorMapa} />}
+					{isLoadingDadosMapa ? (
+						<div className="h-full w-full flex items-center justify-center">
+							<Loading />
+						</div>
+					) : (
 						<MapaBrasil dados={dadosMapa} />
-						<p className="flex text-white">
-							*Passe o cursor sobre o mapa <LuMousePointerClick />
-						</p>
-					</div>
-				)}
-			</section>
-			<section className="w-full h-full flex items-end justify-between">
+					)}
+				</section>
 				{errorStatus && <UserError error={errorStatus} />}
 				{isLoadingDadosStatus ? (
 					<Loading />
 				) : (
-					<>
-						<div className="w-[25rem] h-full flex items-end">
-							<CardStatus
-								dadosParlamentarProjetosEsfera={
-									dadosStatus.dadosProjetoPoliticoPorEsfera
-								}
-								dadosPautaEsfera={dadosStatus.dadosPautaEsfera}
-							/>
-						</div>
-					</>
+					<div className="flex items-end des:mt-100">
+						<CardStatus
+							dadosParlamentarProjetosEsfera={
+								dadosStatus.dadosProjetoPoliticoPorEsfera
+							}
+							dadosPautaEsfera={dadosStatus.dadosPautaEsfera}
+						/>
+					</div>
 				)}
-				<div className="bg- w-32 h-full">
-					<DropdownButton
-						elementos={dadosDropDown}
-						titulo="Esfera"
-						param="esfera"
-						className="w-40"
-					/>
-				</div>
 			</section>
 		</article>
 	);

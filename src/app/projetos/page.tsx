@@ -5,7 +5,6 @@
 import { Suspense, useEffect, useState } from "react";
 import { FaTrash } from "react-icons/fa6";
 import { MdOutlineFilterAlt } from "react-icons/md";
-import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { Button } from "@/components/external/ui-shacnui/button";
@@ -124,18 +123,18 @@ const Filtro = ({
 	isLoadingFiltros,
 	limparSearchParams,
 }: FiltroElementosProps) => (
-	<section className="w-full flex items-center justify-start gap-24">
+	<section className="w-fit tab:w-full flex flex-col tab:flex-row items-start tab:items-center justify-center tab:justify-start gap-4 tab:gap-16 des:gap-24 tab:px-0">
 		{isLoadingFiltros ? (
 			<Loading />
 		) : errorFiltros ? (
 			<UserError error={errorFiltros} />
 		) : (
 			<>
-				<section className="flex gap-12 px-10">
+				<section className="flex gap-4 tab:gap-6 des:gap-12 tab:px-8 des:px-10">
 					{items.map((item, index) => (
 						<DropdownButton
 							key={index}
-							className="w-32"
+							className="w-18 text-[11px] tab:text-[15px] des:text-[18px] tab:w-24 des:w-32"
 							autoApply={false}
 							param={item.param}
 							titulo={item.titulo}
@@ -147,7 +146,7 @@ const Filtro = ({
 				</section>
 				<div className="flex flex-row items-center gap-2">
 					<Button
-						className="flex flex-row justify-center border-[#D974FD] text-[#D974FD] bg-transparent border-[1px] rounded-[3px] w-32 h-12 hover:bg-inherit active:text-white active:bg-[#D974FD] transition-colors duration-75"
+						className="flex flex-row justify-center border-[#D974FD] text-[13px] tab:text-[15px] des:text-[18px] text-[#D974FD] bg-transparent border-[1px] rounded-[3px] w-18 h-12 tab:w-24 des:w-32 hover:bg-inherit active:text-white active:bg-[#D974FD] transition-colors duration-75"
 						onClick={() => aplicarFiltros()}
 					>
 						Filtrar <MdOutlineFilterAlt />
@@ -182,18 +181,20 @@ const CarrosselPls = ({
 		) : (
 			<>
 				{projetos.length > 0 ? (
-					<Carousel opts={{ align: "start" }} className="w-[82rem]">
+					<Carousel
+						opts={{ align: "start" }}
+						className="w-[20rem] tab:w-[39rem] des:w-[82rem]"
+					>
 						<CarouselContent>
-							{projetos.map((item, i) => (
-								<Link
-									key={`${item.id} - ${i}`}
-									href={`/projetos/${item.id}`}
-									className="flex basis-1/2 justify-center"
+							{projetos.map((item, index) => (
+								<CarouselItem
+									key={index}
+									className="basis-[100%] des:basis-1/2 flex justify-center"
 								>
 									<CarouselItem>
 										<Card.Projeto projeto={item} />
 									</CarouselItem>
-								</Link>
+								</CarouselItem>
 							))}
 						</CarouselContent>
 						<CarouselPrevious />
@@ -220,7 +221,7 @@ const Divisor = () => (
 );
 
 const SubTitulo = () => (
-	<Texto.Raiz className="text-7xl text-shadow-xl">
+	<Texto.Raiz className="text-[28px] tab:text-6xl des:text-7xl text-shadow-xl">
 		<Texto.Pequeno.Titillium>Propostas</Texto.Pequeno.Titillium>
 		<Texto.Espaco />
 		<Texto.Forte.Oswald>e Dados Estatísticos</Texto.Forte.Oswald>
@@ -228,21 +229,23 @@ const SubTitulo = () => (
 );
 
 const NumeroPls = ({ dados, isLoading, error, legenda }: NumeroPlsProps) => (
-	<section className="w-full flex justify-center gap-[4.5rem]">
-		<Card.Legenda legenda={legenda}>
-			<Texto.Raiz className="text-6xl">
-				<Texto.Linha>
-					<Texto.Forte.Oswald>{"Número"}</Texto.Forte.Oswald>
-					<Texto.Espaco />
-					<Texto.Pequeno.Titillium>{"de"}</Texto.Pequeno.Titillium>
-				</Texto.Linha>
-				<Texto.Linha className="text-[#93F996]">
-					<Texto.Pequeno.Titillium>{"PL's"}</Texto.Pequeno.Titillium>
-					<Texto.Espaco />
-					<Texto.Forte.Oswald>{"por ano"}</Texto.Forte.Oswald>
-				</Texto.Linha>
-			</Texto.Raiz>
-		</Card.Legenda>
+	<section className="w-full flex flex-col-reverse des:flex-row justify-center items-center gap-4 tab:gap-10 des:gap-[4.5rem]">
+		<div className="flex des:flex-col">
+			<Card.Legenda legenda={legenda}>
+				<Texto.Raiz className="text-3xl tab:text-6xl">
+					<Texto.Linha>
+						<Texto.Forte.Oswald>{"Número"}</Texto.Forte.Oswald>
+						<Texto.Espaco />
+						<Texto.Pequeno.Titillium>{"de"}</Texto.Pequeno.Titillium>
+					</Texto.Linha>
+					<Texto.Linha className="text-[#93F996]">
+						<Texto.Pequeno.Titillium>{"PL's"}</Texto.Pequeno.Titillium>
+						<Texto.Espaco />
+						<Texto.Forte.Oswald>{"por ano"}</Texto.Forte.Oswald>
+					</Texto.Linha>
+				</Texto.Raiz>
+			</Card.Legenda>
+		</div>
 		{isLoading ? (
 			<Loading />
 		) : error ? (
@@ -259,7 +262,7 @@ const NumeroPautas = ({
 	error,
 	legenda,
 }: NumeroPautasProps) => (
-	<section className="w-full flex justify-center gap-[4.5rem]">
+	<section className="w-full flex flex-col des:flex-row justify-center items-center gap-4 tab:gap-10 des:gap-[4.5rem]">
 		{isLoading ? (
 			<Loading />
 		) : error ? (
@@ -269,7 +272,7 @@ const NumeroPautas = ({
 		)}
 		<Card.Legenda legenda={legenda}>
 			<div>
-				<Texto.Raiz className="text-6xl w-[374px]">
+				<Texto.Raiz className="text-3xl tab:text-6xl tab:w-[374px]">
 					<Texto.Linha className="w-full">
 						<Texto.Forte.Oswald>{"Número"}</Texto.Forte.Oswald>
 						<Texto.Espaco />
@@ -550,7 +553,7 @@ const PageContent = () => {
 
 	return (
 		<MainLayout>
-			<div className="flex h-full w-full flex-col gap-24 items-center px-11">
+			<div className="flex h-full w-full flex-col gap-12 tab:gap-24 des:gap-24 items-center justify-center">
 				<Apresentacao apresentacao={apresentacao} />
 
 				{/* Gráfico Mapa */}

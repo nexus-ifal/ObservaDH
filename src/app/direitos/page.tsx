@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { Suspense, useEffect, useState } from "react";
+import { Suspense } from "react";
 import { FaTrash } from "react-icons/fa6";
-import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { Button } from "@/components/external/ui-shacnui/button";
@@ -33,17 +32,13 @@ import { usePauta } from "@/hooks/pauta/use-pauta";
 
 interface DadosEstatisticosProps {
 	elementosDropdown: { titulo: string; value: string }[];
-	dadosRadial: DadosRadial[];
-	dadosGraficoVertical: DadosGraficoBarrasVertical[];
+	dadosRadial: any[];
+	dadosGraficoVertical: any[];
 	legenda: LegendaGrafico[];
 	isPautaSelecionada: boolean;
 	limparSearchParams: () => void;
 }
 
-interface DadosRadial {
-	label: string;
-	value: number;
-}
 interface CarrosselProps {
 	projetos: ProjetoDTO[];
 	isProjetosLoading: boolean;
@@ -65,7 +60,7 @@ const FiltroPauta: React.FC<FiltroPautaProps> = ({
 	isPautaSelecionada,
 	limparSearchParams,
 }) => (
-	<div className="flex flex-row items-center gap-2">
+	<div className="flex flex-row items-center ml-6 mb-4 gap-2">
 		<DropdownButton
 			className="w-32"
 			titulo="Pauta"
@@ -88,13 +83,13 @@ const SecaoDireitosViolados: React.FC<SecaoDireitosVioladosProps> = ({
 	dadosRadial,
 	legenda,
 }) => (
-	<div className="flex gap-[4.5rem] justify-center">
-		<div className="flex w-1/2 h-full justify-end">
+	<div className="flex flex-col des:flex-row gap-4 tab:gap-10 des:gap-[4.5rem] justify-center items-center">
+		<div className="flex w-1/2 h-full justify-center des:justify-end">
 			<Radial dados={dadosRadial} />
 		</div>
 		<div className="flex justify-end items-end">
 			<Card.Legenda legenda={legenda}>
-				<Texto.Raiz shadow className="text-6xl">
+				<Texto.Raiz shadow className="text-3xl des:text-6xl">
 					<Texto.Linha>
 						<Texto.Forte.Oswald>Direitos</Texto.Forte.Oswald>
 					</Texto.Linha>
@@ -116,9 +111,9 @@ const SecaoIdeologias: React.FC<SecaoIdeologiasProps> = ({
 	dadosGraficoVertical,
 	legenda,
 }) => (
-	<section className="w-full flex flex-row gap-[4.5rem] justify-center">
+	<section className="w-full flex flex-col-reverse des:flex-row gap-6 des:gap-[4.5rem] justify-center items-center">
 		<Card.Legenda legenda={legenda}>
-			<Texto.Raiz shadow className="text-5xl">
+			<Texto.Raiz shadow className="text-3xl des:text-5xl">
 				<Texto.Linha>
 					<Texto.Forte.Oswald>Ideologia dos</Texto.Forte.Oswald>
 				</Texto.Linha>
@@ -163,8 +158,8 @@ const Carrossel: React.FC<CarrosselProps> = ({
 	projetos,
 	isProjetosLoading,
 }) => (
-	<section className="flex flex-col gap-14 justify-center text-center">
-		<Texto.Raiz className="text-6xl" shadow>
+	<section className="flex flex-col gap-4 tab:gap-8 des:gap-14 justify-center text-center">
+		<Texto.Raiz className="text-3xl tab:text-5xl des:text-6xl" shadow>
 			<Texto.Pequeno.Titillium>Projetos</Texto.Pequeno.Titillium>
 			<Texto.Espaco />
 			<Texto.Forte.Oswald className="text-[#87D9FF]">de Lei</Texto.Forte.Oswald>
@@ -172,18 +167,17 @@ const Carrossel: React.FC<CarrosselProps> = ({
 		{isProjetosLoading ? (
 			<Loading />
 		) : (
-			<Carousel opts={{ align: "start" }} className="w-[82rem]">
+			<Carousel
+				opts={{ align: "start" }}
+				className="w-[20rem] tab:w-[39rem] des:w-[82rem]"
+			>
 				<CarouselContent>
-					{projetos.map((item, i) => (
-						<Link
-							key={`${item.id} - ${i}`}
-							href={`/projetos/${item.id}`}
-							className="flex basis-1/2 justify-center"
-						>
-							<CarouselItem>
+					{(projetos || []).map((item, i) => (
+						<div key={item.id || i}>
+							<CarouselItem className="flex basis-[100%] des:basis-1/2 justify-center">
 								<Card.Projeto projeto={item} />
 							</CarouselItem>
-						</Link>
+						</div>
 					))}
 				</CarouselContent>
 				<CarouselPrevious />
@@ -194,7 +188,7 @@ const Carrossel: React.FC<CarrosselProps> = ({
 );
 
 const Direitos: React.FC = () => {
-	const { pautas, isLoadingPautas, error } = usePauta();
+	const { pautas, isLoadingPautas, error: errorPautas } = usePauta();
 	const searchParams = useSearchParams();
 	const { replace } = useRouter();
 	const pathName = usePathname();
@@ -203,16 +197,12 @@ const Direitos: React.FC = () => {
 	const isPautaSelecionada = !!pautaId;
 
 	const {
-		isLoading: isLoadingProjetosDireitosIdeologias,
+		isLoading: isLoadingProjetos,
 		direitos_violados_valores,
 		ideologias_valores,
 		projetos_carrosel,
-		error: errorProjetosDireitosIdeologias,
+		error: errorProjetos,
 	} = useProjetosDireitosIdeologias(pautaId);
-
-	const [projetos, setProjetos] = useState<any[]>([]);
-	const [ideologias, setIdeologias] = useState<any[]>([]);
-	const [direitosViolados, setDireitosViolados] = useState<any[]>([]);
 
 	const elementosDropdown =
 		pautas?.map((pauta) => ({
@@ -220,20 +210,7 @@ const Direitos: React.FC = () => {
 			value: pauta.id.toString(),
 		})) || [];
 
-	const isLoading = isLoadingPautas || isLoadingProjetosDireitosIdeologias;
-
-	useEffect(() => {
-		if (!isLoadingProjetosDireitosIdeologias) {
-			setProjetos(projetos_carrosel || []);
-			setIdeologias(ideologias_valores || []);
-			setDireitosViolados(direitos_violados_valores || []);
-		}
-	}, [
-		isLoadingProjetosDireitosIdeologias,
-		projetos_carrosel,
-		ideologias_valores,
-		direitos_violados_valores,
-	]);
+	const isLoading = isLoadingPautas || isLoadingProjetos;
 
 	const limparSearchParams = () => {
 		const params = new URLSearchParams(searchParams.toString());
@@ -242,16 +219,16 @@ const Direitos: React.FC = () => {
 	};
 
 	const renderContent = () => {
-		if (error) {
+		if (errorPautas) {
 			return (
 				<div className="text-red-500">
-					Erro ao carregar pautas: {error.toString()}
+					Erro ao carregar pautas: {errorPautas.toString()}
 				</div>
 			);
 		}
 
-		if (errorProjetosDireitosIdeologias) {
-			return <UserError error={errorProjetosDireitosIdeologias} />;
+		if (errorProjetos) {
+			return <UserError error={errorProjetos} />;
 		}
 
 		if (isLoading) {
@@ -263,14 +240,14 @@ const Direitos: React.FC = () => {
 				<DadosEstatisticos
 					limparSearchParams={limparSearchParams}
 					isPautaSelecionada={isPautaSelecionada}
-					dadosGraficoVertical={ideologias}
-					dadosRadial={direitosViolados}
+					dadosRadial={direitos_violados_valores}
+					dadosGraficoVertical={ideologias_valores}
 					elementosDropdown={elementosDropdown}
 					legenda={legendasGraficosDireitos}
 				/>
 				<Carrossel
-					projetos={projetos}
-					isProjetosLoading={isLoadingProjetosDireitosIdeologias}
+					projetos={projetos_carrosel || []}
+					isProjetosLoading={isLoadingProjetos}
 				/>
 			</>
 		);
@@ -278,7 +255,7 @@ const Direitos: React.FC = () => {
 
 	return (
 		<MainLayout>
-			<div className="flex flex-col h-full w-full gap-24 px-10 justify-center items-center">
+			<div className="flex flex-col h-full w-full gap-8 tab:gap-10 des:gap-24 justify-center items-center">
 				<Titulo pequeno="Violações e Ideologias" grande="dos Projetos de Lei" />
 				{renderContent()}
 			</div>

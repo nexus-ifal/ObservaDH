@@ -270,7 +270,7 @@ const PageContent: React.FC = () => {
 					}
 				/>
 			)}
-			<div className="flex h-full w-full flex-col gap-24 items-center px-4 sm:px-11">
+			<div className="flex h-full w-full flex-col gap-6 tab:gap-12 des:gap-24 items-center px-4 des:px-11">
 				<Titulo pequeno={"Ranking"} grande={"dos Parlamentares"} />
 				<RankingParlamentares
 					filtros={filtros}
@@ -328,11 +328,11 @@ const Filtro = ({
 		{isLoading ? (
 			<Loading />
 		) : (
-			<section className="w-full flex flex-col sm:flex-row items-center justify-start gap-8 sm:gap-24">
-				<section className="flex flex-wrap gap-4 sm:gap-12 px-0 sm:px-10">
+			<section className="w-fit tab:w-full flex flex-col des:flex-row items-start justify-center tab:justify-start gap-4 tab:gap-6 des:gap-24 px-2">
+				<section className="grid grid-cols-3 tab:grid-cols-5 gap-2 tab:gap-6 des:gap-12 des:px-10">
 					{items.map((item, index) => (
 						<DropdownButton
-							className="w-40"
+							className="w-22 text-[11px] tab:text-[15px] des:text-[18px] tab:w-26 des:w-32"
 							autoApply={false}
 							param={item.param}
 							titulo={item.titulo}
@@ -344,19 +344,21 @@ const Filtro = ({
 						/>
 					))}
 				</section>
-				<Button
-					className="flex flex-row justify-center border-[#D974FD] text-[#D974FD] bg-transparent border-[1px] rounded-[3px] w-32 h-12 hover:bg-inherit active:text-white active:bg-[#D974FD] transition-colors duration-75 mt-4 sm:mt-0"
-					onClick={() => aplicarFiltros()}
-				>
-					Filtrar <MdOutlineFilterAlt />
-				</Button>
-				<Button
-					variant="outline"
-					className="h-12 w-12 border-[#4568BE] rounded-se-xl rounded-es-xl hover:bg-red-600 duration-200 text-[#4568BE] hover:text-white"
-					onClick={() => limparSearchParams()}
-				>
-					<FaTrash color="" />
-				</Button>
+				<div className="flex flex-row gap-2 tab:gap-4 des:gap-6">
+					<Button
+						className="flex flex-row justify-center border-[#D974FD] text-[12px] tab:text-[15px] des:text-[18px] text-[#D974FD] bg-transparent border-[1px] rounded-[3px] w-20 h-12 tab:w-24 des:w-32 hover:bg-inherit active:text-white active:bg-[#D974FD] transition-colors duration-75"
+						onClick={() => aplicarFiltros()}
+					>
+						Filtrar <MdOutlineFilterAlt />
+					</Button>
+					<Button
+						variant="outline"
+						className="h-12 w-12 border-[#4568BE] rounded-se-xl rounded-es-xl hover:bg-red-600 duration-200 text-[#4568BE] hover:text-white"
+						onClick={() => limparSearchParams()}
+					>
+						<FaTrash color="" />
+					</Button>
+				</div>
 			</section>
 		)}
 	</>
@@ -391,7 +393,7 @@ const RankingParlamentares = ({
 	aplicarFiltros,
 	limparSearchParams,
 }: RankingParlamentaresProps) => (
-	<article className="flex flex-col w-full gap-12 sm:gap-20">
+	<article className="flex flex-col w-full gap-12 des:gap-20">
 		<Filtro
 			filtros={filtros}
 			items={itemsFiltro}
@@ -400,13 +402,13 @@ const RankingParlamentares = ({
 			aplicarFiltros={aplicarFiltros}
 			limparSearchParams={limparSearchParams}
 		/>
-		<div className="flex flex-col gap-6 sm:gap-10 justify-center">
-			<div className="flex flex-row w-full px-2 sm:px-16 h-14 sm:h-[4.25rem] bg-[#122144] border border-b-0 border-[#87D9FF] rounded-t-[5px] font-semibold text-lg sm:text-2xl text-[#87D9FF]">
-				<section className="w-1/2 h-full px-2 sm:px-16 grid grid-cols-2 gap-2 sm:gap-4 items-center">
+		<div className="flex flex-col gap-6 des:gap-10 justify-center">
+			<div className="flex flex-row w-full px-2 des:px-16 h-14 des:h-[4.25rem] bg-[#122144] border border-b-0 border-[#87D9FF] rounded-t-[5px] font-semibold text-[10px] tab:text-lg des:text-2xl text-[#87D9FF]">
+				<section className="w-1/2 h-full px-2 des:px-16 grid grid-cols-2 gap-2 des:gap-4 items-center">
 					<p>{"Deputado(a)"}</p>
 					<p>{"Nome"}</p>
 				</section>
-				<section className="w-1/2 h-full px-2 sm:px-12 grid grid-cols-3 gap-2 sm:gap-4 items-center">
+				<section className="w-1/2 h-full px-2 des:px-12 grid grid-cols-3 gap-2 des:gap-4 items-center">
 					<p>{"Partido"}</p>
 					<p>{"Estado"}</p>
 					<FiltrarPropostas
@@ -416,7 +418,7 @@ const RankingParlamentares = ({
 				</section>
 			</div>
 			<div
-				className="min-h-96 max-h-96 sm:min-h-[400px] sm:max-h-[800px] w-full rounded-md flex flex-col items-center gap-6 sm:gap-10 overflow-auto"
+				className="min-h-96 max-h-96 des:min-h-[400px] des:max-h-[800px] w-full rounded-md flex flex-col items-center gap-6 des:gap-10 overflow-auto"
 				color="black"
 			>
 				{isLoadingDados && <Loading />}
@@ -446,30 +448,33 @@ const RankingPartidos = ({
 	isLoadingPartidos,
 	error,
 }: RankingPartidosProps) => (
-	<article className="flex flex-col w-full gap-12 sm:gap-20">
+	<article className="flex flex-col w-full gap-6 tab:gap-12 des:gap-20">
 		{error && <UserError error={error} />}
 
-		<div className="w-full text-shadow-xl text-5xl sm:text-7xl text-white text-center">
+		<div className="w-full text-shadow-xl text-3xl tab:text-5xl des:text-7xl text-white text-center">
 			<Texto.Raiz>
 				<Texto.Pequeno.Titillium>Ranking</Texto.Pequeno.Titillium>
 				<Texto.Espaco />
 				<Texto.Forte.Oswald>dos Partidos</Texto.Forte.Oswald>
 			</Texto.Raiz>
 		</div>
-		<div className="flex flex-col gap-6 sm:gap-10 justify-center">
-			<div className="flex flex-row w-full px-2 sm:px-16 h-14 sm:h-[4.25rem] bg-[#122144] border border-b-0 border-[#87D9FF] rounded-t-[5px] font-semibold text-lg sm:text-2xl text-[#87D9FF]">
-				<section className="w-1/2 h-full px-2 sm:px-16 grid grid-cols-2 gap-2 sm:gap-4 items-center">
+		<div className="flex flex-col gap-2 tab:gap-6 des:gap-10 justify-center">
+			<div className="flex flex-row w-full px-2 des:px-16 h-14 des:h-[4.25rem] bg-[#122144] border border-b-0 border-[#87D9FF] rounded-t-[5px] font-semibold text-[9.8px] tab:text-lg des:text-2xl text-[#87D9FF]">
+				<section className="w-1/2 h-full tab:px-2 des:px-16 grid grid-cols-2 gap-2 des:gap-4 items-center">
 					<p>{"Partido"}</p>
 					<p>{"Nome"}</p>
 				</section>
-				<section className="w-1/2 h-full px-2 sm:px-12 grid grid-cols-3 gap-2 sm:gap-4 items-center">
+				<section className="w-1/2 h-full tab:px-2 des:px-12 grid grid-cols-3 justify-between tab:gap-4 items-center text-[9px] tab:text-lg des:text-2xl">
 					<p className="text-center">{"Sigla"}</p>
-					<p>{"Parlamentares"}</p>
+					<p>
+						<span className="hidden des:inline">Parlamentares</span>
+						<span className="des:hidden">Parl.</span>
+					</p>
 					<p>{"Propostas"}</p>
 				</section>
 			</div>
 			<div
-				className="h-96 sm:h-[800px] w-full rounded-md flex flex-col items-center gap-6 sm:gap-10 overflow-auto"
+				className="h-96 des:h-[800px] w-full rounded-md flex flex-col items-center gap-6 des:gap-10 overflow-auto"
 				color="black"
 			>
 				{isLoadingPartidos ? (
@@ -513,12 +518,12 @@ const DadosEstatisticos = ({
 	isLoadingReligiaoRaca,
 	isLoadingIdeologiaGenero,
 }: DadosEstatisticosProps) => (
-	<article className="flex flex-col justify-center gap-12 sm:gap-20">
-		<Texto.Raiz className="text-5xl sm:text-7xl text-shadow-xl text-white text-center">
+	<article className="flex flex-col justify-center gap-6 tab:gap-12 des:gap-20">
+		<Texto.Raiz className="text-2xl tab:text-5xl des:text-7xl text-shadow-xl text-white text-center">
 			<Texto.Pequeno.Oswald>Dados Estatísticos</Texto.Pequeno.Oswald>
 		</Texto.Raiz>
-		<div className="flex flex-col gap-12 sm:gap-20">
-			<section className="flex flex-col sm:flex-row justify-center gap-12 sm:gap-20">
+		<div className="flex flex-col gap-6 tab:gap-12 des:gap-20">
+			<section className="flex flex-col des:flex-row justify-center gap-4 tab:gap-10 des:gap-20">
 				{errorIdeologiaGenero && <UserError error={errorIdeologiaGenero} />}
 				{isLoadingIdeologiaGenero ? (
 					<Loading />
@@ -526,7 +531,7 @@ const DadosEstatisticos = ({
 					<>
 						<GraficoBarraMultiplas dados={ideologiaPorGenero ?? []} />
 						<Card.Legenda legenda={legendas[0]}>
-							<Texto.Raiz className="text-3xl sm:text-5xl w-full">
+							<Texto.Raiz className="text-3xl des:text-5xl w-full">
 								<Texto.Linha>
 									<Texto.Forte.Oswald>
 										{"Ideologia Política"}
@@ -543,14 +548,14 @@ const DadosEstatisticos = ({
 				)}
 			</section>
 
-			<section className="flex flex-col sm:flex-row justify-center gap-12 sm:gap-20">
+			<section className="flex flex-col-reverse des:flex-row justify-center gap-4 tab:gap-10 des:gap-20">
 				{errorReligiaoRaca && <UserError error={errorReligiaoRaca} />}
 				{isLoadingReligiaoRaca ? (
 					<Loading />
 				) : (
 					<>
 						<CardLegenda legenda={legendas[1]}>
-							<Texto.Raiz className="text-3xl sm:text-5xl w-full">
+							<Texto.Raiz className="text-3xl des:text-5xl w-full">
 								<Texto.Linha>
 									<Texto.Forte.Oswald>{"Religião"}</Texto.Forte.Oswald>
 								</Texto.Linha>

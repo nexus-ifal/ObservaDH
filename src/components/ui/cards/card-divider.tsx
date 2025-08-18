@@ -6,7 +6,7 @@ const CardDivider: React.FC<DividerProps> = ({ className }) => {
 	return (
 		<>
 			{className ? (
-				<div className={`${className} h-[1px] bg-white`} />
+				<div className={`${className} h-[0.5px] tab:h-[1px] bg-white`} />
 			) : (
 				<div className="border-gradient" />
 			)}

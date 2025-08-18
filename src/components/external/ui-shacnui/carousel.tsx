@@ -163,7 +163,9 @@ const CarouselContent = React.forwardRef<
 				ref={ref}
 				className={cn(
 					"flex",
-					orientation === "horizontal" ? "-ml-4" : "-mt-4 flex-col",
+					orientation === "horizontal"
+						? "-ml-2 tab:-ml-4"
+						: "-ml-2 tab:-mt-4 flex-col",
 					className
 				)}
 				{...props}
@@ -186,7 +188,7 @@ const CarouselItem = React.forwardRef<
 			aria-roledescription="slide"
 			className={cn(
 				"min-w-0 shrink-0 grow-0 basis-full",
-				orientation === "horizontal" ? "pl-4" : "pt-4",
+				orientation === "horizontal" ? "pl-2 tab:pl-4" : "pt-2 tab:pt-4",
 				className
 			)}
 			{...props}
@@ -205,9 +207,9 @@ const CarouselPrevious = React.forwardRef<
 		<button
 			ref={ref}
 			className={cn(
-				"absolute h-8 w-8 border-none bg-transparent rounded-full transition-all duration-300",
+				"absolute w-6 h-6 tab:h-8 tab:w-8 border-none bg-transparent rounded-full transition-all duration-300",
 				orientation === "horizontal"
-					? "-left-12 top-1/2 -translate-y-1/2"
+					? "-left-[22px] tab:-left-10 des:-left-12 top-1/2 -translate-y-1/2"
 					: "-top-12 left-1/2 -translate-x-1/2 rotate-90",
 				className,
 
@@ -217,11 +219,13 @@ const CarouselPrevious = React.forwardRef<
 			onClick={scrollPrev}
 			{...props}
 		>
-			<ChevronLeft
-				size={32}
-				className="h-8 w-8"
-				color={canScrollPrev ? "#AFC4F9" : "#D1D1D1"}
-			/>
+			<div className="text-[1.5rem] tab:text-[2rem]">
+				<ChevronLeft
+					size={32}
+					className="h-6 w-6 tab:h-8 tab:w-8"
+					color={canScrollPrev ? "#AFC4F9" : "#D1D1D1"}
+				/>
+			</div>
 			<span className="sr-only">Previous slide</span>
 		</button>
 	);
@@ -238,9 +242,9 @@ const CarouselNext = React.forwardRef<
 		<button
 			ref={ref}
 			className={cn(
-				"absolute h-8 w-8 border-none bg-transparent rounded-full transition-all duration-300",
+				"absolute w-6 h-6 tab:h-8 tab:w-8 border-none bg-transparent rounded-full transition-all duration-300",
 				orientation === "horizontal"
-					? "-right-12 top-1/2 -translate-y-1/2"
+					? "-right-[22px] tab:-right-10 des:-right-12 top-1/2 -translate-y-1/2"
 					: "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",
 				className,
 				!canScrollNext && "opacity-50 cursor-not-allowed"
@@ -249,11 +253,13 @@ const CarouselNext = React.forwardRef<
 			onClick={scrollNext}
 			{...props}
 		>
-			<ChevronRight
-				size={32}
-				className="h-8 w-8"
-				color={canScrollNext ? "#AFC4F9" : "#D1D1D1"}
-			/>
+			<div className="text-[1.5rem] tab:text-[2rem]">
+				<ChevronRight
+					size={32}
+					className="h-6 w-6 tab:h-8 tab:w-8"
+					color={canScrollNext ? "#AFC4F9" : "#D1D1D1"}
+				/>
+			</div>
 			<span className="sr-only">Next slide</span>
 		</button>
 	);

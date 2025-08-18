@@ -27,9 +27,9 @@ interface graficoProps {
 
 const GraficoLinhaPontos: React.FC<graficoProps> = ({ dados }) => {
 	return (
-		<Card className="h-[29rem] w-[52rem] bg-[#122144]">
-			<CardContent>
-				<ChartContainer config={chartConfig} className="p-11">
+		<Card className="w-[21.875rem] h-[16.25rem] tab:w-[45rem] tab:h-[25rem] des:w-[52rem] des:h-[29rem] bg-[#122144] flex items-center justify-center">
+			<CardContent className="flex flex-col justify-center items-center w-full h-full p-1 tab:p-6">
+				<ChartContainer config={chartConfig} className="w-full h-full p-0">
 					<LineChart
 						className="w-full h-full p-0 flex justify-between items-center text-white"
 						accessibilityLayer
@@ -47,6 +47,7 @@ const GraficoLinhaPontos: React.FC<graficoProps> = ({ dados }) => {
 							dataKey={chartConfig.projetos.label}
 							allowDataOverflow={false}
 							tickMargin={5}
+							className="text-[9px] tab:text-sm des:text-lg"
 						/>
 
 						<XAxis
@@ -54,6 +55,7 @@ const GraficoLinhaPontos: React.FC<graficoProps> = ({ dados }) => {
 							dataKey="ano"
 							tickLine={true}
 							axisLine={true}
+							className="text-[9px] tab:text-sm des:text-lg"
 						/>
 
 						<ChartTooltip
