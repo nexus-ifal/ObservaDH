@@ -35,7 +35,7 @@ const CardSaibaMais: React.FC<saibaMaisProps> = ({
 					Saiba mais
 				</button>
 			</AlertDialogTrigger>
-			<AlertDialogContent className="flex flex-col h-[60%] des:h-[70%] p-6 tab:p-10 des:p-12 gap-2 tab:gap-6 w-[80%] des:w-[70%] bg-[#121A2B] border-[#4568BE] shadow-lg shadow-[#4568BE] rounded-lg">
+			<AlertDialogContent className="flex flex-col h-[60%] des:h-[90%] p-6 tab:p-10 des:p-12 gap-2 tab:gap-6 w-[85%] des:w-[80%] bg-[#121A2B] border-[#4568BE] shadow-lg shadow-[#4568BE] rounded-lg">
 				<AlertDialogTitle className="flex justify-between">
 					<Texto.Raiz className="tab:text-3xl des:text-5xl w-full">
 						<Texto.Linha>
