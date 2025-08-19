@@ -84,7 +84,8 @@ const GraficoMapa: React.FC<MapaBrasilProps> = ({
 			<p
 				className={`mt-4 des:-mt-6 text-xl des:text-2xl text-white ${titilliumWeb.className}`}
 			>
-				*Clique no mapa
+				<span className="hidden des:inline">*Passe o mouse sobre o mapa</span>
+				<span className="des:hidden">*Clique no mapa</span>
 			</p>
 		</article>
 	);
