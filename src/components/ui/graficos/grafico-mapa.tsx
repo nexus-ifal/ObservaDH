@@ -1,3 +1,4 @@
+import { titilliumWeb } from "../../../fonts/fonts";
 import CardStatus from "../cards/card-status";
 import DropdownButton from "../dropdown/dropdown-button";
 import MapaBrasil from "../icons/mapa-brasil";
@@ -80,6 +81,11 @@ const GraficoMapa: React.FC<MapaBrasilProps> = ({
 					</div>
 				)}
 			</section>
+			<p
+				className={`mt-4 des:-mt-6 text-xl des:text-2xl text-white ${titilliumWeb.className}`}
+			>
+				*Clique no mapa
+			</p>
 		</article>
 	);
 };

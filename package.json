@@ -37,7 +37,7 @@
 		"embla-carousel-react": "^8.6.0",
 		"jsonwebtoken": "^9.0.2",
 		"lucide-react": "^0.513.0",
-		"next": "^15.4.2-canary.51",
+		"next": "^15.4.2-canary.53",
 		"next-auth": "^5.0.0-beta.28",
 		"nodemailer": "^6.10.1",
 		"react": "^19.1.0",
