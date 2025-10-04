@@ -12,16 +12,16 @@ const page: React.FC = () => {
 					Escolha uma das opções para continuar
 				</h2>
 				<div className="flex gap-6 justify-center items-center w-full">
-					<Link href="/admin-routes/cadastro-usuario" passHref>
+					<Link href="/admin-routes/cadastro-usuario">
 						<BotaoAdminUser texto={"Cadastrar"} />
 					</Link>
-					<Link href="/admin-routes/exclusao-usuario" passHref>
+					<Link href="/admin-routes/exclusao-usuario">
 						<BotaoAdminUser texto="Excluir" />
 					</Link>
-					<Link href="/admin-routes/atualizar-usuario" passHref>
+					<Link href="/admin-routes/atualizar-usuario">
 						<BotaoAdminUser texto="Atualizar" />
 					</Link>
-					<Link href="/admin-routes/listar-usuarios" passHref>
+					<Link href="/admin-routes/listar-usuarios">
 						<BotaoAdminUser texto="Visualizar" />
 					</Link>
 				</div>

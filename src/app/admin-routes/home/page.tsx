@@ -13,10 +13,10 @@ const page: React.FC = () => {
 					Escolha uma das opções abaixo
 				</h2>
 				<div className="flex flex-col gap-4 justify-center items-center w-full">
-					<Link href="/admin-routes/acoes-usuario" passHref>
+					<Link href="/admin-routes/acoes-usuario">
 						<BotaoAdmin texto={"Modificações para usuários"} />
 					</Link>
-					<Link href="/user-routes/home" passHref>
+					<Link href="/user-routes/home">
 						<BotaoAdmin texto="Modificações para dados" />
 					</Link>
 				</div>
