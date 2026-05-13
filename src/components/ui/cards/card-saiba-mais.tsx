@@ -9,7 +9,8 @@ import {
 	AlertDialogTitle,
 	AlertDialogTrigger,
 } from "@/components/external/ui-shacnui/alert-dialog";
-
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import Texto from "../componente-texto";
 
 interface saibaMaisProps {
@@ -50,10 +51,10 @@ const CardSaibaMais: React.FC<saibaMaisProps> = ({
 						<IoMdClose size={26} color="white" />
 					</AlertDialogCancel>
 				</AlertDialogTitle>
-				<AlertDialogDescription>
-					<p className="text-[#AFC4F9] text-sm tab:text-xl des:text-3xl text-justify">
-						{texto}
-					</p>
+				<AlertDialogDescription className="flex-1 overflow-hidden">
+					<div className="text-[#AFC4F9] text-sm tab:text-xl des:text-3xl text-justify prose prose-invert max-w-none h-full overflow-y-auto pr-4 custom-scrollbar">
+						<ReactMarkdown remarkPlugins={[remarkGfm]}>{texto}</ReactMarkdown>
+					</div>
 				</AlertDialogDescription>
 			</AlertDialogContent>
 		</AlertDialog>

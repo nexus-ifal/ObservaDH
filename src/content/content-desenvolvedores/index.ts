@@ -28,7 +28,7 @@ const infoDevs: DevInfo[] = [
 				link: "https://github.com/follijulio",
 			},
 		],
-		bio: "Júlio César da Silva Folli, técnico em Informática pelo instituto federal de Alagoas - IFAL. desenvolvedor frontend e backend do projeto ObservaDH",
+		bio: "Júlio César da Silva Folli, técnico em Informática pelo Instituto Federal de Alagoas (IFAL) e graduando em Matemática pela UFAL. Desenvolvedor frontend, backend e de banco de dados do projeto ObservaDH, responsável também pelo deploy e controle de versão.",
 	},
 	{
 		nome: "Rita de Cassia",

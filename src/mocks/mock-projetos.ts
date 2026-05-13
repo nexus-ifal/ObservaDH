@@ -4,9 +4,13 @@ const apresentacao = {
 	subtitulo: "Como funciona a",
 	titulo: "criação de um PL",
 	corTexto: "text-[#FDFF78]",
-	texto: ` 
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed feugiat nisi nec orci maximus, eu tempus metus viverra. Pellentesque non ante turpis. Mauris venenatis vel purus non gravida. Vestibulum a ante semper, efficitur justo sit amet, iaculis enim. Pellentesque facilisis ultricies sem. Donec mollis gravida lectus, et aliquet felis lobortis vel. Donec accumsan augue vestibulum bibendum feugiat. Donec ac auctor ex. Cras tortor ex, pellentesque vel condimentum eu, posuere in nulla. Sed metus risus, finibus at erat a, porta ullamcorper dolor.
-    Donec cursus vestibulum mattis. Vestibulum sodales quam eget sem ullamcorper ultricies consequat in nisl. Donec nisl quam, aliquet quis ultricies eget, euismod sit amet turpis. Phasellus nulla turpis, consequat consectetur dapibus sit amet, viverra ut neque. Cras nec porta dui. Pellentesque ut magna ex. Nam felis turpis, imperdiet ac accumsan a, maximus at nibh. In non augue maximus, venenatis velit id, varius leo. Suspendisse et quam quis ipsum rutrum ullamcorper non eu dui. Nulla condimentum nisl ligula, sed rhoncus urna sagittis non. Pellentesque pulvinar mattis odio, id egestas nunc rhoncus posuere. Cras malesuada nisl dolor. Nullam pulvinar nibh elit, ut dapibus nibh sodales sed. Nam ligula nisi, convallis vitae fringilla consectetur, pulvinar ac nisi. Maecenas faucibus leo et libero ullamcorper, auctor sollicitudin est condimentum.`,
+	texto: `A criação e aprovação de um Projeto de Lei (PL) é um processo rigoroso e detalhado, essencial para a dinâmica do Estado Democrático de Direito. No Brasil, um PL pode ser proposto por deputados, senadores, pelo Presidente da República, por órgãos do Judiciário e, até mesmo, pelos cidadãos através da iniciativa popular. O percurso que essa proposta faz até se tornar uma lei vigente é chamado de Processo Legislativo.
+
+Tudo começa na casa de origem (na esfera federal, geralmente a Câmara dos Deputados). Ao ser protocolado, o projeto é distribuído para as comissões temáticas. É nestes grupos menores — como a Comissão de Constituição e Justiça (CCJ) ou a de Direitos Humanos — que o texto sofre sua principal análise. Os parlamentares debatem, realizam audiências e emitem pareceres. Para o ObservaDH, essa etapa é crítica: muitas propostas que tentam restringir os direitos da população LGBTI+ avançam de forma silenciosa e técnica nessas comissões, longe da atenção pública.
+
+Caso seja aprovado nas comissões (ou se tramitar em regime de urgência), o PL segue para o Plenário, onde todos os parlamentares da Casa votam a proposta. Se aprovado, o texto vai para a casa revisora — por exemplo, do Senado para a Câmara, ou vice-versa. A casa revisora pode aprovar o projeto, rejeitá-lo ou fazer alterações (emendas). Se houver qualquer modificação, o texto precisa voltar à casa de origem para que as mudanças sejam validadas.
+
+Vencida a jornada no Congresso Nacional ou na Assembleia Legislativa, o texto final segue para o Poder Executivo. O Presidente da República (ou o Governador, na esfera estadual) tem o poder de sancionar, transformando o projeto oficialmente em lei, ou vetá-lo total ou parcialmente. Mesmo em caso de veto, o Legislativo ainda pode ter a palavra final, votando para derrubar a decisão do Executivo. Compreender essa engrenagem é o pilar da nossa plataforma: ao monitorar cada uma dessas fases, capacitamos a sociedade civil a intervir a tempo, cobrando transparência e impedindo que retrocessos se tornem leis.`,
 };
 
 const mockStatus = {
@@ -924,25 +928,30 @@ const legendas = [
 		titulo: "PL's",
 		cor: "text-[#93F996]",
 		resumo: `
-     Pls lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis esse, inventore doloribus non cumque, sint illo in modi corporis reprehenderit animi explicabo, sapiente voluptate? Sunt a ducimus atque possimus quasi.
+      Os Projetos de Lei (PLs) são propostas oficiais para criar, alterar ou revogar leis. No ObservaDH, focamos em monitorar aqueles que impactam diretamente a população LGBTI+.
     `,
 		texto: `
-    
-     Pls lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis esse, inventore doloribus non cumque, sint illo in modi corporis reprehenderit animi explicabo, sapiente voluptate? Sunt a ducimus atque possimus quasi.
-     Ipsum dolor sit amet, consectetur adipisicing elit. Perferendis esse, inventore doloribus non cumque, sint illo in modi corporis reprehenderit animi explicabo, sapiente voluptate? Sunt a ducimus atque possimus quasi.
-     Dolor sit amet, consectetur adipisicing elit. Perferendis esse, inventore doloribus non cumque, sint illo in modi corporis reprehenderit animi explicabo, sapiente voluptate? Sunt a ducimus atque possimus quasi.
+      Um Projeto de Lei (PL) é o instrumento formal utilizado por parlamentares para propor novas regras que regerão a sociedade. Eles podem abranger desde mudanças simples no cotidiano até alterações profundas nas garantias individuais e coletivas.
+      
+      Monitorar os PLs é fundamental porque muitos retrocessos em direitos humanos são propostos por meio de textos técnicos e jargões jurídicos complexos, que dificultam a compreensão da sociedade civil. Se não acompanhados de perto, podem se tornar leis e legitimar violações de direitos.
+      
+      No contexto do ObservaDH, nossa equipe filtra e classifica essas propostas. Traduzimos os dados desses projetos para que você possa entender claramente quem são os autores, quais são as reais intenções dos textos e como eles afetam as conquistas da comunidade LGBTI+.
     `,
 	},
 	{
 		titulo: "Pautas",
 		cor: "text-[#F693F9]",
 		resumo: `
-    Pautas lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis esse, inventore doloribus non cumque, sint illo in modi corporis reprehenderit animi explicabo, sapiente voluptate? Sunt a ducimus atque possimus quasi.`,
+      As pautas são as categorias temáticas centrais discutidas nos projetos. Elas nos ajudam a organizar, classificar e entender o foco principal das movimentações legislativas.
+    `,
 		texto: `
-      Pautas lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis esse, inventore doloribus non cumque, sint illo in modi corporis reprehenderit animi explicabo, sapiente voluptate? Sunt a ducimus atque possimus quasi.
-      Ipsum dolor sit amet, consectetur adipisicing elit. Perferendis esse, inventore doloribus non cumque, sint illo in modi corporis reprehenderit animi explicabo, sapiente voluptate? Sunt a ducimus atque possimus quasi.
-      Dolor sit amet, consectetur adipisicing elit. Perferendis esse, inventore doloribus non cumque, sint illo in modi corporis reprehenderit animi explicabo, sapiente voluptate? Sunt a ducimus atque possimus quasi.
-     `,
+      As pautas representam os assuntos fundamentais que estruturam um Projeto de Lei. Elas indicam qual área da vida em sociedade está sendo alvo de discussão legislativa, englobando temas como saúde, educação inclusiva, segurança pública, família ou identidade de gênero.
+      
+      Analisar os projetos através de suas pautas permite identificar tendências e padrões no discurso político. Por exemplo, através dessa classificação, podemos mapear de forma precisa se há uma onda de iniciativas parlamentares tentando restringir o acesso à saúde ou banir debates sobre diversidade nas escolas.
+      
+      O ObservaDH utiliza métodos específicos para classificar os PLs nessas pautas temáticas. Essa organização alimenta nossos gráficos dinâmicos, permitindo que a população filtre as informações e compreenda visualmente quais áreas dos direitos humanos estão sob maior ataque no Legislativo.
+    `,
 	},
 ];
+
 export { apresentacao, legendas, mockStatus, partidosMock, projetosMock };
