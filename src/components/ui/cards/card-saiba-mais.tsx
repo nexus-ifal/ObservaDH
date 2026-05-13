@@ -1,5 +1,7 @@
 import { FaPlus } from "react-icons/fa6";
 import { IoMdClose } from "react-icons/io";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 import {
 	AlertDialog,
@@ -9,8 +11,7 @@ import {
 	AlertDialogTitle,
 	AlertDialogTrigger,
 } from "@/components/external/ui-shacnui/alert-dialog";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
+
 import Texto from "../componente-texto";
 
 interface saibaMaisProps {
