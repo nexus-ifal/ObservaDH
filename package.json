@@ -12,7 +12,8 @@
 		"prettier:fix": "prettier --write .",
 		"lint": "next lint",
 		"lint:fix": "next lint --fix",
-		"format": "npm run prettier:fix && npm run lint:fix && prettier --write ."
+		"format": "npm run prettier:fix && npm run lint:fix && prettier --write .",
+		"prisma:prepare": "npx prisma generate && prisma generate"
 	},
 	"dependencies": {
 		"@auth/prisma-adapter": "^2.9.1",
@@ -37,14 +38,17 @@
 		"embla-carousel-react": "^8.6.0",
 		"jsonwebtoken": "^9.0.2",
 		"lucide-react": "^0.513.0",
-		"next": "^15.6.0-canary.42",
+		"next": "^15.5.18",
 		"next-auth": "^5.0.0-beta.28",
 		"nodemailer": "^6.10.1",
 		"react": "^19.1.0",
 		"react-dom": "^19.1.0",
+		"react-hook-form": "^7.75.0",
 		"react-icons": "^5.5.0",
+		"react-markdown": "^10.1.0",
 		"react-spinners": "^0.17.0",
 		"recharts": "^2.15.3",
+		"remark-gfm": "^4.0.1",
 		"tailwind-merge": "^3.3.0",
 		"tailwindcss-animate": "^1.0.7",
 		"uuid": "^11.1.0",
@@ -59,6 +63,7 @@
 	},
 	"devDependencies": {
 		"@tailwindcss/postcss": "^4.1.8",
+		"@tailwindcss/typography": "^0.5.19",
 		"@types/bcryptjs": "^3.0.0",
 		"@types/node": "^22",
 		"@types/nodemailer": "^6.4.17",

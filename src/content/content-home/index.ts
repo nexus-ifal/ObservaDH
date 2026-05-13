@@ -3,49 +3,13 @@ const apresentacao = {
 	subtitulo: "O que é o",
 	titulo: "ObservaDH?",
 	cor: "text-[#87D9FF]",
-	texto: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed feugiat
-nisi nec orci maximus, eu tempus metus viverra. Pellentesque non
-ante turpis. Mauris venenatis vel purus non gravida. Vestibulum a
-ante semper, efficitur justo sit amet, iaculis enim. Pellentesque
-facilisis ultricies sem. Donec mollis gravida lectus, et aliquet
-felis lobortis vel. Donec accumsan augue vestibulum bibendum
-feugiat. Donec ac auctor ex. Cras tortor ex, pellentesque vel
-condimentum eu, posuere in nulla. Sed metus risus, finibus at erat
-a, porta ullamcorper dolor. Donec cursus vestibulum mattis.
-Vestibulum sodales quam eget sem ullamcorper ultricies consequat in
-nisl. Donec nisl quam, aliquet quis ultricies eget, euismod sit amet
-turpis. Phasellus nulla turpis, consequat consectetur dapibus sit
-amet, viverra ut neque. Cras nec porta dui. Pellentesque ut magna
-ex. Nam felis turpis, imperdiet ac accumsan a, maximus at nibh. In
-non augue maximus, venenatis velit id, varius leo. Suspendisse et
-quam quis ipsum rutrum ullamcorper non eu dui. Nulla condimentum
-nisl ligula, sed rhoncus urna sagittis non. Pellentesque pulvinar
-mattis odio, id egestas nunc rhoncus posuere. Cras malesuada nisl
-dolor. Nullam pulvinar nibh elit, ut dapibus nibh sodales sed. Nam
-ligula nisi, convallis vitae fringilla consectetur, pulvinar ac
-nisi. Maecenas faucibus leo et libero ullamcorper, auctor
-sollicitudin est condimentum. Lorem ipsum dolor sit amet,
-consectetur adipiscing elit. Sed feugiat nisi nec orci maximus, eu
-tempus metus viverra. Pellentesque non ante turpis. Mauris venenatis
-vel purus non gravida. Vestibulum a ante semper, efficitur justo sit
-amet, iaculis enim. Pellentesque facilisis ultricies sem. Donec
-mollis gravida lectus, et aliquet felis lobortis vel. Donec accumsan
-augue vestibulum bibendum feugiat. Donec ac auctor ex. Cras tortor
-ex, pellentesque vel condimentum eu, posuere in nulla. Sed metus
-risus, finibus at erat a, porta ullamcorper dolor. Donec cursus
-vestibulum mattis. Vestibulum sodales quam eget sem ullamcorper
-ultricies consequat in nisl. Donec nisl quam, aliquet quis ultricies
-eget, euismod sit amet turpis. Phasellus nulla turpis, consequat
-consectetur dapibus sit amet, viverra ut neque. Cras nec porta dui.
-Pellentesque ut magna ex. Nam felis turpis, imperdiet ac accumsan a,
-maximus at nibh. In non augue maximus, venenatis velit id, varius
-leo. Suspendisse et quam quis ipsum rutrum ullamcorper non eu dui.
-Nulla condimentum nisl ligula, sed rhoncus urna sagittis non.
-Pellentesque pulvinar mattis odio, id egestas nunc rhoncus posuere.
-Cras malesuada nisl dolor. Nullam pulvinar nibh elit, ut dapibus
-nibh sodales sed. Nam ligula nisi, convallis vitae fringilla
-consectetur, pulvinar ac nisi. Maecenas faucibus leo et libero
-ullamcorper, auctor sollicitudin est condimentum.`,
+	texto: `O Observatório Digital de Discurso e Direitos Humanos (ObservaDH) é uma iniciativa acadêmica e tecnológica que nasce da urgência de monitorar e dar visibilidade ao cenário político brasileiro. Desenvolvido no âmbito dos programas de pesquisa PIBIC e PIBITI, o projeto atua como uma ferramenta essencial de fiscalização cidadã, focada em rastrear proposições parlamentares — como Projetos de Lei (PLs) e Propostas de Emenda à Constituição (PECs) — que ameacem ou tentem restringir os Direitos Humanos, com atenção especial à proteção da população LGBTI+.
+
+A criação da plataforma responde a um contexto histórico e social alarmante. O Brasil não apenas lidera os rankings globais de violência contra a comunidade LGBTI+, como também ocupa posições críticas na letalidade de defensores dos direitos humanos. Apesar de avanços tardios, como a criminalização da homotransfobia alcançada apenas em 2019, pesquisadores apontam que, desde 2013, há uma proliferação de iniciativas dentro do Congresso Nacional que buscam ativamente obstruir ou reverter as conquistas dessa população. Diariamente, um volume massivo de dados e propostas tramita nas Casas Legislativas de forma técnica e opaca, passando despercebido por grande parte da sociedade.
+
+É exatamente nesse vácuo de informação que o ObservaDH atua. A plataforma coleta e analisa essa vasta quantidade de dados burocráticos e os traduz em informações acessíveis. Por meio de métodos de classificação textual e do desenvolvimento de gráficos dinâmicos e interativos, o observatório transforma o jargão legislativo em um panorama visual e claro para qualquer cidadão.
+
+Muito mais do que um repositório de dados, o ObservaDH é um instrumento prático de participação democrática e transparência. Ao expor de maneira didática as movimentações do Poder Legislativo, a plataforma empodera a população para que possa monitorar e cobrar seus representantes eleitos. Além disso, fornece subsídios fundamentais para a criação de novas políticas públicas e atua na educação em direitos humanos, garantindo que as tentativas de retrocesso institucional não aconteçam no escuro`,
 };
 
 // Cards de Esfera - HOME
@@ -54,7 +18,7 @@ const cardsEsfera = [
 		subtitulo: "Visão",
 		titulo: "Geral",
 		texto:
-			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam eveniet inventore quo error est natus facilis. Quod odit voluptates libero dignissimos veniam accusamus omnis, autem architecto. Consequatur in error maxime.",
+			"Acesse o panorama completo de todas as proposições mapeadas. Acompanhe e fiscalize de forma unificada os projetos que impactam os direitos da população LGBTI+ em todo o país.",
 		rota: "/projetos",
 		cor: "text-[#93F996]",
 	},
@@ -62,7 +26,7 @@ const cardsEsfera = [
 		subtitulo: "Esfera",
 		titulo: "Federal",
 		texto:
-			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam eveniet inventore quo error est natus facilis. Quod odit voluptates libero dignissimos veniam accusamus omnis, autem architecto. Consequatur in error maxime.",
+			"Monitore as atividades do Congresso Nacional. Acompanhe os Projetos de Lei (PLs) e Propostas de Emenda à Constituição (PECs) em tramitação na Câmara dos Deputados e no Senado.",
 		rota: "/projetos?esfera=federal",
 		cor: "text-[#FDFF78]",
 	},
@@ -70,7 +34,7 @@ const cardsEsfera = [
 		subtitulo: "Esfera",
 		titulo: "Estadual",
 		texto:
-			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam eveniet inventore quo error est natus facilis. Quod odit voluptates libero dignissimos veniam accusamus omnis, autem architecto. Consequatur in error maxime.",
+			"Fiscalize a atuação nas Assembleias Legislativas. Explore as iniciativas parlamentares de deputados estaduais que afetam as políticas públicas e os direitos humanos em cada estado.",
 		rota: "/projetos?esfera=estadual",
 		cor: "text-[#F693F9]",
 	},
@@ -82,7 +46,7 @@ const cardsInformativos = [
 		titulo: "Conheça",
 		subtitulo: "os Parlamentares",
 		texto:
-			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed feugiat nisi nec orci maximus, eu tempus metus vivrra. Pellentesque non ante turpis. Mauris venenatis",
+			"Descubra quem são os autores das propostas legislativas. Monitore a atuação dos representantes eleitos e veja como eles se posicionam em relação aos direitos LGBTI+.",
 		rota: "/parlamentares",
 		cor: "text-[#F693F9]",
 	},
@@ -91,7 +55,7 @@ const cardsInformativos = [
 		subtitulo:
 			"sobre os <span class='__className_626905 font-normal'>direitos</span>",
 		texto:
-			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed feugiat nisi nec orci maximus, eu tempus metus vivrra. Pellentesque non ante turpis. Mauris venenatis",
+			"Informe-se sobre as garantias constitucionais e conquistas históricas da comunidade LGBTI+. Acesse materiais educativos para fortalecer a luta pelos direitos humanos.",
 		rota: "/direitos",
 		cor: "text-[#87D9FF]",
 		isSubtitleHTML: true,
@@ -100,10 +64,9 @@ const cardsInformativos = [
 		titulo: "Conheça o",
 		subtitulo: "projeto",
 		texto:
-			"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed feugiat nisi nec orci maximus, eu tempus metus vivrra. Pellentesque non ante turpis. Mauris venenatis",
+			"Saiba mais sobre a origem do ObservaDH, nossa metodologia e como transformamos dados legislativos complexos em ferramentas de transparência e participação democrática.",
 		rota: "/sobre",
 		cor: "text-[#93F996]",
 	},
 ];
-
 export { apresentacao, cardsEsfera, cardsInformativos };
