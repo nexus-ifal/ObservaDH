@@ -226,7 +226,7 @@ const Page: React.FC = () => {
 										<FormControl>
 											<Input
 												{...field}
-												className={`bg-white text-black h-12 text-xl font-normal rounded-[5px] ${fieldState.error ? "border-2 border-red-500" : "border-0"}`}
+												className={`bg-white text-black h-12 text-xl font-normal rounded-sm ${fieldState.error ? "border-2 border-red-500" : "border-0"}`}
 												aria-invalid={!!fieldState.error}
 												aria-describedby={
 													fieldState.error ? "nome-error" : undefined
@@ -251,7 +251,7 @@ const Page: React.FC = () => {
 										<FormControl>
 											<Input
 												{...field}
-												className={`bg-white text-black h-12 uppercase text-xl font-normal rounded-[5px] ${fieldState.error ? "border-2 border-red-500" : "border-0"}`}
+												className={`bg-white text-black h-12 uppercase text-xl font-normal rounded-sm ${fieldState.error ? "border-2 border-red-500" : "border-0"}`}
 												type="text"
 												onChange={(e) =>
 													field.onChange(e.target.value.toUpperCase())
@@ -282,7 +282,7 @@ const Page: React.FC = () => {
 										<FormControl>
 											<Input
 												{...field}
-												className={`bg-white text-black h-12 text-xl font-normal rounded-[5px] ${fieldState.error ? "border-2 border-red-500" : "border-0"}`}
+												className={`bg-white text-black h-12 text-xl font-normal rounded-sm ${fieldState.error ? "border-2 border-red-500" : "border-0"}`}
 												type="url"
 												aria-invalid={!!fieldState.error}
 												aria-describedby={

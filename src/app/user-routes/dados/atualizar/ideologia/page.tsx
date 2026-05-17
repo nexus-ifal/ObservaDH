@@ -215,7 +215,7 @@ const Page: React.FC = () => {
 										<FormControl>
 											<Input
 												{...field}
-												className={`bg-white text-black h-12 w-full text-xl font-normal rounded-[5px] ${
+												className={`bg-white text-black h-12 w-full text-xl font-normal rounded-sm ${
 													fieldState.error
 														? "border-2 border-red-500 focus:border-red-500"
 														: "border-2 border-[#91ADF4]"
@@ -244,7 +244,7 @@ const Page: React.FC = () => {
 										<FormControl>
 											<Input
 												{...field}
-												className={`bg-white text-black h-12 w-full text-xl font-normal rounded-[5px] uppercase ${
+												className={`bg-white text-black h-12 w-full text-xl font-normal rounded-sm uppercase ${
 													fieldState.error
 														? "border-2 border-red-500 focus:border-red-500"
 														: "border-2 border-[#91ADF4]"
@@ -281,7 +281,7 @@ const Page: React.FC = () => {
 												<Textarea
 													{...field}
 													rows={8}
-													className="bg-white text-black w-full text-xl font-normal rounded-[5px] border-2 border-[#91ADF4] resize-y h-full min-h-[140px] max-h-80 overflow-auto"
+													className="bg-white text-black w-full text-xl font-normal rounded-sm border-2 border-[#91ADF4] resize-y h-full min-h-[140px] max-h-80 overflow-auto"
 													placeholder="Digite uma descrição para a ideologia"
 												/>
 											</FormControl>

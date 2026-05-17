@@ -318,7 +318,7 @@ const Page: React.FC = () => {
 										<FormControl>
 											<Input
 												{...field}
-												className={`bg-white text-black h-12 text-lg font-normal rounded-[5px] ${
+												className={`bg-white text-black h-12 text-lg font-normal rounded-sm ${
 													fieldState.error
 														? "border-2 border-red-500 focus:border-red-500"
 														: "border-0"
@@ -349,7 +349,7 @@ const Page: React.FC = () => {
 										<FormControl>
 											<Input
 												{...field}
-												className={`bg-white text-black h-12 text-lg font-normal rounded-[5px] ${
+												className={`bg-white text-black h-12 text-lg font-normal rounded-sm ${
 													fieldState.error
 														? "border-2 border-red-500 focus:border-red-500"
 														: "border-0"
@@ -380,7 +380,7 @@ const Page: React.FC = () => {
 										<FormControl>
 											<Input
 												{...field}
-												className={`bg-white text-black h-12 text-lg font-normal rounded-[5px] ${
+												className={`bg-white text-black h-12 text-lg font-normal rounded-sm ${
 													fieldState.error
 														? "border-2 border-red-500 focus:border-red-500"
 														: "border-0"
@@ -411,7 +411,7 @@ const Page: React.FC = () => {
 										<FormControl>
 											<Input
 												{...field}
-												className={`bg-white text-black h-12 text-lg font-normal rounded-[5px] ${
+												className={`bg-white text-black h-12 text-lg font-normal rounded-sm ${
 													fieldState.error
 														? "border-2 border-red-500 focus:border-red-500"
 														: "border-0"
@@ -443,7 +443,7 @@ const Page: React.FC = () => {
 											<Input
 												{...field}
 												value={field.value || ""}
-												className={`bg-white text-black h-12 text-lg font-normal rounded-[5px] ${
+												className={`bg-white text-black h-12 text-lg font-normal rounded-sm ${
 													fieldState.error
 														? "border-2 border-red-500 focus:border-red-500"
 														: "border-0"
@@ -474,7 +474,7 @@ const Page: React.FC = () => {
 										<Select onValueChange={field.onChange} value={field.value}>
 											<FormControl>
 												<SelectTrigger
-													className={`bg-white text-black h-12 text-lg font-normal rounded-[5px] ${
+													className={`bg-white text-black h-12 text-lg font-normal rounded-sm ${
 														fieldState.error
 															? "border-2 border-red-500 focus:border-red-500"
 															: "border-0"
@@ -511,7 +511,7 @@ const Page: React.FC = () => {
 										<Select onValueChange={field.onChange} value={field.value}>
 											<FormControl>
 												<SelectTrigger
-													className={`bg-white text-black h-12 text-lg font-normal rounded-[5px] ${
+													className={`bg-white text-black h-12 text-lg font-normal rounded-sm ${
 														fieldState.error
 															? "border-2 border-red-500 focus:border-red-500"
 															: "border-0"
@@ -548,7 +548,7 @@ const Page: React.FC = () => {
 										<Select onValueChange={field.onChange} value={field.value}>
 											<FormControl>
 												<SelectTrigger
-													className={`bg-white text-black h-12 text-lg font-normal rounded-[5px] ${
+													className={`bg-white text-black h-12 text-lg font-normal rounded-sm ${
 														fieldState.error
 															? "border-2 border-red-500 focus:border-red-500"
 															: "border-0"
@@ -592,7 +592,7 @@ const Page: React.FC = () => {
 											value={field.value}
 											onChange={field.onChange}
 											placeholder="Número do projeto"
-											className={`bg-white text-black h-12 text-lg font-normal rounded-[5px] ${
+											className={`bg-white text-black h-12 text-lg font-normal rounded-sm ${
 												fieldState.error
 													? "border-2 border-red-500 focus:border-red-500"
 													: "border-0"
@@ -618,7 +618,7 @@ const Page: React.FC = () => {
 										<Select onValueChange={field.onChange} value={field.value}>
 											<FormControl>
 												<SelectTrigger
-													className={`bg-white text-black h-12 text-lg font-normal rounded-[5px] ${
+													className={`bg-white text-black h-12 text-lg font-normal rounded-sm ${
 														fieldState.error
 															? "border-2 border-red-500 focus:border-red-500"
 															: "border-0"
@@ -655,7 +655,7 @@ const Page: React.FC = () => {
 										<FormControl>
 											<Input
 												{...field}
-												className={`bg-white text-black h-12 text-xl font-normal rounded-[5px] ${
+												className={`bg-white text-black h-12 text-xl font-normal rounded-sm ${
 													fieldState.error
 														? "border-2 border-red-500 focus:border-red-500"
 														: "border-0"
