@@ -31,7 +31,7 @@ const Header: React.FC = () => {
 							<h1 className="text-[1.563rem] tab:text-[2.5rem] des:text-[3.125rem] text-white logo hover:cursor-pointer" />
 						</Link>
 
-						<ul className="hidden des:flex text-lg des:text-3xl font-normal text-white des:gap-[3.125rem] font">
+						<ul className="hidden des:flex text-lg des:text-2xl font-normal text-white des:gap-[3.125rem] font">
 							{navLinks.map((item) => (
 								<li key={item.titulo} className="z-10">
 									<Link
@@ -67,7 +67,7 @@ const Header: React.FC = () => {
 
 			<div
 				className={clsx(
-					"fixed top-0 right-0 h-fit w-fit border-[2px] border-[#87D9FF] rounded-[5px] p-4 tab:p-8 bg-[#122144] des:hidden z-40",
+					"fixed top-0 right-0 h-fit w-fit border-[2px] border-white rounded-sm p-4 tab:p-8 bg-[#122144] des:hidden z-40",
 					{
 						"-translate-x-2": isMenuOpen,
 						"translate-y-2": isMenuOpen,

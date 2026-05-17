@@ -18,7 +18,7 @@ const CardLegenda: React.FC<legendaProps> = ({ children, legenda }) => {
 			>
 				{legenda.conteudo ? legenda.conteudo : ""}
 			</p>
-			<CardSaibaMais
+			<CardSaibaMais	
 				corTexto={legenda.cor}
 				texto={legenda.aprofundamento ? legenda.aprofundamento : ""}
 			/>

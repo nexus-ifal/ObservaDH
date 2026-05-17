@@ -12,7 +12,7 @@ import {
 	AlertDialogTrigger,
 } from "@/components/external/ui-shacnui/alert-dialog";
 
-import Texto from "../componente-texto";
+import Texto from "../texto";
 
 interface saibaMaisProps {
 	className?: string;

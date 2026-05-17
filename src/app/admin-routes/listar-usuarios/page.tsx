@@ -62,7 +62,7 @@ export default function ListagemUsuarios() {
 				<p className="mb-4">{error}</p>
 				<Link href="/admin-routes/acoes-usuario">
 					<button
-						className={`bg-[#121A2B] rounded-[4px] border-[2px] border-[#2C52A4] ${oswald.className} text-[#91ADF4] text-[15px] font-medium w-fit p-2 hover:cursor-pointer hover:bg-[#2C52A4] hover:border-[#121A2B] hover:text-[#121A2B] transition-colors duration-300`}
+						className={`bg-[#121A2B] rounded-sm border-[2px] border-[#2C52A4] ${oswald.className} text-[#91ADF4] text-[15px] font-medium w-fit p-2 hover:cursor-pointer hover:bg-[#2C52A4] hover:border-[#121A2B] hover:text-[#121A2B] transition-colors duration-300`}
 					>
 						Voltar à página inicial
 					</button>
@@ -86,7 +86,7 @@ export default function ListagemUsuarios() {
 					</p>
 				) : (
 					<div className="overflow-x-auto">
-						<table className="min-w-full bg-white rounded-[5px] overflow-hidden">
+						<table className="min-w-full bg-white rounded-sm overflow-hidden">
 							<thead>
 								<tr className="bg-white text-left text-black">
 									<th
@@ -127,7 +127,7 @@ export default function ListagemUsuarios() {
 				<div className="mt-8 text-center">
 					<Link href="/admin-routes/acoes-usuario">
 						<button
-							className={`bg-[#121A2B] rounded-[4px] border-[2px] border-[#2C52A4] ${oswald.className} text-[#91ADF4] text-[20px] font-medium w-fit p-2 hover:cursor-pointer hover:bg-[#2C52A4] hover:border-[#121A2B] hover:text-[#121A2B] transition-colors duration-300`}
+							className={`bg-[#121A2B] rounded-sm border-[2px] border-[#2C52A4] ${oswald.className} text-[#91ADF4] text-[20px] font-medium w-fit p-2 hover:cursor-pointer hover:bg-[#2C52A4] hover:border-[#121A2B] hover:text-[#121A2B] transition-colors duration-300`}
 						>
 							Voltar à página inicial
 						</button>

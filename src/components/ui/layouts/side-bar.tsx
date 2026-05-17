@@ -25,7 +25,7 @@ const SideBar: React.FC = () => {
 
 	return (
 		<aside className="w-full h-full border-r-2 border-[#AFC4F9] text-white bg-[#050B17]">
-			<div className="flex flex-col items-center h-full p-4 overflow-auto no-scrollbar gap-4">
+			<div className="flex flex-col items-center h-full p-4 overflow-auto no-scrollbar scrollbar-none gap-4">
 				<Link
 					href={"/admin/home"}
 					className={`${oswald.className} text-7xl p-8`}
@@ -63,7 +63,7 @@ const SideBarButton: React.FC<SideBarButtonProps> = ({
 		<Link
 			href={path}
 			className={clsx(
-				"w-11/12 h-[10%] text-3xl bg-[#121A2B] flex justify-between items-center p-6 border-2 rounded-[5px] hover:bg-[#1A326E] duration-200",
+				"w-11/12 h-[10%] text-3xl bg-[#121A2B] flex justify-between items-center p-6 border-2 rounded-sm hover:bg-[#1A326E] duration-200",
 				titilliumWeb.className,
 				"border-[#AFC4F9]",
 				{

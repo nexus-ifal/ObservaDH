@@ -319,7 +319,7 @@ const ChartLegendContent = React.forwardRef<
 								<itemConfig.icon />
 							) : (
 								<div
-									className="h-4 w-4 shrink-0 rounded-[5px]"
+									className="h-4 w-4 shrink-0 rounded-sm"
 									style={{
 										backgroundColor: item.color,
 									}}

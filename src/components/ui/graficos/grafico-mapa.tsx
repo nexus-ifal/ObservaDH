@@ -1,3 +1,4 @@
+import { LuMousePointerClick } from "react-icons/lu";
 import { titilliumWeb } from "../../../fonts/fonts";
 import CardStatus from "../cards/card-status";
 import DropdownButton from "../dropdown/dropdown-button";
@@ -53,7 +54,8 @@ const GraficoMapa: React.FC<MapaBrasilProps> = ({
 					elementos={dadosDropDown}
 					titulo="Esfera"
 					param="esfera"
-					className="text-[12px] tab:text-[16px] des:text-[16px] w-24 tab:w-38 des:w-38"
+					className="text-xs tab:text-base des:text-lg font-medium w-24 tab:w-38 des:w-38"
+					classNameContent="text-xs tab:text-base des:text-lg font-medium"
 				/>
 			</div>
 			<section className="flex flex-col des:flex-row gap-6 tab:gap-6 des:gap-6 w-fit des:mr-62">
@@ -84,7 +86,10 @@ const GraficoMapa: React.FC<MapaBrasilProps> = ({
 			<p
 				className={`mt-4 des:-mt-6 text-xl des:text-2xl text-white ${titilliumWeb.className}`}
 			>
-				<span className="hidden des:inline">*Passe o mouse sobre o mapa</span>
+				<span className="hidden des:flex items-center gap-2">
+					<LuMousePointerClick />
+					Passe o mouse sobre o mapa ou clique
+				</span>
 				<span className="des:hidden">*Clique no mapa</span>
 			</p>
 		</article>

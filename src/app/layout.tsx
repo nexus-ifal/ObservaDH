@@ -17,7 +17,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
 	return (
 		<html lang="pt-br" className={titilliumWeb.className}>
-			<body className="layout-principal antialiased no-scrollbar flex flex-col">
+			<body className="layout-principal antialiased no-scrollbar scrollbar-none flex flex-col">
 				<AuthProvider>
 					<QueryProvider>{children}</QueryProvider>
 				</AuthProvider>

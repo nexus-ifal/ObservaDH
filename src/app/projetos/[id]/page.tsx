@@ -69,13 +69,13 @@ const Page: React.FC<PageProps> = ({ params }) => {
 				<Loading />
 			) : (
 				<div
-					className={`h-fit w-fit flex flex-col justify-center items-center gap-8 tab:gap-16 des:gap-24 border-[#87D9FF] mx-2 tab:mx-8 des:mx-14 ${oswald.className}`}
+					className={`h-fit w-fit flex flex-col justify-center items-center gap-8 tab:gap-16 des:gap-24 border-white mx-2 tab:mx-8 des:mx-14 ${oswald.className}`}
 				>
 					<section className="flex flex-row text-center">
 						<Titulo pequeno="Dados" grande="da Proposta" />
 					</section>
 
-					<article className="flex flex-col bg-gradient-to-t from-[#2C52A4]/45 to-[#050B17]/45 w-full min-h-[30rem] p-4 tab:p-12 des:py-16 des:px-[4.5rem] gap-4 tab:gap-8 des:gap-12 border-2 border-[#87D9FF] rounded-[10px]">
+					<article className="flex flex-col bg-gradient-to-t from-[#2C52A4]/45 to-[#050B17]/45 w-full min-h-[30rem] p-4 tab:p-12 des:py-16 des:px-[4.5rem] gap-4 tab:gap-8 des:gap-12 border-2 border-white rounded-sm">
 						<section className="grid grid-cols-2 des:grid-cols-3 gap-4 tab:gap-8 des:gap-16 flex-wrap">
 							{infos.map((info, index) => (
 								<Card.RenderizacaoItem

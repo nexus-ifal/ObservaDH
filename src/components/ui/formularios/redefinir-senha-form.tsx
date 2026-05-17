@@ -35,9 +35,9 @@ export default function RedefinirSenhaForm() {
 	return (
 		<form
 			action={formAction}
-			className="fundo-form flex flex-col p-8 w-fit h-fit rounded-[5px] border-[2px] border-[#1A326E] justify-center shadow-2xl shadow-[#2C52A4]/50"
+			className="fundo-form flex flex-col p-8 w-fit h-fit rounded-sm border-[2px] border-[#1A326E] justify-center shadow-2xl shadow-[#2C52A4]/50"
 		>
-			<div className="overflow-auto no-scrollbar flex flex-col gap-8">
+			<div className="overflow-auto no-scrollbar scrollbar-none flex flex-col gap-8">
 				<h1 className={`${oswald.className} text-[45px] text-[#122144]`}>
 					Nova Senha
 				</h1>
@@ -52,7 +52,7 @@ export default function RedefinirSenhaForm() {
 							</label>
 							<div className="relative">
 								<input
-									className="bg-white w-[400px] h-[40px] rounded-[5px] border-[2px] border-[#3E3E3E] py-[8px] pl-[4px] pr-10 text-sm placeholder:text-gray-500"
+									className="bg-white w-[400px] h-[40px] rounded-sm border-[2px] border-[#3E3E3E] py-[8px] pl-[4px] pr-10 text-sm placeholder:text-gray-500"
 									id="password"
 									type={showPassword ? "text" : "password"}
 									name="password"
@@ -76,7 +76,7 @@ export default function RedefinirSenhaForm() {
 						<input type="hidden" name="token" value={resetToken} />
 						<button
 							type="submit"
-							className={`bg-[#121A2B] rounded-[4px] border-[2px] border-[#2C52A4] ${oswald.className} text-[#91ADF4] text-[15px] font-medium w-fit p-2 hover:cursor-pointer hover:bg-[#2C52A4] hover:border-[#121A2B] hover:text-[#121A2B] transition-colors duration-300`}
+							className={`bg-[#121A2B] rounded-sm border-[2px] border-[#2C52A4] ${oswald.className} text-[#91ADF4] text-[15px] font-medium w-fit p-2 hover:cursor-pointer hover:bg-[#2C52A4] hover:border-[#121A2B] hover:text-[#121A2B] transition-colors duration-300`}
 							aria-disabled={isPending}
 						>
 							{isPending ? "Redefinindo..." : "Redefinir Senha"}

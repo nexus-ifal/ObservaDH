@@ -50,7 +50,7 @@ const GraficoBarraEmpilhadaVertical: React.FC<
 	GraficoBarraEmpilhadaVerticalProps
 > = ({ dados }) => {
 	return (
-		<Card className="flex flex-col items-center justify-center w-[21.875rem] h-[16.25rem] tab:w-[45rem] tab:h-[25rem] des:w-[52rem] des:h-[29rem] bg-[#121A2B] ">
+		<Card className="flex flex-col items-center justify-center w-[21.875rem] h-[16.25rem] tab:w-[45rem] tab:h-[25rem] des:w-[52rem] des:h-[29rem] bg-[#121A2B]  border-white ">
 			<CardContent className="flex flex-col justify-center items-center w-full h-full p-1 tab:p-6">
 				<ChartContainer config={chartConfig} className="w-full h-full p-0">
 					<BarChart

@@ -6,7 +6,9 @@ const FooterBar: React.FC = () => {
 	return (
 		<footer className="flex flex-col tab:flex-row des:flex-row gap-6 tab:gap-10 p-6 tab:p-8 des:p-12 des:gap-32 w-full h-full bg-gradient-to-r items-start tab:items-center des:items-center justify-center tab:justify-start des:justify-start from-[#050B17] to-[#122144] text-white">
 			<div className="flex flex-col gap-1 tab:gap-2 des:gap-6">
-				<span className="text-3xl tab:text-5xl des:text-6xl logo"></span>
+				<span className="text-3xl tab:text-5xl des:text-6xl ">
+					<div className="logo"/>
+				</span>
 				<p className="max-w-full text-lg tab:text-base des:text-xl">
 					Observatório Digital de Discurso e Direitos Humanos LGBTI+
 				</p>
@@ -25,7 +27,7 @@ const FooterBar: React.FC = () => {
 						/>
 						<Image
 							src="/assets/images/ifal-logo.svg"
-							className="w-20 h-6 tab:w-30 tab:h-11 des:w-36 des:h-11"
+							className="w-20 h-6 tab:w-30 tab:h-11 des:w-20 des:h-20"
 							width={150}
 							height={42}
 							alt="Ifal Logo"

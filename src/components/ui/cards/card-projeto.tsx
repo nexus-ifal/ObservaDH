@@ -11,7 +11,7 @@ interface CardProjetosProps {
 
 const CardProjeto: React.FC<CardProjetosProps> = ({ projeto }) => {
 	return (
-		<div className="bg-gradient-to-t from-[#050B17] to-[#1A326E] w-[19.75rem] h-[15rem] tab:h-[27.625rem] tab:w-[38.125rem] border-[#AFC4F9] border-2 rounded-[10px] px-3 tab:px-8 py-6 tab:py-12 flex flex-col gap-2 tab:gap-4 select-none justify-center">
+		<div className="bg-gradient-to-t from-[#050B17] to-[#1A326E] w-[19.75rem] h-[15rem] tab:h-[27.625rem] tab:w-[38.125rem] border-[#AFC4F9] border-2 rounded-sm px-3 tab:px-8 py-6 tab:py-12 flex flex-col gap-2 tab:gap-4 select-none justify-center">
 			<section className="flex gap-2 tab:gap-6">
 				<CardRenderizarTexto conteudo={projeto.ano} titulo="Ano" />
 				<CardRenderizarTexto
@@ -59,7 +59,7 @@ const CardProjeto: React.FC<CardProjetosProps> = ({ projeto }) => {
 						Ementa:
 					</span>
 					<p
-						className={`${titilliumWeb.className} h-24 overflow-auto no-scrollbar font-normal text-[12px] tab:text-xl text-white text-justify`}
+						className={`${titilliumWeb.className} h-24 overflow-auto no-scrollbar scrollbar-none font-normal text-[12px] tab:text-xl text-white text-justify`}
 					>
 						{projeto.ementa}
 					</p>
