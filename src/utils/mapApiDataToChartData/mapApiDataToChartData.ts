@@ -50,7 +50,7 @@ export function mapApiDataToChartData(apiData: any[]) {
 
 interface IdeologiaData {
 	pauta: string;
-	[key: string]: any; // Allow additional properties if needed
+	[key: string]: any;
 }
 
 export function mapIdeologiasToChartData(apiData: IdeologiaData[]) {

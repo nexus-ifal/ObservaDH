@@ -6,4 +6,5 @@ export type Desenvolvedor = {
 	foto: string;
 	funcao: string;
 	links: LinkType[];
+	contatos?: string;
 };

@@ -9,13 +9,14 @@ interface DevInfo {
 	funcao: string;
 	links: DevLink[];
 	bio: string;
+	contatos?: string;
 }
 
 const infoDevs: DevInfo[] = [
 	{
 		nome: "Júlio César",
 		foto: "https://github.com/follijulio.png",
-		funcao: "Dev Frontend e Backend",
+		funcao: "Dev Frontend, Backend, BD, Deploy e Versionamento",
 		links: [
 			{
 				site: "lattes",
@@ -28,7 +29,8 @@ const infoDevs: DevInfo[] = [
 				link: "https://github.com/follijulio",
 			},
 		],
-		bio: "Júlio César da Silva Folli, técnico em Informática pelo Instituto Federal de Alagoas (IFAL) e graduando em Matemática pela UFAL. Desenvolvedor frontend, backend e de banco de dados do projeto ObservaDH, responsável também pelo deploy e controle de versão.",
+		bio: "Técnico em Informática (IFAL) e graduando em Matemática (UFAL). Atua como Desenvolvedor Full Stack no projeto ObservaDH, sendo responsável por toda a arquitetura do sistema: interfaces, banco de dados, controle de versão e deploy.",
+		contatos: "follijulio@gmail.com",
 	},
 	{
 		nome: "Rita de Cassia",
