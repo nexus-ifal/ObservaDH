@@ -14,31 +14,31 @@ enum Role {
 }
 
 model User {
-    id            String    @id @default(cuid())
-    email         String    @unique
-    passwordHash  String
-    role          Role      @default(EDITOR)
-    name          String?   @unique
-    emailVerified DateTime?
-    createdAt     DateTime  @default(now())
-    updatedAt     DateTime  @updatedAt
+    id                 String              @id @default(cuid())
+    email              String              @unique
+    passwordHash       String
+    role               Role                @default(EDITOR)
+    name               String?             @unique
+    emailVerified      DateTime?
+    createdAt          DateTime            @default(now())
+    updatedAt          DateTime            @updatedAt
     verificationTokens VerificationToken[]
 }
 
 model VerificationToken {
-    id        String    @id @default(cuid())
-    userId    String    @unique
-    token     String    @unique
+    id        String   @id @default(cuid())
+    userId    String   @unique
+    token     String   @unique
     expires   DateTime
-    createdAt DateTime  @default(now())
-    user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+    createdAt DateTime @default(now())
+    user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model ResetSenhaToken {
-    id        String   @id @default(cuid())
-    email     String   @unique
-    token     String   @unique
-    expires   DateTime
+    id      String   @id @default(cuid())
+    email   String   @unique
+    token   String   @unique
+    expires DateTime
 
     @@index([email])
     @@index([token])
@@ -46,6 +46,10 @@ model ResetSenhaToken {
 
 model Projeto {
     id               String           @id @default(uuid()) @db.VarChar(36)
+    originalId       String?          @unique
+    analisadoPelaIA  Boolean          @default(false)
+    linkOficial      String?
+    statusAnalise    String           @default("PENDENTE_ANALISE")
     ano              String
     ementa           String
     pautaId          String
@@ -58,6 +62,7 @@ model Projeto {
     ideologias       Ideologia[]      @relation("IdeologiaToProjeto")
     partidos         Partido[]        @relation("PartidoToProjeto")
     autores          Politico[]       @relation("ProjetoAutores")
+    periculosidade   String?
 }
 
 model Politico {
