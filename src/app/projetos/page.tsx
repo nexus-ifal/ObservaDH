@@ -5,8 +5,8 @@
 import { Suspense, useEffect, useState } from "react";
 import { FaTrash } from "react-icons/fa6";
 import { MdOutlineFilterAlt } from "react-icons/md";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { Button } from "@/components/external/ui-shacnui/button";
 import {
@@ -16,14 +16,18 @@ import {
 	CarouselNext,
 	CarouselPrevious,
 } from "@/components/external/ui-shacnui/carousel";
+import {
+	GraficoBarraEmpilhadaSkeleton,
+	GraficoLinhaPontosSkeleton,
+} from "@/components/skeletons/skeletons-projetos";
 import Card from "@/components/ui/cards";
-import Texto from "@/components/ui/texto";
 import DropdownButton from "@/components/ui/dropdown/dropdown-button";
 import GraficoBarraEmpilhadaHorizontal from "@/components/ui/graficos/barra-empilhada-hoizontal";
 import GraficoMapa from "@/components/ui/graficos/grafico-mapa";
 import GraficoLinhaPontos from "@/components/ui/graficos/linha-pontos";
 import MainLayout from "@/components/ui/layouts/main-layout";
 import Loading from "@/components/ui/loading";
+import Texto from "@/components/ui/texto";
 import UserError from "@/components/ui/user-erro";
 
 import { apresentacao } from "../../mocks/mock-projetos";
@@ -45,10 +49,6 @@ import { useEstado } from "@/hooks/estado/use-estado";
 import { usePauta } from "@/hooks/pauta/use-pauta";
 import { useProjetosFiltrados } from "@/hooks/projeto/use-projetos-filtrados";
 import { buscarEsferas } from "@/infra/api/esfera";
-import {
-	GraficoLinhaPontosSkeleton,
-	GraficoBarraEmpilhadaSkeleton,
-} from "@/components/skeletons/skeletons-projetos";
 
 //render
 const Page: React.FC = () => (
@@ -124,7 +124,6 @@ interface CarrosselPlsProps {
 	isLoading: boolean;
 	error?: any;
 }
-
 
 const Apresentacao: React.FC<ApresentacaoProps> = ({ apresentacao }) => (
 	<motion.section
@@ -634,8 +633,8 @@ const PageContent: React.FC = () => {
 						className="w-full flex justify-center"
 					>
 						{isLoadingMapa ||
-							isLoadingParlamentarProjetoEsfera ||
-							isLoadingPautaEsfera ? (
+						isLoadingParlamentarProjetoEsfera ||
+						isLoadingPautaEsfera ? (
 							<Loading />
 						) : errorMapa || errorStatus ? (
 							<UserError error={errorMapa || errorStatus} />

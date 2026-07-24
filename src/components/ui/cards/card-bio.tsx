@@ -1,4 +1,4 @@
-import { FaGithub, FaEnvelope } from "react-icons/fa6";
+import { FaEnvelope, FaGithub } from "react-icons/fa6";
 import Image from "next/image";
 
 import { oswald, titilliumWeb } from "../../../fonts/fonts";

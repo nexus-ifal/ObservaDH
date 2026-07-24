@@ -14,6 +14,7 @@ const ROTAS_PUBLICAS = [
 	"/parlamentares",
 	"/projetos",
 	"/sobre",
+	"/teste-ia",
 ];
 
 const ROTAS_ADMIN = [

@@ -7,7 +7,7 @@ const FooterBar: React.FC = () => {
 		<footer className="flex flex-col tab:flex-row des:flex-row gap-6 tab:gap-10 p-6 tab:p-8 des:p-12 des:gap-32 w-full h-full bg-gradient-to-r items-start tab:items-center des:items-center justify-center tab:justify-start des:justify-start from-[#050B17] to-[#122144] text-white">
 			<div className="flex flex-col gap-1 tab:gap-2 des:gap-6">
 				<span className="text-3xl tab:text-5xl des:text-6xl ">
-					<div className="logo"/>
+					<div className="logo" />
 				</span>
 				<p className="max-w-full text-lg tab:text-base des:text-xl">
 					Observatório Digital de Discurso e Direitos Humanos LGBTI+

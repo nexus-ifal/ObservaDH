@@ -1,8 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
+import Image from "next/image";
+
 import MainLayout from "@/components/ui/layouts/main-layout";
+
 import { sobre } from "@/content/content-sobre";
 
 //render
@@ -69,8 +71,9 @@ const Sobre: React.FC<SobreProps> = ({
 			</motion.header>
 
 			<section
-				className={`flex flex-col des:grid des:grid-cols-12 gap-8 tab:gap-12 des:gap-16 items-start ${isReverse ? "des:dir-rtl" : ""
-					}`}
+				className={`flex flex-col des:grid des:grid-cols-12 gap-8 tab:gap-12 des:gap-16 items-start ${
+					isReverse ? "des:dir-rtl" : ""
+				}`}
 				style={{ direction: isReverse ? "rtl" : "ltr" }}
 			>
 				<motion.figure
@@ -83,12 +86,14 @@ const Sobre: React.FC<SobreProps> = ({
 				>
 					<div className="relative w-full h-[18rem] tab:h-[26rem] des:h-[32rem] overflow-hidden rounded-sm bg-[#121A2B] border border-white/5 shadow-2xl">
 						<span
-							className={`absolute top-2 w-4 h-4 border-t border-[#D974FD]/60 z-10 ${isReverse ? "right-2 border-r" : "left-2 border-l"
-								}`}
+							className={`absolute top-2 w-4 h-4 border-t border-[#D974FD]/60 z-10 ${
+								isReverse ? "right-2 border-r" : "left-2 border-l"
+							}`}
 						/>
 						<span
-							className={`absolute bottom-2 w-4 h-4 border-b border-[#D974FD]/60 z-10 ${isReverse ? "left-2 border-l" : "right-2 border-r"
-								}`}
+							className={`absolute bottom-2 w-4 h-4 border-b border-[#D974FD]/60 z-10 ${
+								isReverse ? "left-2 border-l" : "right-2 border-r"
+							}`}
 						/>
 
 						<Image

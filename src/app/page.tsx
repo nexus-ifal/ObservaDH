@@ -1,7 +1,11 @@
 "use client";
+import { FiArrowRight } from "react-icons/fi";
 import { motion } from "framer-motion";
+import Link from "next/link";
+
 import Card from "@/components/ui/cards";
 import MainLayout from "@/components/ui/layouts/main-layout";
+
 import {
 	apresentacao,
 	cardsEsfera,
@@ -10,8 +14,6 @@ import {
 	estatisticas,
 	marcoHistorico,
 } from "../content/content-home";
-
-import { FiArrowRight } from "react-icons/fi";
 
 //render
 const Page: React.FC = () => {
@@ -39,8 +41,9 @@ const Page: React.FC = () => {
 								whileInView={{ opacity: 1, x: 0 }}
 								transition={{ duration: 0.6, ease: "easeOut" }}
 								viewport={{ once: true, amount: 0.2 }}
-								className={`flex w-full flex-col gap-6 tab:justify-between tab:gap-10 ${index % 2 !== 0 ? "tab:flex-row-reverse" : "tab:flex-row"
-									}`}
+								className={`flex w-full flex-col gap-6 tab:justify-between tab:gap-10 ${
+									index % 2 !== 0 ? "tab:flex-row-reverse" : "tab:flex-row"
+								}`}
 							>
 								<div className="flex">
 									<Card.Esfera
@@ -89,7 +92,6 @@ const Page: React.FC = () => {
 };
 
 export default Page;
-
 
 const SecaoEstatisticas: React.FC = () => {
 	return (
@@ -223,24 +225,27 @@ const SecaoTimeline: React.FC = () => {
 
 							<div className="shrink-0 relative z-10 mt-1">
 								<div
-									className={`w-3 h-3 rounded-full transition-all duration-300 ${isLast
-										? "bg-white shadow-[0_0_10px_2px_rgba(255,255,255,0.4)] border-2 border-white"
-										: "bg-transparent border-2 border-white group-hover:border-white/80"
-										}`}
+									className={`w-3 h-3 rounded-full transition-all duration-300 ${
+										isLast
+											? "bg-white shadow-[0_0_10px_2px_rgba(255,255,255,0.4)] border-2 border-white"
+											: "bg-transparent border-2 border-white group-hover:border-white/80"
+									}`}
 								/>
 							</div>
 
 							<div
-								className={`flex-1 pb-6 border-b transition-colors duration-300 ${isLast
-									? "border-white/10"
-									: "border-white/5 group-hover:border-white/10"
-									}`}
+								className={`flex-1 pb-6 border-b transition-colors duration-300 ${
+									isLast
+										? "border-white/10"
+										: "border-white/5 group-hover:border-white/10"
+								}`}
 							>
 								<p
-									className={`text-sm tab:text-lg leading-relaxed transition-colors duration-300 ${isLast
-										? "text-white font-medium"
-										: "text-white/65 group-hover:text-white/85"
-										}`}
+									className={`text-sm tab:text-lg leading-relaxed transition-colors duration-300 ${
+										isLast
+											? "text-white font-medium"
+											: "text-white/65 group-hover:text-white/85"
+									}`}
 								>
 									{marco.evento}
 								</p>
@@ -273,7 +278,7 @@ const SecaoCTA: React.FC = () => {
 				</p>
 			</header>
 			<nav className="flex flex-col tab:flex-row gap-3 shrink-0 w-full tab:w-auto items-center">
-				<a
+				<Link
 					href="/projetos"
 					className="group flex items-center justify-center w-full tab:w-auto gap-0 overflow-hidden px-7 py-3 rounded-sm font-semibold text-sm text-white border border-white hover:border-black hover:bg-white hover:text-black transition-all hover:shadow"
 				>
@@ -281,8 +286,8 @@ const SecaoCTA: React.FC = () => {
 					<span className="flex w-0 overflow-hidden transition-all duration-300 group-hover:w-5 group-hover:ml-2">
 						<FiArrowRight size={20} />
 					</span>
-				</a>
-				<a
+				</Link>
+				<Link
 					href="/sobre"
 					className="group flex items-center justify-center w-full tab:w-auto gap-0 overflow-hidden px-7 py-3 rounded-sm font-semibold text-sm text-white border border-white hover:border-black hover:bg-white hover:text-black transition-all hover:shadow"
 				>
@@ -290,7 +295,7 @@ const SecaoCTA: React.FC = () => {
 					<span className="flex w-0 overflow-hidden transition-all duration-300 group-hover:w-5 group-hover:ml-2">
 						<FiArrowRight size={20} />
 					</span>
-				</a>
+				</Link>
 			</nav>
 		</motion.section>
 	);

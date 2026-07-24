@@ -1,6 +1,8 @@
 import { titilliumWeb } from "../../../fonts/fonts";
+
 import CardDivider from "./card-divider";
 import CardStatusItem from "./card-status-item";
+
 import {
 	DadosParlamentarProjetosEsfera,
 	DadosPautaEsfera,

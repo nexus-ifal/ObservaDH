@@ -9,7 +9,6 @@ export const GraficoBarraEmpilhadaSkeleton = () => (
 
 			{[...Array(4)].map((_, i) => (
 				<div key={i} className="flex items-center gap-3 z-10 w-full">
-					
 					<div className="w-8 h-3 tab:h-4 bg-slate-700/50 rounded shrink-0" />
 
 					<div className="flex h-4 tab:h-8 w-full">
@@ -40,7 +39,7 @@ export const GraficoBarraEmpilhadaSkeleton = () => (
 );
 export const GraficoLinhaPontosSkeleton = () => (
 	<div className="w-[21.875rem] h-[16.25rem] tab:w-[45rem] tab:h-[25rem] des:w-[52rem] des:h-[29rem] bg-[#122144] rounded-xl flex p-4 tab:p-10 animate-pulse border border-slate-800">
-	<div className="w-full h-full flex relative border-l border-b border-slate-700/50 ml-6 mb-6">
+		<div className="w-full h-full flex relative border-l border-b border-slate-700/50 ml-6 mb-6">
 			<div className="absolute w-full top-1/4 h-px bg-slate-700/30" />
 			<div className="absolute w-full top-2/4 h-px bg-slate-700/30" />
 			<div className="absolute w-full top-3/4 h-px bg-slate-700/30" />

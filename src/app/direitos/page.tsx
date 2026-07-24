@@ -3,8 +3,8 @@
 
 import { Suspense } from "react";
 import { FaTrash } from "react-icons/fa6";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { Button } from "@/components/external/ui-shacnui/button";
 import {
@@ -15,12 +15,12 @@ import {
 	CarouselPrevious,
 } from "@/components/external/ui-shacnui/carousel";
 import Card from "@/components/ui/cards";
-import Texto from "@/components/ui/texto";
 import DropdownButton from "@/components/ui/dropdown/dropdown-button";
 import GraficoBarrasVertical from "@/components/ui/graficos/barras-vertical";
 import { Radial } from "@/components/ui/graficos/radial";
 import MainLayout from "@/components/ui/layouts/main-layout";
 import Loading from "@/components/ui/loading";
+import Texto from "@/components/ui/texto";
 import Titulo from "@/components/ui/titulo-pages";
 import UserError from "@/components/ui/user-erro";
 
@@ -69,7 +69,6 @@ interface SecaoIdeologiasProps {
 	dadosGraficoVertical: DadosGraficoBarrasVertical[];
 	legenda: LegendaGrafico;
 }
-
 
 const FiltroPauta: React.FC<FiltroPautaProps> = ({
 	elementosDropdown,
@@ -194,7 +193,9 @@ const Carrossel: React.FC<CarrosselProps> = ({
 			<Texto.Raiz className="text-3xl tab:text-5xl des:text-6xl" shadow>
 				<Texto.Pequeno.Titillium>Projetos</Texto.Pequeno.Titillium>
 				<Texto.Espaco />
-				<Texto.Forte.Oswald className="text-[#87D9FF]">de Lei</Texto.Forte.Oswald>
+				<Texto.Forte.Oswald className="text-[#87D9FF]">
+					de Lei
+				</Texto.Forte.Oswald>
 			</Texto.Raiz>
 		</header>
 		{isProjetosLoading ? (
@@ -225,7 +226,6 @@ const Carrossel: React.FC<CarrosselProps> = ({
 	</motion.section>
 );
 
-
 const SkeletonRadial: React.FC = () => (
 	<div className="relative flex items-center justify-center w-[15rem] h-[15rem] tab:w-[22rem] tab:h-[22rem] bg-[#122144]/30 rounded-full animate-pulse border-[1.5rem] border-[#121A2B]/50">
 		<div className="w-[60%] h-[60%] bg-[#121A2B] rounded-full" />
@@ -255,7 +255,6 @@ const SkeletonProjeto: React.FC = () => (
 		</div>
 	</div>
 );
-
 
 const Direitos: React.FC = () => {
 	const { pautas, isLoadingPautas, error: errorPautas } = usePauta();
@@ -320,7 +319,9 @@ const Direitos: React.FC = () => {
 												<Texto.Forte.Oswald>Direitos</Texto.Forte.Oswald>
 											</Texto.Linha>
 											<Texto.Linha className="text-[#D974FD]">
-												<Texto.Pequeno.Titillium>Violados</Texto.Pequeno.Titillium>
+												<Texto.Pequeno.Titillium>
+													Violados
+												</Texto.Pequeno.Titillium>
 											</Texto.Linha>
 										</Texto.Raiz>
 									</Card.Legenda>
@@ -336,7 +337,9 @@ const Direitos: React.FC = () => {
 									<Texto.Forte.Oswald>Ideologia dos</Texto.Forte.Oswald>
 								</Texto.Linha>
 								<Texto.Linha className="text-[#FDFF78]">
-									<Texto.Pequeno.Titillium>Projetos de Lei</Texto.Pequeno.Titillium>
+									<Texto.Pequeno.Titillium>
+										Projetos de Lei
+									</Texto.Pequeno.Titillium>
 								</Texto.Linha>
 							</Texto.Raiz>
 						</Card.Legenda>
@@ -376,7 +379,10 @@ const Direitos: React.FC = () => {
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.5 }}
 				>
-					<Titulo pequeno="Violações e Ideologias" grande="dos Projetos de Lei" />
+					<Titulo
+						pequeno="Violações e Ideologias"
+						grande="dos Projetos de Lei"
+					/>
 				</motion.header>
 				{renderContent()}
 			</main>

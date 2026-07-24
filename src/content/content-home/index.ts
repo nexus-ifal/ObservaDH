@@ -132,7 +132,6 @@ const comoFunciona = [
 	},
 ];
 
-
 const marcoHistorico = [
 	{
 		ano: "2013",
@@ -165,4 +164,11 @@ const marcoHistorico = [
 			"O Observatório é atualizado regularmente com os últimos dados e informações sobre proposições legislativas.",
 	},
 ];
-export { apresentacao, cardsEsfera, cardsInformativos, estatisticas, comoFunciona, marcoHistorico };
+export {
+	apresentacao,
+	cardsEsfera,
+	cardsInformativos,
+	comoFunciona,
+	estatisticas,
+	marcoHistorico,
+};
