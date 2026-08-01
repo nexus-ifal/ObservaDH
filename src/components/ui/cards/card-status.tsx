@@ -13,7 +13,6 @@ interface StatusCardProps {
 	dadosPautaEsfera: DadosPautaEsfera[];
 }
 
-// ಠ_ಠ
 const CardStatus: React.FC<StatusCardProps> = ({
 	dadosParlamentarProjetosEsfera,
 	dadosPautaEsfera,
@@ -24,35 +23,23 @@ const CardStatus: React.FC<StatusCardProps> = ({
 			: dadosParlamentarProjetosEsfera?.esfera === "federal"
 				? "Federais"
 				: "Estaduais";
+
 	return (
-		<article className="flex flex-col gap-2 tab:gap-3 des:gap-4 border-l-[1px] border-white rounded-lg h-fit p-4 tab:p-6 des:p-8">
-			<section className="flex items-center gap-4">
-				<h1
-					className={`${titilliumWeb.className} text-xl tab:text-2xl des:text-4xl font-semibold text-white`}
-				>
-					Dados {ambito}
-				</h1>
-				<CardDivider className="w-9" />
-			</section>
-			<section>
+		<article className="flex flex-col border-l border-white h-fit">
+			<SectionBlock titulo={`Dados ${ambito}`}>
 				<CardStatusItem
-					titulo={"Parlamentares"}
+					titulo="Parlamentares"
 					valor={dadosParlamentarProjetosEsfera?.parlamentares}
 				/>
 				<CardStatusItem
-					titulo={"Projetos de Lei"}
+					titulo="Projetos de Lei"
 					valor={dadosParlamentarProjetosEsfera?.projetosLei}
 				/>
-			</section>
-			<section className="flex items-center gap-4">
-				<h1
-					className={`${titilliumWeb.className} text-xl tab:text-2xl des:text-4xl font-semibold text-white`}
-				>
-					Pautas
-				</h1>
-				<CardDivider className="w-9" />
-			</section>
-			<section>
+			</SectionBlock>
+
+			<div className="border-t border-white/15" />
+
+			<SectionBlock titulo="Pautas">
 				{dadosPautaEsfera.map((item) => (
 					<CardStatusItem
 						titulo={item.pauta}
@@ -60,9 +47,31 @@ const CardStatus: React.FC<StatusCardProps> = ({
 						key={item.pauta}
 					/>
 				))}
-			</section>
+			</SectionBlock>
 		</article>
 	);
 };
+
+function SectionBlock({
+	titulo,
+	children,
+}: {
+	titulo: string;
+	children: React.ReactNode;
+}) {
+	return (
+		<section className="flex flex-col gap-3 tab:gap-4 p-4 tab:p-6 des:p-8">
+			<header className="flex items-center gap-3">
+				<h2
+					className={`${titilliumWeb.className} text-xl tab:text-2xl des:text-3xl font-semibold text-white leading-none`}
+				>
+					{titulo}
+				</h2>
+				<CardDivider className="w-9" />
+			</header>
+			<div className="flex flex-col">{children}</div>
+		</section>
+	);
+}
 
 export default CardStatus;

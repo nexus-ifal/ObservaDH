@@ -3,6 +3,7 @@
 
 import { Suspense } from "react";
 import { FaTrash } from "react-icons/fa6";
+import { motion } from "framer-motion";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { Button } from "@/components/external/ui-shacnui/button";
@@ -14,12 +15,12 @@ import {
 	CarouselPrevious,
 } from "@/components/external/ui-shacnui/carousel";
 import Card from "@/components/ui/cards";
-import Texto from "@/components/ui/componente-texto";
 import DropdownButton from "@/components/ui/dropdown/dropdown-button";
 import GraficoBarrasVertical from "@/components/ui/graficos/barras-vertical";
 import { Radial } from "@/components/ui/graficos/radial";
 import MainLayout from "@/components/ui/layouts/main-layout";
 import Loading from "@/components/ui/loading";
+import Texto from "@/components/ui/texto";
 import Titulo from "@/components/ui/titulo-pages";
 import UserError from "@/components/ui/user-erro";
 
@@ -29,6 +30,15 @@ import { ProjetoDTO } from "@/core/domain/dtos/dados.dto";
 import { DadosGraficoBarrasVertical } from "@/core/domain/types/barras-vertical";
 import { useProjetosDireitosIdeologias } from "@/hooks/dados/use-projetos-direitos-ideologias";
 import { usePauta } from "@/hooks/pauta/use-pauta";
+
+// render
+const Page: React.FC = () => (
+	<Suspense fallback={<Loading />}>
+		<Direitos />
+	</Suspense>
+);
+
+export default Page;
 
 interface DadosEstatisticosProps {
 	elementosDropdown: { titulo: string; value: string }[];
@@ -55,12 +65,17 @@ interface SecaoDireitosVioladosProps {
 	legenda: LegendaGrafico;
 }
 
+interface SecaoIdeologiasProps {
+	dadosGraficoVertical: DadosGraficoBarrasVertical[];
+	legenda: LegendaGrafico;
+}
+
 const FiltroPauta: React.FC<FiltroPautaProps> = ({
 	elementosDropdown,
 	isPautaSelecionada,
 	limparSearchParams,
 }) => (
-	<div className="flex flex-row items-center ml-6 mb-4 gap-2">
+	<nav className="flex flex-row items-center ml-6 mb-4 gap-2">
 		<DropdownButton
 			className="w-32"
 			titulo="Pauta"
@@ -76,18 +91,24 @@ const FiltroPauta: React.FC<FiltroPautaProps> = ({
 				<FaTrash />
 			</Button>
 		)}
-	</div>
+	</nav>
 );
 
 const SecaoDireitosViolados: React.FC<SecaoDireitosVioladosProps> = ({
 	dadosRadial,
 	legenda,
 }) => (
-	<div className="flex flex-col des:flex-row gap-4 tab:gap-10 des:gap-[4.5rem] justify-center items-center">
-		<div className="flex w-1/2 h-full justify-center des:justify-end">
+	<motion.article
+		initial={{ opacity: 0, x: -40 }}
+		whileInView={{ opacity: 1, x: 0 }}
+		transition={{ duration: 0.6 }}
+		viewport={{ once: true }}
+		className="flex flex-col des:flex-row gap-4 tab:gap-10 des:gap-[4.5rem] justify-center items-center w-full"
+	>
+		<figure className="flex w-1/2 h-full justify-center des:justify-end">
 			<Radial dados={dadosRadial} />
-		</div>
-		<div className="flex justify-end items-end">
+		</figure>
+		<header className="flex justify-end items-end">
 			<Card.Legenda legenda={legenda}>
 				<Texto.Raiz shadow className="text-3xl des:text-6xl">
 					<Texto.Linha>
@@ -98,20 +119,21 @@ const SecaoDireitosViolados: React.FC<SecaoDireitosVioladosProps> = ({
 					</Texto.Linha>
 				</Texto.Raiz>
 			</Card.Legenda>
-		</div>
-	</div>
+		</header>
+	</motion.article>
 );
-
-interface SecaoIdeologiasProps {
-	dadosGraficoVertical: DadosGraficoBarrasVertical[];
-	legenda: LegendaGrafico;
-}
 
 const SecaoIdeologias: React.FC<SecaoIdeologiasProps> = ({
 	dadosGraficoVertical,
 	legenda,
 }) => (
-	<section className="w-full flex flex-col-reverse des:flex-row gap-6 des:gap-[4.5rem] justify-center items-center">
+	<motion.section
+		initial={{ opacity: 0, y: 40 }}
+		whileInView={{ opacity: 1, y: 0 }}
+		transition={{ duration: 0.6 }}
+		viewport={{ once: true }}
+		className="w-full flex flex-col-reverse des:flex-row gap-6 des:gap-[4.5rem] justify-center items-center"
+	>
 		<Card.Legenda legenda={legenda}>
 			<Texto.Raiz shadow className="text-3xl des:text-5xl">
 				<Texto.Linha>
@@ -122,8 +144,10 @@ const SecaoIdeologias: React.FC<SecaoIdeologiasProps> = ({
 				</Texto.Linha>
 			</Texto.Raiz>
 		</Card.Legenda>
-		<GraficoBarrasVertical dados={dadosGraficoVertical} />
-	</section>
+		<figure>
+			<GraficoBarrasVertical dados={dadosGraficoVertical} />
+		</figure>
+	</motion.section>
 );
 
 const DadosEstatisticos: React.FC<DadosEstatisticosProps> = ({
@@ -136,13 +160,13 @@ const DadosEstatisticos: React.FC<DadosEstatisticosProps> = ({
 }) => (
 	<>
 		<section className="w-full h-full flex flex-col justify-center">
-			<div className="w-full">
+			<header>
 				<FiltroPauta
 					elementosDropdown={elementosDropdown}
 					isPautaSelecionada={isPautaSelecionada}
 					limparSearchParams={limparSearchParams}
 				/>
-			</div>
+			</header>
 			<div className="flex flex-row w-full items-center justify-center gap-2 h-full">
 				<SecaoDireitosViolados dadosRadial={dadosRadial} legenda={legenda[0]} />
 			</div>
@@ -158,14 +182,29 @@ const Carrossel: React.FC<CarrosselProps> = ({
 	projetos,
 	isProjetosLoading,
 }) => (
-	<section className="flex flex-col gap-4 tab:gap-8 des:gap-14 justify-center text-center">
-		<Texto.Raiz className="text-3xl tab:text-5xl des:text-6xl" shadow>
-			<Texto.Pequeno.Titillium>Projetos</Texto.Pequeno.Titillium>
-			<Texto.Espaco />
-			<Texto.Forte.Oswald className="text-[#87D9FF]">de Lei</Texto.Forte.Oswald>
-		</Texto.Raiz>
+	<motion.section
+		initial={{ opacity: 0, scale: 0.95 }}
+		whileInView={{ opacity: 1, scale: 1 }}
+		transition={{ duration: 0.5 }}
+		viewport={{ once: true }}
+		className="flex flex-col gap-4 tab:gap-8 des:gap-14 justify-center text-center"
+	>
+		<header>
+			<Texto.Raiz className="text-3xl tab:text-5xl des:text-6xl" shadow>
+				<Texto.Pequeno.Titillium>Projetos</Texto.Pequeno.Titillium>
+				<Texto.Espaco />
+				<Texto.Forte.Oswald className="text-[#87D9FF]">
+					de Lei
+				</Texto.Forte.Oswald>
+			</Texto.Raiz>
+		</header>
 		{isProjetosLoading ? (
-			<Loading />
+			<article className="w-[20rem] tab:w-[39rem] des:w-[82rem] mx-auto flex gap-4 overflow-hidden justify-center px-4">
+				<SkeletonProjeto />
+				<div className="hidden des:block">
+					<SkeletonProjeto />
+				</div>
+			</article>
 		) : (
 			<Carousel
 				opts={{ align: "start" }}
@@ -184,7 +223,37 @@ const Carrossel: React.FC<CarrosselProps> = ({
 				<CarouselNext />
 			</Carousel>
 		)}
-	</section>
+	</motion.section>
+);
+
+const SkeletonRadial: React.FC = () => (
+	<div className="relative flex items-center justify-center w-[15rem] h-[15rem] tab:w-[22rem] tab:h-[22rem] bg-[#122144]/30 rounded-full animate-pulse border-[1.5rem] border-[#121A2B]/50">
+		<div className="w-[60%] h-[60%] bg-[#121A2B] rounded-full" />
+	</div>
+);
+
+const SkeletonGraficoVertical: React.FC = () => (
+	<div className="w-[21.875rem] h-[16.25rem] tab:w-[45rem] tab:h-[25rem] des:w-[52rem] des:h-[29rem] bg-[#121A2B]/60 animate-pulse rounded-xl border border-white/10 flex items-end justify-around p-4 tab:p-8 gap-2 tab:gap-6">
+		{Array.from({ length: 6 }).map((_, i) => (
+			<div
+				key={`skel-v-${i}`}
+				className="w-6 tab:w-16 bg-slate-600 rounded-t-sm"
+				style={{ height: `${Math.floor(Math.random() * 60) + 30}%` }}
+			/>
+		))}
+	</div>
+);
+
+const SkeletonProjeto: React.FC = () => (
+	<div className="w-[18rem] tab:w-[22rem] h-[25rem] bg-[#122144]/50 rounded-xl animate-pulse flex flex-col p-6 gap-6 border border-[#87D9FF]/20">
+		<div className="h-6 w-3/4 bg-slate-600 rounded" />
+		<div className="h-4 w-1/2 bg-slate-600 rounded" />
+		<div className="mt-auto space-y-3">
+			<div className="h-3 w-full bg-slate-600 rounded" />
+			<div className="h-3 w-full bg-slate-600 rounded" />
+			<div className="h-3 w-4/5 bg-slate-600 rounded" />
+		</div>
+	</div>
 );
 
 const Direitos: React.FC = () => {
@@ -221,9 +290,9 @@ const Direitos: React.FC = () => {
 	const renderContent = () => {
 		if (errorPautas) {
 			return (
-				<div className="text-red-500">
+				<article className="text-red-500">
 					Erro ao carregar pautas: {errorPautas.toString()}
-				</div>
+				</article>
 			);
 		}
 
@@ -232,7 +301,56 @@ const Direitos: React.FC = () => {
 		}
 
 		if (isLoading) {
-			return <Loading />;
+			return (
+				<>
+					<section className="w-full h-full flex flex-col justify-center">
+						<nav className="flex flex-row items-center ml-6 mb-4 gap-2">
+							<div className="w-32 h-10 tab:h-12 bg-[#122144]/50 animate-pulse rounded border border-white/20" />
+						</nav>
+						<div className="flex flex-row w-full items-center justify-center gap-2 h-full">
+							<article className="flex flex-col des:flex-row gap-4 tab:gap-10 des:gap-[4.5rem] justify-center items-center">
+								<figure className="flex w-1/2 h-full justify-center des:justify-end">
+									<SkeletonRadial />
+								</figure>
+								<header className="flex justify-end items-end">
+									<Card.Legenda legenda={legendasGraficosDireitos[0]}>
+										<Texto.Raiz shadow className="text-3xl des:text-6xl">
+											<Texto.Linha>
+												<Texto.Forte.Oswald>Direitos</Texto.Forte.Oswald>
+											</Texto.Linha>
+											<Texto.Linha className="text-[#D974FD]">
+												<Texto.Pequeno.Titillium>
+													Violados
+												</Texto.Pequeno.Titillium>
+											</Texto.Linha>
+										</Texto.Raiz>
+									</Card.Legenda>
+								</header>
+							</article>
+						</div>
+					</section>
+
+					<section className="w-full flex flex-col-reverse des:flex-row gap-6 des:gap-[4.5rem] justify-center items-center">
+						<Card.Legenda legenda={legendasGraficosDireitos[1]}>
+							<Texto.Raiz shadow className="text-3xl des:text-5xl">
+								<Texto.Linha>
+									<Texto.Forte.Oswald>Ideologia dos</Texto.Forte.Oswald>
+								</Texto.Linha>
+								<Texto.Linha className="text-[#FDFF78]">
+									<Texto.Pequeno.Titillium>
+										Projetos de Lei
+									</Texto.Pequeno.Titillium>
+								</Texto.Linha>
+							</Texto.Raiz>
+						</Card.Legenda>
+						<figure>
+							<SkeletonGraficoVertical />
+						</figure>
+					</section>
+
+					<Carrossel projetos={[]} isProjetosLoading={true} />
+				</>
+			);
 		}
 
 		return (
@@ -255,18 +373,19 @@ const Direitos: React.FC = () => {
 
 	return (
 		<MainLayout>
-			<div className="flex flex-col h-full w-full gap-8 tab:gap-10 des:gap-24 justify-center items-center">
-				<Titulo pequeno="Violações e Ideologias" grande="dos Projetos de Lei" />
+			<main className="flex flex-col h-full w-full gap-8 tab:gap-10 des:gap-24 justify-center items-center py-10">
+				<motion.header
+					initial={{ opacity: 0, y: -20 }}
+					animate={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.5 }}
+				>
+					<Titulo
+						pequeno="Violações e Ideologias"
+						grande="dos Projetos de Lei"
+					/>
+				</motion.header>
 				{renderContent()}
-			</div>
+			</main>
 		</MainLayout>
 	);
 };
-
-const Page: React.FC = () => (
-	<Suspense fallback={<Loading />}>
-		<Direitos />
-	</Suspense>
-);
-
-export default Page;

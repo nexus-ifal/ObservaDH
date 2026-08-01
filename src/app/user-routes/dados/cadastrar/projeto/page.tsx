@@ -196,7 +196,7 @@ const Page: React.FC = () => {
 										<FormControl>
 											<Input
 												{...field}
-												className={`bg-white text-black h-12 text-lg font-normal rounded-[5px] ${
+												className={`bg-white text-black h-12 text-lg font-normal rounded-sm ${
 													fieldState.error
 														? "border-2 border-red-500 focus:border-red-500"
 														: "border-0"
@@ -229,7 +229,7 @@ const Page: React.FC = () => {
 										<FormControl>
 											<Input
 												{...field}
-												className={`bg-white text-black h-12 text-lg font-normal rounded-[5px] ${
+												className={`bg-white text-black h-12 text-lg font-normal rounded-sm ${
 													fieldState.error
 														? "border-2 border-red-500 focus:border-red-500"
 														: "border-0"
@@ -260,7 +260,7 @@ const Page: React.FC = () => {
 										<Select onValueChange={field.onChange} value={field.value}>
 											<FormControl>
 												<SelectTrigger
-													className={`bg-white text-black h-12 text-lg font-normal rounded-[5px] ${
+													className={`bg-white text-black h-12 text-lg font-normal rounded-sm ${
 														fieldState.error
 															? "border-2 border-red-500 focus:border-red-500"
 															: "border-0"
@@ -297,7 +297,7 @@ const Page: React.FC = () => {
 										<Select onValueChange={field.onChange} value={field.value}>
 											<FormControl>
 												<SelectTrigger
-													className={`bg-white text-black h-12 text-lg font-normal rounded-[5px] ${
+													className={`bg-white text-black h-12 text-lg font-normal rounded-sm ${
 														fieldState.error
 															? "border-2 border-red-500 focus:border-red-500"
 															: "border-0"
@@ -426,7 +426,7 @@ const Page: React.FC = () => {
 											<Textarea
 												{...field}
 												rows={5}
-												className={`bg-white min-h-72 text-black text-lg font-normal rounded-[5px] resize-none ${
+												className={`bg-white min-h-72 text-black text-lg font-normal rounded-sm resize-none ${
 													fieldState.error
 														? "border-2 border-red-500 focus:border-red-500"
 														: "border-0"
@@ -458,7 +458,7 @@ const Page: React.FC = () => {
 											<Textarea
 												{...field}
 												rows={5}
-												className={`bg-white text-black min-h-72 text-lg font-normal rounded-[5px] resize-none ${
+												className={`bg-white text-black min-h-72 text-lg font-normal rounded-sm resize-none ${
 													fieldState.error
 														? "border-2 border-red-500 focus:border-red-500"
 														: "border-0"

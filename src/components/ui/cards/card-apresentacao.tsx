@@ -16,18 +16,18 @@ const CardApresentacao: React.FC<CardApresentacaoProps> = ({
 	subtitulo,
 }) => {
 	return (
-		<section className="w-fit h-fit p-8 pho:p-10 tab:p-12 des:p-16 mx-6 des:mx-40 tab:mx-16 bg-gradient-to-b from-[#050B17] to-[#1A326E] border-[1px] border-[#87D9FF] rounded-[5px] shadow-lg shadow-[#87D9FF]">
-			<article className="w-full h-full flex flex-col gap-2 tab:gap-4 des:gap-4">
+		<section className="w-full h-fit p-5 pho:p-10 tab:p-12 des:p-16 bg-gradient-to-br from-[#050B17] to-[#1A326E] border	border-white rounded-lg shadow-xl hover:shadow-2xl transition-transform duration-300 ">
+			<article className="w-full h-full flex flex-col gap-2 ">
 				<h2
-					className={`${oswald.className} text-[1.8rem] des:text-[5rem] tab:text-[3rem] text-white text-shadow-xl font-normal`}
+					className={`${oswald.className} text-[2rem] des:text-[5rem] tab:text-[3rem] text-white  font-normal`}
 				>
 					{subtitulo}{" "}
 					<span className={`${cor} ${titilliumWeb.className} font-extralight`}>
 						{titulo}
 					</span>
 				</h2>
-				<section className="h-[28rem] tab:h-[28rem] des:h-[30rem] w-full overflow-y-auto shadow-inner no-scrollbar">
-					<div className="text-white text-base tab:text-xl des:text-2xl font-light text-justify ">
+				<section className="h-[28rem] w-full overflow-y-auto no-scrollbar scrollbar-none">
+					<div className="text-white text-xl font-normal text-justify ">
 						{children}
 					</div>
 				</section>

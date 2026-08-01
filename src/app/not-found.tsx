@@ -13,9 +13,9 @@ const NotFoundPage: React.FC = () => {
 		router.push("/");
 	};
 	return (
-		<div className="fundo-404 overflow-auto no-scrollbar flex flex-col gap-16">
+		<div className="fundo-404 overflow-auto no-scrollbar scrollbar-none flex flex-col gap-16">
 			<div
-				className={`flex flex-col p-8 gap-40 text-white text-shadow-xl ${oswald.className}`}
+				className={`flex flex-col p-8 gap-40 text-white ${oswald.className}`}
 			>
 				<Header />
 				<div className="flex flex-col gap-16 pl-20">
@@ -23,7 +23,7 @@ const NotFoundPage: React.FC = () => {
 					<p className="text-7xl">{"404 - Página não Encontrada"}</p>
 					<button
 						onClick={retornar}
-						className="rounded-[5px] bg-[#2C52A4] border-[#87D9FF] border-2 h-12 w-48 text-center text-[#91ADF4] text-xl hover:bg-[#122144]	duration-300 shadow-sm shadow-white"
+						className="rounded-sm bg-[#2C52A4] border-2 h-12 w-48 text-center text-[#91ADF4] text-xl hover:bg-[#122144]	duration-300 shadow-sm shadow-white"
 					>
 						{"Voltar a página inicial"}
 					</button>

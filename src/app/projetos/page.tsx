@@ -5,6 +5,7 @@
 import { Suspense, useEffect, useState } from "react";
 import { FaTrash } from "react-icons/fa6";
 import { MdOutlineFilterAlt } from "react-icons/md";
+import { motion } from "framer-motion";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { Button } from "@/components/external/ui-shacnui/button";
@@ -15,19 +16,21 @@ import {
 	CarouselNext,
 	CarouselPrevious,
 } from "@/components/external/ui-shacnui/carousel";
+import {
+	GraficoBarraEmpilhadaSkeleton,
+	GraficoLinhaPontosSkeleton,
+} from "@/components/skeletons/skeletons-projetos";
 import Card from "@/components/ui/cards";
-import Texto from "@/components/ui/componente-texto";
 import DropdownButton from "@/components/ui/dropdown/dropdown-button";
 import GraficoBarraEmpilhadaHorizontal from "@/components/ui/graficos/barra-empilhada-hoizontal";
 import GraficoMapa from "@/components/ui/graficos/grafico-mapa";
 import GraficoLinhaPontos from "@/components/ui/graficos/linha-pontos";
 import MainLayout from "@/components/ui/layouts/main-layout";
 import Loading from "@/components/ui/loading";
+import Texto from "@/components/ui/texto";
 import UserError from "@/components/ui/user-erro";
 
 import { apresentacao } from "../../mocks/mock-projetos";
-
-import TextoRaiz from "./../../components/ui/componente-texto/texto-raiz";
 
 import { legendasGraficosProjetos } from "@/content/content-projetos";
 import { LegendaGrafico } from "@/content/models";
@@ -46,6 +49,16 @@ import { useEstado } from "@/hooks/estado/use-estado";
 import { usePauta } from "@/hooks/pauta/use-pauta";
 import { useProjetosFiltrados } from "@/hooks/projeto/use-projetos-filtrados";
 import { buscarEsferas } from "@/infra/api/esfera";
+
+//render
+const Page: React.FC = () => (
+	<Suspense fallback={<Loading />}>
+		<PageContent />
+	</Suspense>
+);
+
+export default Page;
+
 interface ApresentacaoProps {
 	apresentacao: {
 		texto: string;
@@ -54,6 +67,7 @@ interface ApresentacaoProps {
 		subtitulo: string;
 	};
 }
+
 interface FiltroElementosProps {
 	items: {
 		elementos: elemento[];
@@ -67,18 +81,21 @@ interface FiltroElementosProps {
 	filtros: Record<string, string>;
 	onFiltroChange: (param: string, value: string) => void;
 }
+
 interface NumeroPlsProps {
 	error?: any;
 	isLoading: boolean;
 	legenda: LegendaGrafico;
 	dados: DadosGraficoLinhaPontos[];
 }
+
 interface NumeroPautasProps {
 	error?: any;
 	isLoading: boolean;
 	legenda: LegendaGrafico;
 	dados: DadosGraficoBarraEmpilhadaHorizontal[];
 }
+
 interface PropostasDadosProps {
 	errorPlAno?: any;
 	errorFiltros: any;
@@ -102,8 +119,20 @@ interface PropostasDadosProps {
 	onFiltroChange: (param: string, value: string) => void;
 }
 
-const Apresentacao = ({ apresentacao }: ApresentacaoProps) => (
-	<section>
+interface CarrosselPlsProps {
+	projetos: ProjetoDTO[];
+	isLoading: boolean;
+	error?: any;
+}
+
+const Apresentacao: React.FC<ApresentacaoProps> = ({ apresentacao }) => (
+	<motion.section
+		initial={{ opacity: 0, y: -30 }}
+		whileInView={{ opacity: 1, y: 0 }}
+		transition={{ duration: 0.6 }}
+		viewport={{ once: true }}
+		className="w-full flex justify-center"
+	>
 		<Card.Apresentacao
 			cor={apresentacao.corTexto}
 			titulo={apresentacao.titulo}
@@ -111,10 +140,10 @@ const Apresentacao = ({ apresentacao }: ApresentacaoProps) => (
 		>
 			{apresentacao.texto}
 		</Card.Apresentacao>
-	</section>
+	</motion.section>
 );
 
-const Filtro = ({
+const Filtro: React.FC<FiltroElementosProps> = ({
 	items,
 	filtros,
 	errorFiltros,
@@ -122,58 +151,68 @@ const Filtro = ({
 	aplicarFiltros,
 	isLoadingFiltros,
 	limparSearchParams,
-}: FiltroElementosProps) => (
-	<section className="w-fit tab:w-full flex flex-col tab:flex-row items-start tab:items-center justify-center tab:justify-start gap-4 tab:gap-16 des:gap-24 tab:px-0">
-		{isLoadingFiltros ? (
-			<Loading />
-		) : errorFiltros ? (
-			<UserError error={errorFiltros} />
-		) : (
-			<>
-				<section className="flex gap-4 tab:gap-6 des:gap-12 tab:px-8 des:px-10">
-					{items.map((item, index) => (
-						<DropdownButton
-							key={index}
-							className="w-18 text-[11px] tab:text-[15px] des:text-[18px] tab:w-24 des:w-32"
-							autoApply={false}
-							param={item.param}
-							titulo={item.titulo}
-							elementos={item.elementos}
-							value={filtros[item.param] || ""}
-							onChange={(v) => onFiltroChange(item.param, v)}
-						/>
-					))}
-				</section>
-				<div className="flex flex-row items-center gap-2">
-					<Button
-						className="flex flex-row justify-center border-[#D974FD] text-[13px] tab:text-[15px] des:text-[18px] text-[#D974FD] bg-transparent border-[1px] rounded-[3px] w-18 h-12 tab:w-24 des:w-32 hover:bg-inherit active:text-white active:bg-[#D974FD] transition-colors duration-75"
-						onClick={() => aplicarFiltros()}
-					>
-						Filtrar <MdOutlineFilterAlt />
-					</Button>
-					<Button
-						variant="outline"
-						className="h-12 w-12 border-[#4568BE] rounded-se-xl rounded-es-xl hover:bg-red-600 duration-200 text-[#4568BE] hover:text-white"
-						onClick={() => limparSearchParams()}
-					>
-						<FaTrash color="" />
-					</Button>
-				</div>
-			</>
-		)}
-	</section>
+}) => (
+	<motion.section
+		initial={{ opacity: 0, scale: 0.95 }}
+		whileInView={{ opacity: 1, scale: 1 }}
+		transition={{ duration: 0.5 }}
+		viewport={{ once: true }}
+		className="w-fit tab:w-full flex flex-row justify-center items-center "
+	>
+		<div className="flex gap-10">
+			{isLoadingFiltros ? (
+				<Loading />
+			) : errorFiltros ? (
+				<UserError error={errorFiltros} />
+			) : (
+				<>
+					<nav className="flex gap-4 tab:gap-6 des:gap-12 tab:px-8 des:px-10">
+						{items.map((item, index) => (
+							<DropdownButton
+								key={index}
+								className="w-18 text-xs tab:text-base des:text-lg tab:w-24 des:w-32"
+								autoApply={false}
+								param={item.param}
+								titulo={item.titulo}
+								elementos={item.elementos}
+								value={filtros[item.param] || ""}
+								onChange={(v) => onFiltroChange(item.param, v)}
+							/>
+						))}
+					</nav>
+					<div className="flex flex-row items-center gap-2">
+						<Button
+							className="flex flex-row justify-center border-[#D974FD] text-[13px] tab:text-[15px] des:text-[18px] text-[#D974FD] bg-transparent border rounded-[3px] w-18 h-12 tab:w-24 des:w-32 hover:bg-inherit active:text-white active:bg-[#D974FD] transition-colors duration-75"
+							onClick={() => aplicarFiltros()}
+						>
+							Filtrar <MdOutlineFilterAlt />
+						</Button>
+						<Button
+							variant="outline"
+							className="h-12 w-12 border-[#4568BE] rounded-se-xl rounded-es-xl hover:bg-red-600 duration-200 text-[#4568BE] hover:text-white border"
+							onClick={() => limparSearchParams()}
+						>
+							<FaTrash color="" />
+						</Button>
+					</div>
+				</>
+			)}
+		</div>
+	</motion.section>
 );
 
-const CarrosselPls = ({
+const CarrosselPls: React.FC<CarrosselPlsProps> = ({
 	error,
 	projetos,
 	isLoading,
-}: {
-	projetos: ProjetoDTO[];
-	isLoading: boolean;
-	error?: any;
 }) => (
-	<section className="flex flex-col gap-14 justify-center text-center">
+	<motion.section
+		initial={{ opacity: 0, y: 40 }}
+		whileInView={{ opacity: 1, y: 0 }}
+		transition={{ duration: 0.6 }}
+		viewport={{ once: true }}
+		className="flex flex-col gap-14 justify-center text-center"
+	>
 		{isLoading ? (
 			<Loading />
 		) : error ? (
@@ -191,9 +230,7 @@ const CarrosselPls = ({
 									key={index}
 									className="basis-[100%] des:basis-1/2 flex justify-center"
 								>
-									<CarouselItem>
-										<Card.Projeto projeto={item} />
-									</CarouselItem>
+									<Card.Projeto projeto={item} />
 								</CarouselItem>
 							))}
 						</CarouselContent>
@@ -201,7 +238,7 @@ const CarrosselPls = ({
 						<CarouselNext />
 					</Carousel>
 				) : (
-					<TextoRaiz className="text-center text-6xl text-shadow-xl">
+					<Texto.Raiz className="text-center text-6xl ">
 						<Texto.Linha>
 							<Texto.Pequeno.Titillium>
 								Não há projetos disponíveis
@@ -209,27 +246,51 @@ const CarrosselPls = ({
 							<Texto.Espaco />
 							<Texto.Forte.Oswald>para exibição.</Texto.Forte.Oswald>
 						</Texto.Linha>
-					</TextoRaiz>
+					</Texto.Raiz>
 				)}
 			</>
 		)}
-	</section>
+	</motion.section>
 );
 
-const Divisor = () => (
-	<span className="border-b-[1.5px] shadow-bottom shadow-[#AFC4F9] w-full" />
+const Divisor: React.FC = () => (
+	<motion.hr
+		initial={{ opacity: 0, scaleX: 0 }}
+		whileInView={{ opacity: 1, scaleX: 1 }}
+		transition={{ duration: 0.8 }}
+		viewport={{ once: true }}
+		className="border-t border-white w-full opacity-30"
+	/>
 );
 
-const SubTitulo = () => (
-	<Texto.Raiz className="text-[28px] tab:text-6xl des:text-7xl text-shadow-xl">
-		<Texto.Pequeno.Titillium>Propostas</Texto.Pequeno.Titillium>
-		<Texto.Espaco />
-		<Texto.Forte.Oswald>e Dados Estatísticos</Texto.Forte.Oswald>
-	</Texto.Raiz>
+const SubTitulo: React.FC = () => (
+	<motion.header
+		initial={{ opacity: 0, x: -30 }}
+		whileInView={{ opacity: 1, x: 0 }}
+		transition={{ duration: 0.5 }}
+		viewport={{ once: true }}
+	>
+		<Texto.Raiz className="text-[28px] tab:text-6xl des:text-7xl ">
+			<Texto.Pequeno.Titillium>Propostas</Texto.Pequeno.Titillium>
+			<Texto.Espaco />
+			<Texto.Forte.Oswald>e Dados Estatísticos</Texto.Forte.Oswald>
+		</Texto.Raiz>
+	</motion.header>
 );
 
-const NumeroPls = ({ dados, isLoading, error, legenda }: NumeroPlsProps) => (
-	<section className="w-full flex flex-col-reverse des:flex-row justify-center items-center gap-4 tab:gap-10 des:gap-[4.5rem]">
+const NumeroPls: React.FC<NumeroPlsProps> = ({
+	dados,
+	isLoading,
+	error,
+	legenda,
+}) => (
+	<motion.section
+		initial={{ opacity: 0, x: -50 }}
+		whileInView={{ opacity: 1, x: 0 }}
+		transition={{ duration: 0.6 }}
+		viewport={{ once: true }}
+		className="w-full flex flex-col-reverse des:flex-row justify-center items-center gap-4 tab:gap-10 des:gap-[4.5rem]"
+	>
 		<div className="flex des:flex-col">
 			<Card.Legenda legenda={legenda}>
 				<Texto.Raiz className="text-3xl tab:text-6xl">
@@ -247,24 +308,30 @@ const NumeroPls = ({ dados, isLoading, error, legenda }: NumeroPlsProps) => (
 			</Card.Legenda>
 		</div>
 		{isLoading ? (
-			<Loading />
+			<GraficoLinhaPontosSkeleton />
 		) : error ? (
 			<UserError error={error} />
 		) : (
 			<GraficoLinhaPontos dados={dados} />
 		)}
-	</section>
+	</motion.section>
 );
 
-const NumeroPautas = ({
+const NumeroPautas: React.FC<NumeroPautasProps> = ({
 	dados,
 	isLoading,
 	error,
 	legenda,
-}: NumeroPautasProps) => (
-	<section className="w-full flex flex-col des:flex-row justify-center items-center gap-4 tab:gap-10 des:gap-[4.5rem]">
+}) => (
+	<motion.section
+		initial={{ opacity: 0, x: 50 }}
+		whileInView={{ opacity: 1, x: 0 }}
+		transition={{ duration: 0.6 }}
+		viewport={{ once: true }}
+		className="w-full flex flex-col des:flex-row justify-center items-center gap-4 tab:gap-10 des:gap-[4.5rem]"
+	>
 		{isLoading ? (
-			<Loading />
+			<GraficoBarraEmpilhadaSkeleton />
 		) : error ? (
 			<UserError error={error} />
 		) : (
@@ -286,10 +353,10 @@ const NumeroPautas = ({
 				</Texto.Raiz>
 			</div>
 		</Card.Legenda>
-	</section>
+	</motion.section>
 );
 
-const PropostasDados = ({
+const PropostasDados: React.FC<PropostasDadosProps> = ({
 	items,
 	filtros,
 	projetos,
@@ -306,18 +373,20 @@ const PropostasDados = ({
 	isLoadingFiltros,
 	isLoadingProjetos,
 	limparSearchParams,
-}: PropostasDadosProps) => (
+}) => (
 	<>
 		<SubTitulo />
-		<Filtro
-			items={items}
-			filtros={filtros}
-			errorFiltros={errorFiltros}
-			onFiltroChange={onFiltroChange}
-			aplicarFiltros={aplicarFiltros}
-			isLoadingFiltros={isLoadingFiltros}
-			limparSearchParams={limparSearchParams}
-		/>
+		<div className="w-full flex justify-center">
+			<Filtro
+				items={items}
+				filtros={filtros}
+				errorFiltros={errorFiltros}
+				onFiltroChange={onFiltroChange}
+				aplicarFiltros={aplicarFiltros}
+				isLoadingFiltros={isLoadingFiltros}
+				limparSearchParams={limparSearchParams}
+			/>
+		</div>
 		<CarrosselPls
 			projetos={projetos}
 			error={errorProjetos}
@@ -432,7 +501,7 @@ const usePageData = ({
 	};
 };
 
-const PageContent = () => {
+const PageContent: React.FC = () => {
 	const pathName = usePathname();
 	const { replace } = useRouter();
 	const searchParams = useSearchParams();
@@ -553,67 +622,67 @@ const PageContent = () => {
 
 	return (
 		<MainLayout>
-			<div className="flex h-full w-full flex-col gap-12 tab:gap-24 des:gap-24 items-center justify-center">
-				<Apresentacao apresentacao={apresentacao} />
+			<main className="flex h-full flex-col items-center justify-center py-10">
+				<article className="flex flex-col w-10/12 gap-12 tab:gap-24 des:gap-24 justify-center items-center">
+					<Apresentacao apresentacao={apresentacao} />
+					<motion.div
+						initial={{ opacity: 0, scale: 0.95 }}
+						whileInView={{ opacity: 1, scale: 1 }}
+						transition={{ duration: 0.6 }}
+						viewport={{ once: true }}
+						className="w-full flex justify-center"
+					>
+						{isLoadingMapa ||
+						isLoadingParlamentarProjetoEsfera ||
+						isLoadingPautaEsfera ? (
+							<Loading />
+						) : errorMapa || errorStatus ? (
+							<UserError error={errorMapa || errorStatus} />
+						) : (
+							<GraficoMapa
+								errorMapa={errorMapa ?? ""}
+								errorStatus={errorStatus ?? ""}
+								isLoadingDadosMapa={false}
+								isLoadingDadosStatus={false}
+								dadosMapa={projetosPorUF ?? []}
+								dadosStatus={{
+									dadosPautaEsfera: pautaEsfera ?? [],
+									dadosProjetoPoliticoPorEsfera: parlamentarProjetoEsfera ?? {
+										esfera: "",
+										projetosLei: 0,
+										parlamentares: 0,
+									},
+								}}
+							/>
+						)}
+					</motion.div>
 
-				{/* Gráfico Mapa */}
-				{isLoadingMapa ||
-				isLoadingParlamentarProjetoEsfera ||
-				isLoadingPautaEsfera ? (
-					<Loading />
-				) : errorMapa || errorStatus ? (
-					<UserError error={errorMapa || errorStatus} />
-				) : (
-					<GraficoMapa
-						errorMapa={errorMapa ?? ""}
-						errorStatus={errorStatus ?? ""}
-						isLoadingDadosMapa={false}
-						isLoadingDadosStatus={false}
-						dadosMapa={projetosPorUF ?? []}
-						dadosStatus={{
-							dadosPautaEsfera: pautaEsfera ?? [],
-							dadosProjetoPoliticoPorEsfera: parlamentarProjetoEsfera ?? {
-								esfera: "",
-								projetosLei: 0,
-								parlamentares: 0,
-							},
-						}}
-					/>
-				)}
+					<Divisor />
 
-				<Divisor />
-
-				<Suspense fallback={<div>Carregando filtros...</div>}>
-					<PropostasDados
-						filtros={filtros}
-						projetos={projetos ?? []}
-						items={dropdownItems ?? []}
-						errorProjetos={errorProjetos}
-						errorPautas={errorPautaPorAno}
-						dadosPautas={pautaPorAno ?? []}
-						aplicarFiltros={aplicarFiltros}
-						errorPlAno={errorProjetosPorAno}
-						dadosPlAno={projetosPorAno ?? []}
-						onFiltroChange={handleFiltroChange}
-						isLoadingProjetos={isLoadingProjetos}
-						isLoadingPautas={isLoadingPautaPorAno}
-						limparSearchParams={limparSearchParams}
-						isLoadingPlAno={isLoadingProjetosPorAno}
-						errorFiltros={errorEstado || errorPauta || errorAnos}
-						isLoadingFiltros={
-							isLoadingAnos || isLoadingPautas || isLoadingEstados
-						}
-					/>
-				</Suspense>
-			</div>
+					<Suspense fallback={<Loading />}>
+						<PropostasDados
+							filtros={filtros}
+							projetos={projetos ?? []}
+							items={dropdownItems ?? []}
+							errorProjetos={errorProjetos}
+							errorPautas={errorPautaPorAno}
+							dadosPautas={pautaPorAno ?? []}
+							aplicarFiltros={aplicarFiltros}
+							errorPlAno={errorProjetosPorAno}
+							dadosPlAno={projetosPorAno ?? []}
+							onFiltroChange={handleFiltroChange}
+							isLoadingProjetos={isLoadingProjetos}
+							isLoadingPautas={isLoadingPautaPorAno}
+							limparSearchParams={limparSearchParams}
+							isLoadingPlAno={isLoadingProjetosPorAno}
+							errorFiltros={errorEstado || errorPauta || errorAnos}
+							isLoadingFiltros={
+								isLoadingAnos || isLoadingPautas || isLoadingEstados
+							}
+						/>
+					</Suspense>
+				</article>
+			</main>
 		</MainLayout>
 	);
 };
-
-const Page: React.FC = () => (
-	<Suspense fallback={<div>Carregando página...</div>}>
-		<PageContent />
-	</Suspense>
-);
-
-export default Page;

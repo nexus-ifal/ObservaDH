@@ -3,12 +3,11 @@ import MainLayout from "@/components/ui/layouts/main-layout";
 
 import { infoDevs } from "@/content/content-desenvolvedores";
 
-const desenvolvedores: React.FC = () => {
-	//render
+const Desenvolvedores: React.FC = () => {
 	return (
 		<MainLayout>
-			<div className="flex flex-col h-full w-full gap-24 px-11 items-center">
-				<section className="flex flex-col gap-20">
+			<div className="flex flex-col h-full w-full px-2 tab:px-8 py-10 items-center">
+				<section className="grid grid-cols-1 des:grid-cols-2 gap-4 tab:gap-8 w-full">
 					{infoDevs.map((item) => {
 						const safeItem = {
 							...item,
@@ -26,4 +25,4 @@ const desenvolvedores: React.FC = () => {
 		</MainLayout>
 	);
 };
-export default desenvolvedores;
+export default Desenvolvedores;

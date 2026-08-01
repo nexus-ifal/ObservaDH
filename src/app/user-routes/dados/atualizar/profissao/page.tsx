@@ -212,7 +212,7 @@ const Page: React.FC = () => {
 										<FormControl>
 											<Input
 												{...field}
-												className={`${fieldState.error ? "border-2 border-red-500" : "border-2 border-[#91ADF4]"} bg-white text-black h-12 text-xl rounded-[5px]`}
+												className={`${fieldState.error ? "border-2 border-red-500" : "border-2 border-[#91ADF4]"} bg-white text-black h-12 text-xl rounded-sm`}
 												aria-invalid={!!fieldState.error}
 												aria-describedby={
 													fieldState.error ? "nome-error" : undefined

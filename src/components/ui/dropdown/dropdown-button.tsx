@@ -55,20 +55,20 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({
 	}
 
 	return (
-		<Select onValueChange={handleChange} value={value || ""}>
+		<Select onValueChange={handleChange} value={value || undefined} key={value}>
 			<SelectTrigger
-				className={`w-full h-10 tab:h-12 des:h-12 border-[#4568BE] rounded-[3px] text-[#4568BE] ${className}`}
+				className={`w-full h-10 tab:h-12 des:h-12 border-white rounded-xs text-white ${className}`}
 			>
 				<SelectValue placeholder={titulo} />
 			</SelectTrigger>
 			<SelectContent
-				className={`text-[#4568BE] focus:text-[#4568BE] border-[#91ADF4] bg-[#91ADF4] ${className} ${classNameContent}`}
+				className={`bg-white/20 border-white text-2xl text-white ${className} ${classNameContent}`}
 			>
 				{elementos.map((item) => (
 					<SelectItem
 						value={item.value}
 						key={item.value}
-						className={`text-[#4568BE] focus:bg-[#1A326E] focus:text-[#91ADF4] flex text-start justify-start items-center min-h-10 ${className}`}
+						className={`text-white focus:bg-black/20  bg-white/20 focus:text-white flex text-start justify-start items-center min-h-12 rounded-none transition-colors duration-150 ${className}`}
 					>
 						{item.titulo}
 					</SelectItem>

@@ -27,7 +27,7 @@ interface graficoProps {
 
 const GraficoLinhaPontos: React.FC<graficoProps> = ({ dados }) => {
 	return (
-		<Card className="w-[21.875rem] h-[16.25rem] tab:w-[45rem] tab:h-[25rem] des:w-[52rem] des:h-[29rem] bg-[#122144] flex items-center justify-center">
+		<Card className="w-[21.875rem] h-[16.25rem] tab:w-[45rem] tab:h-[25rem] des:w-[52rem] des:h-[29rem] bg-[#122144] flex items-center justify-center  border-white">
 			<CardContent className="flex flex-col justify-center items-center w-full h-full p-1 tab:p-6">
 				<ChartContainer config={chartConfig} className="w-full h-full p-0">
 					<LineChart

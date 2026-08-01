@@ -17,7 +17,7 @@ import {
 	CarouselPrevious,
 } from "@/components/external/ui-shacnui/carousel";
 
-import Texto from "../componente-texto";
+import Texto from "../texto";
 
 import CardItemRenderizacao from "./card-item-renderizacao";
 import CardMiniProjetos from "./card-mini-projeto";
@@ -57,7 +57,7 @@ const CardParlamentar: React.FC<saibaMaisProps> = ({
 										className="rounded-full border-2 border-white object-cover"
 									/>
 								</div>
-								<p className="text-2xl tab:text-5xl text-shadow-xl font-normal text-white truncate">
+								<p className="text-2xl tab:text-5xl  font-normal text-white truncate">
 									{parlamentar.nome}
 								</p>
 							</div>
@@ -87,7 +87,7 @@ const CardParlamentar: React.FC<saibaMaisProps> = ({
 					</article>
 					<section className="flex flex-col w-full items-center gap-4 tab:gap-8">
 						<div>
-							<Texto.Linha className="text-lg tab:text-4xl text-white text-shadow-xl text-center ">
+							<Texto.Linha className="text-lg tab:text-4xl text-white  text-center ">
 								<Texto.Forte.Oswald>{"Projetos"}</Texto.Forte.Oswald>
 								<Texto.Espaco />
 								<Texto.Pequeno.Titillium className={`text-[#F693F9]`}>

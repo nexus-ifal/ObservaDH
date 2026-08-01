@@ -73,7 +73,7 @@ export class ListarIdeologiaGeneroService
 					...item,
 					ideologia: item.ideologia.replace(/-/g, " "),
 				}))
-				.filter((item) => item.homens > 0 || item.mulheres > 0); // só retorna quem tem dado
+				.filter((item) => item.homens > 0 || item.mulheres > 0);
 
 			const total = dados.length;
 

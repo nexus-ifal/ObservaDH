@@ -127,7 +127,7 @@ const Page: React.FC = () => {
 										<FormControl>
 											<Input
 												{...field}
-												className={`bg-white text-black h-12 w-full text-xl font-normal rounded-[5px] ${
+												className={`bg-white text-black h-12 w-full text-xl font-normal rounded-sm ${
 													fieldState.error
 														? "border-2 border-red-500 focus:border-red-500"
 														: "border-0"

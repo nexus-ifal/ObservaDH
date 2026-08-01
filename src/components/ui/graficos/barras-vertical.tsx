@@ -54,7 +54,7 @@ const GraficoBarrasVertical: React.FC<graficoBarrasVerticalprops> = ({
 	dados,
 }) => {
 	return (
-		<Card className="flex items-center justify-center w-[21.875rem] h-[16.25rem] tab:w-[45rem] tab:h-[25rem] des:w-[52rem] des:h-[29rem] bg-[#122144] shadow-lg shadow-[#4568BE]">
+		<Card className="flex items-center justify-center w-[21.875rem] h-[16.25rem] tab:w-[45rem] tab:h-[25rem] des:w-[52rem] des:h-[29rem] bg-[#122144 border border-white">
 			<CardContent className="flex justify-center items-center w-full h-full p-1 tab:p-6 text-sm">
 				<ChartContainer
 					config={chartConfig}

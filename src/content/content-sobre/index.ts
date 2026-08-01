@@ -6,6 +6,7 @@ const sobre = [
 			"O Observatório Digital de Discurso e Direitos Humanos (ObservaDH) nasce de uma necessidade urgente de escrutínio público frente ao cenário político brasileiro contemporâneo. Desde 2013, pesquisadores têm documentado uma escalada preocupante no número de proposições legislativas que não apenas ignoram, mas ativamente tentam suprimir os direitos fundamentais da população LGBTI+. Diariamente, as Casas Legislativas – tanto em âmbito federal quanto estadual – produzem um volume colossal de dados, projetos de lei e propostas de emenda que tramitam através de processos burocráticos e jargões técnicos quase indecifráveis para o cidadão comum. Essa barreira de compreensão não é acidental; ela afasta a sociedade civil das mesas de decisão e permite que pautas de retrocesso avancem sem a devida resistência popular. A nossa missão central é romper esse bloqueio informacional. Ao transformar o 'tecniquês' legislativo em informações claras, didáticas e visualmente acessíveis, o ObservaDH atua como uma ponte entre os dados frios do Congresso Nacional e a urgência da luta por direitos humanos. Nós acreditamos que a verdadeira transparência pública só ocorre quando a informação é não apenas disponibilizada, mas efetivamente compreendida por aqueles que serão impactados por ela.",
 		urlImagem:
 			"https://www2.ifal.edu.br/campus/arapiraca/noticias/ifal-arapiraca-inaugura-estacionamento-solar-e-laboratorio-de-informatica-adquiridos-com-apoio-parlamentar/inauguracao-1",
+		fonte: "ifal",
 	},
 	{
 		textoLongo:
@@ -14,6 +15,7 @@ const sobre = [
 			"A estruturação tecnológica e metodológica do ObservaDH reflete o rigor acadêmico das iniciativas PIBIC e PIBITI que lhe deram origem. O desenvolvimento da plataforma envolve um processo minucioso de coleta, análise e classificação de dados textuais e metatextuais extraídos diretamente dos trâmites oficiais do Poder Legislativo. Utilizando tecnologias modernas e robustas do ecossistema de desenvolvimento web, nossa equipe realiza um cruzamento de métodos quantitativos e qualitativos para categorizar as propostas legislativas. Esse processo nos permite identificar padrões de discurso, parlamentares com atuações recorrentes nestes temas e as principais estratégias políticas utilizadas para tentar desmantelar políticas públicas de inclusão. O resultado de todo esse processamento de dados é entregue à população através de uma interface interativa, repleta de gráficos dinâmicos e painéis de usabilidade intuitiva. Ao democratizar o acesso a essas análises detalhadas, o projeto ultrapassa os muros da academia e se consolida como um instrumento prático de ação cidadã. Queremos que ativistas, educadores, jornalistas e qualquer membro da sociedade civil possam utilizar nossos dados para embasar denúncias, planejar ações de incidência política e exigir responsabilidade direta de seus representantes eleitos.",
 		urlImagem:
 			"https://www2.ifal.edu.br/campus/arapiraca/noticias/comunidade-academica-celebra-15-anos-do-ifal-arapiraca-e-resgata-memorias/campus-arapiraca-celebra-15-anos-de-existencia/@@images/03925934-c84a-4d04-b6e2-89f7d492a906.jpeg",
+		fonte: "ifal",
 	},
 ];
 

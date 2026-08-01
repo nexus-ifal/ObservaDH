@@ -122,7 +122,7 @@ const Page: React.FC = () => {
 											value={searchTerm}
 											onChange={(e) => setSearchTerm(e.target.value)}
 										/>
-										<div className="max-h-40 overflow-y-auto rounded-lg no-scrollbar">
+										<div className="max-h-40 overflow-y-auto rounded-lg no-scrollbar scrollbar-none">
 											{isLoadingPoliticos ? (
 												<div className="p-2 text-gray-500">Carregando...</div>
 											) : filteredPoliticos.length === 0 ? (

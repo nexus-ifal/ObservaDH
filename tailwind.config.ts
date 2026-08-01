@@ -29,11 +29,11 @@ module.exports = {
 			addUtilities: (utilities: Record<string, any>) => void;
 		}) {
 			addUtilities({
-				".no-scrollbar": {
+				".no-scrollbar scrollbar-none": {
 					"-ms-overflow-style": "none",
 					"scrollbar-width": "none",
 				},
-				".no-scrollbar::-webkit-scrollbar": {
+				".no-scrollbar scrollbar-none::-webkit-scrollbar": {
 					display: "none",
 				},
 			});

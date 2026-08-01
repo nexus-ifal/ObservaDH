@@ -18,7 +18,7 @@ const CardMiniProjetos: React.FC<miniCardProjetosProps> = ({ miniProjeto }) => {
 	};
 	return (
 		<div
-			className="flex flex-row items-center gap-1 tab:gap-4 w-[16rem] tab:w-[41.75rem] justify-between h-fit tab:h-16 rounded-[10px] bg-[#4568BE] border-2 border-[#1A326E] cursor-pointer p-4 tab:px-6 tab:py-4 text-sm text-white font-medium"
+			className="flex flex-row items-center gap-1 tab:gap-4 w-[16rem] tab:w-[41.75rem] justify-between h-fit tab:h-16 rounded-sm bg-[#4568BE] border-2 border-[#1A326E] cursor-pointer p-4 tab:px-6 tab:py-4 text-sm text-white font-medium"
 			onClick={handleClick}
 		>
 			{["Número", "Ano", "Pauta"].map((titulo, index) => (

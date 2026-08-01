@@ -8,12 +8,12 @@ interface mainLayoutProps {
 const MainLayout: React.FC<mainLayoutProps> = ({ children }) => {
 	return (
 		<>
-			<div className="bg-layout-principal antialiased no-scrollbar flex flex-col overflow-hidden">
+			<div className="bg-layout-principal antialiased no-scrollbar scrollbar-none flex flex-col overflow-hidden">
 				<header className="h-[25rem] tab:h-[34rem] des:h-[34rem] w-full">
 					<NavBar />
 				</header>
 				<main className="h-full w-full bg-grid flex justify-center items-center">
-					<div className="h-full w-full my-10">{children}</div>
+					<div className="h-full w-full">{children}</div>
 				</main>
 				<footer className="h-[18.625rem] w-full">
 					<FooterBar />
